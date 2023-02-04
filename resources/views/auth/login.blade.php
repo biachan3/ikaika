@@ -40,11 +40,11 @@
                     <span class="ml-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
                 </label>
             </div>
-            <x-button class="w-200 mt-3 ml-3">
+            <button class="w-200 mt-3 ml-3">
                 <a href="/register" class=" ">
                     {{ __('Register') }}
                 </a>
-            </x-button>
+            </button>
 
             <div class="flex items-center justify-end mt-4">
                 @if (Route::has('password.request'))

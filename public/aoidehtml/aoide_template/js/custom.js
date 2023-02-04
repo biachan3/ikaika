@@ -100,7 +100,7 @@
         //Countdown
 
         $('.countdown').downCount({
-            date: '06/05/2023 12:00:00'
+            date: '06/03/2023 12:00:00'
         }, function() {
             alert('WOOT WOOT, done!');
         });

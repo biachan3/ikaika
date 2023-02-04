@@ -307,8 +307,8 @@ p {
 }
 .logo img {
 	display: block;
-	height: 30px;
-	width: auto;
+	height: 50px;
+	width: 50px;
 }
 a.ticket-link .pulse{
     -webkit-transition: all 300ms linear;
@@ -421,7 +421,7 @@ a.ticket-link:active .pulse{
 	padding: 5px 0; 
 	padding-left: 3px;
 	padding-right: 1px;
-	color: #fff;
+	color: #000;
 	display: inline-block;
     -webkit-transition: all 300ms linear;
     transition: all 300ms linear; 
@@ -454,22 +454,30 @@ a.ticket-link:active .pulse{
 
 .location-fixed {
 	position: fixed;
-	bottom: 30px;
-	right: 25px;
+	/* bottom: 30px;
+	right: 25px; */
 	display: block;
-	z-index: 3001;
-	-webkit-writing-mode: vertical-lr;
-	writing-mode: vertical-lr;
-	transform: rotate(180deg);
+	/* z-index: 3001; */
+	/* -webkit-writing-mode: vertical-lr;
+	writing-mode: vertical-lr; */
+	/* transform: rotate(180deg); */
+	color: #000;
+
 }
+
 .location-fixed p {
 	position: relative;
 	margin: 0;
 	padding: 0;
 	padding-top: 35px;
-	font-size: 13px;
+	font-size: 16px;
 	line-height: 20px;
 	letter-spacing: 1px;
+	color: #000;
+}
+.location-fixed p:hover {
+	/* font-size: 10px; */
+	color: #000;
 }
 .location-fixed p:before {
 	position: absolute;
@@ -479,7 +487,7 @@ a.ticket-link:active .pulse{
 	background-position: left center;
 	background-repeat: no-repeat;
 	background-size: 20px 20px;
-	background-image: url('../img/pin.svg');
+	/* background-image: url('../img/pin.svg'); */
 	width: 20px;
 	height: 20px;
 	z-index: 1;
@@ -499,14 +507,14 @@ body {
 
 /* Color schemes */
 .aoide {
-	--color-text: #fff;
-	--color-bg: #000;
-	--color-link: #fff;
-	--color-link-hover: #5d5050;
-	--color-info: #5d5050;
-	--color-menu: #fff;
-	--color-menu-hover: #fff;
-	--color-title: #fff;
+	--color-text: #000;
+	--color-bg: #fff;
+	--color-link: #000;
+	--color-link-hover: #000;
+	--color-info: #000;
+	--color-menu: #000;
+	--color-menu-hover: #000;
+	--color-title: #000;
 	--color-subtitle: #ededed;
 	--color-deco: #161616;
 }
@@ -562,7 +570,10 @@ main {
 	background-position: center center;
 	background-size: cover;
 	background-repeat: no-repeat;
-	background-image: url('../img/background.jpg');
+	/* color: white; */
+	background-color:#FFFFFF;
+	/* background: linear-gradient(45deg, #FB8CAC, #350166); */
+	/* background-image: url('../img/background.jpg'); */
 }
 .content {
 	position: relative;
@@ -783,7 +794,7 @@ main {
 	content: '';
 	width: 40%;
 	height: 10px;
-	background: linear-gradient(45deg, #000, #333);
+	background: linear-gradient(45deg, #FB8CAC, #350166);
 	position: absolute;
 	left: 0;
 	bottom: 0;
@@ -824,11 +835,12 @@ main {
 	line-height: 1.25;
 	letter-spacing: 2px;
 	font-weight: 600;
-	color: #fff;
+	color: #000;
 	z-index: 1;
 	margin-bottom: 40px;
 }
 .hero-title{
+	/* margin-bot: 200px; */
 	position: relative;
 	width: 100%;
 	max-width: 440px;
@@ -837,15 +849,15 @@ main {
 	font-size: 23px;
 	line-height: 1;
 	font-weight: 600;
-	color: #fff;
+	color: #000;
 	z-index: 2;
 }
 .hero-subtitle{
 	position: relative;
 	width: 100%;
 	text-align: center;
-	font-size: 4vw;
-	line-height: 0.8;
+	font-size: 5vw;
+	line-height: 1.6;
 	font-family: 'Pinyon Script', cursive;
 	font-weight: 400;
 	z-index: 1;

@@ -146,6 +146,7 @@
             complete: () => {
                 link.style.pointerEvents = 'auto';
                 link.classList.add('menu__item--showDeco');
+                document.getElementsByClassName('location-fixed')[0].style.visibility = 'visible';
             }
         });
 
@@ -169,6 +170,7 @@
             begin: () => DOM.links.forEach(link => {
                 link.style.pointerEvents = 'none';
                 link.classList.remove('menu__item--showDeco');
+                document.getElementsByClassName('location-fixed')[0].style.visibility = 'hidden';
             })
         });
 
@@ -220,6 +222,7 @@
                 complete: () => DOM.links.forEach(link => {
                     link.style.pointerEvents = 'auto';
                     link.classList.add('menu__item--showDeco');
+                    document.getElementsByClassName('location-fixed')[0].style.visibility = 'visible';
                 })
             });
         });

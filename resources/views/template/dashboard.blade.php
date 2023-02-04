@@ -92,7 +92,17 @@
 
         <a href="/">
             <div class="logo">
-                <img src="{{ asset('aoidehtml/aoide_template') }}/img/logo.png" alt="" />
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="{{ asset('aoidehtml/aoide_template') }}/img/High Res IKA UBAYA LOGO.jpeg"
+                            width="400px" alt="" />
+                    </div>
+                    <div class="col-md-8 mt-2">
+                        <p>IKA UBAYA</p>
+
+                    </div>
+                </div>
+
             </div>
         </a>
 
@@ -102,7 +112,7 @@
             <div class="ticket">
 
                 {{-- <a href="/loguo"></a> --}}
-                <p>157 seats left</p>
+                {{-- <p>157 seats left</p> --}}
                 <div class="pulse">
                     <svg version="1.1" id="svg-ticket" xmlns="http://www.w3.org/2000/svg"
                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="36px"
@@ -114,22 +124,35 @@
                 </div>
             </div>
         </a>
-        <div id="ticket-wrap">
-            <p>
-                Sampai Jumpa
-            </p>
-            {{-- <a href="#"> --}}
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button class="btn btn-primary w-100" type="submit">Log Out</button>
-                {{-- <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link> --}}
-            </form>
-            {{-- </a> --}}
-        </div>
+
+        @guest
+
+            <div id="ticket-wrap">
+                <p>
+                    Masuk Disini
+                </p>
+                {{-- <a href="#"> --}}
+                <form method="GET" action="{{ route('login') }}">
+                    
+                    <button class="btn btn-primary w-100" type="submit">Log In</button>
+                </form>
+                {{-- </a> --}}
+            </div>
+        @endguest
+        @auth
+
+            <div id="ticket-wrap">
+                <p>
+                    Sampai Jumpa
+                </p>
+                {{-- <a href="#"> --}}
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button class="btn btn-primary w-100" type="submit">Log Out</button>
+                </form>
+                {{-- </a> --}}
+            </div>
+        @endauth
 
         <div class="content">
             <nav class="menu">
@@ -148,6 +171,15 @@
                     <div class="empty-space">-</div>
                     information
                 </a>
+                <a href="#" class="menu__item">media
+                    <div class="empty-space">-</div>
+                    partner
+                </a>
+                <a href="https://goo.gl/maps/oYh2azwDHf9Wbas46">
+                    <div class="location-fixed">
+                        <p class="lokasi">HALAMAN PERPUSTAKAAN, UNIVERSITAS SURABAYA</p>
+                    </div>
+                </a>
                 {{-- <a href="#" class="menu__item">stay
                     <div class="empty-space">-</div>
                     informed
@@ -159,10 +191,12 @@
                     <div class="hero-main-title">
                         Reuni Akbar 55 Tahun Universitas Surabaya
                     </div>
-                    <div class="hero-title">5 Juni</div>
+                    <div class="hero-title">3 Juni</div>
                     <div class="hero-subtitle">
                         <span>2</span><span>0</span><span>2</span><span>3</span>
                     </div>
+                    <button width="100%" type="button" class="btn btn-primary">Daftar Acara</button>
+
                 </div>
                 <ul class="countdown">
                     <li>
@@ -187,24 +221,24 @@
                 viewBox="0 0 1440 800">
                 <defs>
                     <linearGradient id="gradient-1" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0" stop-color="#222222" />
-                        <stop offset="1" stop-color="#000000" />
+                        <stop offset="0" stop-color="#FFFFFF" />
+                        <stop offset="1" stop-color="#FFFFFF" />
                     </linearGradient>
                     <linearGradient id="gradient-2" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0" stop-color="#222222" />
-                        <stop offset="1" stop-color="#000000" />
+                        <stop offset="0" stop-color="#FFFFFF" />
+                        <stop offset="1" stop-color="#FFFFFF" />
                     </linearGradient>
                     <linearGradient id="gradient-3" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0" stop-color="#222222" />
-                        <stop offset="1" stop-color="#000000" />
+                        <stop offset="0" stop-color="#FFFFFF" />
+                        <stop offset="1" stop-color="#FFFFFF" />
                     </linearGradient>
                     <linearGradient id="gradient-4" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0" stop-color="#222222" />
-                        <stop offset="1" stop-color="#000000" />
+                        <stop offset="0" stop-color="#FFFFFF" />
+                        <stop offset="1" stop-color="#FFFFFF" />
                     </linearGradient>
                     <linearGradient id="gradient-5" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0" stop-color="#222222" />
-                        <stop offset="1" stop-color="#000000" />
+                        <stop offset="0" stop-color="#FFFFFF" />
+                        <stop offset="1" stop-color="#FFFFFF" />
                     </linearGradient>
                 </defs>
                 <g class="blob-1">
@@ -1160,7 +1194,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <h2 class="content__title">
-                                            stay informed
+                                            ini media partner
                                         </h2>
                                     </div>
                                     <div class="col-lg-4 mt-3">
@@ -1304,11 +1338,11 @@
 
             <button class="content__close"></button>
         </div>
-        <a href="https://goo.gl/maps/oYh2azwDHf9Wbas46">
+        {{-- <a href="https://goo.gl/maps/oYh2azwDHf9Wbas46">
             <div class="location-fixed">
                 <p class="lokasi">HALAMAN PERPUSTAKAANs, UNIVERSITAS SURABAYA</p>
             </div>
-        </a>
+        </a> --}}
 
         <div class="social-fixed">
             <a href="#">twitter</a>
