@@ -27,21 +27,21 @@
             </div>
 
             <div>
-                <x-label for="angkatan" :value="__('Angkatan')" />
+                <x-label for="year" :value="__('Year')" />
 
-                <x-input id="angkatan" class="block mt-1 w-full" type="text" name="angkatan" :value="old('angkatan')" required autofocus />
+                <x-input id="year" class="block mt-1 w-full" type="text" name="year" :value="old('year')" required autofocus />
             </div>
 
             <div>
-                <x-label for="pekerjaan" :value="__('Pekerjaan')" />
+                <x-label for="work" :value="__('Work')" />
 
-                <x-input id="pekerjaan" class="block mt-1 w-full" type="text" name="pekerjaan" :value="old('pekerjaan')" required autofocus />
+                <x-input id="work" class="block mt-1 w-full" type="text" name="work" :value="old('work')" required autofocus />
             </div>
 
             <div>
-                <x-label for="fakultas" :value="__('Fakultas')" />
+                <x-label for="faculty" :value="__('Faculty')" />
 
-                <x-input id="fakultas" class="block mt-1 w-full" type="text" name="fakultas" :value="old('fakultas')" required autofocus />
+                <x-input id="faculty" class="block mt-1 w-full" type="text" name="faculty" :value="old('faculty')" required autofocus />
             </div>
 
             <!-- Password -->
