@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 05, 2023 at 12:31 PM
+-- Generation Time: Feb 05, 2023 at 04:40 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -36,6 +36,19 @@ CREATE TABLE `article` (
   `date` date NOT NULL,
   `users_id` bigint(20) UNSIGNED NOT NULL,
   `category_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attendee`
+--
+
+CREATE TABLE `attendee` (
+  `ticket_id` varchar(45) NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `year` year(4) DEFAULT NULL,
+  `faculty` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -128,9 +141,6 @@ CREATE TABLE `ticket` (
   `event_id` int(11) NOT NULL,
   `bank_id` int(11) NOT NULL,
   `users_id` bigint(20) UNSIGNED NOT NULL,
-  `person_name` varchar(45) NOT NULL,
-  `person_year` year(4) DEFAULT NULL,
-  `person_faculty` varchar(45) NOT NULL,
   `date` date NOT NULL,
   `amount` bigint(20) NOT NULL,
   `qr` varchar(45) DEFAULT NULL
@@ -168,6 +178,12 @@ ALTER TABLE `article`
   ADD PRIMARY KEY (`idarticle`),
   ADD KEY `fk_article_users1_idx` (`users_id`),
   ADD KEY `fk_article_category1_idx` (`category_id`);
+
+--
+-- Indexes for table `attendee`
+--
+ALTER TABLE `attendee`
+  ADD KEY `fk_attendee_ticket1_idx` (`ticket_id`);
 
 --
 -- Indexes for table `bank`
@@ -275,6 +291,12 @@ ALTER TABLE `users`
 ALTER TABLE `article`
   ADD CONSTRAINT `fk_article_category1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_article_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `attendee`
+--
+ALTER TABLE `attendee`
+  ADD CONSTRAINT `fk_attendee_ticket1` FOREIGN KEY (`ticket_id`) REFERENCES `ticket` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `donation`
