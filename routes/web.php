@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TiketController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/dashboard', function () {
     return view('welcome');
 });
+
+Route::prefix('tiket')->name('tiket.')->controller(TiketController::class)->name('tiket.')->group(function () {
+    Route::get('', 'index')->name('index');
+});
+
 
 Route::get('/', function () {
     return view('template.dashboard');
