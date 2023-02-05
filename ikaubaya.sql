@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 19, 2022 at 12:07 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: Feb 05, 2023 at 04:40 PM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 8.0.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -36,6 +36,19 @@ CREATE TABLE `article` (
   `date` date NOT NULL,
   `users_id` bigint(20) UNSIGNED NOT NULL,
   `category_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `attendee`
+--
+
+CREATE TABLE `attendee` (
+  `ticket_id` varchar(45) NOT NULL,
+  `name` varchar(45) DEFAULT NULL,
+  `year` year(4) DEFAULT NULL,
+  `faculty` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -80,14 +93,30 @@ CREATE TABLE `donation` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `event`
+--
+
+CREATE TABLE `event` (
+  `id` int(11) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `description` varchar(45) DEFAULT NULL,
+  `startevent` datetime DEFAULT NULL,
+  `endevent` datetime DEFAULT NULL,
+  `price` bigint(25) DEFAULT NULL,
+  `category_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
 CREATE TABLE `migrations` (
   `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `migration` varchar(255) NOT NULL,
   `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -101,13 +130,21 @@ CREATE TABLE `role` (
   `description` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data for table `role`
+-- Table structure for table `ticket`
 --
 
-INSERT INTO `role` (`id`, `name`, `description`) VALUES
-(1, 'admin', 'Ini admin'),
-(2, 'pengguna', 'Ini pengguna');
+CREATE TABLE `ticket` (
+  `id` varchar(45) NOT NULL,
+  `event_id` int(11) NOT NULL,
+  `bank_id` int(11) NOT NULL,
+  `users_id` bigint(20) UNSIGNED NOT NULL,
+  `date` date NOT NULL,
+  `amount` bigint(20) NOT NULL,
+  `qr` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -117,25 +154,18 @@ INSERT INTO `role` (`id`, `name`, `description`) VALUES
 
 CREATE TABLE `users` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `role_id` int(11) NOT NULL DEFAULT 2,
-  `angkatan` year(4) NOT NULL,
-  `pekerjaan` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fakultas` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `role_id`, `angkatan`, `pekerjaan`, `fakultas`) VALUES
-(1, 'Dendy', 'korekifaa123@gmail.com', NULL, '$2y$10$DS11.OKUZAXUkPcPiI05jum2Ps0wyEIn0v1vTAEyHqxxWqR4SLZcC', NULL, '2022-12-15 05:46:53', '2022-12-15 05:46:53', 2, 1998, 'Pengangguran', 'Teknik');
+  `year` year(4) NOT NULL,
+  `work` varchar(45) NOT NULL,
+  `faculty` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Indexes for dumped tables
@@ -148,6 +178,12 @@ ALTER TABLE `article`
   ADD PRIMARY KEY (`idarticle`),
   ADD KEY `fk_article_users1_idx` (`users_id`),
   ADD KEY `fk_article_category1_idx` (`category_id`);
+
+--
+-- Indexes for table `attendee`
+--
+ALTER TABLE `attendee`
+  ADD KEY `fk_attendee_ticket1_idx` (`ticket_id`);
 
 --
 -- Indexes for table `bank`
@@ -170,6 +206,13 @@ ALTER TABLE `donation`
   ADD KEY `fk_bank_has_users_bank_idx` (`bank_id`);
 
 --
+-- Indexes for table `event`
+--
+ALTER TABLE `event`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_event_category1_idx` (`category_id`);
+
+--
 -- Indexes for table `migrations`
 --
 ALTER TABLE `migrations`
@@ -180,6 +223,15 @@ ALTER TABLE `migrations`
 --
 ALTER TABLE `role`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ticket`
+--
+ALTER TABLE `ticket`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_donation_event1_idx` (`event_id`),
+  ADD KEY `fk_ticket_bank1_idx` (`bank_id`),
+  ADD KEY `fk_ticket_users1_idx` (`users_id`);
 
 --
 -- Indexes for table `users`
@@ -241,11 +293,31 @@ ALTER TABLE `article`
   ADD CONSTRAINT `fk_article_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
+-- Constraints for table `attendee`
+--
+ALTER TABLE `attendee`
+  ADD CONSTRAINT `fk_attendee_ticket1` FOREIGN KEY (`ticket_id`) REFERENCES `ticket` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
 -- Constraints for table `donation`
 --
 ALTER TABLE `donation`
   ADD CONSTRAINT `fk_bank_has_users_bank` FOREIGN KEY (`bank_id`) REFERENCES `bank` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `fk_bank_has_users_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `event`
+--
+ALTER TABLE `event`
+  ADD CONSTRAINT `fk_event_category1` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Constraints for table `ticket`
+--
+ALTER TABLE `ticket`
+  ADD CONSTRAINT `fk_donation_event1` FOREIGN KEY (`event_id`) REFERENCES `event` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_ticket_bank1` FOREIGN KEY (`bank_id`) REFERENCES `bank` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_ticket_users1` FOREIGN KEY (`users_id`) REFERENCES `users` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `users`
