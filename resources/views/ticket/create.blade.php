@@ -28,6 +28,19 @@
         </div>
     @endfor
     <div class="mb-3">
+            <label for="attendFaculty" class="">Faculty</label>
+            <select class="form-control" id="bank" name="bank">
+       @foreach ($result['bank'] as $bank)
+          <option value="{{ $bank->id }}">{{ $bank->name }}</option>
+       @endforeach
+    </select>
+        </div>
+
+    <div class="mb-3">
+            <label class="">Harga Total</label>
+            <div id="eventPrice" name="eventPrice" >{{$result['price']}}</div>
+        </div>
+    <div class="mb-3">
     <label for="proof" class="col-md-4 control-label">Proof</label>
                                 <input id="proof" type="file" class="form-control" name="proof" required>
                             </div>

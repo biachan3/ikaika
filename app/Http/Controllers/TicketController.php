@@ -38,7 +38,7 @@ class TicketController extends Controller
         $result = [];
         $result['event_id'] =$id['event_id'];
         $result['attendees']=$id['attendees'];
-        $result['price'] =$id['price'];
+        $result['price'] =$id['price']*$id['attendees'];
         $result['bank']=json_decode(json_encode(DB::table('bank')
         ->select('*')
         ->get(), true));
