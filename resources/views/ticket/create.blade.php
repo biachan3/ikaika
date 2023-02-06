@@ -1,77 +1,44 @@
-<x-guest-layout>
-    <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+<!doctype html>
+<html lang="en">
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
 
-        <form method="POST" action="{{ route('register') }}">
-            @csrf
-
-            <!-- Name -->
-            <div>
-                <x-label for="name" :value="__('Name')" />
-
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
-            </div>
-
-            <!-- Email Address -->
-            <div class="mt-4">
-                <x-label for="email" :value="__('Email')" />
-
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            </div>
-
-            <div>
-                <x-label for="year" :value="__('Year')" />
-
-                <x-input id="year" class="block mt-1 w-full" type="text" name="year" :value="old('year')" required autofocus />
-            </div>
-
-            <div>
-                <x-label for="work" :value="__('Work')" />
-
-                <x-input id="work" class="block mt-1 w-full" type="text" name="work" :value="old('work')" required autofocus />
-            </div>
-
-            <div>
-                <x-label for="faculty" :value="__('Faculty')" />
-
-                <x-input id="faculty" class="block mt-1 w-full" type="text" name="faculty" :value="old('faculty')" required autofocus />
-            </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
-
-                <x-input id="password" class="block mt-1 w-full"
-                                type="password"
-                                name="password"
-                                required autocomplete="new-password" />
-            </div>
-
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
-
-                <x-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required />
-            </div>
-{{-- {{{!! Form::select('role_id', $roles, $selectedRole, ['class' => 'form-control m-bot15') !!}}} --}}
-            <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
-                </a>
-
-                <x-button class="ml-4">
-                    {{ __('Register') }}
-                </x-button>
-            </div>
+<body>
+    <h1>Registrasi Acara</h1>
+    <form action="{{ route('ticket.store') }}" method="get">
+    <input type="hidden" class="form-control" id="eventid" value="{{$result['attendees']}}">
+    @for ($i = 0; $i > $result['attendees']; $i++)
+    <div class="mb-3">
+            <label for="attendName"  class="">Nama </label>
+            <input type="text" id="attendName" name="attendName[]">
+        </div>
+        <div class="mb-3">
+            <label  for="attendYear"class="">Year</label>
+            <input type="text"  id="attendYear" name="attendYear[]">
+        </div>
+        <div class="mb-3">
+            <label for="attendFaculty" class="">Faculty</label>
+            <input type="text"  id="attendFaculty" name="attendFaculty[]">
+        </div>
+    @endfor
+    <div class="mb-3">
+    <label for="proof" class="col-md-4 control-label">Proof</label>
+                                <input id="proof" type="file" class="form-control" name="proof" required>
+                            </div>
+                        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
         </form>
-    </x-auth-card>
-</x-guest-layout>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous">
+    
+    </script>
+
+</body>
+
+</html>

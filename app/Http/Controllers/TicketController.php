@@ -25,26 +25,24 @@ class TicketController extends Controller
      */
     public function order($id){
         $result = [];
-        $result['event'] = DB::table('event')
+        $result['event']=json_decode(json_encode(DB::table('event')
         ->select('*')
-        ->where('id','=',$id)
-        ->get();
-        $result['bank']=DB::table('bank')
+        ->get(), true));
+        $result['bank']=json_decode(json_encode(DB::table('bank')
         ->select('*')
-        ->get();
+        ->get(), true));
         return view('ticket.order', compact('result'));
     }
     public function create($id)
     {
         $result = [];
-        $result['event'] = DB::table('event')
+        $result['event_id'] =$id['event_id'];
+        $result['attendees']=$id['attendees'];
+        $result['price'] =$id['price'];
+        $result['bank']=json_decode(json_encode(DB::table('bank')
         ->select('*')
-        ->where('id','=',$id)
-        ->get();
-        $result['bank']=DB::table('bank')
-        ->select('*')
-        ->get();
-        return view('event.index', compact('result'));
+        ->get(), true));
+        return view('ticket.create', compact('result'));
     }
 
     /**
@@ -55,6 +53,9 @@ class TicketController extends Controller
      */
     public function store(Request $request)
     {
+        $destinationPath = '/uploads';
+        $data["proof"]->move(public_path($destinationPath), $data["proof"]->getClientOriginalName());
+        $data["proof"] = $data["proof"]->getClientOriginalName();
         Ticket::create([
             'event_id'     => $data['ticket']['event_id'],
             'bank_id'    => $data['ticket']['bank_id'],
@@ -63,8 +64,10 @@ class TicketController extends Controller
             'amount'     => $data['ticket']['amount'],
             'qr' => $data['ticket']['qr'],
             'status' => 0,
+            'proof' => $data['proof'],
         ]);
-        foreach ($data['attendee'] as $attendee) {
+
+        foreach ($data['attendees'] as $attendee) {
             Attendee::create([
                 'ticket_id'     => $data['ticket']['_id'],
                 'bank_id'    => $data['ticket']['bank_id'],

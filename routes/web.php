@@ -22,10 +22,11 @@ Route::get('/dashboard', function () {
 
 Route::prefix('ticket')->name('ticket.')->controller(TicketController::class)->name('ticket.')->group(function () {
     Route::get('', 'index')->name('index');
+    Route::get('register/{id}', 'order')->name("order");
+Route::get('way', 'oneway')->name("oneway");
 });
 Route::get('/event', 'App\Http\Controllers\EventController@index')->name('event.index');
-Route::get('/ticket/register/{id}', 'TicketController@order')->name("ticket.order");
-Route::put('/ticket/register/set/', 'TicketController@create')->name("ticket.create");
+
 Route::get('/', function () {
     return view('template.dashboard');
 })->name('dashboard');
