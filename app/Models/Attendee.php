@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attendee extends Model
 {
+    public $timestamps = false;
     use HasFactory;
     protected $fillable = [
         'ticket_id', 'name', 'year', 'faculty', 'id'
