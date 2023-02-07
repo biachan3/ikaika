@@ -28,6 +28,9 @@ Route::prefix('ticket')->name('ticket.')->controller(TicketController::class)->n
 });
 Route::get('/event', 'App\Http\Controllers\EventController@index')->name('event.index');
 
+Route::get('/payment', 'App\Http\Controllers\PaymentController@index')->name('payment.index');
+Route::post('/payment/ping', 'App\Http\Controllers\PaymentController@ping')->name('payment.ping');
+
 Route::get('/', function () {
     return view('template.dashboard');
 })->name('dashboard');
