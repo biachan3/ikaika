@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ticket extends Model
 {
+    public $timestamps = false;
     use HasFactory;
     protected $fillable = [
         'id', 'event_id', 'bank_id', 'users_id', 'date', 'amount', 'qr','status','proof'

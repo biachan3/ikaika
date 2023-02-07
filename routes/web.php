@@ -23,7 +23,8 @@ Route::get('/dashboard', function () {
 Route::prefix('ticket')->name('ticket.')->controller(TicketController::class)->name('ticket.')->group(function () {
     Route::get('', 'index')->name('index');
     Route::get('register/{id}', 'order')->name("order");
-Route::get('way', 'oneway')->name("oneway");
+    Route::get('order/', 'create')->name("create");
+    Route::post('store', 'store')->name('store');
 });
 Route::get('/event', 'App\Http\Controllers\EventController@index')->name('event.index');
 

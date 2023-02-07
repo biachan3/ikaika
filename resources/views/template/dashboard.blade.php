@@ -214,14 +214,16 @@
                     <div class="empty-space">-</div>
                     partner
                 </a>
-                <a href="{{ route('event.index') }}" class="menu__item">event
-            
-                </a>
-                <a href="https://goo.gl/maps/oYh2azwDHf9Wbas46">
+                <a href="{{ route('event.index')}}">
+                    <div class="location-fixed">
+                        <p class="lokasi">  Lihat Acara </p>
+                    </div>
+                </a>     
+                <!-- <a href="https://goo.gl/maps/oYh2azwDHf9Wbas46">
                     <div class="location-fixed">
                         <p class="lokasi">HALAMAN PERPUSTAKAAN, UNIVERSITAS SURABAYA</p>
                     </div>
-                </a>
+                </a> -->
                 {{-- <a href="#" class="menu__item">stay
                     <div class="empty-space">-</div>
                     informed
@@ -258,9 +260,13 @@
                         <span class="seconds">00</span>
                         <p class="seconds_ref">seconds</p>
                     </li>
-                    <li><button width="100%" type="button" class="btn  daftar">Daftar Acara</button></li>
+                  
+                  
                 </ul>
-                
+           
+               
+                 
+           
             </div>
             <svg class="scene" width="1440" height="800" preserveAspectRatio="xMinYMid slice"
                 viewBox="0 0 1440 800">

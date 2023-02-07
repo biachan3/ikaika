@@ -11,34 +11,37 @@
 
 <body>
     <h1>Registrasi Acara</h1>
-    <form action="{{ route('ticket.store') }}" method="get">
-    <input type="hidden" class="form-control" id="eventid" value="{{$result['attendees']}}">
-    @for ($i = 0; $i > $result['attendees']; $i++)
+    <form action="{{ route('ticket.store') }}" method="post" enctype="multipart/form-data">
+    @csrf
+    <input type="hidden" class="form-control" id="userId" name ="userId" value="{{Auth::user()->id}}">
+    <input type="hidden" class="form-control" name ="eventId" id="eventId" value="{{$result['event_id']}}">
+    <input type="hidden" class="form-control" name = "eventAttendees" id="eventAttendees" value="{{$result['attendees']}}">
+    @for ($i = 0; $i < $result['attendees']; $i++)
     <div class="mb-3">
+   
             <label for="attendName"  class="">Nama </label>
-            <input type="text" id="attendName" name="attendName[]">
-        </div>
-        <div class="mb-3">
+            <input type="text" id="attendName[]" name="attendName[]">
+
+      
             <label  for="attendYear"class="">Year</label>
-            <input type="text"  id="attendYear" name="attendYear[]">
-        </div>
-        <div class="mb-3">
+            <input type="text"  id="attendYear[]" name="attendYear[]">
+ 
             <label for="attendFaculty" class="">Faculty</label>
-            <input type="text"  id="attendFaculty" name="attendFaculty[]">
+            <input type="text"  id="attendFaculty[]" name="attendFaculty[]">
         </div>
     @endfor
     <div class="mb-3">
-            <label for="attendFaculty" class="">Faculty</label>
+            <label for="attendFaculty" class="">Bank</label>
             <select class="form-control" id="bank" name="bank">
        @foreach ($result['bank'] as $bank)
-          <option value="{{ $bank->id }}">{{ $bank->name }}</option>
+          <option value="{{ $bank->id }}">{{ $bank->name }}----{{ $bank->account }}</option>
        @endforeach
     </select>
         </div>
 
     <div class="mb-3">
-            <label class="">Harga Total</label>
-            <div id="eventPrice" name="eventPrice" >{{$result['price']}}</div>
+            <label for="eventPrice" class="">Harga Total</label>
+          <input type="text" class="form-control" name ="eventPrice" id="eventPrice" value="{{$result['price']}}" readonly>
         </div>
     <div class="mb-3">
     <label for="proof" class="col-md-4 control-label">Proof</label>

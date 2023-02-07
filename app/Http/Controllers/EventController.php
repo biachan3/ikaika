@@ -15,7 +15,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        $results = DB::table('event')
+        $results = DB::table('events')
         ->select('*')
         ->get();
 

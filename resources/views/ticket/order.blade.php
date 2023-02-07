@@ -28,13 +28,14 @@
             <label  class="">Ahkir Acara</label>
             <div id="eventEndevent" >{{$result['event'][0]->endevent}}</div>
         </div>
+  
+        
+        <form action="{{ route('ticket.create') }}" method="get">
+ 
         <div class="mb-3">
             <label class="">Harga per Ticket</label>
-            <div id="eventPrice" name="eventPrice" >{{$result['event'][0]->price}}</div>
+            <input type="text" class="form-control" id="eventPrice" name="eventPrice" value="{{$result['event'][0]->price}}" readonly>
         </div>
-        
-        <form action="{{ route('ticket.oneway') }}" method="get">
-       
 
         <div class="mb-3 ">
         <label class="form-label" for="attendees">Jumlah Orang Maksimal 3 Orang</label>
@@ -44,8 +45,8 @@
             <label for="price" class="form-label">Harga Total</label>
             <!-- <input type="number" id="price" name="price" value="0" > -->
         </div>
-        <input type="hidden" class="form-control" id="harga" value="{{$result['event'][0]->price}}">
-        <input type="hidden" class="form-control" id="eventid" value="{{$result['event'][0]->id}}">
+       
+        <input type="hidden" class="form-control" id="eventId" name="eventId" value="{{$result['event'][0]->id}}">
         <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
