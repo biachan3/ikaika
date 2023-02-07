@@ -30,5 +30,8 @@ Route::get('/event', 'App\Http\Controllers\EventController@index')->name('event.
 Route::get('/', function () {
     return view('template.dashboard');
 })->name('dashboard');
+Route::get('/admin', function () {
+    return view('admin.tiket.index');
+})->name('admindash');
 
 require __DIR__ . '/auth.php';

@@ -181,6 +181,14 @@
                     @csrf
                     <button class="btn btn-primary w-100" type="submit">Log Out</button>
                 </form>
+
+                @if (Auth::user()["role_id"] == "1")
+                <br>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button class="btn btn-primary w-100" type="submit">Menu Admin</button>
+                </form>
+                @endif
                 {{-- </a> --}}
             </div>
         @endauth
@@ -223,6 +231,7 @@
             <div class="event-time">
                 <div class="section">
                     <div class="hero-main-title">
+                        
                         Reuni Akbar 55 Tahun Universitas Surabaya
                     </div>
                     <div class="hero-title">3 Juni</div>
