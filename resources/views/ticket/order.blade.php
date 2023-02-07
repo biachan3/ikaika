@@ -31,7 +31,7 @@
   
         
         <form action="{{ route('ticket.create') }}" method="get">
-        @csrf
+ 
         <div class="mb-3">
             <label class="">Harga per Ticket</label>
             <input type="text" class="form-control" id="eventPrice" name="eventPrice" value="{{$result['event'][0]->price}}" readonly>
@@ -74,4 +74,3 @@
 </body>
 
 </html>
-{{ print_r($result) }}

@@ -58,4 +58,3 @@
 </body>
 
 </html>
-{{ print_r($result) }}
