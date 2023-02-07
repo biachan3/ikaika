@@ -106,6 +106,37 @@
             </div>
         </a>
 
+        <a href="/">
+            <div class="logo2">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="{{ asset('aoidehtml/aoide_template') }}/img/High Res IKA UBAYA LOGO.jpeg"
+                            width="400px" alt="" />
+                    </div>
+                    <div class="col-md-8 mt-2">
+                        <p>IKA UBAYA</p>
+
+                    </div>
+                </div>
+
+            </div>
+        </a>
+        <a href="/">
+            <div class="logo3">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="{{ asset('aoidehtml/aoide_template') }}/img/High Res IKA UBAYA LOGO.jpeg"
+                            width="400px" alt="" />
+                    </div>
+                    <div class="col-md-8 mt-2">
+                        <p>IKA UBAYA</p>
+
+                    </div>
+                </div>
+
+            </div>
+        </a>
+
 
 
         <a href="#ticket-wrap" class="ticket-link">
@@ -198,7 +229,7 @@
                     <div class="hero-subtitle">
                         <span>2</span><span>0</span><span>2</span><span>3</span>
                     </div>
-                    <button width="100%" type="button" class="btn btn-primary">Daftar Acara</button>
+                    
 
                 </div>
                 <ul class="countdown">
@@ -218,7 +249,9 @@
                         <span class="seconds">00</span>
                         <p class="seconds_ref">seconds</p>
                     </li>
+                    <li><button width="100%" type="button" class="btn  daftar">Daftar Acara</button></li>
                 </ul>
+                
             </div>
             <svg class="scene" width="1440" height="800" preserveAspectRatio="xMinYMid slice"
                 viewBox="0 0 1440 800">
