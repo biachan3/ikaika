@@ -175,6 +175,9 @@
                     <div class="empty-space">-</div>
                     partner
                 </a>
+                <a href="{{ route('event.index') }}" class="menu__item">event
+            
+                </a>
                 <a href="https://goo.gl/maps/oYh2azwDHf9Wbas46">
                     <div class="location-fixed">
                         <p class="lokasi">HALAMAN PERPUSTAKAAN, UNIVERSITAS SURABAYA</p>
@@ -184,7 +187,7 @@
                     <div class="empty-space">-</div>
                     informed
                 </a> --}}
-
+         
             </nav>
             <div class="event-time">
                 <div class="section">
