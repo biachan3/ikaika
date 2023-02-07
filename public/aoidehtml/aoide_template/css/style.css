@@ -305,7 +305,31 @@ p {
 	display: block;
 	z-index: 3002;
 }
+.logo2 {
+	position: absolute;
+	top: 22px;
+	left: 200px;
+	display: block;
+	z-index: 3002;
+}
+.logo3 {
+	position: absolute;
+	top: 22px;
+	left: 360px;
+	display: block;
+	z-index: 3002;
+}
 .logo img {
+	display: block;
+	height: 50px;
+	width: 50px;
+}
+.logo2 img {
+	display: block;
+	height: 50px;
+	width: 50px;
+}
+.logo3 img {
 	display: block;
 	height: 50px;
 	width: 50px;
@@ -941,6 +965,16 @@ ul.countdown li span {
 	background-size:cover;
     transition: all 300ms linear;
 }
+.daftar {
+	background-color: #bee;
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    width: 400%;
+	font-size: 20px;
+	/* height: 200%; */
+}
+
 ul.countdown li p {
 	color: #fff;
 	font-size: 11px;
