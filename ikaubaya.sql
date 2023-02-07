@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 05, 2023 at 04:40 PM
+-- Generation Time: Feb 07, 2023 at 07:10 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.2
 
@@ -48,7 +48,8 @@ CREATE TABLE `attendee` (
   `ticket_id` varchar(45) NOT NULL,
   `name` varchar(45) DEFAULT NULL,
   `year` year(4) DEFAULT NULL,
-  `faculty` varchar(45) DEFAULT NULL
+  `faculty` varchar(45) DEFAULT NULL,
+  `id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -64,6 +65,25 @@ CREATE TABLE `bank` (
   `description` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `bank`
+--
+
+INSERT INTO `bank` (`id`, `name`, `account`, `description`) VALUES
+(1, 'bank test', 'test', 'test');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categories`
+--
+
+CREATE TABLE `categories` (
+  `id` int(11) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `description` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 -- --------------------------------------------------------
 
 --
@@ -75,6 +95,13 @@ CREATE TABLE `category` (
   `name` varchar(45) NOT NULL,
   `description` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `name`, `description`) VALUES
+(1, 'test', 'test');
 
 -- --------------------------------------------------------
 
@@ -106,6 +133,13 @@ CREATE TABLE `event` (
   `category_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `event`
+--
+
+INSERT INTO `event` (`id`, `name`, `description`, `startevent`, `endevent`, `price`, `category_id`) VALUES
+(1, 'test', 'test', '2023-02-07 18:23:28', '2023-02-09 18:23:28', 30000, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -130,6 +164,14 @@ CREATE TABLE `role` (
   `description` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `role`
+--
+
+INSERT INTO `role` (`id`, `name`, `description`) VALUES
+(1, 'test', 'test'),
+(3, '', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -143,7 +185,9 @@ CREATE TABLE `ticket` (
   `users_id` bigint(20) UNSIGNED NOT NULL,
   `date` date NOT NULL,
   `amount` bigint(20) NOT NULL,
-  `qr` varchar(45) DEFAULT NULL
+  `qr` varchar(45) DEFAULT NULL,
+  `status` tinyint(4) NOT NULL,
+  `proof` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -161,11 +205,18 @@ CREATE TABLE `users` (
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `role_id` int(11) NOT NULL DEFAULT 2,
+  `role_id` int(11) NOT NULL DEFAULT 1,
   `year` year(4) NOT NULL,
   `work` varchar(45) NOT NULL,
   `faculty` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `role_id`, `year`, `work`, `faculty`) VALUES
+(4, 'golden', 's123@gmail.com', NULL, '$2y$10$FuJiHLVkAFV0NKbnMP4XceKJw6l8Jk92c2htZsVM/s.deoR3dutxG', NULL, '2023-02-06 05:14:15', '2023-02-06 05:14:15', 1, 2019, 'Mahasiswa', 'Teknik');
 
 --
 -- Indexes for dumped tables
@@ -183,12 +234,19 @@ ALTER TABLE `article`
 -- Indexes for table `attendee`
 --
 ALTER TABLE `attendee`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_attendee_ticket1_idx` (`ticket_id`);
 
 --
 -- Indexes for table `bank`
 --
 ALTER TABLE `bank`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -252,16 +310,28 @@ ALTER TABLE `article`
   MODIFY `idarticle` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `attendee`
+--
+ALTER TABLE `attendee`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `bank`
 --
 ALTER TABLE `bank`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `migrations`
@@ -273,13 +343,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Constraints for dumped tables
