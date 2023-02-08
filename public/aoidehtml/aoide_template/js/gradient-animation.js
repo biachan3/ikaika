@@ -219,11 +219,12 @@
                 delay: (t, i) => anime.random(0, 600),
                 easing: 'easeInOutQuad',
                 opacity: 1,
-                complete: () => DOM.links.forEach(link => {
-                    link.style.pointerEvents = 'auto';
-                    link.classList.add('menu__item--showDeco');
-                    document.getElementsByClassName('location-fixed')[0].style.visibility = 'visible';
-                })
+                // complete: () => 
+                // // DOM.links.forEach(link => {
+                // //     link.style.pointerEvents = 'auto';
+                // //     link.classList.add('menu__item--showDeco');
+                // //     document.getElementsByClassName('location-fixed')[0].style.visibility = 'visible';
+                // // })
             });
         });
         blobs.filter(el => el != blobs[current]).forEach(blob => blob.show());

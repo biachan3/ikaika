@@ -32,10 +32,11 @@
     @endfor
     <div class="mb-3">
             <label for="attendFaculty" class="">Bank</label>
-            <select class="form-control" id="bank" name="bank">
+            <label for="attendFaculty" class="">BCA - 05112412422 A.N Bang Starif</label>
+            <!-- <select class="form-control" id="bank" name="bank">
        @foreach ($result['bank'] as $bank)
           <option value="{{ $bank->id }}">{{ $bank->name }}----{{ $bank->account }}</option>
-       @endforeach
+       @endforeach -->
     </select>
         </div>
 

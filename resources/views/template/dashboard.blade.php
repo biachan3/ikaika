@@ -94,11 +94,11 @@
             <div class="logo">
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="{{ asset('aoidehtml/aoide_template') }}/img/High Res IKA UBAYA LOGO.jpeg"
+                        <img src="{{ asset('aoidehtml/aoide_template') }}/img/LOGO UBAYA FIX CS5-02.jpeg"
                             width="400px" alt="" />
                     </div>
                     <div class="col-md-8 mt-2">
-                        <p>IKA UBAYA</p>
+                        <p>UBAYA</p>
 
                     </div>
                 </div>
@@ -110,11 +110,11 @@
             <div class="logo2">
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="{{ asset('aoidehtml/aoide_template') }}/img/High Res IKA UBAYA LOGO.jpeg"
+                        <img src="{{ asset('aoidehtml/aoide_template') }}/img/LOGO 55 UBAYA - COLORED.jpeg"
                             width="400px" alt="" />
                     </div>
                     <div class="col-md-8 mt-2">
-                        <p>IKA UBAYA</p>
+                        <p>55 Tahun</p>
 
                     </div>
                 </div>
@@ -141,18 +141,22 @@
 
         <a href="#ticket-wrap" class="ticket-link">
             <div class="ticket">
-
-                {{-- <a href="/loguo"></a> --}}
+@if (Auth::check())
+<button>Logout</button>
+@else
+<button>Login</button>
+@endif
+                <!-- {{-- <a href="/loguo"></a> --}}
                 {{-- <p>157 seats left</p> --}}
                 <div class="pulse">
                     <svg version="1.1" id="svg-ticket" xmlns="http://www.w3.org/2000/svg"
                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="36px"
-                        height="36px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
+                        height="36px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">Login
                         <path fill="none" stroke="#FFFFFF" stroke-width="4" stroke-miterlimit="10"
                             d="M1,21c0,20,31,38,31,38s31-18,31-38
 										c0-8.285-6-16-15-16c-8.285,0-16,5.715-16,14c0-8.285-7.715-14-16-14C7,5,1,12.715,1,21z" />
                     </svg>
-                </div>
+                </div> -->
             </div>
         </a>
 
@@ -182,12 +186,12 @@
                     <button class="btn btn-primary w-100" type="submit">Log Out</button>
                 </form>
 
-                @if (Auth::user()['role_id'] == '1')
-                    <br>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button class="btn btn-primary w-100" type="submit">Menu Admin</button>
-                    </form>
+                @if(Auth::user()->isAdmin())
+                <br>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button class="btn btn-primary w-100" type="submit">Menu Admin</button>
+                </form>
                 @endif
                 {{-- </a> --}}
             </div>
@@ -1407,9 +1411,10 @@
         </a> --}}
 
         <div class="social-fixed">
-            <a href="#">twitter</a>
-            <a href="https://instagram.com/ikaubaya?igshid=YmMyMTA2M2Y=">instagram</a>
-            <a href="#">behance</a>
+        <a href="https://instagram.com/ikaubaya?igshid=YmMyMTA2M2Y=">Instagram</a>
+            <a href="#">Contact Person</a>
+   
+            <a href="#">Fanspage</a>
         </div>
     </main>
 

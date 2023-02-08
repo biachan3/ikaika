@@ -25,7 +25,7 @@
             <div id="eventStarteven" >{{$result['event'][0]->startevent}}</div>
         </div>
         <div class="mb-3">
-            <label  class="">Ahkir Acara</label>
+            <label  class="">Akhir Acara</label>
             <div id="eventEndevent" >{{$result['event'][0]->endevent}}</div>
         </div>
   
