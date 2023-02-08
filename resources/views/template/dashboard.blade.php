@@ -142,9 +142,9 @@
         <a href="#ticket-wrap" class="ticket-link">
             <div class="ticket">
 @if (Auth::check())
-<button>Logout</button>
-@elseif(Auth::user()->role_id == "1")
-<button>Panel Admin</button>
+<!-- <button>Logout</button>
+@elseif(Auth::user()->role_id == '2')
+<button>Panel Admin</button> -->
 @else
 <button>Login</button>
 @endif
@@ -188,7 +188,7 @@
                     <button class="btn btn-primary w-100" type="submit">Log Out</button>
                 </form>
 
-                @if (Auth::user()["role_id"] == "1")
+                @if(Auth::user()->isAdmin())
                 <br>
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

@@ -16,8 +16,12 @@ class User extends Authenticatable
      *
      * @var array
      */
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id')->withTrashed();
+    }
     protected $fillable = [
-        'name', 'email', 'year', 'password', 'work', 'faculty'
+        'name', 'email', 'year', 'password', 'work', 'faculty','role_id'
     ];
 
     /**
@@ -37,4 +41,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function isAdmin()
+    {
+        foreach ($this->role()->get() as $role) {
+            if ($role->id == 1) {
+                return true;
+            }
+        }
+
+        return false;
+    }
 }
