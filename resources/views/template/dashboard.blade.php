@@ -142,9 +142,7 @@
         <a href="#ticket-wrap" class="ticket-link">
             <div class="ticket">
 @if (Auth::check())
-<!-- <button>Logout</button>
-@elseif(Auth::user()->role_id == '2')
-<button>Panel Admin</button> -->
+<button>Logout</button>
 @else
 <button>Login</button>
 @endif
