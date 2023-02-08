@@ -164,7 +164,7 @@
                 </p>
                 {{-- <a href="#"> --}}
                 <form method="GET" action="{{ route('login') }}">
-                    
+
                     <button class="btn btn-primary w-100" type="submit">Log In</button>
                 </form>
                 {{-- </a> --}}
@@ -182,12 +182,12 @@
                     <button class="btn btn-primary w-100" type="submit">Log Out</button>
                 </form>
 
-                @if (Auth::user()["role_id"] == "1")
-                <br>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button class="btn btn-primary w-100" type="submit">Menu Admin</button>
-                </form>
+                @if (Auth::user()['role_id'] == '1')
+                    <br>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button class="btn btn-primary w-100" type="submit">Menu Admin</button>
+                    </form>
                 @endif
                 {{-- </a> --}}
             </div>
@@ -214,11 +214,11 @@
                     <div class="empty-space">-</div>
                     partner
                 </a>
-                <a href="{{ route('event.index')}}">
+                <a href="{{ route('event.index') }}">
                     <div class="location-fixed">
-                        <p class="lokasi">  Lihat Acara </p>
+                        <p class="lokasi"> Lihat Acara </p>
                     </div>
-                </a>     
+                </a>
                 <!-- <a href="https://goo.gl/maps/oYh2azwDHf9Wbas46">
                     <div class="location-fixed">
                         <p class="lokasi">HALAMAN PERPUSTAKAAN, UNIVERSITAS SURABAYA</p>
@@ -228,19 +228,19 @@
                     <div class="empty-space">-</div>
                     informed
                 </a> --}}
-         
+
             </nav>
             <div class="event-time">
                 <div class="section">
                     <div class="hero-main-title">
-                        
+
                         Reuni Akbar 55 Tahun Universitas Surabaya
                     </div>
                     <div class="hero-title">3 Juni</div>
                     <div class="hero-subtitle">
                         <span>2</span><span>0</span><span>2</span><span>3</span>
                     </div>
-                    
+
 
                 </div>
                 <ul class="countdown">
@@ -260,14 +260,25 @@
                         <span class="seconds">00</span>
                         <p class="seconds_ref">seconds</p>
                     </li>
-                  
-                  
+                    <li>
+                        
+                        
+                    </li>
+
+
                 </ul>
-           
-               
-                 
-           
+                
+
+
+
             </div>
+            {{-- <form method="GET" action="{{ route('event.index') }}">
+                <input class="button btn" type="submit" value="Tes">
+            </form> --}}
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button class="btn btn-primary w-100" type="submit">Log Out</button>
+            </form>
             <svg class="scene" width="1440" height="800" preserveAspectRatio="xMinYMid slice"
                 viewBox="0 0 1440 800">
                 <defs>
