@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,13 +27,21 @@ Route::prefix('ticket')->name('ticket.')->controller(TicketController::class)->n
     Route::get('order/', 'create')->name("create");
     Route::post('store', 'store')->name('store');
 });
+
+Route::prefix('admin')->name('admin.')->controller(AdminController::class)->name('admin.')->group(function () {
+    Route::get('', 'index')->name('index');
+    Route::get('/detail/{id}', 'show')->name('detail');
+});
 Route::get('/event', 'App\Http\Controllers\EventController@index')->name('event.index');
+
+Route::get('/payment', 'App\Http\Controllers\PaymentController@index')->name('payment.index');
+Route::post('/payment/ping', 'App\Http\Controllers\PaymentController@ping')->name('payment.ping');
 
 Route::get('/', function () {
     return view('template.dashboard');
 })->name('dashboard');
-Route::get('/admin', function () {
-    return view('admin.tiket.index');
-})->name('admindash');
+// Route::get('/admin', function () {
+//     return view('admin.tiket.index');
+// })->name('admindash');
 
 require __DIR__ . '/auth.php';

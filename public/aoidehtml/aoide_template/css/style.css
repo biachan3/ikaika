@@ -913,6 +913,13 @@ main {
 
 /* #Countdown
 ================================================== */
+.button {
+	background-color: #bbbeee;
+	display: block;
+	margin: 10px 0;
+	padding: 10px;
+	width: 400%;
+}
 
 ul.countdown {
 	position: relative;
@@ -1630,6 +1637,9 @@ ul.countdown li p {
 		letter-spacing: 1px;
 		margin-top: 15px;
 	}
+
+	
+
 	.content__close {
 		top: 20px;
 		left: 50%;

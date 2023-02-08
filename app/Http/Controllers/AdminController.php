@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Attendee;
+use App\Models\Ticket;
+
 
 class AdminController extends Controller
 {
@@ -13,7 +16,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.template.dashboard', []);
+        $results = Attendee::all();
+        return view('admin.tiket.index', compact('results'));
     }
 
     /**
@@ -45,7 +49,9 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        //
+        $ticket = Ticket::findOrFail($id);
+// return dd($ticket);
+        return view('admin.tiket.detail', compact('ticket'));
     }
 
     /**

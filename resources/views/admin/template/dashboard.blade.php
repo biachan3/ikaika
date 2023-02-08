@@ -25,6 +25,8 @@
     <link href="{{ asset('startbootstrap-sb-admin-2-gh-pages') }}/vendor/datatables/dataTables.bootstrap4.min.css"
         rel="stylesheet">
 
+        @yield('style')
+
 </head>
 
 <body id="page-top">
