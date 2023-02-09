@@ -156,15 +156,10 @@
                 <button class="btn btn-primary w-100" type="submit">Log Out</button>
             </form>
 
-            @if(Auth::user())
-            <br>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button class="btn btn-primary w-100" type="submit">Menu Admin</button>
-            </form>
-            @endif
-            {{-- </a> --}}
-        </div>
+
+    
+                {{-- </a> --}}
+            </div>
         @endauth
 
         <div class="content">
