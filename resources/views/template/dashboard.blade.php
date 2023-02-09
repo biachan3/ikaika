@@ -164,10 +164,10 @@
 
         <div class="content">
             <nav class="menu">
-                <a href="#" class="menu__item">Daftar
+                <!-- <a href="#" class="menu__item">Daftar
                     <div class="empty-space">-</div>
                     Sekarang!
-                </a>
+                </a> -->
                 <!-- <a href="#" class="menu__item">guest
                     <div class="empty-space">-</div>
                     stars
@@ -186,12 +186,13 @@
                 <a href="#" class="menu__item">media
                     <div class="empty-space">-</div>
                     partner
-                </a>
-                <a href="{{ route('event.index') }}">
+                </a>-->
+        
+                <a class="btn btn-default"  style="font-size:4vw; border: 1px solid black; " href="{{ route('event.index') }}">Daftar Disini !
                     <div class="location-fixed">
-                        <p class="lokasi"> Lihat Acara </p>
+                
                     </div>
-                </a> -->
+                </a> 
                 <!-- <a href="https://goo.gl/maps/oYh2azwDHf9Wbas46">
                     <div class="location-fixed">
                         <p class="lokasi">HALAMAN PERPUSTAKAAN, UNIVERSITAS SURABAYA</p>
