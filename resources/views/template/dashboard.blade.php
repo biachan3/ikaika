@@ -141,10 +141,14 @@
 
         <a href="#ticket-wrap" class="ticket-link">
             <div class="ticket">
+
+<button>
 @if (Auth::check())
-<button>Logout</button>
-@else
-<button>Login</button>
+    Logout 
+    @else
+    Login
+</button>
+
 @endif
                 <!-- {{-- <a href="/loguo"></a> --}}
                 {{-- <p>157 seats left</p> --}}
@@ -160,7 +164,7 @@
             </div>
         </a>
 
-        @guest
+        @if (Auth::check())
 
             <div id="ticket-wrap">
                 <p>
@@ -172,14 +176,10 @@
                     <button class="btn btn-primary w-100" type="submit">Log In</button>
                 </form>
                 {{-- </a> --}}
-            </div>
-        @endguest
-        @auth
-
-            <div id="ticket-wrap">
                 <p>
                     Sampai Jumpa
                 </p>
+                @else
                 {{-- <a href="#"> --}}
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
@@ -195,7 +195,11 @@
                 @endif
                 {{-- </a> --}}
             </div>
-        @endauth
+       
+       
+
+   
+            @endif
 
         <div class="content">
             <nav class="menu">
