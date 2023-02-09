@@ -182,9 +182,9 @@
                 </p>
                 {{-- <a href="#"> --}}
                 <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button class="btn btn-primary w-100" type="submit">Log Out</button>
-                </form>
+                @csrf
+                <button class="btn btn-primary w-100" type="submit">Log Out</button>
+            </form>
 
                 @if(Auth::user()->isAdmin())
                 <br>
@@ -279,10 +279,7 @@
             {{-- <form method="GET" action="{{ route('event.index') }}">
                 <input class="button btn" type="submit" value="Tes">
             </form> --}}
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button class="btn btn-primary w-100" type="submit">Log Out</button>
-            </form>
+            
             <svg class="scene" width="1440" height="800" preserveAspectRatio="xMinYMid slice"
                 viewBox="0 0 1440 800">
                 <defs>
