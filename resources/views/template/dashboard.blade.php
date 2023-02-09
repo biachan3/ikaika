@@ -156,7 +156,7 @@
                 <button class="btn btn-primary w-100" type="submit">Log Out</button>
             </form>
 
-            @if(Auth::user()->isAdmin())
+            @if(Auth::user())
             <br>
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
