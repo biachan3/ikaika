@@ -141,14 +141,10 @@
 
         <a href="#ticket-wrap" class="ticket-link">
             <div class="ticket">
-
-<button>
 @if (Auth::check())
-    Logout 
-    @else
-    Login
-</button>
-
+<button>Logout</button>
+@else
+<button>Login</button>
 @endif
                 <!-- {{-- <a href="/loguo"></a> --}}
                 {{-- <p>157 seats left</p> --}}
@@ -164,7 +160,7 @@
             </div>
         </a>
 
-        @if (Auth::check())
+        @guest
 
             <div id="ticket-wrap">
                 <p>
@@ -176,34 +172,32 @@
                     <button class="btn btn-primary w-100" type="submit">Log In</button>
                 </form>
                 {{-- </a> --}}
+            </div>
+        @endguest
+        @auth
+
+            <div id="ticket-wrap">
                 <p>
                     Sampai Jumpa
                 </p>
-                @else
                 {{-- <a href="#"> --}}
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
                     <button class="btn btn-primary w-100" type="submit">Log Out</button>
                 </form>
 
-                @if(Auth::user()->isAdmin())
-                <br>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button class="btn btn-primary w-100" type="submit">Menu Admin</button>
-                </form>
-                @endif
+    
                 {{-- </a> --}}
             </div>
-       
-       
-
-   
-            @endif
+        @endauth
 
         <div class="content">
             <nav class="menu">
-                <a href="#" class="menu__item">guest
+                <a href="#" class="menu__item">Daftar
+                    <div class="empty-space">-</div>
+                    Sekarang!
+                </a>
+                <!-- <a href="#" class="menu__item">guest
                     <div class="empty-space">-</div>
                     stars
                 </a>
@@ -222,11 +216,11 @@
                     <div class="empty-space">-</div>
                     partner
                 </a>
-                <a href="{{ route('event.index')}}">
+                <a href="{{ route('event.index') }}">
                     <div class="location-fixed">
-                        <p class="lokasi">  Lihat Acara </p>
+                        <p class="lokasi"> Lihat Acara </p>
                     </div>
-                </a>     
+                </a> -->
                 <!-- <a href="https://goo.gl/maps/oYh2azwDHf9Wbas46">
                     <div class="location-fixed">
                         <p class="lokasi">HALAMAN PERPUSTAKAAN, UNIVERSITAS SURABAYA</p>
@@ -236,19 +230,19 @@
                     <div class="empty-space">-</div>
                     informed
                 </a> --}}
-         
+
             </nav>
             <div class="event-time">
                 <div class="section">
                     <div class="hero-main-title">
-                        
+
                         Reuni Akbar 55 Tahun Universitas Surabaya
                     </div>
                     <div class="hero-title">3 Juni</div>
                     <div class="hero-subtitle">
                         <span>2</span><span>0</span><span>2</span><span>3</span>
                     </div>
-                    
+
 
                 </div>
                 <ul class="countdown">
