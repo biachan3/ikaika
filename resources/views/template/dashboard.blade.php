@@ -146,6 +146,7 @@
         @endguest
         @auth
 
+
         <div id="ticket-wrap">
             <p>
                 Sampai Jumpa
@@ -249,9 +250,10 @@
             {{-- <form method="GET" action="{{ route('event.index') }}">
             <input class="button btn" type="submit" value="Tes">
             </form> --}}
+
            
             <svg class="scene" width="1440" height="800" preserveAspectRatio="xMinYMid slice" viewBox="0 0 1440 800">
-                <defs>
+            <defs>
                     <linearGradient id="gradient-1" x1="0%" y1="0%" x2="100%" y2="100%">
                         <stop offset="0" stop-color="#FFFFFF" />
                         <stop offset="1" stop-color="#FFFFFF" />
