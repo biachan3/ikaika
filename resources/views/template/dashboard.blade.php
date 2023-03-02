@@ -38,27 +38,30 @@
         <div class="container">
             <div class="row conference-header-row">
                 <div class="col-sm-1 col-lg-1 col-xl-1">
+                        <a href="index.html" class="logo"><img src="{{ asset('Ginger') }}/assets/img/LOGO UBAYA FIX CS5-02_adobe_express.svg"
+                                alt="logo"></a>
+                </div>
+
+                <div class="col-sm-1 col-lg-1 col-xl-1">
                     <a href="index.html" class="logo"><img src="{{ asset('Ginger') }}/assets/img/LOGO 55 UBAYA - COLORED_adobe_express.svg"
                             alt="logo"></a>
                 </div>
+                
                 <div class="col-sm-1 col-lg-1 col-xl-1">
-                    <a href="index.html" class="logo"><img src="{{ asset('Ginger') }}/assets/img/LOGO UBAYA FIX CS5-02_adobe_express.svg"
+                    <a href="index.html" class="logo"><img src="{{ asset('Ginger') }}/assets/img/"
                             alt="logo"></a>
                 </div>
-                <div class="col-sm-1 col-lg-1 col-xl-1">
-                    <a href="index.html" class="logo"><img src="{{ asset('Ginger') }}/assets/img/LOGO UBAYA FIX CS5-02_adobe_express.svg"
-                            alt="logo"></a>
-                </div>
+
                
                 <div class="col-sm-9 col-lg-8 col-xl-6">
                     <nav class="nav-menu menu">
                         <ul class="nav-list">
 
-                            <li><a href="#about">about us</a></li>
-                            <li><a href="#schedule">schedule</a></li>
-                            <li><a href="#location">location</a></li>
-                            <li><a href="/event">register</a></li>
-                            <li><a href="#news">news</a></li>
+                            <li><a href="#about" style="color: black;">about us</a></li>
+                            <li><a href="#schedule" style="color: black;">schedule</a></li>
+                            <li><a href="#location" style="color: black;">location</a></li>
+                            <li><a href="/event" style="color: black;">register</a></li>
+                            <li><a href="#news"style="color: black;">news</a></li>
                             {{-- <li class="dropdown">
 								<a href="#">pages <i class="fa fa-angle-down" aria-hidden="true"></i></a>
 								<ul>
