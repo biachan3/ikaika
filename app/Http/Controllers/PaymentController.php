@@ -19,7 +19,7 @@ class PaymentController extends Controller
         'body' => '{
             "transaction_details":{
                 "order_id":'.$time.',
-                "gross_amount":290000
+                "gross_amount":190000
             },
             "credit_card":{
                 "secure":true
