@@ -15,11 +15,11 @@ class HomeController extends Controller
 
         } else if (request()->user()->role_id == 1) {
 
-            return view('admin.template.dashboard');
+            return view('admin.home.index');
         } else {
             return view('user.index');
 
         }
-        
+
     }
 }

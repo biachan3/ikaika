@@ -33,7 +33,9 @@ Route::middleware('auth')->group(function () {
         Route::get('', 'index')->name('index');
         Route::get('register/{id}', 'order')->name("order");
         Route::get('order/', 'create')->name("create");
-        Route::post('store', 'store')->name('store');
+
+        Route::post('buy', 'store')->name('store');
+        Route::get('buy', 'store1')->name('store1');
     }
     );
 

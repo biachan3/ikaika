@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Admin IKA - @yield('title')</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('startbootstrap-sb-admin-2-gh-pages') }}/vendor/fontawesome-free/css/all.min.css"
@@ -372,34 +372,11 @@
                 </nav>
                 <!-- End of Topbar -->
 
+
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-                    </div>
+                @yield('content')
 
-                    <!-- Content Row -->
-
-
-                    <!-- Content Row -->
-
-                    <div class="row">
-                        @yield('content')
-                        <!-- Area Chart -->
-
-
-                        <!-- Pie Chart -->
-
-                    </div>
-
-                    <!-- Content Row -->
-
-
-                </div>
                 <!-- /.container-fluid -->
 
             </div>
@@ -473,6 +450,8 @@
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('startbootstrap-sb-admin-2-gh-pages') }}/js/demo/datatables-demo.js"></script>
+
+    @yield('script')
 </body>
 
 </html>

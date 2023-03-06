@@ -18,7 +18,7 @@ class PaymentController extends Controller
         $response = $client->request('POST', 'https://app.sandbox.midtrans.com/snap/v1/transactions', [
         'body' => '{
             "transaction_details":{
-                "order_id":"0001",
+                "order_id":"000121",
                 "gross_amount":14000
             },
             "credit_card":{
