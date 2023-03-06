@@ -27,7 +27,7 @@ Route::get('/dashboard', function () {
 // })->name('dashboard');
 Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+// Route::middleware('auth')->group(function () {
 
     Route::prefix('ticket')->name('ticket.')->controller(TicketController::class)->name('ticket.')->group(function () {
         Route::get('', 'index')->name('index');
@@ -51,7 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/payment/ping', 'App\Http\Controllers\PaymentController@ping')->name('payment.ping');
     Route::get('/scanner', 'App\Http\Controllers\ScanController@index')->name('scanner.index');
     Route::get('/qr/{id}', 'App\Http\Controllers\ScanController@generateQR')->name('qrgenerate');
-});
+// });
 
 
 // Route::get('/admin', function () {
