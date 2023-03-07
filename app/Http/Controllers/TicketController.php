@@ -19,6 +19,11 @@ class TicketController extends Controller
 
         return view('template.ticket', []);
     }
+    public function index_user()
+    {
+
+        return view('user.ticket.order');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -82,7 +87,7 @@ class TicketController extends Controller
 //         }
 //         return view('dashboard', []);
 //     }
-    public function store(Request $data)
+    public function regis(Request $data)
     {
         $prefix = "";
         $prefix_fakultas = "";
@@ -123,7 +128,7 @@ class TicketController extends Controller
             $prefix = "TD-";
         }
         $id_trx = $prefix.time();
-        dd($id_trx);
+        dd($data);
 
         //here
     }

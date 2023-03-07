@@ -60,6 +60,13 @@ Route::prefix('ticket')->name('ticket.')->controller(TicketController::class)->n
     Route::post('store', 'store')->name('store');
 }
 );
+
+
+Route::prefix('user')->group(function () {
+    Route::get('/order', [App\Http\Controllers\TicketController::class, 'index_user'])->name('user.index');
+    Route::post('/regis', [App\Http\Controllers\TicketController::class, 'regis'])->name('regis');
+});
+
 Route::prefix('admin')->name('admin.')->controller(AdminController::class)->name('admin.')->group(
     function () {
         Route::get('', 'index')->name('index');
