@@ -113,7 +113,7 @@
                                     />
                                 </div>
                                 <br>
-                                @for ($i = 0; $i < 3; $i++)
+                                <!-- @for ($i = 0; $i < 3; $i++)
                                     <div class="mb-3">
 
 
@@ -145,7 +145,7 @@
                                 <div class="mb-3">
                                     <label for="proof" class="col-md-4 control-label">Bukti Transfer</label>
                                     <input id="proof" type="file" class="form-control" name="proof" required>
-                                </div>
+                                </div> -->
                         </div>
                         <div class="text-center mb-3">
                         <button type="submit" class="btn btn-primary col-lg-6 w-200 mt-3 mb-3 ml-3">Submit</button>
