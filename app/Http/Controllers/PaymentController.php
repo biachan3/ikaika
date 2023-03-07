@@ -14,28 +14,28 @@ class PaymentController extends Controller
     {
         $client = new \GuzzleHttp\Client();
         $base64username = base64_encode(env('MIDTRANS_SERVER_KEY'));
-
+        $time = time();
         $response = $client->request('POST', 'https://app.sandbox.midtrans.com/snap/v1/transactions', [
         'body' => '{
             "transaction_details":{
-                "order_id":"0001",
-                "gross_amount":14000
+                "order_id":'.$time.',
+                "gross_amount":190000
             },
             "credit_card":{
                 "secure":true
             },
             "item_details": [
                 {
-                  "id": "a01",
-                  "price": 10000,
+                  "id": "V001",
+                  "price": 150000,
                   "quantity": 1,
-                  "name": "Apple"
+                  "name": "Tiket Acara Reuni"
                 },
                 {
-                  "id": "b02",
-                  "price": 4000,
+                  "id": "V002",
+                  "price": 40000,
                   "quantity": 1,
-                  "name": "Charge"
+                  "name": "Donasi"
                 }
               ]
         }',

@@ -52,37 +52,95 @@ class TicketController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+//     public function store(Request $data)
+//     {
+//         $destinationPath = '/uploads';
+
+//         $property_features_image = $data["proof"]->getClientOriginalExtension();
+//         $data["proof"]->move(public_path($destinationPath), $property_features_image);
+//         $data["proof"] = $data["proof"]->getClientOriginalName();
+//         $ticket = Ticket::create([
+//             'id'     => Carbon::now(),
+//             'event_id'     => $data['eventId'],
+//             'bank_id'    => $data['bank'],
+//             'users_id'     => Auth::user()->id,
+//             'date'     => Carbon::now(),
+//             'amount'     => $data['eventPrice'],
+//             'qr' => "nanti",
+//             'status' => 0,
+//             'proof' => $data['proof'],
+//         ]);
+// $ticket->save();
+// $id = $ticket->id;
+//         for ($i = 0; $i < $data['eventAttendees']; $i++) {
+//             Attendee::create([
+//                 'ticket_id'     => Carbon::now(),
+//                 'name'    => $data['attendName'][$i],
+//                 'year'     => $data['attendYear'][$i],
+//                 'faculty'     => $data['attendFaculty'][$i],
+//             ]);
+//         }
+//         return view('dashboard', []);
+//     }
     public function store(Request $data)
     {
-        $destinationPath = '/uploads';
-        
-        $property_features_image = $data["proof"]->getClientOriginalExtension();
-        $data["proof"]->move(public_path($destinationPath), $property_features_image);
-        $data["proof"] = $data["proof"]->getClientOriginalName();
-        $ticket = Ticket::create([
-            'id'     => Carbon::now(),
-            'event_id'     => $data['eventId'],
-            'bank_id'    => $data['bank'],
-            'users_id'     => Auth::user()->id,
-            'date'     => Carbon::now(),
-            'amount'     => $data['eventPrice'],
-            'qr' => "nanti",
-            'status' => 0,
-            'proof' => $data['proof'],
-        ]);
-$ticket->save();
-$id = $ticket->id;
-        for ($i = 0; $i < $data['eventAttendees']; $i++) {
-            Attendee::create([
-                'ticket_id'     => Carbon::now(),
-                'name'    => $data['attendName'][$i],
-                'year'     => $data['attendYear'][$i],
-                'faculty'     => $data['attendFaculty'][$i],
-            ]);
-        }
-        return view('dashboard', []);
-    }
+        $prefix = "";
+        $prefix_fakultas = "";
+        $fakultas = $data->fakultas;
 
+        switch ($fakultas) {
+            case "farmasi":
+                $prefix_fakultas = "FF";
+                break;
+            case "hukum":
+                $prefix_fakultas = "FH";
+                break;
+            case "fbe":
+                $prefix_fakultas = "FBE";
+                break;
+            case "politeknik":
+                $prefix_fakultas = "POL";
+                break;
+            case "psikologi":
+                $prefix_fakultas = "FP";
+                break;
+            case "teknik":
+                $prefix_fakultas = "FT";
+                break;
+            case "teknobiologi":
+                $prefix_fakultas = "FTB";
+                break;
+            case "kedokteran":
+                $prefix_fakultas = "FK";
+                break;
+            default:
+                $prefix_fakultas = "";
+        }
+
+        if($data->donation){
+            $prefix = "TO-";
+        }else{
+            $prefix = "TD-";
+        }
+        $id_trx = $prefix.time();
+        dd($id_trx);
+
+        //here
+    }
+    public function store1()
+    {
+        $prefix = "";
+        $data=false;
+        if($data){
+            $prefix = "TI-";
+        }else{
+            $prefix = "TD-";
+        }
+        $id_trx = $prefix.time();
+        dd($id_trx);
+
+        //here
+    }
     /**
      * Display the specified resource.
      *
