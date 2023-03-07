@@ -28,28 +28,27 @@ Route::get('/dashboard', function () {
 Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
-
-    Route::prefix('ticket')->name('ticket.')->controller(TicketController::class)->name('ticket.')->group(function () {
-        Route::get('', 'index')->name('index');
-        Route::get('register/{id}', 'order')->name("order");
-        Route::get('order/', 'create')->name("create");
-        Route::post('store', 'store')->name('store');
-    }
-    );
-
-    Route::prefix('admin')->name('admin.')->controller(AdminController::class)->name('admin.')->group(
-        function () {
-            Route::get('', 'index')->name('index');
-            Route::get('/detail/{id}', 'show')->name('detail');
-        }
-    );
-    Route::get('/event', 'App\Http\Controllers\EventController@index')->name('event.index');
-
-    Route::get('/payment', 'App\Http\Controllers\PaymentController@index')->name('payment.index');
-    Route::post('/payment/ping', 'App\Http\Controllers\PaymentController@ping')->name('payment.ping');
-    Route::get('/scanner', 'App\Http\Controllers\ScanController@index')->name('scanner.index');
-    Route::get('/qr/{id}', 'App\Http\Controllers\ScanController@generateQR')->name('qrgenerate');
 });
+
+Route::prefix('ticket')->name('ticket.')->controller(TicketController::class)->name('ticket.')->group(function () {
+    Route::get('', 'index')->name('index');
+    Route::get('register/{id}', 'order')->name("order");
+    Route::get('order/', 'create')->name("create");
+    Route::post('store', 'store')->name('store');
+}
+);
+Route::prefix('admin')->name('admin.')->controller(AdminController::class)->name('admin.')->group(
+    function () {
+        Route::get('', 'index')->name('index');
+        Route::get('/detail/{id}', 'show')->name('detail');
+    }
+);
+Route::get('/event', 'App\Http\Controllers\EventController@index')->name('event.index');
+
+Route::get('/payment', 'App\Http\Controllers\PaymentController@index')->name('payment.index');
+Route::post('/payment/ping', 'App\Http\Controllers\PaymentController@ping')->name('payment.ping');
+Route::get('/scanner', 'App\Http\Controllers\ScanController@index')->name('scanner.index');
+Route::get('/qr/{id}', 'App\Http\Controllers\ScanController@generateQR')->name('qrgenerate');
 
 
 // Route::get('/admin', function () {

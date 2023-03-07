@@ -60,7 +60,7 @@
                             <li><a href="#about" style="color: black;">about us</a></li>
                             <li><a href="#schedule" style="color: black;">schedule</a></li>
                             <li><a href="#location" style="color: black;">location</a></li>
-                            <li><a href="/event" style="color: black;">register</a></li>
+                            <!-- <li><a href="/event" style="color: black;">register</a></li> -->
                             <li><a href="#news"style="color: black;">news</a></li>
                             {{-- <li class="dropdown">
 								<a href="#">pages <i class="fa fa-angle-down" aria-hidden="true"></i></a>
@@ -74,7 +74,7 @@
                         </ul>
                     </nav>
                 </div>
-                @if (!Auth::check())
+                <!-- @if (!Auth::check())
                     <div class="col-md-3 col-lg-2 col-xl-3 conference-header-btn">
                         {{-- <a href="#register" class="btn"><span>Get Tickets</span></a> --}}
                         <form method="GET" action="{{ route('login') }}">
@@ -90,7 +90,7 @@
                             <button class="btn btn-primary w-100" type="submit">Log Out</button>
                         </form>
                     </div>
-                @endif
+                @endif -->
             </div>
         </div>
     </header>

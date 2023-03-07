@@ -3,16 +3,21 @@
 <section class="s-conference-slider">
     <div class="conference-slider">
         <div class="conference-slide"
-            <!-- style="background-image: url({{ asset('Ginger') }}/assets/img/slide1-home-2.jpg);">
+            style="background-image: url({{ asset('Ginger') }}/assets/img/slide1-home-2.jpg);">
             <img class="conference-slide-tringle" src="{{ asset('Ginger') }}/assets/img/effect-tringle-slider.svg"
                 alt="img">
             <img class="conference-slide-effect" src="{{ asset('Ginger') }}/assets/img/effect-slider-left.svg"
-                alt="img"> -->
+                alt="img">  
             <div class="container">
                 <div class="conference-slide-item">
                     <div class="date">12oct 2019</div>
                     <div class="conference-slider-title">High-Quality</div>
                     <h2 class="title"><span>Best Eventio</span></h2>
+                    <form method="GET" action="{{ route('event.index') }}">
+                            <div class="btn-form-cover">
+                                <button id="#submit" type="submit" class="btn"><span">Daftar Sekarang!</span></button>
+                            </div>
+                        </form>
                 </div>
             </div>
         </div>
@@ -24,9 +29,14 @@
                 alt="img">
             <div class="container">
                 <div class="conference-slide-item">
-                    <div class="date">21dec 2019</div>
+                    <div class="date">21 dec 2019</div>
                     <div class="conference-slider-title">Dedicated To</div>
                     <h2 class="title"><span>Your Success</span></h2>
+                    <form method="GET" action="">
+                            <div class="btn-form-cover">
+                                <button id="#submit" type="submit" class="btn"><span>Daftar Sekarang!</span></button>
+                            </div>
+                        </form>
                 </div>
             </div>
         </div>
@@ -41,6 +51,11 @@
                     <div class="date">27dec 2019</div>
                     <div class="conference-slider-title">Evolving With</div>
                     <h2 class="title"><span>Our Business</span></h2>
+                    <form method="GET" action="">
+                            <div class="btn-form-cover">
+                                <button id="#submit" type="submit" class="btn"><span>Daftar Sekarang!</span></button>
+                            </div>
+                        </form>
                 </div>
             </div>
         </div>

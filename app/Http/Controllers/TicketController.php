@@ -35,15 +35,15 @@ class TicketController extends Controller
         ->get(), true));
         return view('ticket.order', compact('result'));
     }
-    public function create(Request $id)
+    public function create()
     {
-        $result['event_id'] =$id['eventId'];
-        $result['attendees']=$id['attendees'];
-        $result['price'] =$id['eventPrice'] * $result['attendees'] ;
-        $result['bank']=json_decode(json_encode(DB::table('banks')
-        ->select('*')
-        ->get(), true));
-        return view('ticket.create', compact('result'));
+        // $result['event_id'] =$id['eventId'];
+        // $result['attendees']=$id['attendees'];
+        // $result['price'] =$id['eventPrice'] * $result['attendees'] ;
+        // $result['bank']=json_decode(json_encode(DB::table('banks')
+        // ->select('*')
+        // ->get(), true));
+        return view('ticket.create');
     }
 
     /**
