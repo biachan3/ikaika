@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\SupportTicket;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\NewTicket;
 use Illuminate\Http\Request;
-
 class CustomerTicketController extends Controller
 {
     
@@ -25,7 +25,7 @@ class CustomerTicketController extends Controller
         $this->validate($request, $rules);
     
         // Create new ticket
-        $ticket = new Ticket;
+        $ticket = new SupportTicket;
         $ticket->subject = $request->input('subject');
         $ticket->description = $request->input('description');
         $ticket->category = $request->input('category');

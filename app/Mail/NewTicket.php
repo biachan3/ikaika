@@ -1,9 +1,10 @@
 <?php
 
 namespace App\Mail;
+use App\Models\SupportTicket;
 use App\Ticket;
 
-public $ticket;
+
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -11,7 +12,8 @@ use Illuminate\Queue\SerializesModels;
 
 class NewTicket extends Mailable
 {
-    public function __construct(Ticket $ticket)
+    public $ticket;
+    public function __construct(SupportTicket $ticket)
     {
         $this->ticket = $ticket;
     }

@@ -43,8 +43,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/scanner', 'App\Http\Controllers\ScanController@index')->name('scanner.index');
     Route::get('/qr/{id}', 'App\Http\Controllers\ScanController@generateQR')->name('qrgenerate');
 });
-Route::get('/support', 'CustomerTicketController@index')->name('support.index');
-Route::post('/tickets/create', 'CustomerTicketController@createTicket')->name('ticket.create');
+Route::get('/support', [CustomerTicketController::class, 'index'])->name('support.index');
+Route::post('/tickets/create', [CustomerTicketController::class, 'createTicket'])->name('ticket.create');
 
 Route::get('/', function () {
     return view('user.index');
