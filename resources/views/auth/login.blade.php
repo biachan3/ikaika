@@ -53,8 +53,45 @@
                                 </div>
 
                                 <div class="input-group input-group-outline my-3">
-                                    <label class="form-label" for="password">Password</label>
-                                    <input id="password" class="form-control block mt-1 w-full" type="password" name="password" required
+                                    <label class="form-label" for="namaLengkap">Nama Lengkap Alumni</label>
+                                    <input id="namaLengkap" class="form-control block mt-1 w-full" type="" name="namaLengkap" required
+                                    autofocus/>
+                                </div>
+
+                                <div class="input-group input-group-outline my-3">
+                                    <label class="form-label" for="alamatDomisili">Alamat Domisili</label>
+                                    <input id="alamatDomisili" class="form-control block mt-1 w-full" type="" name="alamatDomisili" required
+                                    autofocus/>
+                                </div>
+
+                                <div class="input-group input-group-outline my-3">
+                                    <label class="form-label" for="kota">Kota</label>
+                                    <input id="kota" class="form-control block mt-1 w-full" type="" name="kota" required
+                                    autofocus/>
+                                </div>
+
+                                <div class="input-group input-group-outline my-3">
+                                    <label class="form-label" for="provinsi">Provinsi</label>
+                                    <input id="provinsi" class="form-control block mt-1 w-full" type="" name="provinsi" required
+                                    autofocus/>
+                                </div>
+
+                                <div class="input-group input-group-outline my-3">
+                                    <label class="form-label" for="nomorTelp">No. Handphone Aktif</label>
+                                    <input id="nomorTelp" class="form-control block mt-1 w-full" type="" name="nomorTelp" required
+                                    autofocus/>
+                                </div>
+
+                                //Drop Down
+                                <div class="input-group input-group-outline my-3">
+                                    <label class="form-label" for="nomorTelp">No. Handphone Aktif</label>
+                                    <input id="nomorTelp" class="form-control block mt-1 w-full" type="" name="nomorTelp" required
+                                    autofocus/>
+                                </div>
+
+                                <div class="input-group input-group-outline my-3">
+                                    <label class="form-label" for="tahunAngkatan">Tahun Angkatan (Masuk UBAYA)</label>
+                                    <input id="tahunAngkatan" class="form-control block mt-1 w-full" type="number" name="tahunAngkatan" required
                                     />
                                 </div>
 
