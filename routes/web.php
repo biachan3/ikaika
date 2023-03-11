@@ -5,6 +5,8 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CustomerTicketController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -67,6 +69,8 @@ Route::prefix('user')->group(function () {
     Route::get('/order/{id}', [App\Http\Controllers\TicketController::class, 'detail_transaki'])->name('detail.trx');
     Route::post('/regis', [App\Http\Controllers\TicketController::class, 'regis'])->name('regis');
 });
+Route::get('/support', [CustomerTicketController::class, 'index'])->name('support.index');
+Route::post('/tickets/create', [CustomerTicketController::class, 'createTicket'])->name('ticket.create');
 
 Route::prefix('admin')->name('admin.')->controller(AdminController::class)->name('admin.')->group(
     function () {
