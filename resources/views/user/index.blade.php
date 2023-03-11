@@ -10,14 +10,14 @@
                 alt="img">
             <div class="container">
                 <div class="conference-slide-item">
-                    <div class="date">12oct 2019</div>
-                    <div class="conference-slider-title">High-Quality</div>
-                    <h2 class="title"><span>Best Eventio</span></h2>
-                    <form method="GET" action="{{ route('event.index') }}">
+                    {{-- <div class="date">12oct 2019</div> --}}
+                    <div class="conference-slider-title">Coming Soon!</div>
+                    <h2 class="title"><span style="font-size:80%;">Reuni IKA Ubaya</span></h2>
+                    {{-- <form method="GET" action="{{ route('event.index') }}">
                             <div class="btn-form-cover">
                                 <button id="#submit" type="submit" class="btn"><span">Daftar Sekarang!</span></button>
                             </div>
-                        </form>
+                        </form> --}}
                 </div>
             </div>
         </div>
@@ -66,7 +66,7 @@
 <!-- =========== S-CONFERENCE-COUNTER =========== -->
 <section id="about" class="s-conference-mission"
     style="background-image: url({{ asset('Ginger') }}/assets/img/bg-about-home2.png);">
-    <div class="s-conference-counter">
+    {{-- <div class="s-conference-counter">
         <div class="container">
             <div class="conference-counter-wrap">
                 <img class="conference-counter-effect-1"
@@ -96,8 +96,8 @@
                     src="{{ asset('Ginger') }}/assets/img/counter-icon-2.svg" alt="img">
             </div>
         </div>
-    </div>
-    <div class="s-our-mission s-about-speaker">
+    </div> --}}
+    {{-- <div class="s-our-mission s-about-speaker">
         <div class="container">
             <h2 class="title-conference"><span>Our mission</span></h2>
             <div class="row">
@@ -141,10 +141,10 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
 </section>
 <!-- ========= S-CONFERENCE-COUNTER END ========= -->
-
+{{--
 <!-- ============ SPEAKER & SCHEDULE ============ -->
 <section id="schedule" class="s-speakers-schedule">
     <div class="container">
@@ -667,6 +667,6 @@
                 data-src="{{ asset('Ginger') }}/assets/img/conference-insta-10.jpg" alt="img">
         </a>
     </div>
-</section>
+</section> --}}
 <!--================ S-INSTAGRAM END ================-->
 @endsection

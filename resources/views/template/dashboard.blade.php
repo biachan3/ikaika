@@ -100,7 +100,7 @@
     </body>
 
     <footer>
-        <div class="container">
+        {{-- <div class="container">
             <div class="row">
                 <div class="footer-cont col-12 col-sm-6 col-lg-4">
                     <a href="index.html" class="logo"><img src="{{ asset('Ginger') }}/assets/img/logo.svg"
@@ -150,7 +150,7 @@
                         and <a href="#" target="_blank">Terms and Conditions</a></p>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </footer>
         <!--=================== TO TOP ===================-->
         <a class="to-top" href="#home">
