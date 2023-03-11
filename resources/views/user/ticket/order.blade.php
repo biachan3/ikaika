@@ -16,18 +16,20 @@
                             <li class="inp-cover inp-name"><input id="kota" type="text" name="provinsi" placeholder="Provinsi" required></li>
                             <li class="inp-cover inp-name"><input id="no_hp" type="text" name="no_hp" placeholder="Nomor HP" required></li>
                             <li class="inp-cover inp-profession">
-                                <select class="nice-select">
+                                <select class="nice-select" name="fakultas">
                                     <option selected="selected" disabled>Alumni Fakultas</option>
-                                    <option>Farmasi</option>
-                                    <option>Hukum</option>
-                                    <option>Bisnis Ekonomi</option>
-                                    <option>Politeknik</option>
-                                    <option>Psikologi</option>
-                                    <option>Teknik</option>
-                                    <option>Teknobiologi</option>
-                                    <option>Kedokteran</option>
+                                    <option value="farmasi">Farmasi</option>
+                                    <option value="hukum">Hukum</option>
+                                    <option value="fbe">Bisnis Ekonomi</option>
+                                    <option value="politeknik">Politeknik</option>
+                                    <option value="psikologi">Psikologi</option>
+                                    <option value="teknik">Teknik</option>
+                                    <option value="teknobiologi">Teknobiologi</option>
+                                    <option value="kedokteran">Kedokteran</option>
                                 </select>
                             </li>
+                            <li class="inp-cover inp-name"><input id="angkatan" type="text" name="angkatan" placeholder="Angakatan" required></li>
+
                             <li class="pay-method">
                                 <h5>Dengan donasi</h5>
                                 <div class="pay-item">
