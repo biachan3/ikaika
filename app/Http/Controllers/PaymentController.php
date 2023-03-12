@@ -3,12 +3,107 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Ticket;
 
 class PaymentController extends Controller
 {
     public function index()
     {
         return view('admin.payment.index');
+    }
+    public function getVirtualAccount(Request $request)
+    {
+        $data = Ticket::find($request->id);
+        $method = $request->method;
+        $obj_response ="";
+
+        //Prepare api
+        $client = new \GuzzleHttp\Client();
+        $base64username = base64_encode(env('MIDTRANS_SERVER_KEY'));
+
+        $gross_amount = 0;
+        $bank_transfer_fee = 4000;
+        $tax_bank_transfer_fee_percentage = 11/100;
+        $total_bank_transfer_fee = ($bank_transfer_fee + ($bank_transfer_fee * $tax_bank_transfer_fee_percentage));
+        $is_bank_transfer = str_contains($method, '_va');
+
+        $gopay_fee_percentage = 2.1/100;
+        $qris_fee_percentage = 0.8/100;
+
+        $total_amount_tx = $data->amount + $data->amount_donasi;
+
+        // $is_bank_transfer=false;
+        // $method = "qris";
+        if ($data->transaction_status == null) {
+            if ($is_bank_transfer) {
+                $gross_amount = $total_amount_tx + $total_bank_transfer_fee;
+            } else {
+                if($method == "gopay"){
+                    $total_gopay_fee = ($total_amount_tx * $gopay_fee_percentage);
+                    $gross_amount = $total_amount_tx + $total_gopay_fee;
+                } else if($method == "qris") {
+                    $total_qris_fee = ($total_amount_tx * $qris_fee_percentage);
+                    $gross_amount = $total_amount_tx + $total_qris_fee;
+                }
+            }
+
+
+            if ($method == "bca_va") {
+                try {
+
+                    $response = $client->request('POST', 'https://api.sandbox.midtrans.com/v2/charge', [
+                        'body' => '{
+                            "payment_type": "bank_transfer",
+                            "transaction_details": {
+                              "order_id": "'.$data->id.'",
+                              "gross_amount": '.$gross_amount.'
+                            },
+                            "bank_transfer": {
+                              "bank": "bca"
+                            }
+                          }',
+                        'headers' => [
+                          'accept' => 'application/json',
+                          'authorization' => 'Basic '.$base64username,
+                          'content-type' => 'application/json',
+                        ],
+                      ]);
+                    // echo $response->getBody();
+                    $obj_response = json_decode($response->getBody());
+                    if($obj_response->status_code == "201"){
+                        $data->payment_method = $method;
+                        $data->status = $obj_response->transaction_status;
+                        $data->payment_expiry_time = $obj_response->expiry_time;
+                        $data->payment_media = $obj_response->va_numbers[0]->va_number;
+                        $data->save();
+                    } else if($obj_response->status_code == "406"){
+                        //
+                    } else {
+                        throw new Exception("error response : ".$obj_response->status_code);
+
+                    }
+                } catch(Exception $e) {
+                    echo 'Message: ' .$e->getMessage();
+                }
+
+            } else {
+                # code...
+            }
+        }
+
+
+
+        return response()->json(array(
+            'status'=>'oke',
+            'msg'=>view('user.ticket.detailPayment',compact('data','method','obj_response'))->render()
+        ),200);
+    }
+
+    public function notifHandling(Request $request)
+    {
+        dd($request);
+        $obj_notify = json_decode($request);
+
     }
     public function ping()
     {

@@ -151,14 +151,15 @@ class TicketController extends Controller
         $tiket->amount_donasi = $data->nominal;
         $tiket->save();
 
-        dd($data);
+        // dd($data);
         return redirect()->route('detail.trx',$id_trx);
         //here
     }
     public function detail_transaki($id)
     {
-
-        echo $id;
+        $detail_tx = Ticket::find($id);
+        // dd($detail_tx);
+        return view('user.ticket.orderDetail', compact('detail_tx'));
     }
     /**
      * Display the specified resource.
