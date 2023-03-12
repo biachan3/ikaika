@@ -7,6 +7,8 @@ use App\Models\Attendee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 class TicketController extends Controller
 {
     /**
@@ -159,7 +161,14 @@ class TicketController extends Controller
     {
         $detail_tx = Ticket::find($id);
         // dd($detail_tx);
-        return view('user.ticket.orderDetail', compact('detail_tx'));
+        $qrcode="";
+        if($detail_tx->status =="success" || $detail_tx->status =="settlement")
+        {
+            $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate(url($detail_tx->id)));
+            $qrcode = QrCode::generate($detail_tx->id);
+
+        }
+        return view('user.ticket.orderDetail', compact('detail_tx','qrcode'));
     }
     /**
      * Display the specified resource.

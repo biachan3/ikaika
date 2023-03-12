@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Ticket;
+use App\Mail\InfoRegistrationMail;
+use Illuminate\Support\Facades\Mail;
 
 class PaymentController extends Controller
 {
@@ -114,6 +116,13 @@ class PaymentController extends Controller
             $ticket->status = $req->get("transaction_status");
             // $ticket->detail_tx_response = $req;
             $ticket->save();
+            $details = ['nama' => $ticket->name,
+                        'email' => $ticket->email,
+                        'id_transaksi' => $ticket->id
+                        ];
+
+            \Mail::to($ticket->email)->send(new InfoRegistrationMail($details));
+
         }
 
         // $obj_notify = json_decode($request);

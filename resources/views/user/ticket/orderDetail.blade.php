@@ -52,8 +52,10 @@
                                             @else
                                                 {{$detail_tx->status}}
                                             @endif
-
                                         </p>
+                                        <hr>
+                                        <p>Silahkan simpan QR Code dibawah ini untuk registrasi pada saat acara: </p>
+                                        {!! $qrcode !!}
                                         <br>
                                         <small>ID Transaksi : {{$detail_tx->midtrans_tx_id}}</small>
                                     </div>
