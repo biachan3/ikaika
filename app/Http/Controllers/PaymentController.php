@@ -53,9 +53,18 @@ class PaymentController extends Controller
             }
 
 
-            if ($method == "bca_va") {
+            if ($method == "bca_va" || $method == "bri_va" || $method == "bni_va" || $method == "permata_va") {
                 try {
-
+                    $bank = "";
+                    if ($method == "bca_va") {
+                        $bank = "bca";
+                    } else if($method == "bri_va") {
+                        $bank = "bri";
+                    } else if($method == "bni_va"){
+                        $bank = "bni";
+                    }else {
+                        $bank='permata';
+                    }
                     $response = $client->request('POST', 'https://api.sandbox.midtrans.com/v2/charge', [
                         'body' => '{
                             "payment_type": "bank_transfer",
@@ -64,7 +73,7 @@ class PaymentController extends Controller
                               "gross_amount": '.$gross_amount.'
                             },
                             "bank_transfer": {
-                              "bank": "bca"
+                              "bank": "'.$bank.'"
                             }
                           }',
                         'headers' => [
@@ -93,11 +102,47 @@ class PaymentController extends Controller
                     echo 'Message: ' .$e->getMessage();
                 }
 
-            } else {
-                # code...
+            } else if($method == "qris"){
+                try {
+
+                    $response = $client->request('POST', 'https://api.sandbox.midtrans.com/v2/charge', [
+                        'body' => '{
+                            "payment_type": "qris",
+                            "transaction_details": {
+                              "order_id": "'.$data->id.'",
+                              "gross_amount": '.$gross_amount.'
+                            },
+                            "qris": {
+                              "acquirer": "gopay"
+                            }
+                          }',
+                        'headers' => [
+                          'accept' => 'application/json',
+                          'authorization' => 'Basic '.$base64username,
+                          'content-type' => 'application/json',
+                        ],
+                      ]);
+                    // echo $response->getBody();
+                    $obj_response = json_decode($response->getBody());
+                    if($obj_response->status_code == "201"){
+                        $data->payment_method = $method;
+                        $data->status = $obj_response->transaction_status;
+                        // $data->payment_expiry_time = $obj_response->expiry_time;
+                        $data->payment_media = $obj_response->actions[0]->url;
+                        $data->gross_amount = $gross_amount;
+                        $data->midtrans_tx_id = $obj_response->transaction_id;
+                        $data->save();
+                    } else if($obj_response->status_code == "406"){
+                        //
+                    } else {
+                        throw new Exception("error response : ".$obj_response->status_code);
+
+                    }
+                } catch(Exception $e) {
+                    echo 'Message: ' .$e->getMessage();
+                }
             }
         }
-
 
 
         return response()->json(array(

@@ -18,8 +18,9 @@
                                     <option value="bca_va">BCA Virtual Account</option>
                                     <option value="bni_va">BNI Virtual Account</option>
                                     <option value="bri_va">BRI Virtual Account</option>
-                                    <option value="mandiri_va">Manidiri Bill Payment</option>
-                                    <option value="permata_va">Permata Virtual Account</option>
+                                    {{-- <option value="mandiri_va">Manidiri Bill Payment</option>
+                                    <option value="permata_va">Permata Virtual Account</option> --}}
+                                    <option value="qris">QRIS</option>
                                 </select>
                             </li>
                         </ul>
@@ -36,7 +37,7 @@
 
                     <div class="row">
                         <div class="col-12 text-center">
-                            <div id="response_payment">
+                            <div id="">
                                 <div class="row">
                                     <div class="col-12">
                                         <p>Total Nominal : {{$detail_tx->gross_amount}}</p>
@@ -54,8 +55,10 @@
                                             @endif
                                         </p>
                                         <hr>
+                                        @if($detail_tx->status == "settlement" || $detail_tx->status == "success")
                                         <p>Silahkan simpan QR Code dibawah ini untuk registrasi pada saat acara: </p>
                                         {!! $qrcode !!}
+                                        @endif
                                         <br>
                                         <small>ID Transaksi : {{$detail_tx->midtrans_tx_id}}</small>
                                     </div>
@@ -97,17 +100,6 @@ function getValueMethod(){
             $('#response_payment').html(data.msg)
         }
     });
-
-    // $("#final_price").text("Rp. " + nominal.toLocaleString());
 }
-function isNumber(evt) {
-    evt = (evt) ? evt : window.event;
-    var charCode = (evt.which) ? evt.which : evt.keyCode;
-    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-        return false;
-    }
-    return true;
-}
-
 </script>
 @endsection
