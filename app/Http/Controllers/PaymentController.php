@@ -31,18 +31,21 @@ class PaymentController extends Controller
         $qris_fee_percentage = 0.8/100;
 
         $total_amount_tx = $data->amount + $data->amount_donasi;
-
+        $fee = 0;
         // $is_bank_transfer=false;
         // $method = "qris";
         if ($data->transaction_status == null) {
             if ($is_bank_transfer) {
                 $gross_amount = $total_amount_tx + $total_bank_transfer_fee;
+                $fee = $total_bank_transfer_fee;
             } else {
                 if($method == "gopay"){
                     $total_gopay_fee = ($total_amount_tx * $gopay_fee_percentage);
+                    $fee = $total_gopay_fee;
                     $gross_amount = $total_amount_tx + $total_gopay_fee;
                 } else if($method == "qris") {
                     $total_qris_fee = ($total_amount_tx * $qris_fee_percentage);
+                    $fee = $total_qris_fee;
                     $gross_amount = $total_amount_tx + $total_qris_fee;
                 }
             }
@@ -75,6 +78,8 @@ class PaymentController extends Controller
                         $data->status = $obj_response->transaction_status;
                         $data->payment_expiry_time = $obj_response->expiry_time;
                         $data->payment_media = $obj_response->va_numbers[0]->va_number;
+                        $data->gross_amount = $gross_amount;
+                        $data->midtrans_tx_id = $obj_response->transaction_id;
                         $data->save();
                     } else if($obj_response->status_code == "406"){
                         //
@@ -95,15 +100,24 @@ class PaymentController extends Controller
 
         return response()->json(array(
             'status'=>'oke',
-            'msg'=>view('user.ticket.detailPayment',compact('data','method','obj_response'))->render()
+            'msg'=>view('user.ticket.detailPayment',compact('data','fee','method','obj_response','gross_amount'))->render()
         ),200);
     }
 
     public function notifHandling(Request $request)
     {
-        dd($request);
-        $obj_notify = json_decode($request);
+        // dd($request->request->get("transaction_time"));
+        $req = $request->request;
+        if($req->get("status_code") == "200"){
+            $ticket = Ticket::where('midtrans_tx_id', $req->get('transaction_id'))->first();
+            // dd($ticket);
+            $ticket->status = $req->get("transaction_status");
+            // $ticket->detail_tx_response = $req;
+            $ticket->save();
+        }
 
+        // $obj_notify = json_decode($request);
+        // dd($obj_notify);
     }
     public function ping()
     {

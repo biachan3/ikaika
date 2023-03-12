@@ -2,10 +2,12 @@
 @section('content')
 <section id="register" class="s-buy-ticket" style="padding:148px 148px; ">
     <div class="">
-        <h2 class="title-conference"><span>Beli Tiket</span></h2>
+        <h2 class="title-conference"><span>Detail Transaksi</span></h2>
         <div class="row justify-content-center">
             <div class="col-md-6" style="  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); padding:20px 20px; border-radius:20px; margin-bottom:20px;">
                 <div class="buy-ticket-form">
+                    <i>Kode Transaksi : {{$detail_tx->id}}</i>
+                    @if ($detail_tx->payment_method == null)
                     <form id='contactform' action="{{route('regis')}}" method="POST">
                         @csrf
                         <h5>Data Pembayaran</h5>
@@ -29,6 +31,45 @@
                             </div>
                         </div>
                     </div>
+
+                    @else
+
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <div id="response_payment">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p>Total Nominal : {{$detail_tx->gross_amount}}</p>
+                                        <small>Rp. {{$detail_tx->amount + $detail_tx->amount_donasi}} + Biaya Penanganan Rp. {{ $detail_tx->gross_amount - ($detail_tx->amount + $detail_tx->amount_donasi)}}</small>
+                                        <br><br>
+                                        <h5>Virtual Account :</h5>
+                                        <p>
+                                            <b>{{$detail_tx->payment_media}}</b>
+                                        </p>
+                                        <p>Status Pembayaran :
+                                            @if ($detail_tx->status == "settlement")
+                                                Sukses
+                                            @else
+                                                {{$detail_tx->status}}
+                                            @endif
+
+                                        </p>
+                                        <br>
+                                        <small>ID Transaksi : {{$detail_tx->midtrans_tx_id}}</small>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <h6>Silahkan refresh/muat ulang halaman ini untuk memperbaharui status pembayaran anda.</h6>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    @endif
                 </div>
             </div>
         </div>

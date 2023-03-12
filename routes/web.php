@@ -51,7 +51,7 @@ Route::get('/', [HomeController::class, 'index'])->name('dashboard');
     Route::prefix('payment')->controller(PaymentController::class)->group(
         function () {
             Route::post('/getVirtualAccount', 'getVirtualAccount')->name("getVirtualAccount");
-            Route::post('/notification/handling', 'notifHandling')->name("notifHandling");
+            // Route::post('/notification/handling', 'notifHandling')->name("notifHandling");
         }
     );
     Route::get('/event', 'App\Http\Controllers\EventController@index')->name('event.index');
