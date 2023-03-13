@@ -13,7 +13,7 @@
         <div class="conference-slider">
             <div
                 class="conference-slide gambar-bg"style="background-image: url({{ asset('Ginger') }}/assets/img/BG IKA.svg);">
-                <div class="container "> 
+                <div class="container ">
                     {{-- <a href="single-blog.html"><img
                             src="{{ asset('Ginger') }}/assets/img/" alt="img" width="1920" height="1080" style="opacity: 50%;"></a> --}}
                             {{-- <img
@@ -22,13 +22,15 @@
                         <div class="date">3 Juni 2023</div>
                         <!-- <div class="conference-slider-title">Acara</div> -->
                         <h2 class="title"><span>Reuni Akbar 55 Tahun UBAYA</span></h2>
-                        <form method="GET" action="{{ route('user.order') }}">
+                        {{-- <form method="GET" action="{{ route('user.order') }}"> --}}
                             <div class="btn-form-cover">
-                                <button id="#submit" type="submit" class="btn">
-                                    <span>Daftar Sekarang!</span>
-                                </button>
+                                <a href="{{route('user.order')}}">
+                                    <button id="#submit" type="submit" class="btn">
+                                        <span>Daftar Sekarang!</span>
+                                    </button>
+                                </a>
                             </div>
-                        </form>
+                        {{-- </form> --}}
                     </div>
                 </div>
             </div>
