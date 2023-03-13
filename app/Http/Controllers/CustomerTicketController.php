@@ -23,16 +23,18 @@ class CustomerTicketController extends Controller
     
         // Validate input
         $this->validate($request, $rules);
-    
+    $email = 's160419048@student.ubaya.ac.id';
         // Create new ticket
         $ticket = new SupportTicket;
         $ticket->subject = $request->input('subject');
         $ticket->description = $request->input('description');
         $ticket->category = $request->input('category');
         $ticket->save();
-    
+        if(Auth::user()->email){  $email = Auth::user()->email;
+        }
+      
         // Send email notification
-        Mail::to('s160419048@ubaya.ac.id')->send(new NewTicket($ticket));
+        Mail::to($email)->send(new NewTicket($ticket));
     
         // Redirect to ticket page
         return redirect()->route('ticket.show', $ticket->id);
