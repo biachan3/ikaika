@@ -409,7 +409,7 @@ section {
 
 .container {
   position: relative;
-  background-color: white;
+  /* background-color: white; */
 }
 
 @media -sass-debug-info {
@@ -631,7 +631,8 @@ i {
 
 h2.title {
   text-align: center;
-  margin-bottom: 70px;
+  margin-bottom: 50px;
+
 }
 
 @media -sass-debug-info {
@@ -1163,7 +1164,7 @@ h2.title {
   }
 
   h2 {
-    font-size: 33px;
+    font-size: 10px;
   }
 
   @media -sass-debug-info {
@@ -1711,9 +1712,9 @@ header {
 }
 
 .nav-list>li>a {
-  font-size: 14px;
+  font-size: 18px;
   line-height: 30px;
-  padding: 0 15px;
+  padding: 0 0;
 }
 
 @media -sass-debug-info {
@@ -2436,8 +2437,8 @@ header {
 }
 
 .conference-header-fixed {
-  padding: 20px 0;
-  background-color: transparent;
+  padding: 10px 0;
+  background-color: white;
 }
 
 @media -sass-debug-info {
@@ -2515,7 +2516,7 @@ header {
 
 .conference-header-fixed .nav-list>li>a:after {
   top: auto;
-  bottom: 0;
+  bottom: 0px;
 }
 
 @media -sass-debug-info {
@@ -2574,7 +2575,7 @@ header {
 }
 
 .header-fixed.header-top {
-  top: -100px;
+  top: -200px;
   position: fixed;
   background-color: rgba(51, 51, 51, 0.9);
   -webkit-box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.1);
@@ -3458,7 +3459,7 @@ header {
   }
 
   .conference-header-fixed .nav-list>li>a {
-    font-size: 12px;
+    font-size: 14px;
   }
 
   @media -sass-debug-info {
@@ -5769,9 +5770,109 @@ footer .social-list {
   }
 }
 
-.logo img {
-  display: block;
-  border-radius: 30px;
+@media (max-width: 480px) {
+  .logo img {
+    display: inline;
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+  }
+
+  .logo2 img {
+    display: inline;
+    width: 20px;
+    height: 20px;
+
+  }
+
+  .logo3 img {
+    display: inline;
+    width: 20px;
+    height: 20px;
+
+  }
+
+  .logo4 img {
+    display: inline;
+    width: 20px;
+    height: 20px;
+  }
+
+  .logo5 img {
+    display: flex;
+    width: 50px;
+    height: 50px;
+  }
+
+  .logo6 img {
+    display: flex;
+    width: 50px;
+    height: 50px;
+  }
+
+  .logo7 img {
+    display: flex;
+    width: 50px;
+    height: 50px;
+  }
+
+  .logo8 img {
+    display: flex;
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo img {
+    display: flex;
+    width: 180px;
+    height: 180px;
+  }
+
+  .logo2 img {
+    display: flex;
+    width: 140px;
+    height: 140px;
+
+  }
+
+  .logo3 img {
+    display: flex;
+    width: 120px;
+    height: 100px;
+
+  }
+
+  .logo4 img {
+    display: flex;
+    width: 140px;
+    height: 140px;
+  }
+
+  .logo5 img {
+    display: flex;
+    width: 180px;
+    height: 180px;
+  }
+
+  .logo6 img {
+    display: flex;
+    width: 145px;
+    height: 145px;
+  }
+
+  .logo7 img {
+    display: flex;
+    width: 115px;
+    height: 115px;
+  }
+
+  .logo8 img {
+    display: flex;
+    width: 145px;
+    height: 145px;
+  }
 }
 
 @media -sass-debug-info {
@@ -7608,9 +7709,12 @@ footer .social-list {
   background-color: #fff;
   border: 2px solid #f0f0f0;
   margin-bottom: 12px;
+  margin-left: auto;
+  margin-right: auto;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  width: 1000px;
 }
 
 @media -sass-debug-info {
@@ -7638,7 +7742,7 @@ footer .social-list {
 }
 
 .event-schedule-item .schedule-item-img {
-  width: 18%;
+  width: 15%;
   text-align: center;
   margin: 10px 0px;
   padding: 30px 0px;
@@ -7675,8 +7779,8 @@ footer .social-list {
 }
 
 .event-schedule-item .schedule-item-info {
-  width: 82%;
-  padding: 38px 24px 29px 28px;
+  width: 95%;
+  padding: 26px 24px 29px 28px;
   cursor: pointer;
   position: relative;
 }
@@ -7773,6 +7877,7 @@ footer .social-list {
   font-weight: 600;
   position: relative;
   padding-right: 20px;
+  margin-top: 10px;
 }
 
 @media -sass-debug-info {
@@ -7790,6 +7895,11 @@ footer .social-list {
   padding-bottom: 20px;
   display: none;
   width: 100% !important;
+}
+
+.schedule-info-content p {
+  color: black;
+  font-size: 20px;
 }
 
 @media -sass-debug-info {
@@ -12013,9 +12123,9 @@ blockquote:before {
 
 .conference-slide-item .title {
   font-weight: 600;
-  font-size: 100px;
+  font-size: 60px;
   line-height: 0.8;
-  color: #000;
+  color: #fff;
   text-align: left;
   margin-bottom: 27px;
   position: relative;
@@ -13265,17 +13375,18 @@ blockquote:before {
 }
 
 .s-buy-ticket:before {
-    background-color: #0d5aa5;
-    background-position: top center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    height: 285px;
-    -webkit-clip-path: polygon(100% 0, 100% 91%, 50% 100%, 0 91%, 0 0);
-    clip-path: polygon(100% 0, 100% 91%, 50% 100%, 0 91%, 0 0);
+  background-color: #0d5aa5;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 285px;
+  -webkit-clip-path: polygon(100% 0, 100% 91%, 50% 100%, 0 91%, 0 0);
+  clip-path: polygon(100% 0, 100% 91%, 50% 100%, 0 91%, 0 0);
 
 }
+
 .s-buy-ticket {
-    padding-bottom: 0px;
+  padding-bottom: 0px;
 }
 
 @media -sass-debug-info {
@@ -13975,7 +14086,6 @@ blockquote:before {
   z-index: 1;
   -webkit-transition: .35s ease;
   transition: .35s ease;
-  background: rgba(0, 0, 0, 0.5);
   -webkit-transform: translate(-50%, -50%) scale(0);
   transform: translate(-50%, -50%) scale(0);
   opacity: 0;
@@ -14029,7 +14139,7 @@ blockquote:before {
   transition: .5s ease-out;
   display: block;
   width: 100%;
-  height: 140px;
+  height: 560px;
   -o-object-fit: cover;
   object-fit: cover;
 }
@@ -14050,7 +14160,6 @@ blockquote:before {
   right: 10px;
   z-index: 1;
   color: #fff;
-  background-color: #252525;
   line-height: 30px;
   text-align: center;
   padding: 0 17px;
@@ -21088,7 +21197,7 @@ body.modal .popup-close {
   }
 
   .title-conference:before {
-    height: 62px;
+    height: 10px;
   }
 
   @media -sass-debug-info {

@@ -74,7 +74,7 @@ Route::prefix('ticket')->name('ticket.')->controller(TicketController::class)->n
 
 
 Route::prefix('user')->group(function () {
-    Route::get('/order', [App\Http\Controllers\TicketController::class, 'index_user'])->name('user.index');
+    Route::get('/order', [App\Http\Controllers\TicketController::class, 'index_user'])->name('user.order');
     Route::get('/order/{id}', [App\Http\Controllers\TicketController::class, 'detail_transaki'])->name('detail.trx');
     Route::post('/regis', [App\Http\Controllers\TicketController::class, 'regis'])->name('regis');
 });
@@ -93,6 +93,9 @@ Route::get('/payment', 'App\Http\Controllers\PaymentController@index')->name('pa
 Route::post('/payment/ping', 'App\Http\Controllers\PaymentController@ping')->name('payment.ping');
 Route::get('/scanner', 'App\Http\Controllers\ScanController@index')->name('scanner.index');
 Route::get('/qr/{id}', 'App\Http\Controllers\ScanController@generateQR')->name('qrgenerate');
+Route::get('/faq', 'App\Http\Controllers\FaqController@index')->name('faq.index');
+Route::get('/home', 'App\Http\Controllers\UserController@index')->name('user.index');
+
 
 
 // Route::get('/admin', function () {
