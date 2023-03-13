@@ -82,7 +82,7 @@ class PaymentController extends Controller
                           'content-type' => 'application/json',
                         ],
                       ]);
-                    // echo $response->getBody();
+                    echo $response->getBody();
                     $obj_response = json_decode($response->getBody());
                     if($obj_response->status_code == "201"){
                         $data->payment_method = $method;
