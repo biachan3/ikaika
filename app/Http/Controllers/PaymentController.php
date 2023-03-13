@@ -112,7 +112,7 @@ class PaymentController extends Controller
                               "gross_amount": '.$gross_amount.'
                             },
                             "qris": {
-                              "acquirer": "airpay shopee"
+                              "acquirer": "gopay"
                             }
                           }',
                         'headers' => [
