@@ -31,7 +31,7 @@
     <!-- ============== PRELOADER END ============== -->
     <!-- ================= HEADER ================= -->
     <header class="conference-header-fixed header-fixed">
-        
+
         <a href="#" class="nav-btn">
             <span></span>
             <span></span>
@@ -41,7 +41,7 @@
             <div class="row conference-header-row">
                 <div class="col-sm-1 col-lg-1 col-xl-1 ml-5 mr-5">
                     <a href="/home" class="logo"><img
-                            src="{{ asset('Ginger') }}/assets/img/Logo UBAYA FIX.svg"
+                            src="{{ asset('Ginger/assets/img/Logo UBAYA FIX.svg') }}"
                             alt="logo"></a>
                 </div>
 
@@ -75,7 +75,7 @@
                             {{-- <li class="dropdown">
 								<a href="#">pages <i class="fa fa-angle-down" aria-hidden="true"></i></a>
 								<ul>
-									
+
 									<li><a href="dance-team.html">Dance Teame</a></li>
 									<li><a href="blog.html">Blog</a></li>
 									<li><a href="page-error.html">Page Error 404</a></li>
