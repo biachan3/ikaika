@@ -140,7 +140,6 @@ class TicketController extends Controller
         }
         $idcomplement = implode($randoms);
         $id_trx = $prefix.$prefix_fakultas."-".time().$idcomplement;
-
         $tiket = new Ticket();
         $tiket->id = $id_trx;
         $tiket->event_id = 1;
@@ -157,6 +156,7 @@ class TicketController extends Controller
         } else {
             $nominal_donasi = $data->nominal;
         }
+        // dd($nominal_donasi);
 
         $tiket->amount_donasi = $nominal_donasi;
         $tiket->save();

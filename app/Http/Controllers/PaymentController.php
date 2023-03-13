@@ -104,7 +104,6 @@ class PaymentController extends Controller
 
             } else if($method == "qris"){
                 try {
-
                     $response = $client->request('POST', 'https://api.sandbox.midtrans.com/v2/charge', [
                         'body' => '{
                             "payment_type": "qris",
@@ -113,7 +112,7 @@ class PaymentController extends Controller
                               "gross_amount": '.$gross_amount.'
                             },
                             "qris": {
-                              "acquirer": "gopay"
+                              "acquirer": "airpay shopee"
                             }
                           }',
                         'headers' => [
