@@ -36,7 +36,7 @@ class PaymentController extends Controller
         $fee = 0;
         // $is_bank_transfer=false;
         // $method = "qris";
-        dd($base64username);
+        // dd($base64username);
         if ($data->transaction_status == null) {
             if ($is_bank_transfer) {
                 $gross_amount = $total_amount_tx + $total_bank_transfer_fee;
@@ -83,7 +83,7 @@ class PaymentController extends Controller
                           'content-type' => 'application/json',
                         ],
                       ]);
-                    echo $response->getBody();
+                    // echo $response->getBody();
                     $obj_response = json_decode($response->getBody());
                     if($obj_response->status_code == "201"){
                         $data->payment_method = $method;

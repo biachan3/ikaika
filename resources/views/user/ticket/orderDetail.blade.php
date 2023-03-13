@@ -1,4 +1,7 @@
 @extends('template.dashboard')
+@section('css')
+<link rel="stylesheet" href="{{asset('css/custom-nvn.css')}}">
+@endsection
 @section('content')
 <section id="register" class="s-buy-ticket" style="padding:148px 148px; ">
     <div class="">
