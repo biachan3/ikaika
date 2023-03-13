@@ -102,7 +102,7 @@
                                 <div class="price-final-text" id="final_price">Rp. 100000</div>
                             </div>
                             <div class="btn-form-cover">
-                                <button type="submit" class="btn"><span>Bayar Sekarang</span></button>
+                                <button type="submit" class="btn"><span style="color: white">Bayar Sekarang</span></button>
                             </div>
                         </form>
                         <div id="message"></div>
