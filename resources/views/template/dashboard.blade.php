@@ -17,6 +17,8 @@
     <link href="https://use.fontawesome.com/releases/v5.10.1/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('Ginger') }}/assets/css/nice-select.css">
     <link rel="stylesheet" href="{{ asset('Ginger') }}/assets/css/style.css">
+    <link rel="stylesheet" href="{{asset('css/custom-nvn.css')}}">
+
 </head>
 
 <body id="conference-page" style="background-image: url(assets/img/conference_bg.svg);">
@@ -51,13 +53,9 @@
                             alt="logo"></a>
                 </div>
 
-                <div class="col-sm-1 col-lg-1 col-xl-1 ml-2">
-                    <a href="/home" class="logo3"><img
-                            src="{{ asset('Ginger') }}/assets/img/Logo IKA UBAYA.svg" alt="logo"></a>
-                </div>
-                <div class="col-sm-1 col-lg-1 col-xl-1"">
-                    <a href="/home" class="logo4"><img
-                            src="{{ asset('Ginger') }}/assets/img/Stronger Together.svg" alt="logo"></a>
+                <div class="col-sm-1 col-lg-1 col-xl-1">
+                    <a href="index.html" class="logo"><img src="{{ asset('Ginger') }}/assets/img/"
+                            alt="logo"></a>
                 </div>
 
 
@@ -105,15 +103,15 @@
     </header>
     <!-- =============== HEADER END =============== -->
     @yield('content')
-    <!-- =========== S-CONFERENCE-SLIDER =========== -->
+        <!-- =========== S-CONFERENCE-SLIDER =========== -->
+        
+        <!--================== FOOTER END ==================-->
 
-    <!--================== FOOTER END ==================-->
-
-    <!--=================== TO TOP ===================-->
-    <a class="to-top" href="#home">
-        <i class="fa fa-angle-double-up" aria-hidden="true"></i>
-    </a>
-    <!--================= TO TOP END =================-->
+        <!--=================== TO TOP ===================-->
+        <a class="to-top" href="#home">
+            <i class="fa fa-angle-double-up" aria-hidden="true"></i>
+        </a>
+        <!--================= TO TOP END =================-->
 
     <!--=================== SCRIPT	===================-->
     <script src="{{ asset('Ginger') }}/assets/js/jquery-2.2.4.min.js"></script>

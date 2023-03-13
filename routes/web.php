@@ -5,6 +5,9 @@ use App\Http\Controllers\TicketController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\CustomerTicketController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -45,13 +48,21 @@ Route::get('/', [HomeController::class, 'index'])->name('dashboard');
             Route::get('/detail/{id}', 'show')->name('detail');
         }
     );
+    Route::prefix('payment')->controller(PaymentController::class)->group(
+        function () {
+            Route::post('/getVirtualAccount', 'getVirtualAccount')->name("getVirtualAccount");
+            // Route::post('/notification/handling', 'notifHandling')->name("notifHandling");
+        }
+    );
     Route::get('/event', 'App\Http\Controllers\EventController@index')->name('event.index');
 
     Route::get('/payment', 'App\Http\Controllers\PaymentController@index')->name('payment.index');
     Route::post('/payment/ping', 'App\Http\Controllers\PaymentController@ping')->name('payment.ping');
     Route::get('/scanner', 'App\Http\Controllers\ScanController@index')->name('scanner.index');
     Route::get('/qr/{id}', 'App\Http\Controllers\ScanController@generateQR')->name('qrgenerate');
-// });
+    Route::post('/payment/ping', 'App\Http\Controllers\PaymentController@ping')->name('payment.ping');
+    // });
+
 
 Route::prefix('ticket')->name('ticket.')->controller(TicketController::class)->name('ticket.')->group(function () {
     Route::get('', 'index')->name('index');
@@ -60,6 +71,16 @@ Route::prefix('ticket')->name('ticket.')->controller(TicketController::class)->n
     Route::post('store', 'store')->name('store');
 }
 );
+
+
+Route::prefix('user')->group(function () {
+    Route::get('/order', [App\Http\Controllers\TicketController::class, 'index_user'])->name('user.index');
+    Route::get('/order/{id}', [App\Http\Controllers\TicketController::class, 'detail_transaki'])->name('detail.trx');
+    Route::post('/regis', [App\Http\Controllers\TicketController::class, 'regis'])->name('regis');
+});
+Route::get('/support', [CustomerTicketController::class, 'index'])->name('support.index');
+Route::post('/tickets/create', [CustomerTicketController::class, 'createTicket'])->name('ticket.create');
+
 Route::prefix('admin')->name('admin.')->controller(AdminController::class)->name('admin.')->group(
     function () {
         Route::get('', 'index')->name('index');
