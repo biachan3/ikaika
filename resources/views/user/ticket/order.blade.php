@@ -74,7 +74,7 @@
 var nominal = 0;
 function getamount(evt){
 
-    nominal = parseInt($('#nominal').val()) + 100000;
+    nominal = parseInt($('#nominal').val()) + 2;
     $("#final_price").text("Rp. " + nominal.toLocaleString());
 }
 function isNumber(evt) {
