@@ -333,36 +333,36 @@
 	}
 
 	/* ----------------- CONTACT FORM ----------------- */
-	if( $( '#contactform' )[0] ){
-		$( '#contactform' ).on( 'submit', function() {
-			var action = $( this ).attr( 'action' ),
-			message = $( '#message' ),
-			submit = $( '#submit' );
+	// if( $( '#contactform' )[0] ){
+	// 	$( '#contactform' ).on( 'submit', function() {
+	// 		var action = $( this ).attr( 'action' ),
+	// 		message = $( '#message' ),
+	// 		submit = $( '#submit' );
 
-			message.slideUp( 750, function() {
-				message.hide();
-				submit.attr( 'disabled', 'disabled' );
-				$.post(
-					action,
-					{
-						name: $( '#name' ).val(),
-						email: $( '#email' ).val(),
-						comments: $( '#comments' ).val(),
-					},
-					function( event ) {
-						document.getElementById( 'message' ).innerHTML = event;
-						message.slideDown( 'slow' );
-						submit.removeAttr( 'disabled' );
+	// 		message.slideUp( 750, function() {
+	// 			message.hide();
+	// 			submit.attr( 'disabled', 'disabled' );
+	// 			$.post(
+	// 				action,
+	// 				{
+	// 					name: $( '#name' ).val(),
+	// 					email: $( '#email' ).val(),
+	// 					comments: $( '#comments' ).val(),
+	// 				},
+	// 				function( event ) {
+	// 					document.getElementById( 'message' ).innerHTML = event;
+	// 					message.slideDown( 'slow' );
+	// 					submit.removeAttr( 'disabled' );
 
-						if ( null != event.match( 'success' ) ) {
-							$( '#contactform' ).slideDown( 'slow' );
-						}
-					}
-					);
-			});
-			return false;
-		});
-	}
+	// 					if ( null != event.match( 'success' ) ) {
+	// 						$( '#contactform' ).slideDown( 'slow' );
+	// 					}
+	// 				}
+	// 				);
+	// 		});
+	// 		return false;
+	// 	});
+	// }
 
 	/*------------------- NICE SELECT -------------------*/
 	if($('.nice-select')[0]){

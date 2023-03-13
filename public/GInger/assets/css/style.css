@@ -647,7 +647,7 @@ h2.title {
 .title-conference {
   position: relative;
   text-align: center;
-  padding: 14px 0;
+  padding: 20px 0;
   margin-bottom: 60px;
 }
 
@@ -4660,7 +4660,7 @@ textarea::placeholder {
 .inp-cover {
   position: relative;
   z-index: 2;
-  width: calc(50% - 5px);
+  width: calc(100% - 5px);
 }
 
 @media -sass-debug-info {
@@ -13264,8 +13264,18 @@ blockquote:before {
   }
 }
 
+.s-buy-ticket:before {
+    background-color: #0d5aa5;
+    background-position: top center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 285px;
+    -webkit-clip-path: polygon(100% 0, 100% 91%, 50% 100%, 0 91%, 0 0);
+    clip-path: polygon(100% 0, 100% 91%, 50% 100%, 0 91%, 0 0);
+
+}
 .s-buy-ticket {
-  padding-bottom: 160px;
+    padding-bottom: 0px;
 }
 
 @media -sass-debug-info {

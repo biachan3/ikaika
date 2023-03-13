@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Admin IKA - @yield('title')</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('startbootstrap-sb-admin-2-gh-pages') }}/vendor/fontawesome-free/css/all.min.css"
@@ -372,34 +372,11 @@
                 </nav>
                 <!-- End of Topbar -->
 
+
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
 
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
-                    </div>
+                @yield('content')
 
-                    <!-- Content Row -->
-
-
-                    <!-- Content Row -->
-
-                    <div class="row">
-                        @yield('content')
-                        <!-- Area Chart -->
-
-
-                        <!-- Pie Chart -->
-
-                    </div>
-
-                    <!-- Content Row -->
-
-
-                </div>
                 <!-- /.container-fluid -->
 
             </div>
@@ -440,7 +417,10 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button class="btn btn-primary w-100" type="submit">Log Out</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -470,6 +450,8 @@
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('startbootstrap-sb-admin-2-gh-pages') }}/js/demo/datatables-demo.js"></script>
+
+    @yield('script')
 </body>
 
 </html>

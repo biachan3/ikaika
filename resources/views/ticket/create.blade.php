@@ -33,11 +33,11 @@
       "
         loading="lazy">
         <span class="mask bg-gradient-dark opacity-6"></span>
-        <div class="container my-auto">
-            <div class="row">
-                <div class="col-lg-9 col-md-12 col-12 mx-auto">
-                    <div class="card z-index-0 fadeIn3 fadeInBottom">
-                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
+        <div class="container my-auto mt-3 mb-3">
+            <div class="row mt-3 mb-3">
+                <div class="col-lg-9 col-md-12 col-12 mx-auto mt-3 mb-3">
+                    <div class="card z-index-0 fadeIn3 fadeInBottom mt-3 mb-3">
+                        <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2 mt-3 mb-3">
                             <div class="bg-gradient-primary shadow-primary border-radius-lg py-3 pe-1">
                                 <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">
                                     Registrasi Acara Reuni
@@ -49,12 +49,71 @@
                             <form action="{{ route('ticket.store') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <input type="hidden" class="form-control" id="userId" name="userId"
-                                    value="{{ Auth::user()->id }}">
+                                    value="1">
                                 <input type="hidden" class="form-control" name="eventId" id="eventId"
-                                    value="{{ $result['event_id'] }}">
+                                    value="1">
                                 <input type="hidden" class="form-control" name="eventAttendees" id="eventAttendees"
-                                    value="{{ $result['attendees'] }}">
-                                @for ($i = 0; $i < $result['attendees']; $i++)
+                                    value="1">
+                                    
+                                <div class="input-group input-group-outline my-3 mb-3">
+                                    <label class="form-label" for="namaLengkap">Nama Lengkap Alumni</label>
+                                    <input id="namaLengkap" class="form-control block mt-1 w-full" type="" name="namaLengkap" required
+                                    autofocus/>
+                                </div>    
+
+                                <div class="input-group input-group-outline my-3 mb-3">
+                                    <label class="form-label" for="email">Email</label>
+                                    <input id="email" class="form-control block mt-1 w-full" type="email" name="email" required
+                                    autofocus/>
+                                </div>
+
+                                <div class="input-group input-group-outline my-3 mb-3">
+                                    <label class="form-label" for="alamatDomisili">Alamat Domisili</label>
+                                    <input id="alamatDomisili" class="form-control block mt-1 w-full" type="" name="alamatDomisili" required
+                                    autofocus/>
+                                </div>
+
+                                <div class="input-group input-group-outline my-3 mb-3">
+                                    <label class="form-label" for="kota">Kota</label>
+                                    <input id="kota" class="form-control block mt-1 w-full" type="" name="kota" required
+                                    autofocus/>
+                                </div>
+
+                                <div class="input-group input-group-outline my-3 mb-3">
+                                    <label class="form-label" for="provinsi">Provinsi</label>
+                                    <input id="provinsi" class="form-control block mt-1 w-full" type="" name="provinsi" required
+                                    autofocus/>
+                                </div>
+
+                                <div class="input-group input-group-outline my-3 mb-3">
+                                    <label class="form-label" for="nomorTelp">No. Handphone Aktif</label>
+                                    <input id="nomorTelp" class="form-control block mt-1 w-full" type="" name="nomorTelp" required
+                                    autofocus/>
+                                </div>
+
+                                <div class="my-3 mb-3">
+                                    <label for="alumniFakultas" class=""></label>
+                                    <select class="form-control" id="alumniFakultas" name="alumniFakultas" style="">
+                                        <option value="0">--Alumni Fakultas--
+                                        <option value="1">Farmasi
+                                        <option value="2">Hukum
+                                        <option value="3">Bisnis & Ekonomi
+                                        <option value="4">Politeknik
+                                        <option value="5">Psikologi
+                                        <option value="6">Teknik
+                                        <option value="7">Teknik Biologi
+                                        <option value="8">Kedokteran
+                                        <option value="9">Industri Kreatif
+                                    </select>
+                                </div>
+
+                                <div class="input-group input-group-outline my-3 mb-3">
+                                    <label class="form-label" for="tahunAngkatan">Tahun Angkatan (Masuk UBAYA)</label>
+                                    <input id="tahunAngkatan" class="form-control block mt-1 w-full" type="number" name="tahunAngkatan" required
+                                    />
+                                </div>
+                                <br>
+                                <!-- @for ($i = 0; $i < 3; $i++)
                                     <div class="mb-3">
 
 
@@ -73,25 +132,23 @@
                                 <div class="mb-3">
                                     <label for="attendFaculty" class="">Bank</label>
                                     <select class="form-control" id="bank" name="bank">
-                                        @foreach ($result['bank'] as $bank)
-                                            <option value="{{ $bank->id }}">
-                                                {{ $bank->name }} a.n {{ $bank->description }} {{ $bank->account }}</option>
-                                        @endforeach
+                                            <option value="1">
+                                                BCA
                                     </select>
                                 </div>
 
                                 <div class="mb-3">
                                     <label for="eventPrice" class="">Harga Total</label>
                                     <input type="text" class="form-control" name="eventPrice" id="eventPrice"
-                                        value="{{ $result['price'] }}" readonly>
+                                        value="1" readonly>
                                 </div>
                                 <div class="mb-3">
                                     <label for="proof" class="col-md-4 control-label">Bukti Transfer</label>
                                     <input id="proof" type="file" class="form-control" name="proof" required>
-                                </div>
+                                </div> -->
                         </div>
-                        <div class="text-center">
-                        <button type="submit" class="btn btn-primary col-lg-6">Submit</button>
+                        <div class="text-center mb-3">
+                        <button type="submit" class="btn btn-primary col-lg-6 w-200 mt-3 mb-3 ml-3">Submit</button>
                         </div>
                         </form>
                     </div>
@@ -99,7 +156,7 @@
             </div>
         </div>
     </div>
-    <footer class="footer position-absolute bottom-2 py-2 w-100">
+    <!-- <footer class="footer position-absolute bottom-2 py-2 w-100">
         <div class="container">
             <div class="row align-items-center justify-content-lg-between">
                 <div class="col-12 col-md-6 my-auto">
@@ -136,7 +193,7 @@
                 </div>
             </div>
         </div>
-    </footer>
+    </footer> -->
     </div>
     <!--   Core JS Files   -->
     <script src="{{ asset('material-kit-master') }}/assets/js/core/popper.min.js" type="text/javascript"></script>
