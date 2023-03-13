@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Ticket;
 use App\Mail\InfoRegistrationMail;
 use Illuminate\Support\Facades\Mail;
+use Exception;
 
 class PaymentController extends Controller
 {
@@ -36,6 +37,7 @@ class PaymentController extends Controller
         $fee = 0;
         // $is_bank_transfer=false;
         // $method = "qris";
+        // dd($base64username);
         if ($data->transaction_status == null) {
             if ($is_bank_transfer) {
                 $gross_amount = $total_amount_tx + $total_bank_transfer_fee;
@@ -65,12 +67,12 @@ class PaymentController extends Controller
                     }else {
                         $bank='permata';
                     }
-                    $response = $client->request('POST', 'https://api.sandbox.midtrans.com/v2/charge', [
+                    $response = $client->request('POST', 'https://api.midtrans.com/v2/charge', [
                         'body' => '{
                             "payment_type": "bank_transfer",
                             "transaction_details": {
                               "order_id": "'.$data->id.'",
-                              "gross_amount": '.$gross_amount.'
+                              "gross_amount": '.ceil($gross_amount).'
                             },
                             "bank_transfer": {
                               "bank": "'.$bank.'"
@@ -104,13 +106,12 @@ class PaymentController extends Controller
 
             } else if($method == "qris"){
                 try {
-
-                    $response = $client->request('POST', 'https://api.sandbox.midtrans.com/v2/charge', [
+                    $response = $client->request('POST', 'https://api.midtrans.com/v2/charge', [
                         'body' => '{
                             "payment_type": "qris",
                             "transaction_details": {
                               "order_id": "'.$data->id.'",
-                              "gross_amount": '.$gross_amount.'
+                              "gross_amount": '.ceil($gross_amount).'
                             },
                             "qris": {
                               "acquirer": "gopay"

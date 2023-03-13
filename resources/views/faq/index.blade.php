@@ -10,7 +10,7 @@
 
             <div class="container ">
                 <div class="conference-slide-item ">
-                    
+
                 </div>
             </div>
         </div>
@@ -126,7 +126,7 @@
                         <h4>Bagaimana cara mendaftarkan diri di Acara Reuni IKA?</h4>
                         <div class="schedule-info-content"
                             style="display: none; height: auto; padding: 0px 0px 0px; margin: 15px 0px 0px; width: 445px; opacity: 1;">
-                            <p>Silahkan melakukan registrasi <a href="#index">disini.</a> </p><br>
+                            <p>Silahkan melakukan registrasi <a href="{{route('user.order')}}">disini.</a> </p><br>
                             <p>Jika sudah berhasil melakukan registrasi, Anda dapat membayar biaya kontribusi dengan
                                 berbagai pilihan pembayaran.
                             </p><br>

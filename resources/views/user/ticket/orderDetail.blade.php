@@ -1,4 +1,7 @@
 @extends('template.dashboard')
+@section('css')
+<link rel="stylesheet" href="{{asset('css/custom-nvn.css')}}">
+@endsection
 @section('content')
 <section id="register" class="s-buy-ticket" style="padding:148px 148px; ">
     <div class="">
@@ -43,10 +46,12 @@
                                         <p>Total Nominal : {{$detail_tx->gross_amount}}</p>
                                         <small>Rp. {{$detail_tx->amount + $detail_tx->amount_donasi}} + Biaya Penanganan Rp. {{ $detail_tx->gross_amount - ($detail_tx->amount + $detail_tx->amount_donasi)}}</small>
                                         <br><br>
+                                        @if ($detail_tx->payment_method != "qris")
                                         <h5>Virtual Account :</h5>
                                         <p>
                                             <b>{{$detail_tx->payment_media}}</b>
                                         </p>
+                                        @endif
                                         <p>Status Pembayaran :
                                             @if ($detail_tx->status == "settlement")
                                                 Sukses

@@ -114,6 +114,9 @@ class TicketController extends Controller
             case "teknik":
                 $prefix_fakultas = "FT";
                 break;
+            case "industri":
+                $prefix_fakultas = "FIK";
+                break;
             case "teknobiologi":
                 $prefix_fakultas = "FTB";
                 break;
@@ -140,7 +143,6 @@ class TicketController extends Controller
         }
         $idcomplement = implode($randoms);
         $id_trx = $prefix.$prefix_fakultas."-".time().$idcomplement;
-
         $tiket = new Ticket();
         $tiket->id = $id_trx;
         $tiket->event_id = 1;
@@ -149,8 +151,17 @@ class TicketController extends Controller
         $tiket->no_hp = $data->no_hp;
         $tiket->fakultas = $data->fakultas;
         $tiket->angkatan = $data->angkatan;
-        $tiket->amount = 100000;
-        $tiket->amount_donasi = $data->nominal;
+        $tiket->amount = 10;
+
+        $nominal_donasi = 0;
+        if ($data->nominal == null || $data->nominal == "") {
+            $nominal_donasi = 0;
+        } else {
+            $nominal_donasi = $data->nominal;
+        }
+        // dd($nominal_donasi);
+
+        $tiket->amount_donasi = $nominal_donasi;
         $tiket->save();
 
         // dd($data);
