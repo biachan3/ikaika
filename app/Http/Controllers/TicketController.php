@@ -150,7 +150,15 @@ class TicketController extends Controller
         $tiket->fakultas = $data->fakultas;
         $tiket->angkatan = $data->angkatan;
         $tiket->amount = 100000;
-        $tiket->amount_donasi = $data->nominal;
+
+        $nominal_donasi = 0;
+        if ($data->nominal == null || $data->nominal == "") {
+            $nominal_donasi = 0;
+        } else {
+            $nominal_donasi = $data->nominal;
+        }
+
+        $tiket->amount_donasi = $nominal_donasi;
         $tiket->save();
 
         // dd($data);
