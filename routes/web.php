@@ -74,7 +74,7 @@ Route::prefix('ticket')->name('ticket.')->controller(TicketController::class)->n
 
 
 Route::prefix('user')->group(function () {
-    Route::get('/order', [App\Http\Controllers\TicketController::class, 'index_user'])->name('user.index');
+    Route::get('/order', [App\Http\Controllers\TicketController::class, 'index_user'])->name('user.order');
     Route::get('/order/{id}', [App\Http\Controllers\TicketController::class, 'detail_transaki'])->name('detail.trx');
     Route::post('/regis', [App\Http\Controllers\TicketController::class, 'regis'])->name('regis');
 });

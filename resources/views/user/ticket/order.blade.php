@@ -1,4 +1,4 @@
-@extends('template.dashboard')
+@extends('template.dashboardorder')
 @section('content')
 <section id="register" class="s-marathon-register" style="padding-top:148px; ">
     <div class="">

@@ -1,4 +1,4 @@
-@extends('template.dashboard')
+@extends('template.dashboardorder')
 
 @section('content')
     {{-- <section class="s-conference-slider">

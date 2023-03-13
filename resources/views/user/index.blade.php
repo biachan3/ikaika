@@ -22,7 +22,7 @@
                         <div class="date">3 Juni 2023</div>
                         <!-- <div class="conference-slider-title">Acara</div> -->
                         <h2 class="title"><span>Reuni Akbar 55 Tahun UBAYA</span></h2>
-                        <form method="GET" action="{{ route('event.index') }}">
+                        <form method="GET" action="{{ route('user.order') }}">
                             <div class="btn-form-cover">
                                 <button id="#submit" type="submit" class="btn">
                                     <span>Daftar Sekarang!</span>
