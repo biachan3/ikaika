@@ -72,6 +72,9 @@ Route::get('/payment', 'App\Http\Controllers\PaymentController@index')->name('pa
 Route::post('/payment/ping', 'App\Http\Controllers\PaymentController@ping')->name('payment.ping');
 Route::get('/scanner', 'App\Http\Controllers\ScanController@index')->name('scanner.index');
 Route::get('/qr/{id}', 'App\Http\Controllers\ScanController@generateQR')->name('qrgenerate');
+Route::get('/faq', 'App\Http\Controllers\FaqController@index')->name('faq.index');
+Route::get('/home', 'App\Http\Controllers\UserController@index')->name('user.index');
+
 
 
 // Route::get('/admin', function () {
