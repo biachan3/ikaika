@@ -38,7 +38,6 @@
             <span></span>
         </a>
 
-<<<<<<< HEAD
         <div class="row conference-header-row">
             <div class="d-flex flex-row justify-content-center multi-nav">
                 <a href="/home" class="logo3"><img src="{{ asset('Ginger') }}/assets/img/Logo UBAYA FIX.svg"
@@ -49,29 +48,6 @@
 
                 <a href="/home" class="logo3"><img src="{{ asset('Ginger') }}/assets/img/Logo IKA UBAYA.svg"
                         class="logo" alt="logo"></a>
-=======
-            <div class="row conference-header-row">
-                <div class="col-sm-1 col-lg-1 col-xl-1 ml-5 mr-5">
-                    <a href="{{url('/')}}" class="logo"><img
-                            src="{{ asset('Ginger/assets/img/Logo_UBAYA_FIX.svg') }}"
-                            alt="logo"></a>
-                </div>
-
-                <div class="col-sm-1 col-lg-1 col-xl-1">
-                    <a href="{{url('/')}}" class="logo2"><img
-                            src="{{ asset('Ginger') }}/assets/img/55_UBAYA.svg"
-                            alt="logo"></a>
-                </div>
-
-                <div class="col-sm-1 col-lg-1 col-xl-1 ml-2">
-                    <a href="{{url('/')}}" class="logo3"><img
-                            src="{{ asset('Ginger') }}/assets/img/Logo_IKA_UBAYA.svg" alt="logo"></a>
-                </div>
-                <div class="col-sm-1 col-lg-1 col-xl-1"">
-                    <a href="{{url('/')}}" class="logo4"><img
-                            src="{{ asset('Ginger') }}/assets/img/Stronger_Together.svg" alt="logo"></a>
-                </div>
->>>>>>> 52834291353f230b7ac7af0d3cf5f4df676e1d7b
 
                 <a href="/home" class="logo4"><img
                         src="{{ asset('Ginger') }}/assets/img/Stronger Together.svg" class="logo"></a>
