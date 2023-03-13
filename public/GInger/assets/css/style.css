@@ -8246,7 +8246,7 @@ footer .social-list {
   background-position: top center;
   background-repeat: no-repeat;
   background-image: url(../img/bg-register.svg);
-  z-index: 1;
+  z-index: 0;
   pointer-events: none;
 }
 

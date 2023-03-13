@@ -114,6 +114,9 @@ class TicketController extends Controller
             case "teknik":
                 $prefix_fakultas = "FT";
                 break;
+            case "industri":
+                $prefix_fakultas = "FIK";
+                break;
             case "teknobiologi":
                 $prefix_fakultas = "FTB";
                 break;

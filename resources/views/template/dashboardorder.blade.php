@@ -12,6 +12,7 @@
     <link rel="shortcut icon" href="{{ asset('Ginger') }}/assets/img/favicon.png">
     <!-- =================== STYLE =================== -->
     @yield('css')
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ asset('Ginger') }}/assets/css/slick.min.css" />
     <link rel="stylesheet" href="{{ asset('Ginger') }}/assets/css/bootstrap-grid.css">
     <link href="https://use.fontawesome.com/releases/v5.10.1/css/all.css" rel="stylesheet">
@@ -43,6 +44,7 @@
     <!--================= TO TOP END =================-->
 
     <!--=================== SCRIPT	===================-->
+    @yield('script')
     <script src="{{ asset('Ginger') }}/assets/js/jquery-2.2.4.min.js"></script>
     <script src="{{ asset('Ginger') }}/assets/js/slick.min.js"></script>
     <script src="{{ asset('Ginger') }}/assets/js/rx-lazy.js"></script>
