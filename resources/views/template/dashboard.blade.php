@@ -31,48 +31,42 @@
     <!-- ============== PRELOADER END ============== -->
     <!-- ================= HEADER ================= -->
     <header class="conference-header-fixed header-fixed">
-        
+
         <a href="#" class="nav-btn">
             <span></span>
             <span></span>
             <span></span>
         </a>
 
-            <div class="row conference-header-row">
-                <div class="col-sm-1 col-lg-1 col-xl-1 ml-5 mr-5">
-                    <a href="/home" class="logo"><img
-                            src="{{ asset('Ginger') }}/assets/img/Logo UBAYA FIX.svg"
-                            alt="logo"></a>
-                </div>
+        <div class="row conference-header-row">
+            <div class="d-flex flex-row justify-content-center multi-nav">
+                <a href="/home" class="logo3"><img src="{{ asset('Ginger') }}/assets/img/Logo UBAYA FIX.svg"
+                        class="logo" alt="logo"></a>
 
-                <div class="col-sm-1 col-lg-1 col-xl-1">
-                    <a href="/home" class="logo2"><img
-                            src="{{ asset('Ginger') }}/assets/img/55 UBAYA.svg"
-                            alt="logo"></a>
-                </div>
+                <a href="/home" class="logo3"><img src="{{ asset('Ginger') }}/assets/img/55 UBAYA.svg"
+                        class="logo" alt="logo"></a>
 
-                <div class="col-sm-1 col-lg-1 col-xl-1 ml-2">
-                    <a href="/home" class="logo3"><img
-                            src="{{ asset('Ginger') }}/assets/img/Logo IKA UBAYA.svg" alt="logo"></a>
-                </div>
-                <div class="col-sm-1 col-lg-1 col-xl-1"">
-                    <a href="/home" class="logo4"><img
-                            src="{{ asset('Ginger') }}/assets/img/Stronger Together.svg" alt="logo"></a>
-                </div>
+                <a href="/home" class="logo3"><img src="{{ asset('Ginger') }}/assets/img/Logo IKA UBAYA.svg"
+                        class="logo" alt="logo"></a>
 
+                <a href="/home" class="logo4"><img
+                        src="{{ asset('Ginger') }}/assets/img/Stronger Together.svg" class="logo"></a>
+            </div>
 
-                <div class="col-sm-9 col-lg-8 col-xl-6">
-                    <nav class="nav-menu menu">
-                        <ul class="nav-list">
+            <nav class="nav-menu menu">
+                <ul class="nav-list">
 
-                            {{-- <li><a href="#about" style="color: black;">about us</a></li>
+                    {{-- <li><a href="#about" style="color: black;">about us</a></li>
                             <li><a href="#schedule" style="color: black;">schedule</a></li>
                             <li><a href="#location" style="color: black;">location</a></li> --}}
-                            <!-- <li><a href="/event" style="color: black;">register</a></li> -->
-                            <li><a href="#news" style="color: black;">Galeri IKA</a></li>
-                            <li><a href="/faq" style="color: black;">FAQ</a></li>
-                            {{-- <li><a href="#conference-team.html" style="color: black;">Conference Team</a></li> --}}
-                            {{-- <li class="dropdown">
+                    <!-- <li><a href="/event" style="color: black;">register</a></li> -->
+                    <li><a href="#news" style="color: black;">Galeri IKA</a></li>
+                    <li><a href="/faq" style="color: black;">FAQ</a></li>
+
+                    
+                    {{-- <li><a href="{{ route('user.order') }}" style="color: black;">Daftar</a></li> --}}
+                    {{-- <li><a href="#conference-team.html" style="color: black;">Conference Team</a></li> --}}
+                    {{-- <li class="dropdown">
 								<a href="#">pages <i class="fa fa-angle-down" aria-hidden="true"></i></a>
 								<ul>
 									
@@ -81,27 +75,10 @@
 									<li><a href="page-error.html">Page Error 404</a></li>
 								</ul>
 							</li> --}}
-                        </ul>
-                    </nav>
-                </div>
-                <!-- @if (!Auth::check())
-<div class="col-md-3 col-lg-2 col-xl-3 conference-header-btn">
-                        {{-- <a href="#register" class="btn"><span>Get Tickets</span></a> --}}
-                        <form method="GET" action="{{ route('login') }}">
-
-                            <button class="btn btn-primary w-100" type="submit">Log In</button>
-                        </form>
-                    </div>
-@else
-<div class="col-md-3 col-lg-2 col-xl-3 conference-header-btn">
-                        {{-- <a href="#register" class="btn"><span>Get Tickets</span></a> --}}
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <button class="btn btn-primary w-100" type="submit">Log Out</button>
-                        </form>
-                    </div>
-@endif -->
-            </div>
+                </ul>
+                
+            </nav>
+        </div>
     </header>
     <!-- =============== HEADER END =============== -->
     @yield('content')

@@ -2577,7 +2577,7 @@ header {
 .header-fixed.header-top {
   top: -200px;
   position: fixed;
-  background-color: rgba(51, 51, 51, 0.9);
+  background-color: rgba(255, 255, 255, 0.9);
   -webkit-box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.1);
   box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.1);
 }
@@ -5247,7 +5247,7 @@ footer .social-list {
 .footer-cont .footer-phone {
   font-size: 24px;
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 @media -sass-debug-info {
@@ -5752,13 +5752,13 @@ footer .social-list {
   }
 }
 
-.logo {
+/* .logo {
   color: #fff;
   font-size: 20px;
   text-decoration: none;
   position: relative;
   z-index: 4;
-}
+} */
 
 @media -sass-debug-info {
   filename {
@@ -5770,108 +5770,111 @@ footer .social-list {
   }
 }
 
+
+
 @media (max-width: 480px) {
-  .logo img {
+  /* .logo img {
     display: inline;
     width: 20px;
     height: 20px;
     margin-left: 5px;
-  }
+  } */
 
-  .logo2 img {
-    display: inline;
-    width: 20px;
-    height: 20px;
-
-  }
-
-  .logo3 img {
-    display: inline;
-    width: 20px;
-    height: 20px;
-
-  }
-
-  .logo4 img {
-    display: inline;
-    width: 20px;
-    height: 20px;
-  }
-
-  .logo5 img {
+  .nav-wrap {
     display: flex;
-    width: 50px;
-    height: 50px;
+    z-index: 5;
+    width: 100%;
+    height: 15px;
   }
 
-  .logo6 img {
-    display: flex;
-    width: 50px;
-    height: 50px;
+  .logo {
+    width: 55%;
+    aspect-ratio: 3/2;
+    object-fit: contain;
   }
 
-  .logo7 img {
-    display: flex;
-    width: 50px;
-    height: 50px;
+  .logo4 {
+    margin-right: 30px;
   }
 
-  .logo8 img {
-    display: flex;
-    width: 50px;
-    height: 50px;
+  .h2-pad {
+    padding-top: 32.5px;
+    padding-bottom: 35px;
+    padding-left: 0px;
+
+    font-size: 28px;
+    align-items: start;
+  }
+
+  /* .social-footer-ins {
+    margin-top: 20px;
+    font-size: 16px;
+  } */
+
+  .multi-nav {
+    gap: 2px;
+    margin-left: 35px;
+    display: none;
   }
 }
 
-@media (max-width: 480px) {
-  .logo img {
+@media (min-width: 480px) {
+  /* .logo img {
     display: flex;
     width: 180px;
     height: 180px;
+  } */
+
+  .logo {
+    width: 35%;
+    aspect-ratio: 3/2;
+    object-fit: contain;
   }
 
-  .logo2 img {
-    display: flex;
-    width: 140px;
-    height: 140px;
-
+  .logo2 {
+    width: 15%;
+    aspect-ratio: 3/2;
+    object-fit: contain;
   }
 
-  .logo3 img {
-    display: flex;
-    width: 120px;
-    height: 100px;
-
+  .logo3 {
+    margin-right: -150px;
+  }
+  .logo4 {
+    margin-right: 100px;
+  }
+  .logo5 {
+    margin-right: -150px;
+  }
+  .logo6 {
+    margin-right: 100px;
   }
 
-  .logo4 img {
-    display: flex;
-    width: 140px;
-    height: 140px;
+  .h2-pad {
+    padding-top: 32.5px;
+    padding-bottom: 35px;
+    padding-left: 0px;
+    font-size: 28px;
+    align-items: start;
   }
 
-  .logo5 img {
-    display: flex;
-    width: 180px;
-    height: 180px;
+  .social-footer {
+    padding-top: 27px;
+    font-size: 32px;
   }
 
-  .logo6 img {
-    display: flex;
-    width: 145px;
-    height: 145px;
+  /* .social-footer-ins {
+    margin-top: 80px;
+    font-size: 20px;
+  } */
+
+  .multi-nav {
+    gap: 2px;
+    margin-left: 35px;
   }
 
-  .logo7 img {
-    display: flex;
-    width: 115px;
-    height: 115px;
-  }
-
-  .logo8 img {
-    display: flex;
-    width: 145px;
-    height: 145px;
+  .margin-ftr {
+    margin-left: 100px;
   }
 }
 
@@ -5888,13 +5891,13 @@ footer .social-list {
 .btn {
   padding: 14px 35px;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 17px;
   line-height: 1;
   font-family: "Red Hat Display", sans-serif;
   letter-spacing: 0.1em;
   border: 2px solid #0d5aa5;
   border-radius: 3px;
-  color: #000;
+  color: #fff;
   text-transform: uppercase;
   text-decoration: none;
   text-align: center;
@@ -5921,7 +5924,7 @@ footer .social-list {
 }
 
 .btn:hover {
-  color: #0d5aa5;
+  color: #fff;
 }
 
 @media -sass-debug-info {
@@ -7705,16 +7708,42 @@ footer .social-list {
   }
 }
 
-.event-schedule-item {
-  background-color: #fff;
-  border: 2px solid #f0f0f0;
-  margin-bottom: 12px;
-  margin-left: auto;
-  margin-right: auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  width: 1000px;
+@media (max-width: 480px) {
+  .event-schedule-item {
+    background-color: #fff;
+    border: 2px solid #f0f0f0;
+    margin-bottom: 12px;
+    margin-left: 10px;
+    margin-right: 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 95%;
+  }
+
+  .schedule-info-content p {
+    color: black;
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 480px) {
+  .event-schedule-item {
+    background-color: #fff;
+    border: 2px solid #f0f0f0;
+    margin-bottom: 12px;
+    margin-left: auto;
+    margin-right: auto;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 1000px;
+  }
+
+  .schedule-info-content p {
+    color: black;
+    font-size: 20px;
+  }
 }
 
 @media -sass-debug-info {
@@ -7897,10 +7926,7 @@ footer .social-list {
   width: 100% !important;
 }
 
-.schedule-info-content p {
-  color: black;
-  font-size: 20px;
-}
+
 
 @media -sass-debug-info {
   filename {
@@ -12073,7 +12099,7 @@ blockquote:before {
 }
 
 .conference-slide-item .date {
-  color: #0d5aa5;
+  color: #fff;
   letter-spacing: 0.17em;
   text-transform: uppercase;
   font-weight: 700;
@@ -12100,7 +12126,7 @@ blockquote:before {
   font-weight: 300;
   font-size: 64px;
   line-height: 1.3;
-  color: #000;
+  color: #fff;
   margin-bottom: 7px;
   -webkit-transition: .35s ease;
   transition: .35s ease;
@@ -14178,6 +14204,7 @@ blockquote:before {
 
 .conference-post-content {
   padding: 29px 38px 35px;
+  height: 160px;
 }
 
 @media -sass-debug-info {
@@ -19330,9 +19357,6 @@ body.modal .popup-close {
     }
   }
 
-  .conference-post-content {
-    padding: 22px 15px 29px;
-  }
 
   @media -sass-debug-info {
     filename {
