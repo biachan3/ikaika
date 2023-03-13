@@ -65,7 +65,7 @@ class PaymentController extends Controller
                     }else {
                         $bank='permata';
                     }
-                    $response = $client->request('POST', 'https://api.sandbox.midtrans.com/v2/charge', [
+                    $response = $client->request('POST', 'https://api.midtrans.com/v2/charge', [
                         'body' => '{
                             "payment_type": "bank_transfer",
                             "transaction_details": {
@@ -104,7 +104,7 @@ class PaymentController extends Controller
 
             } else if($method == "qris"){
                 try {
-                    $response = $client->request('POST', 'https://api.sandbox.midtrans.com/v2/charge', [
+                    $response = $client->request('POST', 'https://api.midtrans.com/v2/charge', [
                         'body' => '{
                             "payment_type": "qris",
                             "transaction_details": {
