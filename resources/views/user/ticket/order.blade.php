@@ -99,7 +99,7 @@
                             
                             <div class="price-final">
                                 <span>price:</span>
-                                <div class="price-final-text" id="final_price">Rp. 100000</div>
+                                <div class="price-final-text" id="final_price">Rp. 100.000</div>
                             </div>
                             <div class="btn-form-cover">
                                 <button type="submit" class="btn"><span style="color: white">Bayar Sekarang</span></button>
@@ -119,7 +119,7 @@
         function getamount(evt) {
 
             nominal = parseInt($('#nominal').val()) + 100000;
-            $("#final_price").text("Rp. " + nominal.toLocaleString());
+            $("#final_price").text("Rp. " + nominal.toLocaleString('id-ID'));
         }
         var currentValue = 0;
 
