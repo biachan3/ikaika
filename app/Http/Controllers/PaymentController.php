@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Ticket;
 use App\Mail\InfoRegistrationMail;
 use Illuminate\Support\Facades\Mail;
+use Exception;
 
 class PaymentController extends Controller
 {
