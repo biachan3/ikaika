@@ -41,23 +41,23 @@
             <div class="row conference-header-row">
                 <div class="col-sm-1 col-lg-1 col-xl-1 ml-5 mr-5">
                     <a href="/home" class="logo"><img
-                            src="{{ asset('Ginger/assets/img/Logo UBAYA FIX.svg') }}"
+                            src="{{ asset('Ginger/assets/img/Logo_UBAYA_FIX.svg') }}"
                             alt="logo"></a>
                 </div>
 
                 <div class="col-sm-1 col-lg-1 col-xl-1">
                     <a href="/home" class="logo2"><img
-                            src="{{ asset('Ginger') }}/assets/img/55 UBAYA.svg"
+                            src="{{ asset('Ginger') }}/assets/img/55_UBAYA.svg"
                             alt="logo"></a>
                 </div>
 
                 <div class="col-sm-1 col-lg-1 col-xl-1 ml-2">
                     <a href="/home" class="logo3"><img
-                            src="{{ asset('Ginger') }}/assets/img/Logo IKA UBAYA.svg" alt="logo"></a>
+                            src="{{ asset('Ginger') }}/assets/img/Logo_IKA_UBAYA.svg" alt="logo"></a>
                 </div>
                 <div class="col-sm-1 col-lg-1 col-xl-1"">
                     <a href="/home" class="logo4"><img
-                            src="{{ asset('Ginger') }}/assets/img/Stronger Together.svg" alt="logo"></a>
+                            src="{{ asset('Ginger') }}/assets/img/Stronger_Together.svg" alt="logo"></a>
                 </div>
 
 
