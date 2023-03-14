@@ -1,13 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Auth;
 use App\Models\Ticket;
 use App\Models\Attendee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 
 class TicketController extends Controller
 {
@@ -32,14 +35,15 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function order($id){
+    public function order($id)
+    {
         $result = [];
-        $result['event']=json_decode(json_encode(DB::table('events')
-        ->select('*')
-        ->get(), true));
-        $result['bank']=json_decode(json_encode(DB::table('banks')
-        ->select('*')
-        ->get(), true));
+        $result['event'] = json_decode(json_encode(DB::table('events')
+            ->select('*')
+            ->get(), true));
+        $result['bank'] = json_decode(json_encode(DB::table('banks')
+            ->select('*')
+            ->get(), true));
         return view('ticket.order', compact('result'));
     }
     public function create()
@@ -202,7 +206,24 @@ class TicketController extends Controller
     {
         //
     }
-
+    public function search(Request $data)
+    {
+        $check = [];
+        $result = DB::table('events')
+            ->select('events.name as event_name', 'tickets.id as ticket_id', 'users.name as name', 'tickets.date as date', 'tickets.qr as qr', 'tickets.amount as price')
+            ->join('tickets', 'events.id', '=', 'tickets.event_id')
+            ->join('users', 'users.id', '=', 'tickets.users_id')
+            ->where('tickets.id', '=', $data['id'])
+            ->get();
+        if ($result['name'] = $data['name']) {
+            $check['check'] = true;
+            $check['name'] = $result['name'];
+            $check['date'] = $result['date'];
+            $check['event'] = $result['event']['name'];
+        }
+        
+        return view('ticket.search', compact('check'));
+    }
     /**
      * Update the specified resource in storage.
      *
