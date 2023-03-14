@@ -19,6 +19,15 @@ class PaymentController extends Controller
         $data = Ticket::find($request->id);
         $method = $request->method;
         $obj_response ="";
+        $is_production = env('IS_PRODUCTION');
+
+        $url_endpoint ="";
+        if($is_production)
+        {
+            $url_endpoint = 'https://api.midtrans.com/v2/charge';
+        } else {
+            $url_endpoint = 'https://api.sandbox.midtrans.com/v2/charge';
+        }
 
         //Prepare api
         $client = new \GuzzleHttp\Client();
@@ -67,7 +76,7 @@ class PaymentController extends Controller
                     }else {
                         $bank='permata';
                     }
-                    $response = $client->request('POST', 'https://api.midtrans.com/v2/charge', [
+                    $response = $client->request('POST', $url_endpoint, [
                         'body' => '{
                             "payment_type": "bank_transfer",
                             "transaction_details": {
@@ -106,7 +115,7 @@ class PaymentController extends Controller
 
             } else if($method == "qris"){
                 try {
-                    $response = $client->request('POST', 'https://api.midtrans.com/v2/charge', [
+                    $response = $client->request('POST', $url_endpoint, [
                         'body' => '{
                             "payment_type": "qris",
                             "transaction_details": {
