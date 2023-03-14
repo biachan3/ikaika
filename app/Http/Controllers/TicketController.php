@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
+
 class TicketController extends Controller
 {
     /**
@@ -100,7 +103,7 @@ class TicketController extends Controller
             case "farmasi":
                 $prefix_fakultas = "FF";
                 break;
-            case "hukum":
+            case "fukum":
                 $prefix_fakultas = "FH";
                 break;
             case "fbe":
@@ -114,6 +117,9 @@ class TicketController extends Controller
                 break;
             case "teknik":
                 $prefix_fakultas = "FT";
+                break;
+            case "industri":
+                $prefix_fakultas = "FIK";
                 break;
             case "teknobiologi":
                 $prefix_fakultas = "FTB";
@@ -130,24 +136,54 @@ class TicketController extends Controller
         }else{
             $prefix = "TD-";
         }
-        $id_trx = $prefix.time();
-        dd($data);
 
+        //Ngitung random buat bikin unik
+        $numbers = '1234567890';
+        $randoms = array();
+        $numCount = strlen($numbers) - 1;
+        for ($i = 0; $i < 4; $i++) {
+            $n = rand(0, $numCount);
+            $randoms[] = $numbers[$n];
+        }
+        $idcomplement = implode($randoms);
+        $id_trx = $prefix.$prefix_fakultas."-".time().$idcomplement;
+        $tiket = new Ticket();
+        $tiket->id = $id_trx;
+        $tiket->event_id = 1;
+        $tiket->nama_lengkap = $data->nama;
+        $tiket->email = $data->email;
+        $tiket->no_hp = $data->no_hp;
+        $tiket->fakultas = $data->fakultas;
+        $tiket->angkatan = $data->angkatan;
+        $tiket->amount = 10;
+
+        $nominal_donasi = 0;
+        if ($data->nominal == null || $data->nominal == "") {
+            $nominal_donasi = 0;
+        } else {
+            $nominal_donasi = $data->nominal;
+        }
+        // dd($nominal_donasi);
+
+        $tiket->amount_donasi = $nominal_donasi;
+        $tiket->save();
+
+        // dd($data);
+        return redirect()->route('detail.trx',$id_trx);
         //here
     }
-    public function store1()
+    public function detail_transaki($id)
     {
-        $prefix = "";
-        $data=false;
-        if($data){
-            $prefix = "TI-";
-        }else{
-            $prefix = "TD-";
-        }
-        $id_trx = $prefix.time();
-        dd($id_trx);
+        $detail_tx = Ticket::find($id);
+        // dd($detail_tx);
+        $qrcode="";
+        if($detail_tx->status =="success" || $detail_tx->status =="settlement")
+        {
+            $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate(url($detail_tx->id)));
+            $qrcode = QrCode::generate($detail_tx->id);
 
-        //here
+        }
+        return view('user.ticket.orderDetail', compact('detail_tx','qrcode'));
     }
     /**
      * Display the specified resource.
