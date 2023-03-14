@@ -51,17 +51,17 @@
 				</ul>
                 </div> --}}
                 <div class="d-flex flex-row justify-content-center multi-nav">
-                    <a href="/home"><img src="{{ asset('Ginger') }}/assets/img/Logo UBAYA FIX.svg"
+                    <a href="/home"><img src="{{ asset('Ginger') }}/assets/img/Logo_UBAYA_FIX.svg"
                             class="logo " alt="logo"></a>
     
-                    <a href="/home"><img src="{{ asset('Ginger') }}/assets/img/55 UBAYA.svg"
+                    <a href="/home"><img src="{{ asset('Ginger') }}/assets/img/55_UBAYA.svg"
                             class="logo " alt="logo"></a>
     
-                    <a href="/home"><img src="{{ asset('Ginger') }}/assets/img/Logo IKA UBAYA.svg"
+                    <a href="/home"><img src="{{ asset('Ginger') }}/assets/img/Logo_IKA_UBAYA.svg"
                             class="logo" alt="logo"></a>
     
                     <a href="/home"><img
-                            src="{{ asset('Ginger') }}/assets/img/Stronger Together.svg" class="logo"></a>
+                            src="{{ asset('Ginger') }}/assets/img/Stronger_Together.svg" class="logo"></a>
                 </div>
             </div>
         </header>
