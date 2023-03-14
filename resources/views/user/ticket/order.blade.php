@@ -88,7 +88,7 @@
                                 <span>Ya</span>
                             </div>
                             <div>
-                                <input id="nominal" type="text" name="nominal" placeholder="Nominal" required
+                                <input id="nominal" type="number" name="nominal" placeholder="Nominal" required
                                     onkeypress="return isNumber(event)" onkeyup="getamount(event)">
                             </div>
                             <br>
