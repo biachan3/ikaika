@@ -396,7 +396,7 @@
                     <div class="footer-cont col-12 col-sm-6 col-lg-4 margin-ftr">
                         <div class="d-flex">
                             <a href="index.html" class="logo"><img
-                                    src="{{ asset('Ginger') }}/assets/img/Logo IKA UBAYA.svg" alt="logo"
+                                    src="{{ asset('Ginger') }}/assets/img/Logo_IKA_UBAYA.svg" alt="logo"
                                     style="width: 95px; height: 95px; margin-left: -10px;"></a>
                             <h2 class="h2-pad">IKA UBAYA</h2>
                         </div>
