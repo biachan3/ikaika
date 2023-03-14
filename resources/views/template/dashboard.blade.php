@@ -40,30 +40,25 @@
 
         <div class="row conference-header-row">
             <div class="d-flex flex-row justify-content-center multi-nav">
-                <a href="/home" class="logo3"><img src="{{ asset('Ginger') }}/assets/img/Logo UBAYA FIX.svg"
+                <a href="/home" class="logo3"><img src="{{ asset('Ginger') }}/assets/img/Logo_UBAYA_FIX.svg"
                         class="logo" alt="logo"></a>
 
-                <a href="/home" class="logo3"><img src="{{ asset('Ginger') }}/assets/img/55 UBAYA.svg"
+                <a href="/home" class="logo3"><img src="{{ asset('Ginger') }}/assets/img/55_UBAYA.svg" class="logo"
+                        alt="logo"></a>
+
+                <a href="/home" class="logo3"><img src="{{ asset('Ginger') }}/assets/img/Logo_IKA_UBAYA.svg"
                         class="logo" alt="logo"></a>
 
-                <a href="/home" class="logo3"><img src="{{ asset('Ginger') }}/assets/img/Logo IKA UBAYA.svg"
-                        class="logo" alt="logo"></a>
-
-                <a href="/home" class="logo4"><img
-                        src="{{ asset('Ginger') }}/assets/img/Stronger Together.svg" class="logo"></a>
+                <a href="/home" class="logo4"><img src="{{ asset('Ginger') }}/assets/img/Stronger_Together.svg"
+                        class="logo"></a>
             </div>
 
             <nav class="nav-menu menu">
-                <ul class="nav-list">
 
-                    {{-- <li><a href="#about" style="color: black;">about us</a></li>
-                            <li><a href="#schedule" style="color: black;">schedule</a></li>
-                            <li><a href="#location" style="color: black;">location</a></li> --}}
-                    <!-- <li><a href="/event" style="color: black;">register</a></li> -->
+                <ul class="nav-list">
                     <li><a href="#news" style="color: black;">Galeri IKA</a></li>
                     <li><a href="/faq" style="color: black;">FAQ</a></li>
 
-                    
                     {{-- <li><a href="{{ route('user.order') }}" style="color: black;">Daftar</a></li> --}}
                     {{-- <li><a href="#conference-team.html" style="color: black;">Conference Team</a></li> --}}
                     {{-- <li class="dropdown">
@@ -76,7 +71,7 @@
 								</ul>
 							</li> --}}
                 </ul>
-                
+
             </nav>
         </div>
     </header>
