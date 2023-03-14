@@ -18,12 +18,12 @@
                             <li class="inp-cover inp-profession">
                                 <select class="nice-select" id="payment_method" name="method" onchange="getValueMethod()">
                                     <option selected="selected" disabled>Metode Pembayaran</option>
-                                    <option value="bca_va">BCA Virtual Account</option>
+                                    {{-- <option value="bca_va">BCA Virtual Account</option> --}}
+                                    <option value="qris">QRIS</option>
                                     <option value="bni_va">BNI Virtual Account</option>
                                     <option value="bri_va">BRI Virtual Account</option>
                                     {{-- <option value="mandiri_va">Manidiri Bill Payment</option>
                                     <option value="permata_va">Permata Virtual Account</option> --}}
-                                    <option value="qris">QRIS</option>
                                 </select>
                             </li>
                         </ul>
@@ -61,6 +61,11 @@
                                         </p>
                                         <hr>
                                         @if($detail_tx->status == "settlement" || $detail_tx->status == "success")
+                                        <p>
+                                            <b>
+                                                Terima kasih Anda telah terdaftar sebagai peserta Reuni Akbar IKA Ubaya 2023. Undangan Elektronik akan kami kirimkan ke email atau nomor wa Anda yang terdaftar dalam waktu 2x24jam 🙏🏻
+                                            </b>
+                                        </p>
                                         <p>Silahkan simpan QR Code dibawah ini untuk registrasi pada saat acara: </p>
                                         {!! $qrcode !!}
                                         @endif
