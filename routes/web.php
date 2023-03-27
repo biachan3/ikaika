@@ -87,6 +87,10 @@ Route::prefix('admin')->name('admin.')->controller(AdminController::class)->name
         Route::get('/detail/{id}', 'show')->name('detail');
     }
 );
+Route::get('/genkey', 'App\Http\Controllers\PaymentController@genkey')->name('genkey');
+Route::get('/add-data-manual', 'App\Http\Controllers\PaymentController@addManualData')->name('addManualData');
+Route::post('/postadddatamanual', 'App\Http\Controllers\PaymentController@postadddatamanual')->name('postadddatamanual');
+
 Route::get('/event', 'App\Http\Controllers\EventController@index')->name('event.index');
 
 Route::get('/payment', 'App\Http\Controllers\PaymentController@index')->name('payment.index');
