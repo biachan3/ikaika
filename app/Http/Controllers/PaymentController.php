@@ -255,7 +255,7 @@ class PaymentController extends Controller
             case "farmasi":
                 $prefix_fakultas = "FF";
                 break;
-            case "fukum":
+            case "hukum":
                 $prefix_fakultas = "FH";
                 break;
             case "fbe":
@@ -296,7 +296,7 @@ class PaymentController extends Controller
         $t = new TicketOwner();
         $t->nama = $request->nama;
         $t->id_tiket = $id_trx;
-        // $t->save();
+        $t->save();
 
         $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($id_trx));
         // $qrcode = QrCode::generate($id_trx);
