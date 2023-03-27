@@ -4,12 +4,29 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Ticket;
+use App\Models\TicketOwner;
 use App\Mail\InfoRegistrationMail;
 use Illuminate\Support\Facades\Mail;
 use Exception;
+use PDF;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class PaymentController extends Controller
 {
+    public function genkey()
+    {
+        $signkey = "5jvmfze7dgc9enof";
+        $datetime = "2021-10-23 22:51:45";
+        $orderid = "test001";
+        $model = "SENDINVOICE";
+        $comcode = "SGWIKABUAYA";
+        $amount = 100000;
+        $ccy = "IDR";
+
+        $uppercase = strtoupper("##$signkey##$datetime##$orderid##$amount##$ccy##$comcode##$model##");
+        $signature = hash('sha256', $uppercase);
+        echo $uppercase;
+    }
     public function index()
     {
         return view('admin.payment.index');
@@ -221,5 +238,76 @@ class PaymentController extends Controller
 
         echo $response->getBody();
         // return response()->json($response->getBody(), 200);
+    }
+
+    public function addManualData()
+    {
+        return view('general.add-data-manual');
+    }
+
+    public function postadddatamanual(Request $request)
+    {
+        $prefix = "TO-";
+        $prefix_fakultas = "";
+        $fakultas = $request->fakultas;
+
+        switch ($fakultas) {
+            case "farmasi":
+                $prefix_fakultas = "FF";
+                break;
+            case "fukum":
+                $prefix_fakultas = "FH";
+                break;
+            case "fbe":
+                $prefix_fakultas = "FBE";
+                break;
+            case "politeknik":
+                $prefix_fakultas = "POL";
+                break;
+            case "psikologi":
+                $prefix_fakultas = "FP";
+                break;
+            case "teknik":
+                $prefix_fakultas = "FT";
+                break;
+            case "industri":
+                $prefix_fakultas = "FIK";
+                break;
+            case "teknobiologi":
+                $prefix_fakultas = "FTB";
+                break;
+            case "kedokteran":
+                $prefix_fakultas = "FK";
+                break;
+            default:
+                $prefix_fakultas = "";
+        }
+
+        $numbers = '1234567890';
+        $randoms = array();
+        $numCount = strlen($numbers) - 1;
+        for ($i = 0; $i < 4; $i++) {
+            $n = rand(0, $numCount);
+            $randoms[] = $numbers[$n];
+        }
+        $idcomplement = implode($randoms);
+        $id_trx = $prefix.$prefix_fakultas."-".time().$idcomplement;
+        // dd($id_trx);
+        $t = new TicketOwner();
+        $t->nama = $request->nama;
+        $t->id_tiket = $id_trx;
+        // $t->save();
+
+        $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($id_trx));
+        // $qrcode = QrCode::generate($id_trx);
+
+        $data["name"] = $request->nama;
+        $data["nomer"] = $id_trx;
+        $data['qr'] = $qrcode;
+
+        $customPaper = array(0,0,595,420);
+        $pdf = PDF::loadview('pdf.tiket', $data);
+        $pdf->setPaper($customPaper);
+    	return $pdf->stream("Ticket - $id_trx.pdf");
     }
 }

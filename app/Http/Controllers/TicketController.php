@@ -146,7 +146,7 @@ class TicketController extends Controller
             $randoms[] = $numbers[$n];
         }
         $idcomplement = implode($randoms);
-        $id_trx = $prefix.$prefix_fakultas."-".time().$idcomplement;
+        $id_trx = "TX-".$prefix.$prefix_fakultas."-".time().$idcomplement;
         $tiket = new Ticket();
         $tiket->id = $id_trx;
         $tiket->event_id = 1;
