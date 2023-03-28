@@ -22,10 +22,11 @@ class PaymentController extends Controller
         $comcode = "SGWIKABUAYA";
         $amount = 100000;
         $ccy = "IDR";
+        $uuid="80784df2-accb-46fc-92f4-8d3103b38408";
 
-        $uppercase = strtoupper("##$signkey##$datetime##$orderid##$amount##$ccy##$comcode##$model##");
+        $uppercase = strtoupper("##$signkey##$uuid##$datetime##$orderid##$amount##$ccy##$comcode##$model##");
         $signature = hash('sha256', $uppercase);
-        echo $uppercase;
+        echo $signature;
     }
     public function index()
     {
@@ -305,7 +306,7 @@ class PaymentController extends Controller
         $data["nomer"] = $id_trx;
         $data['qr'] = $qrcode;
 
-        $customPaper = array(0,0,595,420);
+        $customPaper = array(0,0,910,1618);
         $pdf = PDF::loadview('pdf.tiket', $data);
         $pdf->setPaper($customPaper);
     	return $pdf->stream("Ticket - $id_trx.pdf");

@@ -10,11 +10,12 @@
 </style>
 
 </head>
-<body style="background-image: url(./image-template/pdftiket.png); background-size: cover; height:200px;">
+<body style="background-image: url(./image-template/ticket-02.png); background-size: cover; height:200px;">
 	<style type="text/css">
         @font-face {
-            font-family: "Times New Roman";
-            src: url("/times.ttf");
+            font-family: "klik";
+            src: url("/Klik-Light.otf");
+            font-weight: lighter;
         }
 
 		  @page { margin: 0in; }
@@ -31,14 +32,14 @@
 
         .column1 {
         /* margin-left: 10px; */
-        margin-top: 240px;
+        margin-top: 800px;
         float: left;
-        width: 30%;
+        width: 50%;
         }
         .column2 {
         /* margin-left: 100px; */
         float: left;
-        width: 70%;
+        width: 50%;
         }
         .column3 {
         margin-left: 80px;
@@ -61,23 +62,25 @@
 
         /* Clear floats after the columns */
         .row:after {
+
         content: "";
         display: table;
         clear: both;
         }
         .nama{
-            /* margin-top:239px;
-            margin-left: 520px; */
+            top:890px;
+            left: 520px;
 
-            color: #000000;
-            font-family: 'Times New Roman', serif;
-            font-size: 1.2em;
+            color: #695345;
+            font-family: 'klik', sans-serif;
+            font-size: 2.3em;
+            position: fixed;
         }
         .undian{
             margin-top:7px;
             margin-left: 700px;
             color: #000000;
-            font-family: 'Times New Roman', serif;
+            font-family: 'Times New Roman', sans-serif;
             font-size: 2em;
         }
         .dear{
@@ -85,32 +88,35 @@
             margin-left: 60px;
             text-align: center;
             color: #BC7128;
-            font-family: 'Times New Roman', serif;
+            font-family: 'Times New Roman', sans-serif;
             font-size: 1.5em;
         }
         .nomer{
-            /* margin-top:20px;
-            margin-left: 520px; */
-            color: #000000;
-            font-family: 'Times New Roman', serif;
-            font-size: 1.2em;
+            margin-top:790px;
+            margin-left: 520px;
+            color: #695345;
+            font-family: 'klik', sans-serif;
+            font-size: 2.3em;
+            padding-bottom:10%;
+            width: 500px;
         }
         .qr{
             height: 280px;
-            margin-top: 141px;
-            margin-left: 103px;
+            top: 1251px;
+            left: 468px;
+            position: fixed;
         }
 	</style>
     <section>
-        <div class="row">
+        <div class="nomer" style="margin-bottom:20px">{{$name}}</div>
+        <div class="nama">{{$nomer}}</div>
+        <img src="data:image/png;base64, {!! $qr !!}" class="qr">
+        {{-- <div class="row">
             <div class="column2">
-                <img src="data:image/png;base64, {!! $qr !!}" class="qr">
             </div>
             <div class="column1">
-                <div class="nomer" style="margin-bottom:20px"><b>{{$nomer}}</b></div>
-                <div class="nama"><b>{{$name}}</b></div>
             </div>
-        </div>
+        </div> --}}
 
 
     </section>
