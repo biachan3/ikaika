@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Mail;
 use Exception;
 use PDF;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Uuid;
 
 class PaymentController extends Controller
 {
@@ -23,10 +24,11 @@ class PaymentController extends Controller
         $amount = 100000;
         $ccy = "IDR";
         $uuid="80784df2-accb-46fc-92f4-8d3103b38408";
+        // $uuid = Uuid::generate();
 
         $uppercase = strtoupper("##$signkey##$uuid##$datetime##$orderid##$amount##$ccy##$comcode##$model##");
         $signature = hash('sha256', $uppercase);
-        echo $signature;
+        echo $signature." + ".$uppercase;
     }
     public function index()
     {

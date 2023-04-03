@@ -23,13 +23,13 @@
                         <!-- <div class="conference-slider-title">Acara</div> -->
                         <h2 class="title"><span>Reuni Akbar 55 Tahun UBAYA</span></h2>
                         {{-- <form method="GET" action="{{ route('user.order') }}"> --}}
-                            <div class="btn-form-cover">
+                            {{-- <div class="btn-form-cover">
                                 <a href="{{route('user.order')}}">
                                     <button id="#submit" type="submit" class="btn">
                                         <span>Daftar Sekarang!</span>
                                     </button>
                                 </a>
-                            </div>
+                            </div> --}}
                         {{-- </form> --}}
                     </div>
                 </div>
@@ -716,7 +716,7 @@
                                 No.169, Pucang Sewu, Gubeng, Surabaya City, East
                                 Java 60284</a>
                             </div>
-                            
+
                         </li>
                     </ul>
 
