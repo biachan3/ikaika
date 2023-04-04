@@ -52,6 +52,7 @@ Route::get('/', [HomeController::class, 'index'])->name('dashboard');
         function () {
             Route::post('/getVirtualAccount', 'getVirtualAccount')->name("getVirtualAccount");
             // Route::post('/notification/handling', 'notifHandling')->name("notifHandling");
+            Route::post('/inquiry-process', 'inquiryProcess')->name("inquiryProcess");
         }
     );
     Route::get('/event', 'App\Http\Controllers\EventController@index')->name('event.index');

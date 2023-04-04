@@ -11,6 +11,7 @@ use Exception;
 use PDF;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Uuid;
+use Carbon\Carbon;
 
 class PaymentController extends Controller
 {
@@ -29,6 +30,26 @@ class PaymentController extends Controller
         $uppercase = strtoupper("##$signkey##$uuid##$datetime##$orderid##$amount##$ccy##$comcode##$model##");
         $signature = hash('sha256', $uppercase);
         echo $signature." + ".$uppercase;
+    }
+    public function inquiryProcess(Request $request)
+    {
+        $rq_uuid = $request->rq_uuid;
+        $rq_datetime = $request->rq_datetime;
+        $rq_password = $request->password;
+        $rq_signature = $request->signature;
+        $rq_comcode = $request->member_id;
+        $rq_orderid = $request->order_id;
+        $now = Carbon::now();
+
+        return response()->json([
+            'rq_uuid' => $rq_uuid,
+            'rs_datetime' => $now,
+            'error_code' => '0000',
+            'error_message' => 'success',
+            'order_id' => $rq_orderid,
+            'amount' => '100000']
+        ,200);
+
     }
     public function index()
     {
@@ -299,7 +320,7 @@ class PaymentController extends Controller
         $t = new TicketOwner();
         $t->nama = $request->nama;
         $t->id_tiket = $id_trx;
-        $t->save();
+        // $t->save();
 
         $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($id_trx));
         // $qrcode = QrCode::generate($id_trx);
@@ -308,7 +329,7 @@ class PaymentController extends Controller
         $data["nomer"] = $id_trx;
         $data['qr'] = $qrcode;
 
-        $customPaper = array(0,0,910,1618);
+        $customPaper = array(0,0,1080,1660);
         $pdf = PDF::loadview('pdf.tiket', $data);
         $pdf->setPaper($customPaper);
     	return $pdf->stream("Ticket - $id_trx.pdf");

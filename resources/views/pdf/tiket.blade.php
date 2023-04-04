@@ -10,7 +10,7 @@
 </style>
 
 </head>
-<body style="background-image: url(./image-template/ticket-02.png); background-size: cover; height:200px;">
+<body style="background-image: url(./image-template/ticket 4-02.png); background-size: cover; height:200px;">
 	<style type="text/css">
         @font-face {
             font-family: "klik";
@@ -68,12 +68,12 @@
         clear: both;
         }
         .nama{
-            top:890px;
-            left: 520px;
+            top:880px;
+            left: 500px;
 
             color: #695345;
             font-family: 'klik', sans-serif;
-            font-size: 2.3em;
+            font-size: 2.8em;
             position: fixed;
         }
         .undian{
@@ -92,24 +92,24 @@
             font-size: 1.5em;
         }
         .nomer{
-            margin-top:790px;
-            margin-left: 520px;
+            margin-top:810px;
+            margin-left: 500px;
             color: #695345;
             font-family: 'klik', sans-serif;
-            font-size: 2.3em;
+            font-size: 2.8em;
             padding-bottom:10%;
-            width: 500px;
+            width: 900px;
         }
         .qr{
-            height: 280px;
-            top: 1251px;
-            left: 468px;
+            height: 370px;
+            top: 1255px;
+            left: 538px;
             position: fixed;
         }
 	</style>
     <section>
-        <div class="nomer" style="margin-bottom:20px">{{$name}}</div>
-        <div class="nama">{{$nomer}}</div>
+        <div class="nomer" style="margin-bottom:20px">{{$nomer}}</div>
+        <div class="nama">{{$name}}</div>
         <img src="data:image/png;base64, {!! $qr !!}" class="qr">
         {{-- <div class="row">
             <div class="column2">
