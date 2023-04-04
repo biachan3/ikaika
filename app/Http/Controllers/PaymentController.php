@@ -41,13 +41,22 @@ class PaymentController extends Controller
         $rq_orderid = $request->order_id;
         $now = Carbon::now();
 
+        $signkey = "5jvmfze7dgc9enof";
+        $model = "INQUIRY-RS";
+
+        $signature_res = hash('sha256', strtoupper("##$signkey##$rq_uuid##$rq_datetime##$rq_orderid##0000##$model##"));
         return response()->json([
             'rq_uuid' => $rq_uuid,
             'rs_datetime' => $now,
             'error_code' => '0000',
             'error_message' => 'success',
             'order_id' => $rq_orderid,
-            'amount' => '100000']
+            'amount' => '100000',
+            'ccy' => 'IDR',
+            'description' => 'Tiket Reuni',
+            'trx_date' => $now,
+            'signature' => $signature_res
+            ]
         ,200);
 
     }
@@ -316,7 +325,7 @@ class PaymentController extends Controller
         }
         $idcomplement = implode($randoms);
         $id_trx = $prefix.$prefix_fakultas."-".time().$idcomplement;
-        // dd($id_trx);
+
         $t = new TicketOwner();
         $t->nama = $request->nama;
         $t->id_tiket = $id_trx;
