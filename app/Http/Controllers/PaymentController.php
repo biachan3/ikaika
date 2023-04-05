@@ -40,14 +40,19 @@ class PaymentController extends Controller
         $rq_comcode = $request->member_id;
         $rq_orderid = $request->order_id;
         $now = Carbon::now();
-
+        $now = date("Y-m-d H:i:s");
+        // dd($now);
         $signkey = "5jvmfze7dgc9enof";
         $model = "INQUIRY-RS";
 
-        $signature_res = hash('sha256', strtoupper("##$signkey##$rq_uuid##$rq_datetime##$rq_orderid##0000##$model##"));
+        $upper = strtoupper("##$signkey##$rq_uuid##$now##$rq_orderid##0000##$model##");
+        $signature_res = hash('sha256', $upper);
+        echo $upper;
+        echo "Sign: ".$signature_res;
+        // $d = array('foo' => 'bar', 'baz' => 'long');
         return response()->json([
             'rq_uuid' => $rq_uuid,
-            'rs_datetime' => $now,
+            'rs_datetime' => $rq_datetime,
             'error_code' => '0000',
             'error_message' => 'success',
             'order_id' => $rq_orderid,
