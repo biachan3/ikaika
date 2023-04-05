@@ -52,7 +52,7 @@ class PaymentController extends Controller
         // $d = array('foo' => 'bar', 'baz' => 'long');
         return response()->json([
             'rq_uuid' => $rq_uuid,
-            'rs_datetime' => $rq_datetime,
+            'rs_datetime' => $now,
             'error_code' => '0000',
             'error_message' => 'success',
             'order_id' => $rq_orderid,
