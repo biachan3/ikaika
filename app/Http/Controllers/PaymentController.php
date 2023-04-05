@@ -39,7 +39,7 @@ class PaymentController extends Controller
         $rq_signature = $request->signature;
         $rq_comcode = $request->member_id;
         $rq_orderid = $request->order_id;
-        $now = Carbon::now();
+        // $now = Carbon::now();
         $now = date("Y-m-d H:i:s");
         // dd($now);
         $signkey = "5jvmfze7dgc9enof";
@@ -47,8 +47,8 @@ class PaymentController extends Controller
 
         $upper = strtoupper("##$signkey##$rq_uuid##$now##$rq_orderid##0000##$model##");
         $signature_res = hash('sha256', $upper);
-        echo $upper;
-        echo "Sign: ".$signature_res;
+        // echo $upper;
+        // echo "Sign: ".$signature_res;
         // $d = array('foo' => 'bar', 'baz' => 'long');
         return response()->json([
             'rq_uuid' => $rq_uuid,
