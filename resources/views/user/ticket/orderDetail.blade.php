@@ -22,7 +22,7 @@
                                     {{-- <option value="qris">QRIS</option> --}}
                                     <option value="009">BNI Virtual Account</option>
                                     <option value="002">BRI Virtual Account</option>
-                                    <option value="008">Manidiri Bill Payment</option>
+                                    <option value="008">Manidiri Virtual Account</option>
                                     <option value="013">Permata Virtual Account</option>
                                 </select>
                             </li>
@@ -60,7 +60,7 @@
                                             @endif
                                         </p>
                                         <hr>
-                                        @if($detail_tx->transaction_status == "settlement" || $detail_tx->transaction_status == "success")
+                                        @if($detail_tx->transaction_status == "settlement" || $detail_tx->transaction_status == "Sukses")
                                         <p>
                                             <b>
                                                 Terima kasih Anda telah terdaftar sebagai peserta Reuni Akbar IKA Ubaya 2023. Undangan Elektronik akan kami kirimkan ke email atau nomor wa Anda yang terdaftar dalam waktu 2x24jam 🙏🏻
