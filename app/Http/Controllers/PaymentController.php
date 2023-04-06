@@ -228,7 +228,7 @@ class PaymentController extends Controller
                 'rs_datetime' => $now,
                 'error_code' => '0000',
                 'error_message' => 'success',
-                'order_id' => $rq_orderid,
+                'order_id' => $order_id,
                 'reconcile_id' => strtotime("now"),
                 'reconcile_datetime' => $now,
                 'signature' => $signature_res
