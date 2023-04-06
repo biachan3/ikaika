@@ -179,11 +179,12 @@ class PaymentController extends Controller
                     dd($obj_response);
                     if($obj_response->error_code == "0000"){
                         $data->payment_method = $method;
-                        $data->status = $obj_response->transaction_status;
+                        $data->status = "In Proccess";
                         $data->payment_expiry_time = $obj_response->expired;
-                        $data->payment_media = $obj_response->va_numbers[0]->va_number;
-                        $data->gross_amount = $gross_amount;
-                        $data->midtrans_tx_id = $obj_response->transaction_id;
+                        $data->payment_media = $obj_response->va_number;
+                        $data->gross_amount = $obj_response->total_amount;
+                        $data->fee = $obj_response->fee;
+                        // $data->midtrans_tx_id = $obj_response->transaction_id;
                         $data->save();
                     } else if($obj_response->status_code == "406"){
                         //
@@ -245,21 +246,49 @@ class PaymentController extends Controller
 
     public function notifHandling(Request $request)
     {
-        // dd($request->request->get("transaction_time"));
-        $req = $request->request;
-        if($req->get("status_code") == "200"){
-            $ticket = Ticket::where('midtrans_tx_id', $req->get('transaction_id'))->first();
+        $now = date("Y-m-d H:i:s");
+        $rq_uuid = $request->rq_uuid;
+        $rq_datetime = $request->rq_datetime;
+        $order_id = $request->order_id;
+        $payment_datetime = $request->payment_datetime;
+        $payment_ref = $request->payment_ref;
+        try {
+            $ticket = Ticket::where('uuid', $rq_uuid)->first();
             // dd($ticket);
-            $ticket->status = $req->get("transaction_status");
+            $ticket->status = "success";
             // $ticket->detail_tx_response = $req;
+            $ticket->payment_datetime = $payment_datetime;
+            $ticket->payment_ref = $payment_ref;
             $ticket->save();
             $details = ['nama' => $ticket->name,
                         'email' => $ticket->email,
                         'id_transaksi' => $ticket->id
                         ];
-
             \Mail::to($ticket->email)->send(new InfoRegistrationMail($details));
+            $signkey = "5jvmfze7dgc9enof";
 
+            $upper = strtoupper("##$signkey##$rq_uuid##$now##0000##PAYMENTREPORT-RS##");
+            $signature_res = hash('sha256', $upper);
+
+            return response()->json([
+                'rq_uuid' => $rq_uuid,
+                'rs_datetime' => $now,
+                'error_code' => '0000',
+                'error_message' => 'success',
+                'order_id' => $rq_orderid,
+                'reconcile_id' => strtotime("now"),
+                'reconcile_datetime' => $now,
+                'signature' => $signature_res
+                ]
+            ,200);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'rq_uuid' => $rq_uuid,
+                'rs_datetime' => $now,
+                'error_code' => '1001',
+                'error_message' => 'Gagal Menyimpan/Mengirim Email',
+                ]
+            ,200);
         }
 
         // $obj_notify = json_decode($request);
