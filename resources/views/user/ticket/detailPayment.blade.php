@@ -3,7 +3,7 @@
     <div class="col-12">
         @if ($method != "mandiri_va")
             @if ($method == "qris")
-                <p>Total Nominal : {{$gross_amount}}</p>
+                <p>Total Nominal : {{$total_amount_tx}}</p>
                 <small>Rp. {{$data->amount + $data->amount_donasi}} + Biaya Penanganan Rp. {{$fee}}</small>
                 <div class="row justify-content-center">
                     <div class="col-8" style="text-align: center">
@@ -17,7 +17,7 @@
                 </div>
                 <small>Harap segera melakukan pembayaran sebelum : <b>{{$data->payment_expiry_time}}</b></small>
             @else
-                <p>Total Nominal : {{$gross_amount}}</p>
+                <p>Total Nominal : {{$total_amount_tx}}</p>
                 <small>Rp. {{$data->amount + $data->amount_donasi}} + Biaya Penanganan Rp. {{$fee}}</small>
                 <h5>Virtual Account :</h5>
                 <p>

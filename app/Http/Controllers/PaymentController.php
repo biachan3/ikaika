@@ -18,7 +18,7 @@ class PaymentController extends Controller
     public function genkey()
     {
         $signkey = "5jvmfze7dgc9enof";
-        $datetime = "2021-10-23 22:51:45";
+        $datetime = "2023-04-05 13:48:30";
         $orderid = "test001";
         $model = "SENDINVOICE";
         $comcode = "SGWIKABUAYA";
@@ -28,6 +28,8 @@ class PaymentController extends Controller
         // $uuid = Uuid::generate();
 
         $uppercase = strtoupper("##$signkey##$uuid##$datetime##$orderid##$amount##$ccy##$comcode##$model##");
+        $checkstatus = strtoupper("##$signkey##$datetime##$orderid##$model##");
+
         $signature = hash('sha256', $uppercase);
         echo $signature." + ".$uppercase;
     }
@@ -47,16 +49,16 @@ class PaymentController extends Controller
 
         $upper = strtoupper("##$signkey##$rq_uuid##$now##$rq_orderid##0000##$model##");
         $signature_res = hash('sha256', $upper);
-        // echo $upper;
-        // echo "Sign: ".$signature_res;
-        // $d = array('foo' => 'bar', 'baz' => 'long');
+        $t = Ticket::find($rq_orderid);
+        $t->gross_amount = $t->amount + $t->amount_donasi;
+        $t->save();
         return response()->json([
             'rq_uuid' => $rq_uuid,
             'rs_datetime' => $now,
             'error_code' => '0000',
             'error_message' => 'success',
             'order_id' => $rq_orderid,
-            'amount' => '100000',
+            'amount' => $t->gross_amount,
             'ccy' => 'IDR',
             'description' => 'Tiket Reuni',
             'trx_date' => $now,
@@ -79,23 +81,23 @@ class PaymentController extends Controller
         $url_endpoint ="";
         if($is_production)
         {
-            $url_endpoint = 'https://api.midtrans.com/v2/charge';
+            $url_endpoint = 'https://sandbox-api.espay.id/rest/merchantpg/sendinvoice';
         } else {
-            $url_endpoint = 'https://api.sandbox.midtrans.com/v2/charge';
+            $url_endpoint = 'https://api.espay.id/rest/merchantpg/sendinvoice';
         }
 
         //Prepare api
         $client = new \GuzzleHttp\Client();
-        $base64username = base64_encode(env('MIDTRANS_SERVER_KEY'));
+        // $base64username = base64_encode(env('MIDTRANS_SERVER_KEY'));
 
-        $gross_amount = 0;
-        $bank_transfer_fee = 4000;
-        $tax_bank_transfer_fee_percentage = 11/100;
-        $total_bank_transfer_fee = ($bank_transfer_fee + ($bank_transfer_fee * $tax_bank_transfer_fee_percentage));
-        $is_bank_transfer = str_contains($method, '_va');
+        // $gross_amount = 0;
+        // $bank_transfer_fee = 4000;
+        // $tax_bank_transfer_fee_percentage = 11/100;
+        // $total_bank_transfer_fee = ($bank_transfer_fee + ($bank_transfer_fee * $tax_bank_transfer_fee_percentage));
+        // $is_bank_transfer = str_contains($method, '_va');
 
-        $gopay_fee_percentage = 2.1/100;
-        $qris_fee_percentage = 0.8/100;
+        // $gopay_fee_percentage = 2.1/100;
+        // $qris_fee_percentage = 0.8/100;
 
         $total_amount_tx = $data->amount + $data->amount_donasi;
         $fee = 0;
@@ -103,57 +105,82 @@ class PaymentController extends Controller
         // $method = "qris";
         // dd($base64username);
         if ($data->transaction_status == null) {
-            if ($is_bank_transfer) {
-                $gross_amount = $total_amount_tx + $total_bank_transfer_fee;
-                $fee = $total_bank_transfer_fee;
-            } else {
-                if($method == "gopay"){
-                    $total_gopay_fee = ($total_amount_tx * $gopay_fee_percentage);
-                    $fee = $total_gopay_fee;
-                    $gross_amount = $total_amount_tx + $total_gopay_fee;
-                } else if($method == "qris") {
-                    $total_qris_fee = ($total_amount_tx * $qris_fee_percentage);
-                    $fee = $total_qris_fee;
-                    $gross_amount = $total_amount_tx + $total_qris_fee;
-                }
-            }
+            // dd($data->transaction_status);
+            // if ($is_bank_transfer) {
+            //     $gross_amount = $total_amount_tx + $total_bank_transfer_fee;
+            //     $fee = $total_bank_transfer_fee;
+            // } else {
+            //     if($method == "gopay"){
+            //         $total_gopay_fee = ($total_amount_tx * $gopay_fee_percentage);
+            //         $fee = $total_gopay_fee;
+            //         $gross_amount = $total_amount_tx + $total_gopay_fee;
+            //     } else if($method == "qris") {
+            //         $total_qris_fee = ($total_amount_tx * $qris_fee_percentage);
+            //         $fee = $total_qris_fee;
+            //         $gross_amount = $total_amount_tx + $total_qris_fee;
+            //     }
+            // }
 
 
-            if ($method == "bca_va" || $method == "bri_va" || $method == "bni_va" || $method == "permata_va") {
+            if ($method != "qris") {
                 try {
-                    $bank = "";
-                    if ($method == "bca_va") {
-                        $bank = "bca";
-                    } else if($method == "bri_va") {
-                        $bank = "bri";
-                    } else if($method == "bni_va"){
-                        $bank = "bni";
-                    }else {
-                        $bank='permata';
-                    }
-                    $response = $client->request('POST', $url_endpoint, [
-                        'body' => '{
-                            "payment_type": "bank_transfer",
-                            "transaction_details": {
-                              "order_id": "'.$data->id.'",
-                              "gross_amount": '.ceil($gross_amount).'
-                            },
-                            "bank_transfer": {
-                              "bank": "'.$bank.'"
-                            }
-                          }',
-                        'headers' => [
-                          'accept' => 'application/json',
-                          'authorization' => 'Basic '.$base64username,
-                          'content-type' => 'application/json',
-                        ],
-                      ]);
-                    // echo $response->getBody();
+                    $uuid = Uuid::generate();
+                    $data->uuid = $uuid->string;
+                    $data->save();
+                    // dd($data);
+                    // $bank = "";
+                    // if ($method == "bca_va") {
+                    //     $bank = "bca";
+                    // } else if($method == "bri_va") {
+                    //     $bank = "bri";
+                    // } else if($method == "bni_va"){
+                    //     $bank = "bni";
+                    // }else {
+                    //     $bank='permata';
+                    // }
+                    // $response = $client->request('POST', $url_endpoint, [
+                    //     'body' => '{
+                    //         "payment_type": "bank_transfer",
+                    //         "transaction_details": {
+                    //           "order_id": "'.$data->id.'",
+                    //           "gross_amount": '.ceil($gross_amount).'
+                    //         },
+                    //         "bank_transfer": {
+                    //           "bank": "'.$bank.'"
+                    //         }
+                    //       }',
+                    //     'headers' => [
+                    //       'accept' => 'application/json',
+                    //       'authorization' => 'Basic '.$base64username,
+                    //       'content-type' => 'application/json',
+                    //     ],
+                    //   ]);
+                    $signkey = "5jvmfze7dgc9enof";
+                    $now = date("Y-m-d H:i:s");
+                    $uppercase = strtoupper("##$signkey##$data->uuid##$now##$data->id##$total_amount_tx##IDR##SGWIKABUAYA##SENDINVOICE##");
+                    $signature = hash('sha256', $uppercase);
+                    // dd($total_amount_tx);
+                    $response = $client->post($url_endpoint, [
+                        'form_params' => [
+                            'rq_uuid' => $data->uuid,
+                            'rq_datetime' => $now,
+                            'comm_code' => 'SGWIKABUAYA',
+                            'amount' => $total_amount_tx,
+                            'ccy' => 'IDR',
+                            'order_id' => $data->id,
+                            'remark2' => $data->nama_lengkap,
+                            'update' => 'N',
+                            'bank_code' => $method,
+                            'signature' => $signature
+                        ]
+                    ]);
+
                     $obj_response = json_decode($response->getBody());
-                    if($obj_response->status_code == "201"){
+                    dd($obj_response);
+                    if($obj_response->error_code == "0000"){
                         $data->payment_method = $method;
                         $data->status = $obj_response->transaction_status;
-                        $data->payment_expiry_time = $obj_response->expiry_time;
+                        $data->payment_expiry_time = $obj_response->expired;
                         $data->payment_media = $obj_response->va_numbers[0]->va_number;
                         $data->gross_amount = $gross_amount;
                         $data->midtrans_tx_id = $obj_response->transaction_id;
@@ -212,7 +239,7 @@ class PaymentController extends Controller
 
         return response()->json(array(
             'status'=>'oke',
-            'msg'=>view('user.ticket.detailPayment',compact('data','fee','method','obj_response','gross_amount'))->render()
+            'msg'=>view('user.ticket.detailPayment',compact('data','fee','method','obj_response','total_amount_tx'))->render()
         ),200);
     }
 
