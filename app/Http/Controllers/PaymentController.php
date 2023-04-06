@@ -90,12 +90,13 @@ class PaymentController extends Controller
         $client = new \GuzzleHttp\Client();
         $total_amount_tx = $data->amount + $data->amount_donasi;
         $fee = 0;
+        $uuid = Uuid::generate();
+        $data->uuid = $uuid->string;
+        $data->save();
+
         if ($data->transaction_status == null) {
             if ($method != "qris") {
                 try {
-                    $uuid = Uuid::generate();
-                    $data->uuid = $uuid->string;
-                    $data->save();
                     // $response = $client->request('POST', $url_endpoint, [
                     //     'body' => '{
                     //         "payment_type": "bank_transfer",
@@ -156,23 +157,20 @@ class PaymentController extends Controller
 
             } else if($method == "qris"){
                 try {
-                    $response = $client->request('POST', $url_endpoint, [
-                        'body' => '{
-                            "payment_type": "qris",
-                            "transaction_details": {
-                              "order_id": "'.$data->id.'",
-                              "gross_amount": '.ceil($gross_amount).'
-                            },
-                            "qris": {
-                              "acquirer": "gopay"
-                            }
-                          }',
-                        'headers' => [
-                          'accept' => 'application/json',
-                          'authorization' => 'Basic '.$base64username,
-                          'content-type' => 'application/json',
-                        ],
-                      ]);
+                    $response = $client->post($url_endpoint, [
+                        'form_params' => [
+                            'rq_uuid' => $data->uuid,
+                            'rq_datetime' => $now,
+                            'comm_code' => 'SGWIKABUAYA',
+                            'amount' => $total_amount_tx,
+                            'ccy' => 'IDR',
+                            'order_id' => $data->id,
+                            'remark2' => $data->nama_lengkap,
+                            'update' => 'N',
+                            'bank_code' => $method,
+                            'signature' => $signature
+                        ]
+                    ]);
                     // echo $response->getBody();
                     $obj_response = json_decode($response->getBody());
                     if($obj_response->error_code == "0000"){
@@ -209,10 +207,9 @@ class PaymentController extends Controller
         $payment_datetime = $request->payment_datetime;
         $payment_ref = $request->payment_ref;
         try {
-            $ticket = Ticket::where('uuid', $rq_uuid)->first();
+            $ticket = Ticket::find($order_id);
             // dd($ticket);
             $ticket->transaction_status = "Sukses";
-            // $ticket->detail_tx_response = $req;
             $ticket->payment_datetime = $payment_datetime;
             $ticket->payment_ref = $payment_ref;
             $ticket->save();
