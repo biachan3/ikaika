@@ -53,14 +53,14 @@
                                         </p>
                                         @endif
                                         <p>Status Pembayaran :
-                                            @if ($detail_tx->status == "settlement")
+                                            @if ($detail_tx->transaction_status == "settlement")
                                                 Sukses
                                             @else
-                                                {{$detail_tx->status}}
+                                                {{$detail_tx->transaction_status}}
                                             @endif
                                         </p>
                                         <hr>
-                                        @if($detail_tx->status == "settlement" || $detail_tx->status == "success")
+                                        @if($detail_tx->transaction_status == "settlement" || $detail_tx->transaction_status == "success")
                                         <p>
                                             <b>
                                                 Terima kasih Anda telah terdaftar sebagai peserta Reuni Akbar IKA Ubaya 2023. Undangan Elektronik akan kami kirimkan ke email atau nomor wa Anda yang terdaftar dalam waktu 2x24jam 🙏🏻
@@ -70,7 +70,7 @@
                                         {!! $qrcode !!}
                                         @endif
                                         <br>
-                                        <small>ID Transaksi : {{$detail_tx->midtrans_tx_id}}</small>
+                                        <small>ID Transaksi : {{$detail_tx->uuid}}</small>
                                     </div>
                                 </div>
                                 <hr>

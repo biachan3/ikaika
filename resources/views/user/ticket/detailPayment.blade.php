@@ -35,7 +35,7 @@
                 123456789
             </p>
         @endif
-        <p>Status Pembayaran : {{$data->status}}</p>
+        <p>Status Pembayaran : {{$data->transaction_status}}</p>
     </div>
 </div>
 <hr>

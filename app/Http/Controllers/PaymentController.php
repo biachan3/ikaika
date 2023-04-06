@@ -137,12 +137,12 @@ class PaymentController extends Controller
                     // dd($obj_response);
                     if($obj_response->error_code == "0000"){
                         $data->payment_method = $method;
-                        $data->transaction_status = "In Proccess";
+                        $data->transaction_status = "Menunggu Pembayaran";
                         $data->payment_expiry_time = $obj_response->expired;
                         $data->payment_media = $obj_response->va_number;
                         $data->gross_amount = $obj_response->total_amount;
                         $data->fee = $obj_response->fee;
-
+                        $fee = $obj_response->fee;
                         $total_amount_tx += $obj_response->fee;
 
                         $data->save();
