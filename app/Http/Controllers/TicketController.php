@@ -177,7 +177,7 @@ class TicketController extends Controller
         $detail_tx = Ticket::find($id);
         // dd($detail_tx);
         $qrcode="";
-        if($detail_tx->transaction_status =="success" || $detail_tx->transaction_status =="settlement")
+        if($detail_tx->transaction_status =="Sukses" || $detail_tx->transaction_status =="settlement")
         {
             $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate(url($detail_tx->id)));
             $qrcode = QrCode::generate($detail_tx->id);
