@@ -19,7 +19,7 @@ class PaymentController extends Controller
     {
         $signkey = "5jvmfze7dgc9enof";
         $datetime = "2023-04-05 13:48:30";
-        $orderid = "test001";
+        $orderid = "TX-TD-FT-16807672838754";
         $model = "SENDINVOICE";
         $comcode = "SGWIKABUAYA";
         $amount = 100000;
@@ -28,10 +28,10 @@ class PaymentController extends Controller
         // $uuid = Uuid::generate();
 
         $uppercase = strtoupper("##$signkey##$uuid##$datetime##$orderid##$amount##$ccy##$comcode##$model##");
-        $checkstatus = strtoupper("##$signkey##$datetime##$orderid##$model##");
+        $checkstatus = strtoupper("##$signkey##$datetime##$orderid##CHECKSTATUS##");
 
-        $signature = hash('sha256', $uppercase);
-        echo $signature." + ".$uppercase;
+        $signature = hash('sha256', $checkstatus);
+        echo $signature." + ".$checkstatus;
     }
     public function inquiryProcess(Request $request)
     {
@@ -88,56 +88,14 @@ class PaymentController extends Controller
 
         //Prepare api
         $client = new \GuzzleHttp\Client();
-        // $base64username = base64_encode(env('MIDTRANS_SERVER_KEY'));
-
-        // $gross_amount = 0;
-        // $bank_transfer_fee = 4000;
-        // $tax_bank_transfer_fee_percentage = 11/100;
-        // $total_bank_transfer_fee = ($bank_transfer_fee + ($bank_transfer_fee * $tax_bank_transfer_fee_percentage));
-        // $is_bank_transfer = str_contains($method, '_va');
-
-        // $gopay_fee_percentage = 2.1/100;
-        // $qris_fee_percentage = 0.8/100;
-
         $total_amount_tx = $data->amount + $data->amount_donasi;
         $fee = 0;
-        // $is_bank_transfer=false;
-        // $method = "qris";
-        // dd($base64username);
         if ($data->transaction_status == null) {
-            // dd($data->transaction_status);
-            // if ($is_bank_transfer) {
-            //     $gross_amount = $total_amount_tx + $total_bank_transfer_fee;
-            //     $fee = $total_bank_transfer_fee;
-            // } else {
-            //     if($method == "gopay"){
-            //         $total_gopay_fee = ($total_amount_tx * $gopay_fee_percentage);
-            //         $fee = $total_gopay_fee;
-            //         $gross_amount = $total_amount_tx + $total_gopay_fee;
-            //     } else if($method == "qris") {
-            //         $total_qris_fee = ($total_amount_tx * $qris_fee_percentage);
-            //         $fee = $total_qris_fee;
-            //         $gross_amount = $total_amount_tx + $total_qris_fee;
-            //     }
-            // }
-
-
             if ($method != "qris") {
                 try {
                     $uuid = Uuid::generate();
                     $data->uuid = $uuid->string;
                     $data->save();
-                    // dd($data);
-                    // $bank = "";
-                    // if ($method == "bca_va") {
-                    //     $bank = "bca";
-                    // } else if($method == "bri_va") {
-                    //     $bank = "bri";
-                    // } else if($method == "bni_va"){
-                    //     $bank = "bni";
-                    // }else {
-                    //     $bank='permata';
-                    // }
                     // $response = $client->request('POST', $url_endpoint, [
                     //     'body' => '{
                     //         "payment_type": "bank_transfer",
@@ -159,7 +117,7 @@ class PaymentController extends Controller
                     $now = date("Y-m-d H:i:s");
                     $uppercase = strtoupper("##$signkey##$data->uuid##$now##$data->id##$total_amount_tx##IDR##SGWIKABUAYA##SENDINVOICE##");
                     $signature = hash('sha256', $uppercase);
-                    // dd($total_amount_tx);
+
                     $response = $client->post($url_endpoint, [
                         'form_params' => [
                             'rq_uuid' => $data->uuid,
@@ -184,7 +142,9 @@ class PaymentController extends Controller
                         $data->payment_media = $obj_response->va_number;
                         $data->gross_amount = $obj_response->total_amount;
                         $data->fee = $obj_response->fee;
-                        // $data->midtrans_tx_id = $obj_response->transaction_id;
+
+                        $total_amount_tx += $obj_response->fee;
+
                         $data->save();
                     } else if($obj_response->status_code == "406"){
                         //
