@@ -177,11 +177,11 @@ class PaymentController extends Controller
                     $obj_response = json_decode($response->getBody());
                     if($obj_response->error_code == "0000"){
                         $data->payment_method = $method;
-                        $data->status = $obj_response->transaction_status;
+                        $data->transaction_status = $obj_response->transaction_status;
                         // $data->payment_expiry_time = $obj_response->expiry_time;
-                        $data->payment_media = $obj_response->actions[0]->url;
-                        $data->gross_amount = $gross_amount;
-                        $data->midtrans_tx_id = $obj_response->transaction_id;
+                        $data->payment_media = $obj_response->va_number;
+                        $data->gross_amount = $obj_response->total_amount;
+                        $data->uuid = $obj_response->uuid;
                         $data->save();
                     } else {
                         throw new Exception("error response : ".$obj_response->error_code);
@@ -211,7 +211,7 @@ class PaymentController extends Controller
         try {
             $ticket = Ticket::where('uuid', $rq_uuid)->first();
             // dd($ticket);
-            $ticket->status = "success";
+            $ticket->transaction_status = "Sukses";
             // $ticket->detail_tx_response = $req;
             $ticket->payment_datetime = $payment_datetime;
             $ticket->payment_ref = $payment_ref;
@@ -237,12 +237,12 @@ class PaymentController extends Controller
                 'signature' => $signature_res
                 ]
             ,200);
-        } catch (\Throwable $th) {
+        } catch (\Exception $e) {
             return response()->json([
                 'rq_uuid' => $rq_uuid,
                 'rs_datetime' => $now,
                 'error_code' => '1001',
-                'error_message' => 'Gagal Menyimpan/Mengirim Email',
+                'error_message' => $e->getMessage(),
                 ]
             ,200);
         }
