@@ -146,10 +146,8 @@ class PaymentController extends Controller
                         $total_amount_tx += $obj_response->fee;
 
                         $data->save();
-                    } else if($obj_response->status_code == "406"){
-                        //
                     } else {
-                        throw new Exception("error response : ".$obj_response->status_code);
+                        throw new Exception("error response : ".$obj_response->error_code);
 
                     }
                 } catch(Exception $e) {
@@ -177,7 +175,7 @@ class PaymentController extends Controller
                       ]);
                     // echo $response->getBody();
                     $obj_response = json_decode($response->getBody());
-                    if($obj_response->status_code == "201"){
+                    if($obj_response->error_code == "0000"){
                         $data->payment_method = $method;
                         $data->status = $obj_response->transaction_status;
                         // $data->payment_expiry_time = $obj_response->expiry_time;
@@ -185,10 +183,8 @@ class PaymentController extends Controller
                         $data->gross_amount = $gross_amount;
                         $data->midtrans_tx_id = $obj_response->transaction_id;
                         $data->save();
-                    } else if($obj_response->status_code == "406"){
-                        //
                     } else {
-                        throw new Exception("error response : ".$obj_response->status_code);
+                        throw new Exception("error response : ".$obj_response->error_code);
 
                     }
                 } catch(Exception $e) {
