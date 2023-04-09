@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <body id="conference-page" >
+    <body id="conference-page">
         <!-- =============== PRELOADER =============== -->
         <div class="page-preloader-cover">
             <div class="cssload-loader">
@@ -52,11 +52,12 @@
         </header>
 
         <!--=================== Card Photo ===================-->
-        <section style="padding-top:40px; background-image: url({{ asset('Ginger') }}/assets/img/BG IKA.svg);">
+        <section style="padding-top:40px;" style="object-fit: fill; background-image: url({{ asset('Ginger') }}/assets/img/BG IKA UBAYA.jpg);">
             <div class="" >
                 <h2 class="title-conference"><span>Galeri Foto</span></h2>
-                <div class="row justify-content-center">
-                    <div class="" style="width: 80%; box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); padding:20px 20px; border-radius:20px; margin-bottom:20px;">
+                <div class="row justify-content-center" style="object-fit: fill; background-image: url({{ asset('Ginger') }}/assets/img/BG IKA UBAYA.jpg);">
+                    <div class="" style="width: 80%; box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+                    padding:20px 20px; border-radius:20px; margin-bottom:20px;">
                         
                     </div>
                 </div>
