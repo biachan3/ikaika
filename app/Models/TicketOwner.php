@@ -5,10 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SupportTicket extends Model
+class TicketOwner extends Model
 {
     use HasFactory;
-    protected $fillable = [
-        'subject', 'description', 'category', 'email'
-    ];
+    protected $table = "ticket_owner";
+
 }

@@ -1,13 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Auth;
 use App\Models\Ticket;
 use App\Models\Attendee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 
 class TicketController extends Controller
 {
@@ -32,14 +35,15 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function order($id){
+    public function order($id)
+    {
         $result = [];
-        $result['event']=json_decode(json_encode(DB::table('events')
-        ->select('*')
-        ->get(), true));
-        $result['bank']=json_decode(json_encode(DB::table('banks')
-        ->select('*')
-        ->get(), true));
+        $result['event'] = json_decode(json_encode(DB::table('events')
+            ->select('*')
+            ->get(), true));
+        $result['bank'] = json_decode(json_encode(DB::table('banks')
+            ->select('*')
+            ->get(), true));
         return view('ticket.order', compact('result'));
     }
     public function create()
@@ -142,7 +146,7 @@ class TicketController extends Controller
             $randoms[] = $numbers[$n];
         }
         $idcomplement = implode($randoms);
-        $id_trx = $prefix.$prefix_fakultas."-".time().$idcomplement;
+        $id_trx = "TX-".$prefix.$prefix_fakultas."-".time().$idcomplement;
         $tiket = new Ticket();
         $tiket->id = $id_trx;
         $tiket->event_id = 1;
@@ -151,7 +155,7 @@ class TicketController extends Controller
         $tiket->no_hp = $data->no_hp;
         $tiket->fakultas = $data->fakultas;
         $tiket->angkatan = $data->angkatan;
-        $tiket->amount = 10;
+        $tiket->amount = 100000;
 
         $nominal_donasi = 0;
         if ($data->nominal == null || $data->nominal == "") {
@@ -173,7 +177,7 @@ class TicketController extends Controller
         $detail_tx = Ticket::find($id);
         // dd($detail_tx);
         $qrcode="";
-        if($detail_tx->status =="success" || $detail_tx->status =="settlement")
+        if($detail_tx->transaction_status =="Sukses" || $detail_tx->transaction_status =="settlement")
         {
             $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate(url($detail_tx->id)));
             $qrcode = QrCode::generate($detail_tx->id);
@@ -202,7 +206,24 @@ class TicketController extends Controller
     {
         //
     }
+    public function search(Request $data)
+    {
+        $check = [];
+        $result = DB::table('events')
+            ->select('events.name as event_name', 'tickets.id as ticket_id', 'users.name as name', 'tickets.date as date', 'tickets.qr as qr', 'tickets.amount as price')
+            ->join('tickets', 'events.id', '=', 'tickets.event_id')
+            ->join('users', 'users.id', '=', 'tickets.users_id')
+            ->where('tickets.id', '=', $data['id'])
+            ->get();
+        if ($result['name'] = $data['name']) {
+            $check['check'] = true;
+            $check['name'] = $result['name'];
+            $check['date'] = $result['date'];
+            $check['event'] = $result['event']['name'];
+        }
 
+        return view('ticket.search', compact('check'));
+    }
     /**
      * Update the specified resource in storage.
      *

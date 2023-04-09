@@ -19,20 +19,22 @@ class CustomerTicketController extends Controller
             'subject' => 'required',
             'description' => 'required',
             'category' => 'required',
+            'email'=>'required',
         ];
     
         // Validate input
         $this->validate($request, $rules);
-    
+        $email = $request->input('email');
         // Create new ticket
         $ticket = new SupportTicket;
+        $ticket->email = $email;
         $ticket->subject = $request->input('subject');
         $ticket->description = $request->input('description');
         $ticket->category = $request->input('category');
         $ticket->save();
-    
+      
         // Send email notification
-        Mail::to('s160419048@ubaya.ac.id')->send(new NewTicket($ticket));
+        Mail::to($email)->send(new NewTicket($ticket));
     
         // Redirect to ticket page
         return redirect()->route('ticket.show', $ticket->id);

@@ -1,5 +1,7 @@
 <form action="{{ route('ticket.create') }}" method="POST">
     @csrf
+    <label for="email">Email :</label>
+    <input type="email" name="email" id="email">
     <label for="subject">Subject:</label>
     <input type="text" name="subject" id="subject">
 
