@@ -1,7 +1,14 @@
-@if ($data->status != "settlement" || $data->status != "success")
+@if ($obj_response->error_code != "0000")
 <div class="row">
     <div class="col-12">
-        @if ($method != "mandiri_va")
+        <p style="color:red;">Kode Error : {{$obj_response->error_code}}</p>
+        <p style="color:red;">Pesan Error : {{$obj_response->error_message}}</p>
+    </div>
+</div>
+@else
+    @if ($data->status != "settlement" || $data->status != "Sukses")
+    <div class="row">
+        <div class="col-12">
             @if ($method == "qris")
                 <p>Total Nominal : {{$total_amount_tx}}</p>
                 <small>Rp. {{$data->amount + $data->amount_donasi}} + Biaya Penanganan Rp. {{$fee}}</small>
@@ -25,30 +32,21 @@
                 </p>
                 <small>Harap segera melakukan pembayaran sebelum : <b>{{$data->payment_expiry_time}}</b></small>
             @endif
-        @else
-            <h5>Biller Code :</h5>
-            <p>
-                70012
-            </p>
-            <h5>Biller Key :</h5>
-            <p>
-                123456789
-            </p>
-        @endif
-        <p>Status Pembayaran : {{$data->transaction_status}}</p>
+            <p>Status Pembayaran : {{$data->transaction_status}}</p>
+        </div>
     </div>
-</div>
-<hr>
-<div class="row">
-    <div class="col-12">
-        <h6>Silahkan refresh/muat ulang halaman ini untuk memperbaharui status pembayaran anda.</h6>
+    <hr>
+    <div class="row">
+        <div class="col-12">
+            <h6>Silahkan refresh/muat ulang halaman ini untuk memperbaharui status pembayaran anda.</h6>
+        </div>
     </div>
-</div>
-@else
-<div class="row">
-    <div class="col-12">
+    @else
+    <div class="row">
+        <div class="col-12">
 
+        </div>
     </div>
-</div>
+    @endif
 @endif
 

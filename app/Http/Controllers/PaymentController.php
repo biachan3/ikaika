@@ -181,10 +181,11 @@ class PaymentController extends Controller
                         $data->gross_amount = $obj_response->total_amount;
                         $data->uuid = $obj_response->uuid;
                         $data->save();
-                    } else {
-                        throw new Exception("error response : ".$obj_response->error_code);
-
                     }
+                    // else {
+                    //     throw new Exception("error response : ".$obj_response->error_code);
+
+                    // }
                 } catch(Exception $e) {
                     echo 'Message: ' .$e->getMessage();
                 }
