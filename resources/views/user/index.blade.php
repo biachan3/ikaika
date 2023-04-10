@@ -12,7 +12,7 @@
     <section class="s-conference-slider">
         <div class="conference-slider">
             <div
-                class="conference-slide gambar-bg"style="background-image: url({{ asset('Ginger') }}/assets/img/BG IKA.svg);">
+                class="conference-slide gambar-bg" style="background-image: url({{ asset('Ginger') }}/assets/img/BG IKA.svg);">
                 <div class="container ">
                     {{-- <a href="single-blog.html"><img
                             src="{{ asset('Ginger') }}/assets/img/" alt="img" width="1920" height="1080" style="opacity: 50%;"></a> --}}
