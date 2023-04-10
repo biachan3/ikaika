@@ -1,8 +1,8 @@
 @if ($obj_response->error_code != "0000")
 <div class="row">
     <div class="col-12">
-        <p style="color:red;">Kode Error : {{$obj_response->error_code}}</p>
-        <p style="color:red;">Pesan Error : {{$obj_response->error_message}}</p>
+        <p style="color:red;"><b>Kode Error : {{$obj_response->error_code}}</b></p>
+        <p style="color:red;"><b>Pesan Error : {{$obj_response->error_message}}</b></p>
     </div>
 </div>
 @else
