@@ -47,7 +47,7 @@ class PaymentController extends Controller
         $signkey = env('SIGNKEY');
         $model = "INQUIRY-RS";
 
-        if($rq_password == ")*HU9+7JG4"){
+        if($rq_password == ")*HU9+7JG4a"){
             $upper = strtoupper("##$signkey##$rq_uuid##$now##$rq_orderid##0000##$model##");
             $signature_res = hash('sha256', $upper);
             $t = Ticket::find($rq_orderid);
@@ -64,6 +64,14 @@ class PaymentController extends Controller
                 'description' => 'Tiket Reuni',
                 'trx_date' => $now,
                 'signature' => $signature_res
+                ]
+            ,200);
+        } else {
+            return response()->json([
+                'rq_uuid' => $rq_uuid,
+                'rs_datetime' => $now,
+                'error_code' => '1001',
+                'error_message' => "Invalid Password",
                 ]
             ,200);
         }
