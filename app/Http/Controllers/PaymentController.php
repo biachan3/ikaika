@@ -97,7 +97,7 @@ class PaymentController extends Controller
 
         if ($data->transaction_status == null) {
             if ($method != "qris") {
-                try {
+                // try {
                     // $response = $client->request('POST', $url_endpoint, [
                     //     'body' => '{
                     //         "payment_type": "bank_transfer",
@@ -137,6 +137,7 @@ class PaymentController extends Controller
 
                     $obj_response = json_decode($response->getBody());
                     // dd($obj_response);
+
                     if($obj_response->error_code == "0000"){
                         $data->payment_method = $method;
                         $data->transaction_status = "Menunggu Pembayaran";
@@ -148,50 +149,54 @@ class PaymentController extends Controller
                         $total_amount_tx += $obj_response->fee;
 
                         $data->save();
-                    } else {
-                        throw new Exception("error response : ".$obj_response->error_code);
-
-                    }
-                } catch(Exception $e) {
-                    echo 'Message: ' .$e->getMessage();
-                }
-
-            } else if($method == "qris"){
-                try {
-                    $response = $client->post($url_endpoint, [
-                        'form_params' => [
-                            'rq_uuid' => $data->uuid,
-                            'rq_datetime' => $now,
-                            'comm_code' => 'SGWIKABUAYA',
-                            'amount' => $total_amount_tx,
-                            'ccy' => 'IDR',
-                            'order_id' => $data->id,
-                            'remark2' => $data->nama_lengkap,
-                            'update' => 'N',
-                            'bank_code' => $method,
-                            'signature' => $signature
-                        ]
-                    ]);
-                    // echo $response->getBody();
-                    $obj_response = json_decode($response->getBody());
-                    if($obj_response->error_code == "0000"){
-                        $data->payment_method = $method;
-                        $data->transaction_status = $obj_response->transaction_status;
-                        // $data->payment_expiry_time = $obj_response->expiry_time;
-                        $data->payment_media = $obj_response->va_number;
-                        $data->gross_amount = $obj_response->total_amount;
-                        $data->uuid = $obj_response->uuid;
-                        $data->save();
                     }
                     // else {
                     //     throw new Exception("error response : ".$obj_response->error_code);
 
                     // }
-                } catch(Exception $e) {
-                    echo 'Message: ' .$e->getMessage();
+
                 }
+                // catch(Exception $e) {
+                //     echo 'Message: ' .$e->getMessage();
+                // }
+
             }
-        }
+            // else if($method == "qris"){
+            //     try {
+            //         $response = $client->post($url_endpoint, [
+            //             'form_params' => [
+            //                 'rq_uuid' => $data->uuid,
+            //                 'rq_datetime' => $now,
+            //                 'comm_code' => 'SGWIKABUAYA',
+            //                 'amount' => $total_amount_tx,
+            //                 'ccy' => 'IDR',
+            //                 'order_id' => $data->id,
+            //                 'remark2' => $data->nama_lengkap,
+            //                 'update' => 'N',
+            //                 'bank_code' => $method,
+            //                 'signature' => $signature
+            //             ]
+            //         ]);
+            //         // echo $response->getBody();
+            //         $obj_response = json_decode($response->getBody());
+            //         if($obj_response->error_code == "0000"){
+            //             $data->payment_method = $method;
+            //             $data->transaction_status = $obj_response->transaction_status;
+            //             // $data->payment_expiry_time = $obj_response->expiry_time;
+            //             $data->payment_media = $obj_response->va_number;
+            //             $data->gross_amount = $obj_response->total_amount;
+            //             $data->uuid = $obj_response->uuid;
+            //             $data->save();
+            //         }
+            //         // else {
+            //         //     throw new Exception("error response : ".$obj_response->error_code);
+
+            //         // }
+            //     } catch(Exception $e) {
+            //         echo 'Message: ' .$e->getMessage();
+            //     }
+            // }
+        // }
 
 
         return response()->json(array(
