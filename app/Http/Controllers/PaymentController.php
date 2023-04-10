@@ -81,9 +81,10 @@ class PaymentController extends Controller
         $url_endpoint ="";
         if($is_production)
         {
-            $url_endpoint = 'https://sandbox-api.espay.id/rest/merchantpg/sendinvoices';
-        } else {
+            // $url_endpoint = 'https://sandbox-api.espay.id/rest/merchantpg/sendinvoices';
             $url_endpoint = 'https://api.espay.id/rest/merchantpg/sendinvoice';
+        } else {
+            $url_endpoint = 'https://sandbox-api.espay.id/rest/merchantpg/sendinvoices';
         }
 
         //Prepare api
