@@ -47,8 +47,8 @@ class PaymentController extends Controller
         $signkey = env('SIGNKEY');
         $model = "INQUIRY-RS";
 
-        if($rq_password == ")*HU9+7JG4a"){
-            $upper = strtoupper("##$signkey##$rq_uuid##$now##$rq_orderid##0000##$model##");
+        if($rq_password == ")*HU9+7JG4"){
+            $upper = strtoupper("##$signkey##$rq_uuid##$now##$rq_orderid##0000##$model###");
             $signature_res = hash('sha256', $upper);
             $t = Ticket::find($rq_orderid);
             $t->gross_amount = $t->amount + $t->amount_donasi;
