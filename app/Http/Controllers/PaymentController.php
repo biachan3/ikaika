@@ -221,7 +221,7 @@ class PaymentController extends Controller
         $rq_uuid = $request->rq_uuid;
         $rq_datetime = $request->rq_datetime;
         $rq_password = $request->password;
-        if($rq_password != ")*HU9+7JG4")
+        if($rq_password != ")*HU9+7JG4a")
         {
             return response()->json([
                 'rq_uuid' => $rq_uuid,
