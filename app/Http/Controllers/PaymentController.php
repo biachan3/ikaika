@@ -47,24 +47,26 @@ class PaymentController extends Controller
         $signkey = "5jvmfze7dgc9enof";
         $model = "INQUIRY-RS";
 
-        $upper = strtoupper("##$signkey##$rq_uuid##$now##$rq_orderid##0000##$model##");
-        $signature_res = hash('sha256', $upper);
-        $t = Ticket::find($rq_orderid);
-        $t->gross_amount = $t->amount + $t->amount_donasi;
-        $t->save();
-        return response()->json([
-            'rq_uuid' => $rq_uuid,
-            'rs_datetime' => $now,
-            'error_code' => '0000',
-            'error_message' => 'success',
-            'order_id' => $rq_orderid,
-            'amount' => $t->gross_amount,
-            'ccy' => 'IDR',
-            'description' => 'Tiket Reuni',
-            'trx_date' => $now,
-            'signature' => $signature_res
-            ]
-        ,200);
+        if($rq_password == ")*HU9+7JG4"){
+            $upper = strtoupper("##$signkey##$rq_uuid##$now##$rq_orderid##0000##$model##");
+            $signature_res = hash('sha256', $upper);
+            $t = Ticket::find($rq_orderid);
+            $t->gross_amount = $t->amount + $t->amount_donasi;
+            $t->save();
+            return response()->json([
+                'rq_uuid' => $rq_uuid,
+                'rs_datetime' => $now,
+                'error_code' => '0000',
+                'error_message' => 'success',
+                'order_id' => $rq_orderid,
+                'amount' => $t->gross_amount,
+                'ccy' => 'IDR',
+                'description' => 'Tiket Reuni',
+                'trx_date' => $now,
+                'signature' => $signature_res
+                ]
+            ,200);
+        }
 
     }
     public function index()
