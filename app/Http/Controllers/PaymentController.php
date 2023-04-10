@@ -117,7 +117,7 @@ dd($is_production);
                     //       'content-type' => 'application/json',
                     //     ],
                     //   ]);
-                    $signkey = "5jvmfze7dgc9enof";
+                    $signkey = env('SIGNKEY');
                     $now = date("Y-m-d H:i:s");
                     $uppercase = strtoupper("##$signkey##$data->uuid##$now##$data->id##$total_amount_tx##IDR##SGWIKABUAYA##SENDINVOICE##");
                     $signature = hash('sha256', $uppercase);
