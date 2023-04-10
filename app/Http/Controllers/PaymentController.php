@@ -17,7 +17,7 @@ class PaymentController extends Controller
 {
     public function genkey()
     {
-        $signkey = "5jvmfze7dgc9enof";
+        $signkey = env('SIGNKEY');
         $datetime = "2023-04-05 13:48:30";
         $orderid = "TX-TD-FT-16807672838754";
         $model = "SENDINVOICE";
@@ -44,7 +44,7 @@ class PaymentController extends Controller
         // $now = Carbon::now();
         $now = date("Y-m-d H:i:s");
         // dd($now);
-        $signkey = "5jvmfze7dgc9enof";
+        $signkey = env('SIGNKEY');
         $model = "INQUIRY-RS";
 
         if($rq_password == ")*HU9+7JG4"){
@@ -88,7 +88,7 @@ class PaymentController extends Controller
         } else {
             $url_endpoint = 'https://sandbox-api.espay.id/rest/merchantpg/sendinvoice';
         }
-
+dd($is_production);
         //Prepare api
         $client = new \GuzzleHttp\Client();
         $total_amount_tx = $data->amount + $data->amount_donasi;
@@ -227,7 +227,7 @@ class PaymentController extends Controller
                         'id_transaksi' => $ticket->id
                         ];
             \Mail::to($ticket->email)->send(new InfoRegistrationMail($details));
-            $signkey = "5jvmfze7dgc9enof";
+            $signkey = env('SIGNKEY');
 
             $upper = strtoupper("##$signkey##$rq_uuid##$now##0000##PAYMENTREPORT-RS##");
             $signature_res = hash('sha256', $upper);
