@@ -88,7 +88,7 @@ class PaymentController extends Controller
         } else {
             $url_endpoint = 'https://sandbox-api.espay.id/rest/merchantpg/sendinvoice';
         }
-dd($is_production);
+// dd($is_production);
         //Prepare api
         $client = new \GuzzleHttp\Client();
         $total_amount_tx = $data->amount + $data->amount_donasi;
