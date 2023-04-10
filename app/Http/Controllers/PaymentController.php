@@ -221,7 +221,7 @@ class PaymentController extends Controller
         $rq_uuid = $request->rq_uuid;
         $rq_datetime = $request->rq_datetime;
         $rq_password = $request->password;
-        if($rq_password != ")*HU9+7JG4a")
+        if($rq_password != ")*HU9+7JG4aa")
         {
             return response()->json([
                 'rq_uuid' => $rq_uuid,
@@ -234,6 +234,16 @@ class PaymentController extends Controller
         $order_id = $request->order_id;
         $payment_datetime = $request->payment_datetime;
         $payment_ref = $request->payment_ref;
+        $cekTiket = Ticket::where('payment_ref',$payment_ref)->first();
+        if ($cekTiket != null) {
+            return response()->json([
+                'rq_uuid' => $rq_uuid,
+                'rs_datetime' => $now,
+                'error_code' => '1002',
+                'error_message' => "Invalid, double payment",
+                ]
+            ,200);
+        }
         try {
             $ticket = Ticket::find($order_id);
             // dd($ticket);
