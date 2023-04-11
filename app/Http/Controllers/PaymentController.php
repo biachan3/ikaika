@@ -45,7 +45,7 @@ class PaymentController extends Controller
         $now = date("Y-m-d H:i:s");
         // dd($now);
         $signkey = env('SIGNKEY');
-        $model = "INQUIRY-RS";
+        $model = "INQUIRY-RSS";
 
         if($rq_password == ")*HU9+7JG4"){
             $upper = strtoupper("##$signkey##$rq_uuid##$now##$rq_orderid##0000##$model##");
@@ -55,8 +55,8 @@ class PaymentController extends Controller
             $t->save();
             return response()->json([
                 'rq_uuid' => $rq_uuid,
-                // 'rs_datetime' => $now,
-                // 'error_code' => '0000',
+                'rs_datetime' => $now,
+                'error_code' => '0000',
                 'error_message' => 'success',
                 'order_id' => $rq_orderid,
                 'amount' => $t->gross_amount,
