@@ -55,11 +55,11 @@ class PaymentController extends Controller
             $t->save();
             return response()->json([
                 'rq_uuid' => $rq_uuid,
-                'rs_datetime' => $now,
-                'error_code' => '0000',
+                // 'rs_datetime' => $now,
+                // 'error_code' => '0000',
                 'error_message' => 'success',
                 'order_id' => $rq_orderid,
-                // 'amount' => $t->gross_amount,
+                'amount' => $t->gross_amount,
                 'ccy' => 'IDR',
                 'description' => 'Tiket Reuni',
                 'trx_date' => $now,
