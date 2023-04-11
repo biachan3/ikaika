@@ -59,7 +59,7 @@ class PaymentController extends Controller
                 'error_code' => '0000',
                 'error_message' => 'success',
                 'order_id' => $rq_orderid,
-                'amount' => $t->gross_amount,
+                // 'amount' => $t->gross_amount,
                 'ccy' => 'IDR',
                 'description' => 'Tiket Reuni',
                 'trx_date' => $now,
