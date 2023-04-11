@@ -258,12 +258,11 @@ class PaymentController extends Controller
             \Mail::to($ticket->email)->send(new InfoRegistrationMail($details));
             $signkey = env('SIGNKEY');
 
-            // $upper = strtoupper("##$signkey##$rq_uuid##0000##PAYMENTREPORT-RS##");
             $upper = strtoupper("##$signkey##$rq_uuid##$now##0000##PAYMENTREPORT-RS##");
             $signature_res = hash('sha256', $upper);
 
             return response()->json([
-                // 'rq_uuid' => $rq_uuid,
+                'rq_uuid' => $rq_uuid,
                 'rs_datetime' => $now,
                 'error_code' => '0000',
                 'error_message' => 'success',
