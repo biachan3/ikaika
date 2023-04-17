@@ -21,7 +21,7 @@ class PaymentController extends Controller
         $datetime = "2023-04-05 13:48:30";
         $orderid = "TX-TD-FT-16807672838754";
         $model = "SENDINVOICE";
-        $comcode = "SGWIKABUAYA";
+        $comcode = "SGWIKAUBAYA";
         $amount = 100000;
         $ccy = "IDR";
         $uuid="80784df2-accb-46fc-92f4-8d3103b38408";
@@ -127,14 +127,14 @@ class PaymentController extends Controller
                     //   ]);
                     $signkey = env('SIGNKEY');
                     $now = date("Y-m-d H:i:s");
-                    $uppercase = strtoupper("##$signkey##$data->uuid##$now##$data->id##$total_amount_tx##IDR##SGWIKABUAYA##SENDINVOICE##");
+                    $uppercase = strtoupper("##$signkey##$data->uuid##$now##$data->id##$total_amount_tx##IDR##SGWIKAUBAYA##SENDINVOICE##");
                     $signature = hash('sha256', $uppercase);
 
                     $response = $client->post($url_endpoint, [
                         'form_params' => [
                             'rq_uuid' => $data->uuid,
                             'rq_datetime' => $now,
-                            'comm_code' => 'SGWIKABUAYA',
+                            'comm_code' => 'SGWIKAUBAYA',
                             'amount' => $total_amount_tx,
                             'ccy' => 'IDR',
                             'order_id' => $data->id,
@@ -177,7 +177,7 @@ class PaymentController extends Controller
             //             'form_params' => [
             //                 'rq_uuid' => $data->uuid,
             //                 'rq_datetime' => $now,
-            //                 'comm_code' => 'SGWIKABUAYA',
+            //                 'comm_code' => 'SGWIKAUBAYA',
             //                 'amount' => $total_amount_tx,
             //                 'ccy' => 'IDR',
             //                 'order_id' => $data->id,
