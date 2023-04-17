@@ -263,7 +263,7 @@ class PaymentController extends Controller
             $signature_res = hash('sha256', $upper);
 
             return response()->json([
-                // 'rq_uuid' => $rq_uuid,
+                'rq_uuid' => $rq_uuid,
                 'rs_datetime' => $now,
                 'error_code' => '0000',
                 'error_message' => 'success',
