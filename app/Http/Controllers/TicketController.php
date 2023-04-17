@@ -103,7 +103,7 @@ class TicketController extends Controller
             case "farmasi":
                 $prefix_fakultas = "FF";
                 break;
-            case "fukum":
+            case "hukum":
                 $prefix_fakultas = "FH";
                 break;
             case "fbe":
