@@ -1,4 +1,4 @@
-@extends('template.dashboardorder')
+@extends('template.dashboard')
 
 @section('css')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -23,6 +23,7 @@
         }
     </style>
 @endsection
+
 @section('content')
     <section id="register" class="s-marathon-register" style="padding-top:148px; ">
         <div class="">
