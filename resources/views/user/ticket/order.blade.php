@@ -120,10 +120,10 @@
             // console.log($('#nominal').val());
             if($('#nominal').val() == '') {
                 
-                nominal = 0 + 100000;
+                nominal = 0 + 150000;
             } else {
 
-                nominal = parseInt($('#nominal').val()) + 100000;
+                nominal = parseInt($('#nominal').val()) + 150000;
             }
             $("#final_price").text("Rp. " + nominal.toLocaleString('id-ID'));
         }
@@ -139,7 +139,7 @@
             document.getElementById('nominal').removeAttribute('required', '');
             document.getElementById('nominal').style.display = 'none';
             document.getElementById('nominal').value = '';
-            nominal = 100000;
+            nominal = 150000;
             $("#final_price").text("Rp. " + nominal.toLocaleString('id-ID'));
 
 
