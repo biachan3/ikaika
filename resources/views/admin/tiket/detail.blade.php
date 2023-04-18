@@ -58,6 +58,8 @@
                         </tbody>
                     </table>
                 </div>
+                <a href="{{ route('admin.index') }}"
+                    class="btn block btn-xs btn-info">Back</a>
             </div>
         </div>
     </div>

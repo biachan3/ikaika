@@ -42,7 +42,7 @@
                             </div>
                             <div class="mb-3">
 
-                                <input id="email" type="email" name="email" placeholder="E-mail" required>
+                                <input id="email" type="email" name="email" placeholder="E-mail">
                             </div>
                             <div class="mb-3">
 
@@ -117,8 +117,14 @@
         var nominal = 0;
 
         function getamount(evt) {
+            // console.log($('#nominal').val());
+            if($('#nominal').val() == '') {
+                
+                nominal = 0 + 100000;
+            } else {
 
-            nominal = parseInt($('#nominal').val()) + 100000;
+                nominal = parseInt($('#nominal').val()) + 100000;
+            }
             $("#final_price").text("Rp. " + nominal.toLocaleString('id-ID'));
         }
         var currentValue = 0;
@@ -132,6 +138,10 @@
         function handleNoClick(myRadio) {
             document.getElementById('nominal').removeAttribute('required', '');
             document.getElementById('nominal').style.display = 'none';
+            document.getElementById('nominal').value = '';
+            nominal = 100000;
+            $("#final_price").text("Rp. " + nominal.toLocaleString('id-ID'));
+
 
         }
 
