@@ -109,7 +109,7 @@ class PaymentController extends Controller
         } else {
             $url_endpoint_qr = 'https://sandbox-api.espay.id/rest/digitalpay/pushtopay';
         }
-dd($url_endpoint_qr);
+// dd($url_endpoint_qr);
         //Prepare api
         $client = new \GuzzleHttp\Client();
         $total_amount_tx = $data->amount + $data->amount_donasi;
