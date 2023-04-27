@@ -19,12 +19,12 @@ class PaymentController extends Controller
     {
         $signkey = env('SIGNKEY');
         $datetime = "2023-04-05 13:48:30";
-        $orderid = "TX-TD-FTQR";
+        $orderid = "TX-TD-FTQR1";
         $model = "SENDINVOICE";
         $comcode = "SGWIKABUAYA";
         $amount = 10300;
         $ccy = "IDR";
-        $uuid="e7276d90-d451-11ed-9e6b-65a9879c03c9-123123";
+        $uuid="e7276d90-d451-11ed-9e6b-65a9879c03c9-1231231";
         // $uuid = Uuid::generate();
 
         $uppercase = strtoupper("##$signkey##$uuid##$datetime##$orderid##$amount##$ccy##$comcode##$model##");
