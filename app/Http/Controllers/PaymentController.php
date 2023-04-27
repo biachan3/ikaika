@@ -173,6 +173,9 @@ class PaymentController extends Controller
                             'product_code' => "LINKAJA",
                             'customer_id' => $data->no_hp,
                             'signature' => $signature
+                        ],
+                        'headers' => [
+                            'Authorization' => 'Basic U0dXSUtBQlVBWUE6KSpIVTkrN0pHNA=='
                         ]
                     ]);
 
