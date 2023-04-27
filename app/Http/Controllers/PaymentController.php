@@ -162,7 +162,7 @@ class PaymentController extends Controller
                 try {
                     $qr = strtoupper("##$data->uuid##SGWIKAUBAYA##LINKAJA##$data->id##$total_amount_tx##PUSHTOPAY##5jvmfze7dgc9enof##");
                     $signature = hash('sha256', $qr);
-                    dd($signature);
+
                     $response = $client->post($url_endpoint_qr, [
                         'form_params' => [
                             'rq_uuid' => $data->uuid,
@@ -177,6 +177,7 @@ class PaymentController extends Controller
                     ]);
 
                     $obj_response = json_decode($response->getBody());
+                    dd($obj_response);
                     if($obj_response->error_code == "0000"){
                         $data->payment_method = "QRIS";
                         $data->transaction_status = "Menunggu Pembayaran";
