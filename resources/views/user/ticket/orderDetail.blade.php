@@ -22,7 +22,7 @@
                                     {{-- <option value="qris">QRIS</option> --}}
                                     <option value="009">BNI Virtual Account</option>
                                     <option value="002">BRI Virtual Account</option>
-                                    <option value="008">Manidiri Virtual Account</option>
+                                    <option value="008">Mandiri Virtual Account</option>
                                     <option value="013">Permata Virtual Account</option>
                                 </select>
                             </li>

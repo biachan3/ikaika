@@ -29,8 +29,54 @@
             <div class="cssload-inner cssload-three"></div>
         </div>
     </div>
+
     <!-- ============== PRELOADER END ============== -->
     <!-- ================= HEADER ================= -->
+    <header class="conference-header-fixed header-fixed">
+
+        <a href="#" class="nav-btn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </a>
+
+        <div class="row conference-header-row">
+            <div class="d-flex flex-row justify-content-center multi-nav">
+                <a href="/home" class="logo3"><img src="{{ asset('Ginger') }}/assets/img/Logo_UBAYA_FIX.svg"
+                        class="logo" alt="logo"></a>
+
+                <a href="/home" class="logo3"><img src="{{ asset('Ginger') }}/assets/img/55_UBAYA.svg" class="logo"
+                        alt="logo"></a>
+
+                <a href="/home" class="logo3"><img src="{{ asset('Ginger') }}/assets/img/Logo_IKA_UBAYA.svg"
+                        class="logo" alt="logo"></a>
+
+                <a href="/home" class="logo4"><img src="{{ asset('Ginger') }}/assets/img/Stronger_Together.svg"
+                        class="logo"></a>
+            </div>
+
+            <nav class="nav-menu menu">
+
+                <ul class="nav-list">
+                    {{-- <li><a href="/#news" style="color: black;">Galeri IKA</a></li>
+                    <li><a href="/faq" style="color: black;">FAQ</a></li> --}}
+
+                    {{-- <li><a href="{{ route('user.order') }}" style="color: black;">Daftar</a></li> --}}
+                    {{-- <li><a href="#conference-team.html" style="color: black;">Conference Team</a></li> --}}
+                    {{-- <li class="dropdown">
+								<a href="#">pages <i class="fa fa-angle-down" aria-hidden="true"></i></a>
+								<ul>
+
+									<li><a href="dance-team.html">Dance Teame</a></li>
+									<li><a href="blog.html">Blog</a></li>
+									<li><a href="page-error.html">Page Error 404</a></li>
+								</ul>
+							</li> --}}
+                </ul>
+
+            </nav>
+        </div>
+    </header>
     <!-- =============== HEADER END =============== -->
     @yield('content')
     <!-- =========== S-CONFERENCE-SLIDER =========== -->

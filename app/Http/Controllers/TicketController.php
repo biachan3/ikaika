@@ -103,7 +103,7 @@ class TicketController extends Controller
             case "farmasi":
                 $prefix_fakultas = "FF";
                 break;
-            case "fukum":
+            case "hukum":
                 $prefix_fakultas = "FH";
                 break;
             case "fbe":
@@ -155,7 +155,7 @@ class TicketController extends Controller
         $tiket->no_hp = $data->no_hp;
         $tiket->fakultas = $data->fakultas;
         $tiket->angkatan = $data->angkatan;
-        $tiket->amount = 100000;
+        $tiket->amount = 150000;
 
         $nominal_donasi = 0;
         if ($data->nominal == null || $data->nominal == "") {

@@ -50,7 +50,7 @@ class PaymentController extends Controller
         $signkey = env('SIGNKEY');
         $model = "INQUIRY-RS";
 
-        if($rq_password == ")*HU9+7JG4"){
+        if($rq_password == "JDVDDJTO"){
             $upper = strtoupper("##$signkey##$rq_uuid##$now##$rq_orderid##0000##$model##");
             $signature_res = hash('sha256', $upper);
             $t = Ticket::find($rq_orderid);
@@ -130,14 +130,14 @@ class PaymentController extends Controller
                     //   ]);
                     $signkey = env('SIGNKEY');
                     $now = date("Y-m-d H:i:s");
-                    $uppercase = strtoupper("##$signkey##$data->uuid##$now##$data->id##$total_amount_tx##IDR##SGWIKABUAYA##SENDINVOICE##");
+                    $uppercase = strtoupper("##$signkey##$data->uuid##$now##$data->id##$total_amount_tx##IDR##SGWIKAUBAYA##SENDINVOICE##");
                     $signature = hash('sha256', $uppercase);
 
                     $response = $client->post($url_endpoint, [
                         'form_params' => [
                             'rq_uuid' => $data->uuid,
                             'rq_datetime' => $now,
-                            'comm_code' => 'SGWIKABUAYA',
+                            'comm_code' => 'SGWIKAUBAYA',
                             'amount' => $total_amount_tx,
                             'ccy' => 'IDR',
                             'order_id' => $data->id,
@@ -180,7 +180,7 @@ class PaymentController extends Controller
             //             'form_params' => [
             //                 'rq_uuid' => $data->uuid,
             //                 'rq_datetime' => $now,
-            //                 'comm_code' => 'SGWIKABUAYA',
+            //                 'comm_code' => 'SGWIKAUBAYA',
             //                 'amount' => $total_amount_tx,
             //                 'ccy' => 'IDR',
             //                 'order_id' => $data->id,
@@ -224,7 +224,7 @@ class PaymentController extends Controller
         $rq_uuid = $request->rq_uuid;
         $rq_datetime = $request->rq_datetime;
         $rq_password = $request->password;
-        if($rq_password != ")*HU9+7JG4")
+        if($rq_password != "JDVDDJTO")
         {
             return response()->json([
                 'rq_uuid' => $rq_uuid,

@@ -88,6 +88,7 @@
     <!--================= TO TOP END =================-->
 
     <!--=================== SCRIPT	===================-->
+    @yield('script')
     <script src="{{ asset('Ginger') }}/assets/js/jquery-2.2.4.min.js"></script>
     <script src="{{ asset('Ginger') }}/assets/js/slick.min.js"></script>
     <script src="{{ asset('Ginger') }}/assets/js/rx-lazy.js"></script>

@@ -1,4 +1,4 @@
-@extends('template.dashboardorder')
+@extends('template.dashboard')
 
 @section('css')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -23,6 +23,7 @@
         }
     </style>
 @endsection
+
 @section('content')
     <section id="register" class="s-marathon-register" style="padding-top:148px; ">
         <div class="">
@@ -42,7 +43,7 @@
                             </div>
                             <div class="mb-3">
 
-                                <input id="email" type="email" name="email" placeholder="E-mail" required>
+                                <input id="email" type="email" name="email" placeholder="E-mail">
                             </div>
                             <div class="mb-3">
 
@@ -99,7 +100,7 @@
                             
                             <div class="price-final">
                                 <span>price:</span>
-                                <div class="price-final-text" id="final_price">Rp. 100.000</div>
+                                <div class="price-final-text" id="final_price">Rp. 150.000</div>
                             </div>
                             <div class="btn-form-cover">
                                 <button type="submit" class="btn"><span style="color: white">Bayar Sekarang</span></button>
@@ -117,8 +118,14 @@
         var nominal = 0;
 
         function getamount(evt) {
+            // console.log($('#nominal').val());
+            if($('#nominal').val() == '') {
+                
+                nominal = 0 + 150000;
+            } else {
 
-            nominal = parseInt($('#nominal').val()) + 100000;
+                nominal = parseInt($('#nominal').val()) + 150000;
+            }
             $("#final_price").text("Rp. " + nominal.toLocaleString('id-ID'));
         }
         var currentValue = 0;
@@ -132,6 +139,10 @@
         function handleNoClick(myRadio) {
             document.getElementById('nominal').removeAttribute('required', '');
             document.getElementById('nominal').style.display = 'none';
+            document.getElementById('nominal').value = '';
+            nominal = 150000;
+            $("#final_price").text("Rp. " + nominal.toLocaleString('id-ID'));
+
 
         }
 
