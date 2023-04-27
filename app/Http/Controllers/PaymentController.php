@@ -54,9 +54,9 @@ class PaymentController extends Controller
         // if($rq_password == "JDVDDJTO"){
             $upper = strtoupper("##$signkey##$rq_uuid##$now##$rq_orderid##0000##$model##");
             $signature_res = hash('sha256', $upper);
-            $t = Ticket::find($rq_orderid);
-            $t->gross_amount = $t->amount + $t->amount_donasi;
-            $t->save();
+            // $t = Ticket::find($rq_orderid);
+            // $t->gross_amount = $t->amount + $t->amount_donasi;
+            // $t->save();
             return response()->json([
                 'rq_uuid' => $rq_uuid,
                 'rs_datetime' => $now,
