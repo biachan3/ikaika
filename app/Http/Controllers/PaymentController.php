@@ -117,11 +117,12 @@ class PaymentController extends Controller
         $uuid = Uuid::generate();
         $data->uuid = $uuid->string;
         $data->save();
+        $now = date("Y-m-d H:i:s");
+
 
         if ($data->transaction_status == null) {
             if ($method != "qris") {
                 $signkey = env('SIGNKEY');
-                $now = date("Y-m-d H:i:s");
                 $uppercase = strtoupper("##$signkey##$data->uuid##$now##$data->id##$total_amount_tx##IDR##SGWIKAUBAYA##SENDINVOICE##");
                 $signature = hash('sha256', $uppercase);
 
