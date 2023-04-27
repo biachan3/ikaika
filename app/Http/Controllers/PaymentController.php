@@ -162,11 +162,11 @@ class PaymentController extends Controller
                     // }
 
             }
-                // catch(Exception $e) {
-                //     echo 'Message: ' .$e->getMessage();
-                // }
                 else if($method == "qris"){
                     try {
+                        $qr = strtoupper("##$data->uuid##SGWIKAUBAYA##LINKAJA##$data->id##$total_amount_tx##PUSHTOPAY##5jvmfze7dgc9enof##");
+                        $signature = hash('sha256', $qr);
+
                         $response = $client->post($url_endpoint_qr, [
                             'form_params' => [
                                 'rq_uuid' => $data->uuid,
