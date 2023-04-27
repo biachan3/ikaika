@@ -19,7 +19,7 @@
                                 <select class="nice-select" id="payment_method" name="method" onchange="getValueMethod()">
                                     <option selected="selected" disabled>Metode Pembayaran</option>
                                     {{-- <option value="bca_va">BCA Virtual Account</option> --}}
-                                    {{-- <option value="qris">QRIS</option> --}}
+                                    <option value="qris">QRIS</option>
                                     <option value="009">BNI Virtual Account</option>
                                     <option value="002">BRI Virtual Account</option>
                                     <option value="008">Mandiri Virtual Account</option>

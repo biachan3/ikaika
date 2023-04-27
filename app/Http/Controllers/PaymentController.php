@@ -101,6 +101,14 @@ class PaymentController extends Controller
         } else {
             $url_endpoint = 'https://sandbox-api.espay.id/rest/merchantpg/sendinvoice';
         }
+
+        $url_endpoint_qr ="";
+        if($is_production)
+        {
+            $url_endpoint_qr = 'https://api.espay.id/rest/digitalpay/pushtopay';
+        } else {
+            $url_endpoint_qr = 'https://sandbox-api.espay.id/rest/digitalpay/pushtopay';
+        }
 // dd($is_production);
         //Prepare api
         $client = new \GuzzleHttp\Client();
@@ -112,105 +120,81 @@ class PaymentController extends Controller
 
         if ($data->transaction_status == null) {
             if ($method != "qris") {
-                // try {
-                    // $response = $client->request('POST', $url_endpoint, [
-                    //     'body' => '{
-                    //         "payment_type": "bank_transfer",
-                    //         "transaction_details": {
-                    //           "order_id": "'.$data->id.'",
-                    //           "gross_amount": '.ceil($gross_amount).'
-                    //         },
-                    //         "bank_transfer": {
-                    //           "bank": "'.$bank.'"
-                    //         }
-                    //       }',
-                    //     'headers' => [
-                    //       'accept' => 'application/json',
-                    //       'authorization' => 'Basic '.$base64username,
-                    //       'content-type' => 'application/json',
-                    //     ],
-                    //   ]);
-                    $signkey = env('SIGNKEY');
-                    $now = date("Y-m-d H:i:s");
-                    $uppercase = strtoupper("##$signkey##$data->uuid##$now##$data->id##$total_amount_tx##IDR##SGWIKAUBAYA##SENDINVOICE##");
-                    $signature = hash('sha256', $uppercase);
+                $signkey = env('SIGNKEY');
+                $now = date("Y-m-d H:i:s");
+                $uppercase = strtoupper("##$signkey##$data->uuid##$now##$data->id##$total_amount_tx##IDR##SGWIKAUBAYA##SENDINVOICE##");
+                $signature = hash('sha256', $uppercase);
 
-                    $response = $client->post($url_endpoint, [
-                        'form_params' => [
-                            'rq_uuid' => $data->uuid,
-                            'rq_datetime' => $now,
-                            'comm_code' => 'SGWIKAUBAYA',
-                            'amount' => $total_amount_tx,
-                            'ccy' => 'IDR',
-                            'order_id' => $data->id,
-                            'remark2' => $data->nama_lengkap,
-                            'update' => 'N',
-                            'bank_code' => $method,
-                            'signature' => $signature
-                        ]
-                    ]);
+                $response = $client->post($url_endpoint, [
+                    'form_params' => [
+                        'rq_uuid' => $data->uuid,
+                        'rq_datetime' => $now,
+                        'comm_code' => 'SGWIKAUBAYA',
+                        'amount' => $total_amount_tx,
+                        'ccy' => 'IDR',
+                        'order_id' => $data->id,
+                        'remark2' => $data->nama_lengkap,
+                        'update' => 'N',
+                        'bank_code' => $method,
+                        'signature' => $signature
+                    ]
+                ]);
 
-                    $obj_response = json_decode($response->getBody());
-                    // dd($obj_response);
+                $obj_response = json_decode($response->getBody());
+                // dd($obj_response);
 
-                    if($obj_response->error_code == "0000"){
-                        $data->payment_method = $method;
-                        $data->transaction_status = "Menunggu Pembayaran";
-                        $data->payment_expiry_time = $obj_response->expired;
-                        $data->payment_media = $obj_response->va_number;
-                        $data->gross_amount = $obj_response->total_amount;
-                        $data->fee = $obj_response->fee;
-                        $fee = $obj_response->fee;
-                        $total_amount_tx += $obj_response->fee;
+                if($obj_response->error_code == "0000"){
+                    $data->payment_method = $method;
+                    $data->transaction_status = "Menunggu Pembayaran";
+                    $data->payment_expiry_time = $obj_response->expired;
+                    $data->payment_media = $obj_response->va_number;
+                    $data->gross_amount = $obj_response->total_amount;
+                    $data->fee = $obj_response->fee;
+                    $fee = $obj_response->fee;
+                    $total_amount_tx += $obj_response->fee;
 
-                        $data->save();
-                    }
+                    $data->save();
+                }
                     // else {
                     //     throw new Exception("error response : ".$obj_response->error_code);
 
                     // }
 
-                }
+            }
                 // catch(Exception $e) {
                 //     echo 'Message: ' .$e->getMessage();
                 // }
 
-            }
-            // else if($method == "qris"){
-            //     try {
-            //         $response = $client->post($url_endpoint, [
-            //             'form_params' => [
-            //                 'rq_uuid' => $data->uuid,
-            //                 'rq_datetime' => $now,
-            //                 'comm_code' => 'SGWIKAUBAYA',
-            //                 'amount' => $total_amount_tx,
-            //                 'ccy' => 'IDR',
-            //                 'order_id' => $data->id,
-            //                 'remark2' => $data->nama_lengkap,
-            //                 'update' => 'N',
-            //                 'bank_code' => $method,
-            //                 'signature' => $signature
-            //             ]
-            //         ]);
-            //         // echo $response->getBody();
-            //         $obj_response = json_decode($response->getBody());
-            //         if($obj_response->error_code == "0000"){
-            //             $data->payment_method = $method;
-            //             $data->transaction_status = $obj_response->transaction_status;
-            //             // $data->payment_expiry_time = $obj_response->expiry_time;
-            //             $data->payment_media = $obj_response->va_number;
-            //             $data->gross_amount = $obj_response->total_amount;
-            //             $data->uuid = $obj_response->uuid;
-            //             $data->save();
-            //         }
-            //         // else {
-            //         //     throw new Exception("error response : ".$obj_response->error_code);
+        }
+            else if($method == "qris"){
+                try {
+                    $response = $client->post($url_endpoint_qr, [
+                        'form_params' => [
+                            'rq_uuid' => $data->uuid,
+                            'rq_datetime' => $now,
+                            'comm_code' => 'SGWIKAUBAYA',
+                            'amount' => $total_amount_tx,
+                            'order_id' => $data->id,
+                            'product_code' => "LINKAJA",
+                            'customer_id' => $data->no_hp,
+                            'signature' => $signature
+                        ]
+                    ]);
 
-            //         // }
-            //     } catch(Exception $e) {
-            //         echo 'Message: ' .$e->getMessage();
-            //     }
-            // }
+                    $obj_response = json_decode($response->getBody());
+                    if($obj_response->error_code == "0000"){
+                        $data->payment_method = "QRIS";
+                        $data->transaction_status = "Menunggu Pembayaran";
+                        $data->payment_media = $obj_response->QRCode;
+                        $data->gross_amount = $data->gross_amount;
+                        $data->uuid = $obj_response->uuid;
+                        $data->payment_ref = $obj_response->trx_id;
+                        $data->save();
+                    }
+                } catch(Exception $e) {
+                    echo 'Message: ' .$e->getMessage();
+                }
+            }
         // }
 
 
