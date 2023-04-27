@@ -19,19 +19,22 @@ class PaymentController extends Controller
     {
         $signkey = env('SIGNKEY');
         $datetime = "2023-04-05 13:48:30";
-        $orderid = "TX-TD-FT-16807672838754";
+        $orderid = "TX-TD-FTQR";
         $model = "SENDINVOICE";
         $comcode = "SGWIKABUAYA";
-        $amount = 100000;
+        $amount = 10300;
         $ccy = "IDR";
-        $uuid="80784df2-accb-46fc-92f4-8d3103b38408";
+        $uuid="e7276d90-d451-11ed-9e6b-65a9879c03c9-123123";
         // $uuid = Uuid::generate();
 
         $uppercase = strtoupper("##$signkey##$uuid##$datetime##$orderid##$amount##$ccy##$comcode##$model##");
         $checkstatus = strtoupper("##$signkey##$datetime##$orderid##CHECKSTATUS##");
 
-        $signature = hash('sha256', $checkstatus);
-        echo $signature." + ".$checkstatus;
+        $qr = strtoupper("##$uuid##$comcode##OVO##$orderid##$amount##PUSHTOPAY##589d08485e35d7f11ddab14f9d20f039##");
+
+        $signature = hash('sha256', $qr);
+        echo $signature." + ".$qr.'<hr>';
+        // echo
     }
     public function inquiryProcess(Request $request)
     {
