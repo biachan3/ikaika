@@ -30,7 +30,7 @@ class PaymentController extends Controller
         $uppercase = strtoupper("##$signkey##$uuid##$datetime##$orderid##$amount##$ccy##$comcode##$model##");
         $checkstatus = strtoupper("##$signkey##$datetime##$orderid##CHECKSTATUS##");
 
-        $qr = strtoupper("##$uuid##$comcode##OVO##$orderid##$amount##PUSHTOPAY##589d08485e35d7f11ddab14f9d20f039##");
+        $qr = strtoupper("##$uuid##$comcode##OVO##$orderid##$amount##PUSHTOPAY##5jvmfze7dgc9enof##");
 
         $signature = hash('sha256', $qr);
         echo $signature." + ".$qr.'<hr>';
@@ -50,7 +50,8 @@ class PaymentController extends Controller
         $signkey = env('SIGNKEY');
         $model = "INQUIRY-RS";
 
-        if($rq_password == "JDVDDJTO"){
+        if($rq_password == ")*HU9+7JG4"){
+        // if($rq_password == "JDVDDJTO"){
             $upper = strtoupper("##$signkey##$rq_uuid##$now##$rq_orderid##0000##$model##");
             $signature_res = hash('sha256', $upper);
             $t = Ticket::find($rq_orderid);
