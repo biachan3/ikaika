@@ -100,7 +100,7 @@ Route::post('/payment/ping', 'App\Http\Controllers\PaymentController@ping')->nam
 Route::get('/scanner', 'App\Http\Controllers\ScanController@index')->name('scanner.index');
 Route::get('/qr/{id}', 'App\Http\Controllers\ScanController@generateQR')->name('qrgenerate');
 Route::get('/faq', 'App\Http\Controllers\FaqController@index')->name('faq.index');
-Route::get('/galeri', 'App\Http\Controllers\GaleriController@index')->name('galeri.index');
+Route::get('/galeri/{id}', 'App\Http\Controllers\GaleriController@index')->name('galeri.index');
 Route::get('/home', 'App\Http\Controllers\UserController@index')->name('user.index');
 
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Galeri;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -10,8 +11,9 @@ class HomeController extends Controller
     {
         // return dd(request()->user()->role_id);
         if (request()->user() == null) {
+            $results = Galeri::all();
             // return dd(request()->user());
-            return view('user.index');
+            return view('user.index', compact('results'));
 
         } else if (request()->user()->role_id == 1) {
 
