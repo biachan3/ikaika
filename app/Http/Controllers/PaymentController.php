@@ -155,6 +155,7 @@ class PaymentController extends Controller
                     $total_amount_tx += $obj_response->fee;
 
                     $data->save();
+                    dd($data);
                 }
 
             }
