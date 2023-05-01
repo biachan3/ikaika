@@ -155,7 +155,7 @@ class PaymentController extends Controller
                     $total_amount_tx += $obj_response->fee;
 
                     $data->save();
-                    dd($data);
+                    // dd($data);
                 }
 
             }
@@ -182,7 +182,7 @@ class PaymentController extends Controller
                     ]);
 
                     $obj_response = json_decode($response->getBody());
-                    dd($obj_response->error_code);
+                    // dd($obj_response->error_code);
                     if($obj_response->error_code == "0000"){
                         $data->payment_method = "QRIS";
                         $data->transaction_status = "Menunggu Pembayaran";
@@ -191,6 +191,7 @@ class PaymentController extends Controller
                         $data->uuid = $obj_response->uuid;
                         $data->payment_ref = $obj_response->trx_id;
                         $data->save();
+                        dd($data);
                     }
                 } catch(Exception $e) {
                     echo 'Message: ' .$e->getMessage();
