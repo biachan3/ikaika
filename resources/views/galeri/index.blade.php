@@ -37,16 +37,16 @@
 				</ul>
                 </div> --}}
                 <div class="d-flex flex-row justify-content-center multi-nav">
-                    <a href="/home"><img src="{{ asset('Ginger') }}/assets/img/Logo_UBAYA_FIX.svg" class="logo "
+                    <a href="/"><img src="{{ asset('Ginger') }}/assets/img/Logo_UBAYA_FIX.svg" class="logo "
                             alt="logo"></a>
 
-                    <a href="/home"><img src="{{ asset('Ginger') }}/assets/img/55_UBAYA.svg" class="logo "
+                    <a href="/"><img src="{{ asset('Ginger') }}/assets/img/55_UBAYA.svg" class="logo "
                             alt="logo"></a>
 
-                    <a href="/home"><img src="{{ asset('Ginger') }}/assets/img/Logo_IKA_UBAYA.svg" class="logo"
+                    <a href="/"><img src="{{ asset('Ginger') }}/assets/img/Logo_IKA_UBAYA.svg" class="logo"
                             alt="logo"></a>
 
-                    <a href="/home"><img src="{{ asset('Ginger') }}/assets/img/Stronger_Together.svg" class="logo"></a>
+                    <a href="/"><img src="{{ asset('Ginger') }}/assets/img/Stronger_Together.svg" class="logo"></a>
                 </div>
             </div>
         </header>
@@ -55,10 +55,16 @@
         <section style="padding-top:40px;" style="object-fit: fill; background-image: url({{ asset('Ginger') }}/assets/img/BG IKA UBAYA.jpg);">
             <div class="" >
                 <h2 class="title-conference"><span>Galeri Foto</span></h2>
+                {{-- {{ dd($result) }} --}}
                 <div class="row justify-content-center" style="object-fit: fill; background-image: url({{ asset('Ginger') }}/assets/img/BG IKA UBAYA.jpg);">
                     <div class="" style="width: 80%; box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
                     padding:20px 20px; border-radius:20px; margin-bottom:20px;">
-                        
+                    <h1>{{ $result->id }}</h1>
+                    <img src="{{ asset('Ginger') }}/assets/img/{{ $result->image }}" alt="">
+                    <h1>{{ $result->image }}</h1>
+                    <h1>{{ $result->date }}</h1>
+                    <h1>{{ $result->judul }}</h1>
+                    <h1>{{ $result->text }}</h1>
                     </div>
                 </div>
             </div>

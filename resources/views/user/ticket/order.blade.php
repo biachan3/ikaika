@@ -21,6 +21,10 @@
             font-size: 20px;
 
         }
+
+        select {
+            width: 100%;
+        }
     </style>
 @endsection
 
@@ -60,6 +64,7 @@
                             <div class="mb-3">
                                 <select class="form-select" name="fakultas">
                                     <option selected="selected" disabled>&nbsp; &nbsp; &nbsp; Alumni Fakultas</option>
+                                    <option value="kia">&nbsp; &nbsp; &nbsp; Keluarga Ikatan Aumni</option>
                                     <option value="farmasi">&nbsp; &nbsp; &nbsp; Farmasi</option>
                                     <option value="hukum">&nbsp; &nbsp; &nbsp; Hukum</option>
                                     <option value="fbe">&nbsp; &nbsp; &nbsp; Bisnis Ekonomi</option>

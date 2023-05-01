@@ -419,19 +419,22 @@
         <div class="conference-news-container">
             <h2 class="title-conference title-conference-white"><span>Galeri IKA</span></h2>
             <div class="conference-news-slider">
+                {{-- {{ dd($results) }} --}}
+                @foreach ($results as $result)
                 <div class="conference-news-slide">
                     <div class="conference-news-item">
                         <div class="conference-post-thumbnail">
-                            <a href="single-blog.html"><img src="{{ asset('Ginger') }}/assets/img/Pak Rektor.jpeg"
+                            <a href="{{ url('galeri', [$result->id]) }}"><img src="{{ asset('Ginger') }}/assets/img/{{ $result->image }}"
                                     alt="img"></a>
                         </div>
-                        <div class="date"><span>2021</span></div>
+                        <div class="date"><span>{{ $result->date }}</span></div>
                         <div class="conference-post-content">
-                            <h4><a href="single-blog.html">Buku Antologi Aku dan UBAYA</a></h4>
+                            <h4><a href="{{ url('galeri', [$result->id]) }}">{{ $result->judul }}</a></h4>
                         </div>
                     </div>
                 </div>
-                <div class="conference-news-slide">
+                @endforeach
+                {{-- <div class="conference-news-slide">
                     <div class="conference-news-item">
                         <div class="conference-post-thumbnail">
                             <a href="single-blog.html"><img src="{{ asset('Ginger') }}/assets/img/Donor Darah 2021.jpg"
@@ -517,7 +520,7 @@
                             <h4><a href="single-blog.html">Pelantikan Pengurus IKA</a></h4>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>
