@@ -182,16 +182,16 @@ class PaymentController extends Controller
                     ]);
 
                     $obj_response = json_decode($response->getBody());
-                    dd($obj_response->error_code);
+                    // dd($obj_response->error_code);
                     if($obj_response->error_code == "0000"){
                         $data->payment_method = "QRIS";
                         $data->transaction_status = "Menunggu Pembayaran";
                         $data->payment_media = $obj_response->QRCode;
                         $data->gross_amount = $data->gross_amount;
-                        $data->uuid = $obj_response->uuid;
+                        $data->uuid = $obj_response->rq_uuid;
                         $data->payment_ref = $obj_response->trx_id;
                         $data->save();
-                        dd($data);
+                        // dd($data);
                     }
                 } catch(Exception $e) {
                     echo 'Message: ' .$e->getMessage();
