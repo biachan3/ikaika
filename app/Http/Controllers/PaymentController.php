@@ -181,7 +181,7 @@ class PaymentController extends Controller
                     ]);
 
                     $obj_response = json_decode($response->getBody());
-                    // dd($obj_response);
+                    dd($obj_response->error_code);
                     if($obj_response->error_code == "0000"){
                         $data->payment_method = "QRIS";
                         $data->transaction_status = "Menunggu Pembayaran";
