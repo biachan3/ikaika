@@ -131,22 +131,24 @@ class TicketController extends Controller
                 $prefix_fakultas = "";
         }
 
-        if($data->donation){
+        if($data->donation > 0){
             $prefix = "TO-";
         }else{
             $prefix = "TD-";
         }
 
         //Ngitung random buat bikin unik
-        $numbers = '1234567890';
-        $randoms = array();
-        $numCount = strlen($numbers) - 1;
-        for ($i = 0; $i < 4; $i++) {
-            $n = rand(0, $numCount);
-            $randoms[] = $numbers[$n];
-        }
-        $idcomplement = implode($randoms);
-        $id_trx = "TX-".$prefix.$prefix_fakultas."-".time().$idcomplement;
+        // $numbers = '1234567890';
+        // $randoms = array();
+        // $numCount = strlen($numbers) - 1;
+        // for ($i = 0; $i < 4; $i++) {
+        //     $n = rand(0, $numCount);
+        //     $randoms[] = $numbers[$n];
+        // }
+        $last = Ticket::orderBy('created_at','desc')->first();
+        $idcomplement = substr($last->id,-4) + 1;
+        $id_trx = "TX-".$prefix.$prefix_fakultas."-".str_pad($idcomplement,4,"0",STR_PAD_LEFT);;
+        // dd($id_trx);
         $tiket = new Ticket();
         $tiket->id = $id_trx;
         $tiket->event_id = 1;
