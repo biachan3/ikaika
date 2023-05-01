@@ -172,7 +172,8 @@ class PaymentController extends Controller
                             'order_id' => $data->id,
                             'product_code' => "LINKAJA",
                             'customer_id' => $data->no_hp,
-                            'signature' => $signature
+                            'signature' => $signature,
+                            'description' => "Tiket Reuni IKA UBAYA $data->uuid"
                         ],
                         'headers' => [
                             'Authorization' => 'Basic U0dXSUtBQlVBWUE6KSpIVTkrN0pHNA=='
@@ -354,6 +355,10 @@ class PaymentController extends Controller
             case "kedokteran":
                 $prefix_fakultas = "FK";
                 break;
+            case "kia":
+                $prefix_fakultas = "KIA";
+                break;
+
             default:
                 $prefix_fakultas = "";
         }

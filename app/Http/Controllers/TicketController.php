@@ -127,6 +127,9 @@ class TicketController extends Controller
             case "kedokteran":
                 $prefix_fakultas = "FK";
                 break;
+            case "kia":
+                $prefix_fakultas = "KIA";
+                break;
             default:
                 $prefix_fakultas = "";
         }
