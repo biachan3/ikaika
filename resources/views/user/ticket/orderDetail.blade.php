@@ -51,6 +51,18 @@
                                         <p>
                                             <b>{{$detail_tx->payment_media}}</b>
                                         </p>
+                                        @else
+                                        <div class="row justify-content-center">
+                                            <div class="col-8" style="text-align: center">
+                                                <h5>Silahkan melakukan pembayaran pada QRIS berikut :</h5>
+                                                <p>
+                                                    <img src="https://pulsapaket.com/images/blog/iconQris.png" style="max-width:80%" alt="">
+                                                    <br>
+                                                    <img src="{{$data->payment_media}}" style="max-width:90%" alt="">
+                                                </p>
+                                            </div>
+                                        </div>
+
                                         @endif
                                         <p>Status Pembayaran :
                                             @if ($detail_tx->transaction_status == "settlement")
