@@ -58,7 +58,7 @@
                                                 <p>
                                                     <img src="https://pulsapaket.com/images/blog/iconQris.png" style="max-width:80%" alt="">
                                                     <br>
-                                                    <img src="{{$data->payment_media}}" style="max-width:90%" alt="">
+                                                    <img src="{{$detail_tx->payment_media}}" style="max-width:90%" alt="">
                                                 </p>
                                             </div>
                                         </div>
