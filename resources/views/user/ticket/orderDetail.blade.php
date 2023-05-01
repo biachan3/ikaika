@@ -46,7 +46,7 @@
                                         <p>Total Nominal : {{$detail_tx->gross_amount}}</p>
                                         <small>Rp. {{$detail_tx->amount + $detail_tx->amount_donasi}} + Biaya Penanganan Rp. {{ $detail_tx->gross_amount - ($detail_tx->amount + $detail_tx->amount_donasi)}}</small>
                                         <br><br>
-                                        @if ($detail_tx->payment_method != "qris")
+                                        @if ($detail_tx->payment_method != "QRIS")
                                         <h5>Virtual Account :</h5>
                                         <p>
                                             <b>{{$detail_tx->payment_media}}</b>
