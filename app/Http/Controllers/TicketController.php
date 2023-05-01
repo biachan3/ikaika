@@ -135,9 +135,9 @@ class TicketController extends Controller
         }
 
         if($data->donation > 0){
-            $prefix = "TO-";
-        }else{
             $prefix = "TD-";
+        }else{
+            $prefix = "TO-";
         }
 
         //Ngitung random buat bikin unik
