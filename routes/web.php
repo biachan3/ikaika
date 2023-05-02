@@ -52,6 +52,8 @@ Route::get('/', [HomeController::class, 'index'])->name('dashboard');
         function () {
             Route::post('/getVirtualAccount', 'getVirtualAccount')->name("getVirtualAccount");
             // Route::post('/notification/handling', 'notifHandling')->name("notifHandling");
+            Route::post('/inquiry-process', 'inquiryProcess')->name("inquiryProcess");
+            Route::post('/payment-notif', 'notifHandling')->name("notifHandling");
         }
     );
     Route::get('/event', 'App\Http\Controllers\EventController@index')->name('event.index');
@@ -87,6 +89,10 @@ Route::prefix('admin')->name('admin.')->controller(AdminController::class)->name
         Route::get('/detail/{id}', 'show')->name('detail');
     }
 );
+Route::get('/genkey', 'App\Http\Controllers\PaymentController@genkey')->name('genkey');
+Route::get('/add-data-manual', 'App\Http\Controllers\PaymentController@addManualData')->name('addManualData');
+Route::post('/postadddatamanual', 'App\Http\Controllers\PaymentController@postadddatamanual')->name('postadddatamanual');
+
 Route::get('/event', 'App\Http\Controllers\EventController@index')->name('event.index');
 
 Route::get('/payment', 'App\Http\Controllers\PaymentController@index')->name('payment.index');
@@ -94,6 +100,7 @@ Route::post('/payment/ping', 'App\Http\Controllers\PaymentController@ping')->nam
 Route::get('/scanner', 'App\Http\Controllers\ScanController@index')->name('scanner.index');
 Route::get('/qr/{id}', 'App\Http\Controllers\ScanController@generateQR')->name('qrgenerate');
 Route::get('/faq', 'App\Http\Controllers\FaqController@index')->name('faq.index');
+Route::get('/galeri/{id}', 'App\Http\Controllers\GaleriController@index')->name('galeri.index');
 Route::get('/home', 'App\Http\Controllers\UserController@index')->name('user.index');
 
 

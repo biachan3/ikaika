@@ -12,7 +12,7 @@
     <section class="s-conference-slider">
         <div class="conference-slider">
             <div
-                class="conference-slide gambar-bg"style="background-image: url({{ asset('Ginger') }}/assets/img/BG IKA.svg);">
+                class="conference-slide gambar-bg" style="background-image: url({{ asset('Ginger') }}/assets/img/BG IKA.svg);">
                 <div class="container ">
                     {{-- <a href="single-blog.html"><img
                             src="{{ asset('Ginger') }}/assets/img/" alt="img" width="1920" height="1080" style="opacity: 50%;"></a> --}}
@@ -22,7 +22,7 @@
                         <div class="date">3 Juni 2023</div>
                         <!-- <div class="conference-slider-title">Acara</div> -->
                         <h2 class="title"><span>Reuni Akbar 55 Tahun UBAYA</span></h2>
-                        {{-- <form method="GET" action="{{ route('user.order') }}"> --}}
+                        <form method="GET" action="{{ route('user.order') }}">
                             <div class="btn-form-cover">
                                 <a href="{{route('user.order')}}">
                                     <button id="#submit" type="submit" class="btn">
@@ -30,7 +30,7 @@
                                     </button>
                                 </a>
                             </div>
-                        {{-- </form> --}}
+                        </form>
                     </div>
                 </div>
             </div>
@@ -419,19 +419,22 @@
         <div class="conference-news-container">
             <h2 class="title-conference title-conference-white"><span>Galeri IKA</span></h2>
             <div class="conference-news-slider">
+                {{-- {{ dd($results) }} --}}
+                @foreach ($results as $result)
                 <div class="conference-news-slide">
                     <div class="conference-news-item">
                         <div class="conference-post-thumbnail">
-                            <a href="single-blog.html"><img src="{{ asset('Ginger') }}/assets/img/Pak Rektor.jpeg"
+                            <a href="{{ url('galeri', [$result->id]) }}"><img src="{{ asset('Ginger') }}/assets/img/{{ $result->image }}"
                                     alt="img"></a>
                         </div>
-                        <div class="date"><span>2021</span></div>
+                        <div class="date"><span>{{ $result->date }}</span></div>
                         <div class="conference-post-content">
-                            <h4><a href="single-blog.html">Buku Antologi Aku dan UBAYA</a></h4>
+                            <h4><a href="{{ url('galeri', [$result->id]) }}">{{ $result->judul }}</a></h4>
                         </div>
                     </div>
                 </div>
-                <div class="conference-news-slide">
+                @endforeach
+                {{-- <div class="conference-news-slide">
                     <div class="conference-news-item">
                         <div class="conference-post-thumbnail">
                             <a href="single-blog.html"><img src="{{ asset('Ginger') }}/assets/img/Donor Darah 2021.jpg"
@@ -517,7 +520,7 @@
                             <h4><a href="single-blog.html">Pelantikan Pengurus IKA</a></h4>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>
@@ -716,7 +719,7 @@
                                 No.169, Pucang Sewu, Gubeng, Surabaya City, East
                                 Java 60284</a>
                             </div>
-                            
+
                         </li>
                     </ul>
 

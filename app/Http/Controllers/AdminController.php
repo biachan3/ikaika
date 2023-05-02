@@ -16,8 +16,15 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $results = Attendee::all();
-        return view('admin.tiket.index', compact('results'));
+        $results = Ticket::all();
+        $sdh_lunas = Ticket::all()->where('transaction_status', '=', 'Sukses');
+        $blm_lunas = Ticket::all()->where('transaction_status', '!=', 'Sukses');
+        $uang_lunas = Ticket::where('transaction_status', '=', 'Sukses')->sum('gross_amount');
+        $uang_blm = Ticket::where('transaction_status', '!=', 'Sukses')->sum('gross_amount');
+        $jum_sdh = $sdh_lunas->count();
+        $jum_blm = $blm_lunas->count();
+        $jum_tx = $results->count();
+        return view('admin.tiket.index', compact('results', 'jum_tx', 'jum_sdh', 'uang_lunas', 'uang_blm', 'jum_blm'));
     }
 
     /**

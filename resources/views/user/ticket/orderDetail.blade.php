@@ -20,10 +20,10 @@
                                     <option selected="selected" disabled>Metode Pembayaran</option>
                                     {{-- <option value="bca_va">BCA Virtual Account</option> --}}
                                     <option value="qris">QRIS</option>
-                                    <option value="bni_va">BNI Virtual Account</option>
-                                    <option value="bri_va">BRI Virtual Account</option>
-                                    {{-- <option value="mandiri_va">Manidiri Bill Payment</option>
-                                    <option value="permata_va">Permata Virtual Account</option> --}}
+                                    <option value="009">BNI Virtual Account</option>
+                                    <option value="002">BRI Virtual Account</option>
+                                    <option value="008">Mandiri Virtual Account</option>
+                                    <option value="013">Permata Virtual Account</option>
                                 </select>
                             </li>
                         </ul>
@@ -46,21 +46,33 @@
                                         <p>Total Nominal : {{$detail_tx->gross_amount}}</p>
                                         <small>Rp. {{$detail_tx->amount + $detail_tx->amount_donasi}} + Biaya Penanganan Rp. {{ $detail_tx->gross_amount - ($detail_tx->amount + $detail_tx->amount_donasi)}}</small>
                                         <br><br>
-                                        @if ($detail_tx->payment_method != "qris")
+                                        @if ($detail_tx->payment_method != "QRIS")
                                         <h5>Virtual Account :</h5>
                                         <p>
                                             <b>{{$detail_tx->payment_media}}</b>
                                         </p>
+                                        @else
+                                        <div class="row justify-content-center">
+                                            <div class="col-8" style="text-align: center">
+                                                <h5>Silahkan melakukan pembayaran pada QRIS berikut :</h5>
+                                                <p>
+                                                    <img src="https://pulsapaket.com/images/blog/iconQris.png" style="max-width:80%" alt="">
+                                                    <br>
+                                                    <img src="{{$detail_tx->payment_media}}" style="max-width:90%" alt="">
+                                                </p>
+                                            </div>
+                                        </div>
+
                                         @endif
                                         <p>Status Pembayaran :
-                                            @if ($detail_tx->status == "settlement")
+                                            @if ($detail_tx->transaction_status == "settlement")
                                                 Sukses
                                             @else
-                                                {{$detail_tx->status}}
+                                                {{$detail_tx->transaction_status}}
                                             @endif
                                         </p>
                                         <hr>
-                                        @if($detail_tx->status == "settlement" || $detail_tx->status == "success")
+                                        @if($detail_tx->transaction_status == "settlement" || $detail_tx->transaction_status == "Sukses")
                                         <p>
                                             <b>
                                                 Terima kasih Anda telah terdaftar sebagai peserta Reuni Akbar IKA Ubaya 2023. Undangan Elektronik akan kami kirimkan ke email atau nomor wa Anda yang terdaftar dalam waktu 2x24jam 🙏🏻
@@ -70,7 +82,7 @@
                                         {!! $qrcode !!}
                                         @endif
                                         <br>
-                                        <small>ID Transaksi : {{$detail_tx->midtrans_tx_id}}</small>
+                                        <small>ID Transaksi : {{$detail_tx->uuid}}</small>
                                     </div>
                                 </div>
                                 <hr>

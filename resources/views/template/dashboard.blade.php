@@ -40,23 +40,23 @@
 
         <div class="row conference-header-row">
             <div class="d-flex flex-row justify-content-center multi-nav">
-                <a href="/home" class="logo3"><img src="{{ asset('Ginger') }}/assets/img/Logo_UBAYA_FIX.svg"
+                <a href="/" class="logo3"><img src="{{ asset('Ginger') }}/assets/img/Logo_UBAYA_FIX.svg"
                         class="logo" alt="logo"></a>
 
-                <a href="/home" class="logo3"><img src="{{ asset('Ginger') }}/assets/img/55_UBAYA.svg" class="logo"
+                <a href="/" class="logo3"><img src="{{ asset('Ginger') }}/assets/img/55_UBAYA.svg" class="logo"
                         alt="logo"></a>
 
-                <a href="/home" class="logo3"><img src="{{ asset('Ginger') }}/assets/img/Logo_IKA_UBAYA.svg"
+                <a href="/" class="logo3"><img src="{{ asset('Ginger') }}/assets/img/Logo_IKA_UBAYA.svg"
                         class="logo" alt="logo"></a>
 
-                <a href="/home" class="logo4"><img src="{{ asset('Ginger') }}/assets/img/Stronger_Together.svg"
+                <a href="/" class="logo4"><img src="{{ asset('Ginger') }}/assets/img/Stronger_Together.svg"
                         class="logo"></a>
             </div>
 
             <nav class="nav-menu menu">
 
                 <ul class="nav-list">
-                    <li><a href="#news" style="color: black;">Galeri IKA</a></li>
+                    <li><a href="/#news" style="color: black;">Galeri IKA</a></li>
                     <li><a href="/faq" style="color: black;">FAQ</a></li>
 
                     {{-- <li><a href="{{ route('user.order') }}" style="color: black;">Daftar</a></li> --}}
@@ -88,6 +88,7 @@
     <!--================= TO TOP END =================-->
 
     <!--=================== SCRIPT	===================-->
+    @yield('script')
     <script src="{{ asset('Ginger') }}/assets/js/jquery-2.2.4.min.js"></script>
     <script src="{{ asset('Ginger') }}/assets/js/slick.min.js"></script>
     <script src="{{ asset('Ginger') }}/assets/js/rx-lazy.js"></script>
