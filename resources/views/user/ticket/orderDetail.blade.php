@@ -107,7 +107,8 @@ var nominal = 0;
 function getValueMethod(){
 
     method = $('#payment_method').val();
-    console.log(method);
+    // console.log(method);
+    // $('#payment_method').prop("disabled", true);
     $('#response_payment').html(`<div class="loader"></div>`);
     $.ajax({
         type:'POST',

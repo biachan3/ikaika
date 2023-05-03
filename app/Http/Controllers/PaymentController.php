@@ -260,9 +260,9 @@ class PaymentController extends Controller
                 $botUrl = 'https://apidemo.waviro.com/api/sendwa';
                 $secretKey = 'jeB4DfuH2c1kZGaldxY2';
                 $nohp = Str::replaceFirst('0', '62', $ticket->no_hp);
-                $message = 'Berikut Link untuk Ticket Anda : https://reuni55ubaya.com/user/order/'.$ticket->id;
-               
-        
+                $message = "Terima kasih telah melakukan pendaftaran. Kode Pendaftaran anda adalah : $ticket->id . /nBerikut Link untuk Ticket Anda : https://reuni55ubaya.com/user/order/".$ticket->id;
+
+
                 $response = Http::withHeaders([
                     'secretkey' => $secretKey,
                     'Content-Type' => 'application/json'
@@ -270,7 +270,7 @@ class PaymentController extends Controller
                     'nohp' => $nohp,
                     'pesan' => $message
                 ]);
-        
+
             }
 //END WA
             return response()->json([
