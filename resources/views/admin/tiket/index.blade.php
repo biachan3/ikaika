@@ -40,6 +40,7 @@
                                 <th>Total Bayar</th>
                                 <th>Status</th>
                                 <th>Detail</th>
+                                <th>Resend WA</th>
 
                             </tr>
                         </thead>
@@ -54,7 +55,7 @@
                                 <th>Total Bayar</th>
                                 <th>Status</th>
                                 <th>Detail</th>
-
+                                <th>Resend WA</th>
                             </tr>
                         </tfoot>
                         <tbody>

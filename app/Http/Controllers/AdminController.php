@@ -83,7 +83,33 @@ class AdminController extends Controller
     {
         //
     }
+    public function resendWA($id)
+    {
+        $curl = curl_init();
 
+        curl_setopt_array($curl, array(
+          CURLOPT_URL => 'https://apidemo.waviro.com/api/sendwa',
+          CURLOPT_RETURNTRANSFER => true,
+          CURLOPT_ENCODING => '',
+          CURLOPT_MAXREDIRS => 10,
+          CURLOPT_TIMEOUT => 0,
+          CURLOPT_FOLLOWLOCATION => true,
+          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+          CURLOPT_CUSTOMREQUEST => 'POST',
+          CURLOPT_POSTFIELDS =>'{
+            "nohp": "628125133338",
+            "pesan": "https://reuni55ubaya.com/user/order/'.$id.'",
+          }',
+          CURLOPT_HTTPHEADER => array(
+            'secretkey:jeB4DfuH2c1kZGaldxY2',
+            'Content-Type: application/json'
+          ),
+        ));
+        
+        $response = curl_exec($curl);
+        
+        curl_close($curl);
+    }
     /**
      * Remove the specified resource from storage.
      *

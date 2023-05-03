@@ -253,7 +253,35 @@ class PaymentController extends Controller
 
             $upper = strtoupper("##$signkey##$rq_uuid##$now##0000##PAYMENTREPORT-RS##");
             $signature_res = hash('sha256', $upper);
+            //Start WA
+            $is_production = false;
+            if($is_production){
+$curl = curl_init();
 
+curl_setopt_array($curl, array(
+  CURLOPT_URL => 'https://apidemo.waviro.com/api/sendwa',
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => '',
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 0,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => 'POST',
+  CURLOPT_POSTFIELDS =>'{
+    "nohp": "628125133338",
+    "pesan": "https://reuni55ubaya.com/user/order/'.$ticket->id.'",
+  }',
+  CURLOPT_HTTPHEADER => array(
+    'secretkey:jeB4DfuH2c1kZGaldxY2',
+    'Content-Type: application/json'
+  ),
+));
+
+$response = curl_exec($curl);
+
+curl_close($curl);
+            }
+//END WA
             return response()->json([
                 'rq_uuid' => $rq_uuid,
                 'rs_datetime' => $now,
