@@ -257,6 +257,8 @@ class PaymentController extends Controller
             //Start WA
             $enable_wa = env('ENABLE_WA');
             $is_wa_production = env('IS_PRODUCTION_WA');
+            $botUrl = "";
+            $secretKey = "";
             if($enable_wa){
                 if ($is_wa_production) {
                     $botUrl = 'https://api.waviro.com/api/sendwa';
