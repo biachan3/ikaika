@@ -8,6 +8,7 @@ use App\Models\Attendee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
+use App\Mail\InfoRegistrationMail;
 
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -195,6 +196,28 @@ class TicketController extends Controller
             # code...
         }
 
+
+    }
+
+public function sendemail($order_id){
+        // dd($ticket);
+        // $ticket->transaction_status = "Sukses";
+        // $ticket->payment_datetime = $payment_datetime;
+        // $ticket->payment_ref = $payment_ref;
+        // $ticket->save();
+        try {
+            $ticket = Ticket::find($order_id);
+            $details = ['nama' => $ticket->nama_lengkap,
+            'email' => $ticket->email,
+            'id_transaksi' => $ticket->id
+        ];
+        // dd($details);
+
+            \Mail::to($ticket->email)->send(new InfoRegistrationMail($details));
+            echo "Sukses";
+        } catch (\Exception $th) {
+            echo "gagal : ".$th->getMessage();
+        }
 
     }
     /**
