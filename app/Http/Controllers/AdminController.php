@@ -86,7 +86,7 @@ class AdminController extends Controller
     }
     public function resendWA($id,$no_hp)
     {
-        $no_hp="08125133338";
+        // $no_hp="08125133338";
         $botUrl = 'https://apidemo.waviro.com/api/sendwa';
         $secretKey = 'jeB4DfuH2c1kZGaldxY2';
         $nohp = Str::replaceFirst('0', '62', $no_hp);
