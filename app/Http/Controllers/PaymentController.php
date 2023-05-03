@@ -268,7 +268,7 @@ class PaymentController extends Controller
                     $secretKey = 'jeB4DfuH2c1kZGaldxY2';
                 }
                 $nohp = Str::replaceFirst('0', '62', $ticket->no_hp);
-                $message = "Terima kasih telah melakukan pendaftaran. Kode Pendaftaran anda adalah : $ticket->id . /nBerikut Link untuk Ticket Anda : https://reuni55ubaya.com/user/order/".$ticket->id;
+                $message = "Hai $ticket->nama_lengkap!\nTerima kasih telah melakukan pendaftaran pada Acara Reuni IKA UBAYA.\nKode Pendaftaran anda adalah : $ticket->id.\nBerikut Link untuk Ticket Anda : https://reuni55ubaya.com/user/order/".$ticket->id."\n \n Salam Hangat, Panitia IKA Ubaya";
 
 
                 $response = Http::withHeaders([
