@@ -255,10 +255,16 @@ class PaymentController extends Controller
             $upper = strtoupper("##$signkey##$rq_uuid##$now##0000##PAYMENTREPORT-RS##");
             $signature_res = hash('sha256', $upper);
             //Start WA
-            $is_production = false;
-            if($is_production){
-                $botUrl = 'https://apidemo.waviro.com/api/sendwa';
-                $secretKey = 'jeB4DfuH2c1kZGaldxY2';
+            $enable_wa = env('ENABLE_WA');
+            $is_wa_production = env('IS_PRODUCTION_WA');
+            if($enable_wa){
+                if ($is_wa_production) {
+                    $botUrl = 'https://api.waviro.com/api/sendwa';
+                    $secretKey = 'jeB4DfuH2c1kZGaldxY2';
+                } else {
+                    $botUrl = 'https://apidemo.waviro.com/api/sendwa';
+                    $secretKey = 'jeB4DfuH2c1kZGaldxY2';
+                }
                 $nohp = Str::replaceFirst('0', '62', $ticket->no_hp);
                 $message = "Terima kasih telah melakukan pendaftaran. Kode Pendaftaran anda adalah : $ticket->id . /nBerikut Link untuk Ticket Anda : https://reuni55ubaya.com/user/order/".$ticket->id;
 
