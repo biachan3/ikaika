@@ -188,36 +188,6 @@ class TicketController extends Controller
             $qrcode = QrCode::generate($detail_tx->id);
 
         }
-        public function sendMessage()
-    {
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => 'https://{{bot_url}}/api/sendwa',
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => '',
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 0,
-          CURLOPT_FOLLOWLOCATION => true,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => 'POST',
-          CURLOPT_POSTFIELDS =>'{
-            "nohp": "628123xxxxxx",
-            "pesan": "Test kirim text",
-            "notifyurl": "https://yourdomain/your_notify_url"
-          }',
-          CURLOPT_HTTPHEADER => array(
-            'secretkey:{{secret_key}} ',
-            'Content-Type: application/json'
-          ),
-        ));
-
-        $response = curl_exec($curl);
-
-        curl_close($curl);
-
-        return response()->json($response);
-    }
         return view('user.ticket.orderDetail', compact('detail_tx','qrcode'));
     }
     /**
@@ -226,6 +196,27 @@ class TicketController extends Controller
      * @param  \App\Models\Ticket  $ticket
      * @return \Illuminate\Http\Response
      */
+    public function sendemail($order_id){
+        // dd($ticket);
+        // $ticket->transaction_status = "Sukses";
+        // $ticket->payment_datetime = $payment_datetime;
+        // $ticket->payment_ref = $payment_ref;
+        // $ticket->save();
+        try {
+            $ticket = Ticket::find($order_id);
+            $details = ['nama' => $ticket->nama_lengkap,
+            'email' => $ticket->email,
+            'id_transaksi' => $ticket->id
+        ];
+        // dd($details);
+
+            \Mail::to($ticket->email)->send(new InfoRegistrationMail($details));
+            echo "Sukses";
+        } catch (\Exception $th) {
+            echo "gagal : ".$th->getMessage();
+        }
+
+    }
     public function show(Ticket $ticket)
     {
         //

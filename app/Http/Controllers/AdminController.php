@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Attendee;
 use App\Models\Ticket;
+use Illuminate\Support\Facades\Http;
 
 
 class AdminController extends Controller
@@ -83,32 +84,23 @@ class AdminController extends Controller
     {
         //
     }
-    public function resendWA($id)
+    public function resendWA($id,$no_hp)
     {
-        $curl = curl_init();
+        $botUrl = 'https://apidemo.waviro.com/api/sendwa';
+        $secretKey = 'jeB4DfuH2c1kZGaldxY2';
+        $nohp = $no_hp;
+        $message = 'Berikut Link untuk Ticket Anda : https://reuni55ubaya.com/user/order/'.$id;
+       
 
-        curl_setopt_array($curl, array(
-          CURLOPT_URL => 'https://apidemo.waviro.com/api/sendwa',
-          CURLOPT_RETURNTRANSFER => true,
-          CURLOPT_ENCODING => '',
-          CURLOPT_MAXREDIRS => 10,
-          CURLOPT_TIMEOUT => 0,
-          CURLOPT_FOLLOWLOCATION => true,
-          CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-          CURLOPT_CUSTOMREQUEST => 'POST',
-          CURLOPT_POSTFIELDS =>'{
-            "nohp": "628125133338",
-            "pesan": "https://reuni55ubaya.com/user/order/'.$id.'",
-          }',
-          CURLOPT_HTTPHEADER => array(
-            'secretkey:jeB4DfuH2c1kZGaldxY2',
-            'Content-Type: application/json'
-          ),
-        ));
-        
-        $response = curl_exec($curl);
-        
-        curl_close($curl);
+        $response = Http::withHeaders([
+            'secretkey' => $secretKey,
+            'Content-Type' => 'application/json'
+        ])->post($botUrl, [
+            'nohp' => $nohp,
+            'pesan' => $message
+        ]);
+
+        return response()->json($response->body());
     }
     /**
      * Remove the specified resource from storage.

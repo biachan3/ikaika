@@ -46,6 +46,7 @@ Route::get('/', [HomeController::class, 'index'])->name('dashboard');
         function () {
             Route::get('', 'index')->name('index');
             Route::get('/detail/{id}', 'show')->name('detail');
+            Route::get('/resendWA/{id}', 'resendWA')->name('resendWA');
         }
     );
     Route::prefix('payment')->controller(PaymentController::class)->group(
