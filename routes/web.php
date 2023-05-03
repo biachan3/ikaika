@@ -104,6 +104,7 @@ Route::get('/galeri/{id}', 'App\Http\Controllers\GaleriController@index')->name(
 Route::get('/home', 'App\Http\Controllers\UserController@index')->name('user.index');
 
 
+Route::get('/sendemail/{order_id}', [App\Http\Controllers\TicketController::class, 'sendemail'])->name('sendemail.manual');
 
 // Route::get('/admin', function () {
 //     return view('admin.tiket.index');
