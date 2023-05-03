@@ -244,7 +244,7 @@ class PaymentController extends Controller
             $ticket->payment_datetime = $payment_datetime;
             $ticket->payment_ref = $payment_ref;
             $ticket->save();
-            $details = ['nama' => $ticket->name,
+            $details = ['nama' => $ticket->nama_lengkap,
                         'email' => $ticket->email,
                         'id_transaksi' => $ticket->id
                         ];
