@@ -8,6 +8,7 @@ use App\Models\TicketOwner;
 use App\Mail\InfoRegistrationMail;
 use Illuminate\Support\Facades\Mail;
 use Exception;
+use Illuminate\Support\Str;
 use PDF;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Uuid;
@@ -258,7 +259,7 @@ class PaymentController extends Controller
             if($is_production){
                 $botUrl = 'https://apidemo.waviro.com/api/sendwa';
                 $secretKey = 'jeB4DfuH2c1kZGaldxY2';
-                $nohp = $ticket->no_hp;
+                $nohp = Str::replaceFirst('0', '62', $ticket->no_hp);
                 $message = 'Berikut Link untuk Ticket Anda : https://reuni55ubaya.com/user/order/'.$ticket->id;
                
         
