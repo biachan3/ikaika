@@ -79,6 +79,8 @@
                                     @endif
                                     <td> <a href="{{ route('admin.detail', [$result->id]) }}"
                                             class="btn block btn-xs btn-info">Detail</a></td>
+                                    <td><a href="{{ route('admin.resendWA', [$result->id, $result->no_hp]) }}"
+                                            class="btn block btn-xs btn-info">Resend WA</a></td>
                                 </tr>
                                 @php
                                     $angka++;

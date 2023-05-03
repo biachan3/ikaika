@@ -218,7 +218,6 @@ public function sendemail($order_id){
         } catch (\Exception $th) {
             echo "gagal : ".$th->getMessage();
         }
-
     }
     /**
      * Display the specified resource.
@@ -226,6 +225,27 @@ public function sendemail($order_id){
      * @param  \App\Models\Ticket  $ticket
      * @return \Illuminate\Http\Response
      */
+    public function sendemail($order_id){
+        // dd($ticket);
+        // $ticket->transaction_status = "Sukses";
+        // $ticket->payment_datetime = $payment_datetime;
+        // $ticket->payment_ref = $payment_ref;
+        // $ticket->save();
+        try {
+            $ticket = Ticket::find($order_id);
+            $details = ['nama' => $ticket->nama_lengkap,
+            'email' => $ticket->email,
+            'id_transaksi' => $ticket->id
+        ];
+        // dd($details);
+
+            \Mail::to($ticket->email)->send(new InfoRegistrationMail($details));
+            echo "Sukses";
+        } catch (\Exception $th) {
+            echo "gagal : ".$th->getMessage();
+        }
+
+    }
     public function show(Ticket $ticket)
     {
         //

@@ -46,6 +46,7 @@ Route::get('/', [HomeController::class, 'index'])->name('dashboard');
         function () {
             Route::get('', 'index')->name('index');
             Route::get('/detail/{id}', 'show')->name('detail');
+            Route::get('/resendWA/{id}/{no_hp}', 'resendWA')->name('resendWA');
         }
     );
     Route::prefix('payment')->controller(PaymentController::class)->group(
@@ -104,7 +105,6 @@ Route::get('/galeri/{id}', 'App\Http\Controllers\GaleriController@index')->name(
 Route::get('/home', 'App\Http\Controllers\UserController@index')->name('user.index');
 
 
-Route::get('/sendemail/{order_id}', [App\Http\Controllers\TicketController::class, 'sendemail'])->name('sendemail.manual');
 
 // Route::get('/admin', function () {
 //     return view('admin.tiket.index');
