@@ -32,7 +32,7 @@ class InfoRegistrationMail extends Mailable
     {
         $nama = $this->details['nama'];
         // dd($nama);
-        return $this->subject("Informasi Pendaftaran Reuni 55 IKA Ubaya $nama")
+        return $this->subject("Informasi Pendaftaran Reuni 55 IKA Ubaya - $nama")
                     ->view('emails.infoemail');
     }
 }
