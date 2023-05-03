@@ -98,7 +98,7 @@ class AdminController extends Controller
           CURLOPT_CUSTOMREQUEST => 'POST',
           CURLOPT_POSTFIELDS =>'{
             "nohp": "628125133338",
-            "pesan": "https://reuni55ubaya.com/user/order/'.$ticket->id.'",
+            "pesan": "https://reuni55ubaya.com/user/order/'.$id.'",
           }',
           CURLOPT_HTTPHEADER => array(
             'secretkey:jeB4DfuH2c1kZGaldxY2',
