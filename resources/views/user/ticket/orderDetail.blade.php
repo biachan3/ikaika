@@ -6,8 +6,8 @@
 <section id="register" class="s-buy-ticket" style="padding:148px 148px; ">
     <div class="">
         <h2 class="title-conference"><span>Detail Transaksi</span></h2>
-        <div class="row justify-content-center">
-            <div class="col-md-6" style="  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); padding:20px 20px; border-radius:20px; margin-bottom:20px;">
+        <div class="card-orderd justify-content-center">
+            <div class="col-md-6" style="  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); padding:200px 200px; border-radius:20px; margin-bottom:20px;">
                 <div class="buy-ticket-form">
                     <i>Kode Transaksi : {{$detail_tx->id}}</i>
                     @if ($detail_tx->payment_method == null)
