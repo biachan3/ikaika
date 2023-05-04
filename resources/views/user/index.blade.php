@@ -16,9 +16,9 @@
                 <div class="container ">
                     {{-- <a href="single-blog.html"><img
                             src="{{ asset('Ginger') }}/assets/img/" alt="img" width="1920" height="1080" style="opacity: 50%;"></a> --}}
-                    {{-- <img
-                            src="{{ asset('Ginger') }}/assets/img/REUNI AKBAR IKA UBAYA 2018.jpg" alt="img" width="auto" style="opacity: 50%;">  --}}
-                    <div class="conference-slide-item ">
+                    <img
+                            src="{{ asset('Ginger') }}/assets/img/Poster IKA.jpg" alt="img" width="37%" height="100%" style="opacity: 75%; margin-right: 220px;"> 
+                    <div class="conference-slide-item">
                         <div class="date">3 Juni 2023</div>
                         <!-- <div class="conference-slider-title">Acara</div> -->
                         <h2 class="title"><span>Reuni Akbar 55 Tahun UBAYA</span></h2>
