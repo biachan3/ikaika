@@ -5816,6 +5816,13 @@ footer .social-list {
     margin-left: 35px;
     display: none;
   }
+
+  .card-orderd {
+    display: flexbox;
+    flex-wrap: wrap;
+    margin-right: -120px;
+    margin-left: -120px;
+}
 }
 
 @media (min-width: 480px) {
@@ -5875,6 +5882,12 @@ footer .social-list {
 
   .margin-ftr {
     margin-left: 100px;
+  }
+  .card-orderd {
+      display: flexbox;
+      flex-wrap: wrap;
+      margin-right: -15px;
+      margin-left: -15px;
   }
 }
 

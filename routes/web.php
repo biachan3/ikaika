@@ -74,7 +74,7 @@ Route::prefix('ticket')->name('ticket.')->controller(TicketController::class)->n
     Route::post('store', 'store')->name('store');
 }
 );
-
+Route::get('/sendemail/{order_id}', [App\Http\Controllers\TicketController::class, 'sendemail'])->name('sendemail.manual');
 
 Route::prefix('user')->group(function () {
     Route::get('/order', [App\Http\Controllers\TicketController::class, 'index_user'])->name('user.order');

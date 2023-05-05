@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use App\Mail\InfoRegistrationMail;
+use Str;
+use Http;
 
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -199,32 +201,6 @@ class TicketController extends Controller
 
     }
 
-public function sendemail($order_id){
-        // dd($ticket);
-        // $ticket->transaction_status = "Sukses";
-        // $ticket->payment_datetime = $payment_datetime;
-        // $ticket->payment_ref = $payment_ref;
-        // $ticket->save();
-        try {
-            $ticket = Ticket::find($order_id);
-            $details = ['nama' => $ticket->nama_lengkap,
-            'email' => $ticket->email,
-            'id_transaksi' => $ticket->id
-        ];
-        // dd($details);
-
-            \Mail::to($ticket->email)->send(new InfoRegistrationMail($details));
-            echo "Sukses";
-        } catch (\Exception $th) {
-            echo "gagal : ".$th->getMessage();
-        }
-    }
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Ticket  $ticket
-     * @return \Illuminate\Http\Response
-     */
     public function sendemail($order_id){
         // dd($ticket);
         // $ticket->transaction_status = "Sukses";
@@ -239,13 +215,28 @@ public function sendemail($order_id){
         ];
         // dd($details);
 
-            \Mail::to($ticket->email)->send(new InfoRegistrationMail($details));
+            // \Mail::to($ticket->email)->send(new InfoRegistrationMail($details));
+            $botUrl = 'https://apidemo.waviro.com/api/sendwa';
+            $secretKey = 'jeB4DfuH2c1kZGaldxY2';
+            $nohp = Str::replaceFirst('0', '62', $ticket->no_hp);
+            $message = "Hai $ticket->nama_lengkap!\nTerima kasih telah melakukan pendaftaran pada Acara Reuni IKA UBAYA.\nKode Pendaftaran anda adalah : $ticket->id.\nBerikut Link untuk Ticket Anda : https://reuni55ubaya.com/user/order/".$ticket->id."\n \n Salam Hangat, Panitia IKA Ubaya";
+
+
+            $response = Http::withHeaders([
+                'secretkey' => $secretKey,
+                'Content-Type' => 'application/json'
+            ])->post($botUrl, [
+                'nohp' => $nohp,
+                'pesan' => $message
+            ]);
+
             echo "Sukses";
         } catch (\Exception $th) {
             echo "gagal : ".$th->getMessage();
         }
-
     }
+
+
     public function show(Ticket $ticket)
     {
         //
