@@ -254,7 +254,7 @@ class TicketController extends Controller
 
             // $pdf->output("Ticket - $id_trx.pdf");
             // dd($content);
-             $fileurl = url("/public/$filename");
+             $fileurl = url("/public/public/pdf/$filename");
 
             $response = Http::withHeaders([
                 'secretkey' => $secretKey,
