@@ -262,7 +262,7 @@ class TicketController extends Controller
             ])->post($botUrl, [
                 'nohp' => $nohp,
                 'pesan' => $message,
-                'media' =>$fileurl
+                'mediaurl' =>$fileurl
             ]);
 
             echo "Sukses";
