@@ -11,6 +11,9 @@ use Carbon\Carbon;
 use App\Mail\InfoRegistrationMail;
 use Str;
 use Http;
+use PDF;
+use Storage;
+use File;
 
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -213,21 +216,53 @@ class TicketController extends Controller
             'email' => $ticket->email,
             'id_transaksi' => $ticket->id
         ];
+            $id_trx = $ticket->id;
         // dd($details);
 
             // \Mail::to($ticket->email)->send(new InfoRegistrationMail($details));
-            $botUrl = 'https://apidemo.waviro.com/api/sendwa';
-            $secretKey = 'jeB4DfuH2c1kZGaldxY2';
+            $botUrl = 'https://apiikaubaya.waviro.com/api/sendwa';
+            $secretKey = 'NJpWs4gWb9vi5Q6hMJPV';
             $nohp = Str::replaceFirst('0', '62', $ticket->no_hp);
             $message = "Hai $ticket->nama_lengkap!\nTerima kasih telah melakukan pendaftaran pada Acara Reuni IKA UBAYA.\nKode Pendaftaran anda adalah : $ticket->id.\nBerikut Link untuk Ticket Anda : https://reuni55ubaya.com/user/order/".$ticket->id."\n \n Salam Hangat, Panitia IKA Ubaya";
 
+
+            $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($id_trx));
+            // $qrcode = QrCode::generate($id_trx);
+
+            $data["name"] = $ticket->nama_lengkap;
+            $data["nomer"] = $id_trx;
+            $data['qr'] = $qrcode;
+
+            $customPaper = array(0,0,1080,1660);
+            $pdf = PDF::loadview('pdf.tiket', $data);
+            $pdf->setPaper($customPaper);
+
+            $directory_path = 'public/pdf';
+
+            if(!File::exists($directory_path)) {
+
+                File::makeDirectory($directory_path, $mode = 0755, true, true);
+             }
+             $filename="Ticket - $id_trx.pdf";
+            //  dd();
+            $pdf->save(''.$directory_path.'/'.$filename);
+            // $content = $pdf->download()->getOriginalContent();
+
+            // Storage::put('public/pdf/'."Ticket - $id_trx.pdf",$content) ;
+
+            // $pdf->save($path  . "Ticket - $id_trx.pdf");
+
+            // $pdf->output("Ticket - $id_trx.pdf");
+            // dd($content);
+             $fileurl = url("/public/$filename");
 
             $response = Http::withHeaders([
                 'secretkey' => $secretKey,
                 'Content-Type' => 'application/json'
             ])->post($botUrl, [
                 'nohp' => $nohp,
-                'pesan' => $message
+                'pesan' => $message,
+                'media' =>$fileurl
             ]);
 
             echo "Sukses";
