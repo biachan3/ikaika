@@ -237,7 +237,7 @@ class TicketController extends Controller
             $pdf = PDF::loadview('pdf.tiket', $data);
             $pdf->setPaper($customPaper);
 
-            $directory_path = 'public/pdf';
+            $directory_path = public_path('public/pdf');
 
             if(!File::exists($directory_path)) {
 
