@@ -220,7 +220,7 @@ class TicketController extends Controller
         // dd($details);
 
             // \Mail::to($ticket->email)->send(new InfoRegistrationMail($details));
-            $botUrl = 'https://apiikaubaya.waviro.com/api/sendwa';
+            $botUrl = 'https://apiikaubaya.waviro.com/api/sendmedia';
             $secretKey = 'NJpWs4gWb9vi5Q6hMJPV';
             $nohp = Str::replaceFirst('0', '62', $ticket->no_hp);
             $message = "Hai $ticket->nama_lengkap!\nTerima kasih telah melakukan pendaftaran pada Acara Reuni IKA UBAYA.\nKode Pendaftaran anda adalah : $ticket->id.\nBerikut Link untuk Ticket Anda : https://reuni55ubaya.com/user/order/".$ticket->id."\n \n Salam Hangat, Panitia IKA Ubaya";
