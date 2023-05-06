@@ -243,7 +243,7 @@ class TicketController extends Controller
 
                 File::makeDirectory($directory_path, $mode = 0755, true, true);
              }
-             $filename="Ticket - $id_trx.pdf";
+             $filename="Ticket-$id_trx.pdf";
             //  dd();
             $pdf->save(''.$directory_path.'/'.$filename);
             // $content = $pdf->download()->getOriginalContent();
@@ -255,7 +255,7 @@ class TicketController extends Controller
             // $pdf->output("Ticket - $id_trx.pdf");
             // dd($content);
              $fileurl = url("/public/public/pdf/$filename");
-             dd($fileurl);
+            //  dd($fileurl);
             $response = Http::withHeaders([
                 'secretkey' => $secretKey,
                 'Content-Type' => 'application/json'
