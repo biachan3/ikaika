@@ -223,7 +223,7 @@ class TicketController extends Controller
             $botUrl = 'https://apiikaubaya.waviro.com/api/sendmedia';
             $secretKey = 'NJpWs4gWb9vi5Q6hMJPV';
             $nohp = Str::replaceFirst('0', '62', $ticket->no_hp);
-            $message = "Hai $ticket->nama_lengkap!\nTerima kasih telah melakukan pendaftaran pada Acara Reuni IKA UBAYA.\nKode Pendaftaran anda adalah : $ticket->id.\nBerikut Link untuk Ticket Anda : https://reuni55ubaya.com/user/order/".$ticket->id."\n \n Salam Hangat, Panitia IKA Ubaya";
+            $message = "Selamat Siang Ubayatizen!\Terimakasih kami ucapkan atas partisipasinya dalam\nREUNI AKBAR IKA UBAYA 2023\nUntuk itu, kami bermaksud mengirimkan E-PASS sebagai bukti partisipasi saudara dan dapat ditunjukkan saat registrasi acara.\n \n 🤫 E-PASS bersifat rahasia dan hanya berlaku untuk 1x registrasi saja.\n \n Jangan lupa untuk hadir dalam rangkaian acara pada 3 Juni 2023.\n \n#StrongerTogether";
 
 
             $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($id_trx));
@@ -256,7 +256,7 @@ class TicketController extends Controller
             // dd($content);
              $fileurl = url("/public/public/pdf/$filename");
             //  dd($fileurl);
-            dd($message);
+            // dd($message);
             $response = Http::withHeaders([
                 'secretkey' => $secretKey,
                 'Content-Type' => 'application/json'
