@@ -255,8 +255,6 @@ class TicketController extends Controller
             // $pdf->output("Ticket - $id_trx.pdf");
             // dd($content);
              $fileurl = url("/public/public/pdf/$filename");
-            //  dd($fileurl);
-            // dd($message);
             $response = Http::withHeaders([
                 'secretkey' => $secretKey,
                 'Content-Type' => 'application/json'
@@ -265,7 +263,7 @@ class TicketController extends Controller
                 'pesan' => $message,
                 'mediaurl' =>$fileurl
             ]);
-            dd($response);
+            dd($response->getBody());
             echo "Sukses";
         } catch (\Exception $th) {
             echo "gagal : ".$th->getMessage();
