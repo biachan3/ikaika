@@ -263,8 +263,15 @@ class TicketController extends Controller
                 'pesan' => "Selamat Siang Ubayatizen!\Terimakasih kami ucapkan atas partisipasinya dalam\nREUNI AKBAR IKA UBAYA 2023\nUntuk itu, kami bermaksud mengirimkan E-PASS sebagai bukti partisipasi saudara dan dapat ditunjukkan saat registrasi acara.\n \n 🤫 E-PASS bersifat rahasia dan hanya berlaku untuk 1x registrasi saja.\n \n Jangan lupa untuk hadir dalam rangkaian acara pada 3 Juni 2023.\n \n#StrongerTogether",
                 'mediaurl' =>$fileurl
             ]);
-            dd($response);
-            echo "Sukses";
+            $responseChat = Http::withHeaders([
+                'secretkey' => $secretKey,
+                'Content-Type' => 'application/json'
+            ])->post('https://apiikaubaya.waviro.com/api/sendwa', [
+                'nohp' => $nohp,
+                'pesan' => "Selamat Siang Ubayatizen!\Terimakasih kami ucapkan atas partisipasinya dalam\nREUNI AKBAR IKA UBAYA 2023\nUntuk itu, kami bermaksud mengirimkan E-PASS sebagai bukti partisipasi saudara dan dapat ditunjukkan saat registrasi acara.\n \n 🤫 E-PASS bersifat rahasia dan hanya berlaku untuk 1x registrasi saja.\n \n Jangan lupa untuk hadir dalam rangkaian acara pada 3 Juni 2023.\n \n#StrongerTogether"
+            ]);
+            echo $response;
+            // echo "Sukses";
         } catch (\Exception $th) {
             echo "gagal : ".$th->getMessage();
         }
