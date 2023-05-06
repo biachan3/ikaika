@@ -256,6 +256,7 @@ class TicketController extends Controller
             // dd($content);
              $fileurl = url("/public/public/pdf/$filename");
             //  dd($fileurl);
+            dd($message);
             $response = Http::withHeaders([
                 'secretkey' => $secretKey,
                 'Content-Type' => 'application/json'
