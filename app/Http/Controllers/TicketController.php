@@ -166,7 +166,7 @@ class TicketController extends Controller
         $tiket->no_hp = $data->no_hp;
         $tiket->fakultas = $data->fakultas;
         $tiket->angkatan = $data->angkatan;
-        $tiket->amount = 150000;
+        $tiket->amount = 10000;
 
         $nominal_donasi = 0;
         if ($data->nominal == null || $data->nominal == "") {
@@ -227,7 +227,6 @@ class TicketController extends Controller
 
 
             $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($id_trx));
-            // $qrcode = QrCode::generate($id_trx);
 
             $data["name"] = $ticket->nama_lengkap;
             $data["nomer"] = $id_trx;
@@ -242,18 +241,9 @@ class TicketController extends Controller
             if(!File::exists($directory_path)) {
 
                 File::makeDirectory($directory_path, $mode = 0755, true, true);
-             }
-             $filename="Ticket-$id_trx.pdf";
-            //  dd();
+            }
+            $filename="Ticket-$id_trx.pdf";
             $pdf->save(''.$directory_path.'/'.$filename);
-            // $content = $pdf->download()->getOriginalContent();
-
-            // Storage::put('public/pdf/'."Ticket - $id_trx.pdf",$content) ;
-
-            // $pdf->save($path  . "Ticket - $id_trx.pdf");
-
-            // $pdf->output("Ticket - $id_trx.pdf");
-            // dd($content);
              $fileurl = url("/public/public/pdf/$filename");
             $response = Http::withHeaders([
                 'secretkey' => $secretKey,
