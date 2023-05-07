@@ -17,7 +17,7 @@
                     {{-- <a href="single-blog.html"><img
                             src="{{ asset('Ginger') }}/assets/img/" alt="img" width="1920" height="1080" style="opacity: 50%;"></a> --}}
                     <img
-                            src="{{ asset('Ginger') }}/assets/img/Poster IKA.jpg" alt="img" width="37%" height="100%" style="opacity: 75%; margin-right: 220px;"> 
+                            src="{{ asset('Ginger') }}/assets/img/Poster IKA.jpg" alt="img" width="37%" height="100%" style="opacity: 85%; margin-right: 220px;"> 
                     <div class="conference-slide-item">
                         <div class="date">3 Juni 2023</div>
                         <!-- <div class="conference-slider-title">Acara</div> -->
@@ -429,7 +429,7 @@
                         </div>
                         <div class="date"><span>{{ $result->date }}</span></div>
                         <div class="conference-post-content">
-                            <h4><a href="{{ url('galeri', [$result->id]) }}">{{ $result->judul }}</a></h4>
+                            <h5><a href="{{ url('galeri', [$result->id]) }}">{{ $result->judul }}</a></h5>
                         </div>
                     </div>
                 </div>
