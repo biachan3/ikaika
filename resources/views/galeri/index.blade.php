@@ -65,6 +65,12 @@
                     {{-- <h1>{{ $result->date }}</h1> --}}
                     <h2 class="judul">{{ $result->judul }}</h2>
                     <p class="captionphoto">{{ $result->text }}</p>
+                    <br/>
+                    <img class="galeris" src="{{ asset('Ginger') }}/assets/img/{{ $result->image }}" alt="">
+                    <p class="captionphoto">{{ $result->text }}</p>
+                    <img class="galeris" src="{{ asset('Ginger') }}/assets/img/{{ $result->image }}" alt="">
+                    <h2 class="judul">{{ $result->judul }}</h2>
+                    <p class="captionphoto">{{ $result->text }}</p>
                     </div>
                 </div>
             </div>
