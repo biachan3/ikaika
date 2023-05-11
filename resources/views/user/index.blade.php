@@ -254,7 +254,7 @@
     <!--=============== S-HAVE-PREPARED END ===============-->
 
     <!--================= S-PRICING-TABLE =================-->
-    {{-- <section class="s-pricing-table">
+    <section class="s-pricing-table">
         <div class="container">
             <h2 class="title-conference"><span>Pricing table</span></h2>
             <div class="row pricing-table-cover">
@@ -315,7 +315,7 @@
                 </div>
             </div>
         </div>
-    </section> --}}
+    </section>
     <!--=============== S-PRICING-TABLE END ===============-->
 
 
