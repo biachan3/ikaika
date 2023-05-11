@@ -255,6 +255,7 @@ class PaymentController extends Controller
             $upper = strtoupper("##$signkey##$rq_uuid##$now##0000##PAYMENTREPORT-RS##");
             $signature_res = hash('sha256', $upper);
             //Start WA
+            $id_trx = $ticket->id;
             $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($id_trx));
 
             $data["name"] = $ticket->nama_lengkap;
