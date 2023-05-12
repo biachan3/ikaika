@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Ticket;
 use App\Models\TicketOwner;
 use App\Mail\InfoRegistrationMail;
+use App\Mail\InfoLinkRegisMail;
 use Illuminate\Support\Facades\Mail;
 use Exception;
 use Illuminate\Support\Str;
