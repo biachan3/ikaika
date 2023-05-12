@@ -289,6 +289,7 @@ class PaymentController extends Controller
 
             $directory_path = public_path('public/pdf');
             $secretKey = 'NJpWs4gWb9vi5Q6hMJPV';
+            $nohp = Str::replaceFirst('0', '62', $ticket->no_hp);
 
             if(!File::exists($directory_path)) {
 
@@ -297,12 +298,11 @@ class PaymentController extends Controller
             $filename="Ticket-$id_trx.pdf";
             $pdf->save(''.$directory_path.'/'.$filename);
             $fileurl = url("/public/public/pdf/$filename");
-            $botUrl = 'https://apiikaubaya.waviro.com/api/sendmedia';
 
             $response = Http::withHeaders([
                 'secretkey' => $secretKey,
                 'Content-Type' => 'application/json'
-            ])->post($botUrl, [
+            ])->post("https://apiikaubaya.waviro.com/api/sendmedia", [
                 'nohp' => $nohp,
                 'pesan' => "",
                 'mediaurl' =>$fileurl
