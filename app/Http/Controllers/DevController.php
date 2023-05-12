@@ -2,7 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
+use App\Models\Ticket;
+use App\Models\Attendee;
+use App\Models\TicketOwner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use App\Mail\InfoRegistrationMail;
+use Str;
+use Http;
+use PDF;
+use Storage;
+use File;
 
 class DevController extends Controller
 {
