@@ -23,8 +23,8 @@ class PaymentController extends Controller
     {
         $signkey = env('SIGNKEY');
         $datetime = "2023-05-13 01:51:45";
-        $orderid = "TX-TO-FT-0003";
-        $model = "SENDINVOICE";
+        $orderid = "TX-TO-FT-0027";
+        $model = "INQUIRY";
         $comcode = env('COMCODE');
         $amount = 10300;
         $ccy = "IDR";
@@ -32,7 +32,7 @@ class PaymentController extends Controller
         // $uuid = Uuid::generate();
 
         $uppercase = strtoupper("##$signkey##$uuid##$datetime##$orderid##$amount##$ccy##$comcode##$model##");
-        $checkstatus = strtoupper("##$signkey##$datetime##$orderid##PAYMENTREPORT##");
+        $checkstatus = strtoupper("##$signkey##$datetime##$orderid##INQUIRY##");
 
         $qr = strtoupper("##$uuid##$comcode##LINKAJA##$orderid##$amount##PUSHTOPAY##5jvmfze7dgc9enof##");
 
@@ -172,7 +172,8 @@ class PaymentController extends Controller
             }
             else if($method == "qris"){
                 try {
-                    $qr = strtoupper("##$data->uuid##$comcode##LINKAJA##$data->id##$total_amount_tx##PUSHTOPAY##$signkey##");
+                    $productcode = env('PRODUCT_CODE_QRIS');
+                    $qr = strtoupper("##$data->uuid##$comcode##$productcode##$data->id##$total_amount_tx##PUSHTOPAY##$signkey##");
                     $signature = hash('sha256', $qr);
                     $credential = "";
                     if($is_production)
@@ -188,7 +189,7 @@ class PaymentController extends Controller
                             'comm_code' => $comcode,
                             'amount' => $total_amount_tx,
                             'order_id' => $data->id,
-                            'product_code' => "LINKAJA",
+                            'product_code' => env('PRODUCT_CODE_QRIS'),
                             'customer_id' => $data->no_hp,
                             'signature' => $signature,
                             'description' => "Tiket Reuni IKA UBAYA $data->uuid"
