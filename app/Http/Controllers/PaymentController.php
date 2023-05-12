@@ -15,6 +15,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Uuid;
 use Carbon\Carbon;
 use File;
+use Http;
 
 class PaymentController extends Controller
 {
