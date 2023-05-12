@@ -296,7 +296,9 @@ class PaymentController extends Controller
             }
             $filename="Ticket-$id_trx.pdf";
             $pdf->save(''.$directory_path.'/'.$filename);
-             $fileurl = url("/public/public/pdf/$filename");
+            $fileurl = url("/public/public/pdf/$filename");
+            $botUrl = 'https://apiikaubaya.waviro.com/api/sendmedia';
+
             $response = Http::withHeaders([
                 'secretkey' => $secretKey,
                 'Content-Type' => 'application/json'
