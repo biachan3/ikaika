@@ -288,6 +288,7 @@ class PaymentController extends Controller
             $pdf->setPaper($customPaper);
 
             $directory_path = public_path('public/pdf');
+            $secretKey = 'NJpWs4gWb9vi5Q6hMJPV';
 
             if(!File::exists($directory_path)) {
 
