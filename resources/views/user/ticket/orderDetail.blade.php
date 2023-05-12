@@ -115,19 +115,19 @@ function getValueMethod(){
     $('.nice-select').eq(1).addClass('disabled');
     // console.log($('.nice-select')[1]);
     $('#response_payment').html(`<div class="loader"></div>`);
-    // $.ajax({
-    //     type:'POST',
-    //     url:'{{route("getVirtualAccount")}}',
-    //     data:{
-    //         '_token':'<?php echo csrf_token() ?>',
-    //         id: "{{$detail_tx->id}}",
-    //         method: method
-    //     },
-    //     success: function(data){
-    //         // $('#response_payment').clear();
-    //         $('#response_payment').html(data.msg)
-    //     }
-    // });
+    $.ajax({
+        type:'POST',
+        url:'{{route("getVirtualAccount")}}',
+        data:{
+            '_token':'<?php echo csrf_token() ?>',
+            id: "{{$detail_tx->id}}",
+            method: method
+        },
+        success: function(data){
+            // $('#response_payment').clear();
+            $('#response_payment').html(data.msg)
+        }
+    });
 }
 </script>
 @endsection
