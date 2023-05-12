@@ -14,14 +14,15 @@ use PDF;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Uuid;
 use Carbon\Carbon;
+use File;
 
 class PaymentController extends Controller
 {
     public function genkey()
     {
         $signkey = env('SIGNKEY');
-        $datetime = "2023-04-05 13:48:30";
-        $orderid = "TX-TD-FTQR1";
+        $datetime = "2023-05-13 01:51:45";
+        $orderid = "TX-TO-FT-0003";
         $model = "SENDINVOICE";
         $comcode = env('COMCODE');
         $amount = 10300;
@@ -30,12 +31,12 @@ class PaymentController extends Controller
         // $uuid = Uuid::generate();
 
         $uppercase = strtoupper("##$signkey##$uuid##$datetime##$orderid##$amount##$ccy##$comcode##$model##");
-        $checkstatus = strtoupper("##$signkey##$datetime##$orderid##CHECKSTATUS##");
+        $checkstatus = strtoupper("##$signkey##$datetime##$orderid##PAYMENTREPORT##");
 
         $qr = strtoupper("##$uuid##$comcode##LINKAJA##$orderid##$amount##PUSHTOPAY##5jvmfze7dgc9enof##");
 
-        $signature = hash('sha256', $qr);
-        echo $signature." + ".$qr.'<hr>';
+        $signature = hash('sha256', $checkstatus);
+        echo $signature." + ".$checkstatus.'<hr>';
     }
     public function inquiryProcess(Request $request)
     {

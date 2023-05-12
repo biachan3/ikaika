@@ -100,7 +100,7 @@
                                 </select>
                             </div>
                             <div class="mb-3">
-                                <input readonly type="text" required id="datepicker" name="angkatan" placeholder="Tahun Angkatan"/>
+                                <input readonly type="text" required id="datepicker" name="angkatan" placeholder="Tahun Angkatan" required/>
 
                                 {{-- <select class="form-select" name="fakultas">
                                     <option selected="selected" disabled>&nbsp; &nbsp; &nbsp; Angkatan</option>
