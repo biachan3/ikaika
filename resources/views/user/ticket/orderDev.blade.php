@@ -54,12 +54,12 @@
 
     <section id="register" class="s-marathon-register" style="padding-top:148px; ">
         <div class="">
-            <h2 class="title-conference"><span>Beli Tiket</span></h2>
+            <h2 class="title-conference"><span>DEV Beli Tiket</span></h2>
             <div class="row justify-content-center">
                 <div class="col-md-6"
                     style="  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); padding:20px 20px; border-radius:20px; margin-bottom:20px;">
                     <div class="buy-ticket-form">
-                        <form class="form-register" id="form-regis" action="{{ route('regis') }}" method="POST">
+                        <form class="form-register" id="form-regis" action="{{ route('dev.order') }}" method="POST">
                             @csrf
 
                             <h5 class="text-aja">Data Diri</h5>

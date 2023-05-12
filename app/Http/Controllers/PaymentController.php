@@ -88,6 +88,7 @@ class PaymentController extends Controller
     }
     public function getVirtualAccount(Request $request)
     {
+
         $data = Ticket::find($request->id);
         $method = $request->method;
         $obj_response ="";
@@ -154,9 +155,15 @@ class PaymentController extends Controller
                     $data->fee = $obj_response->fee;
                     $fee = $obj_response->fee;
                     $total_amount_tx += $obj_response->fee;
-
+                    //kirim email
                     $data->save();
-                    // dd($data);
+
+                    $details = [
+                        'nama' => $data->nama_lengkap,
+                        'email' => $data->email,
+                        'id_transaksi' => $data->id
+                    ];
+                    \Mail::to($data->email)->send(new InfoLinkRegisMail($details));
                 }
 
             }
@@ -178,7 +185,7 @@ class PaymentController extends Controller
                             'comm_code' => $comcode,
                             'amount' => $total_amount_tx,
                             'order_id' => $data->id,
-                            'product_code' => "LINKAJA",
+                            'product_code' => "QRIS",
                             'customer_id' => $data->no_hp,
                             'signature' => $signature,
                             'description' => "Tiket Reuni IKA UBAYA $data->uuid"
@@ -189,7 +196,7 @@ class PaymentController extends Controller
                     ]);
 
                     $obj_response = json_decode($response->getBody());
-                    // dd($obj_response->error_code);
+
                     if($obj_response->error_code == "0000"){
                         $data->payment_method = "QRIS";
                         $data->transaction_status = "Menunggu Pembayaran";
@@ -198,7 +205,12 @@ class PaymentController extends Controller
                         $data->uuid = $obj_response->rq_uuid;
                         $data->payment_ref = $obj_response->trx_id;
                         $data->save();
-                        // dd($data);
+                        $details = [
+                            'nama' => $data->nama_lengkap,
+                            'email' => $data->email,
+                            'id_transaksi' => $data->id
+                        ];
+                        \Mail::to($data->email)->send(new InfoLinkRegisMail($details));
                     }
                 } catch(Exception $e) {
                     echo 'Message: ' .$e->getMessage();
@@ -408,20 +420,35 @@ class PaymentController extends Controller
                 $prefix_fakultas = "";
         }
 
-        $numbers = '1234567890';
-        $randoms = array();
-        $numCount = strlen($numbers) - 1;
-        for ($i = 0; $i < 4; $i++) {
-            $n = rand(0, $numCount);
-            $randoms[] = $numbers[$n];
+        $last = Ticket::orderBy('created_at','desc')->first();
+        $idcomplement = substr($last->id,-4) + 1;
+        $id_trx = "TX-".$prefix.$prefix_fakultas."-".str_pad($idcomplement,4,"0",STR_PAD_LEFT);;
+
+        $tiket = new Ticket();
+        $tiket->id = $id_trx;
+        $tiket->event_id = 1;
+        $tiket->nama_lengkap = $data->nama;
+        $tiket->email = $data->email;
+        $tiket->no_hp = $data->no_hp;
+        $tiket->fakultas = $data->fakultas;
+        $tiket->angkatan = $data->angkatan;
+        $tiket->amount = 150000;
+
+        $nominal_donasi = 0;
+        if ($data->nominal == null || $data->nominal == "") {
+            $nominal_donasi = 0;
+        } else {
+            $nominal_donasi = $data->nominal;
         }
-        $idcomplement = implode($randoms);
-        $id_trx = $prefix.$prefix_fakultas."-".time().$idcomplement;
+        // dd($nominal_donasi);
+
+        $tiket->amount_donasi = $nominal_donasi;
+        $tiket->save();
 
         $t = new TicketOwner();
         $t->nama = $request->nama;
         $t->id_tiket = $id_trx;
-        // $t->save();
+        $t->save();
 
         $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($id_trx));
         // $qrcode = QrCode::generate($id_trx);

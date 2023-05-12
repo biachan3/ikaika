@@ -3,6 +3,11 @@
 <link rel="stylesheet" href="{{asset('css/custom-nvn.css')}}">
 @endsection
 @section('content')
+<script>
+    alert("Harap pastikan pilihan metode pembayaran anda! Anda tidak dapat mengubah metode pembayaran kecuali melakukan registrasi ulang!");
+
+</script>
+
 <section id="register" class="s-buy-ticket" style="padding:148px 148px; ">
     <div class="">
         <h2 class="title-conference"><span>Detail Transaksi</span></h2>
@@ -19,7 +24,7 @@
                                 <select class="nice-select" id="payment_method" name="method" onchange="getValueMethod()">
                                     <option selected="selected" disabled>Metode Pembayaran</option>
                                     {{-- <option value="bca_va">BCA Virtual Account</option> --}}
-                                    {{-- <option value="qris">QRIS</option> --}}
+                                    <option value="qris">QRIS</option>
                                     <option value="009">BNI Virtual Account</option>
                                     <option value="002">BRI Virtual Account</option>
                                     <option value="008">Mandiri Virtual Account</option>
@@ -107,22 +112,22 @@ var nominal = 0;
 function getValueMethod(){
 
     method = $('#payment_method').val();
-    // console.log(method);
-    // $('#payment_method').prop("disabled", true);
+    $('.nice-select').eq(1).addClass('disabled');
+    // console.log($('.nice-select')[1]);
     $('#response_payment').html(`<div class="loader"></div>`);
-    $.ajax({
-        type:'POST',
-        url:'{{route("getVirtualAccount")}}',
-        data:{
-            '_token':'<?php echo csrf_token() ?>',
-            id: "{{$detail_tx->id}}",
-            method: method
-        },
-        success: function(data){
-            // $('#response_payment').clear();
-            $('#response_payment').html(data.msg)
-        }
-    });
+    // $.ajax({
+    //     type:'POST',
+    //     url:'{{route("getVirtualAccount")}}',
+    //     data:{
+    //         '_token':'<?php echo csrf_token() ?>',
+    //         id: "{{$detail_tx->id}}",
+    //         method: method
+    //     },
+    //     success: function(data){
+    //         // $('#response_payment').clear();
+    //         $('#response_payment').html(data.msg)
+    //     }
+    // });
 }
 </script>
 @endsection

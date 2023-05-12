@@ -104,6 +104,11 @@ Route::get('/faq', 'App\Http\Controllers\FaqController@index')->name('faq.index'
 Route::get('/galeri/{id}', 'App\Http\Controllers\GaleriController@index')->name('galeri.index');
 Route::get('/home', 'App\Http\Controllers\UserController@index')->name('user.index');
 
+Route::prefix('dev')->group(function () {
+    Route::get('/order', [App\Http\Controllers\DevController::class, 'index_user'])->name('dev.order');
+    Route::post('/regis', [App\Http\Controllers\DevController::class, 'regis'])->name('regis');
+
+});
 
 
 // Route::get('/admin', function () {
