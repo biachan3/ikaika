@@ -162,9 +162,15 @@ class PaymentController extends Controller
             }
             else if($method == "qris"){
                 try {
-                    $qr = strtoupper("##$data->uuid##$comcode##LINKAJA##$data->id##$total_amount_tx##PUSHTOPAY##5jvmfze7dgc9enof##");
+                    $qr = strtoupper("##$data->uuid##$comcode##LINKAJA##$data->id##$total_amount_tx##PUSHTOPAY##$signkey##");
                     $signature = hash('sha256', $qr);
-
+                    $credential = "";
+                    if($is_production)
+                    {
+                        $credential = 'U0dXSUtBVUJBWUE6SkRWRERKVE8=';
+                    } else {
+                        $credential = 'U0dXSUtBQlVBWUE6KSpIVTkrN0pHNA==';
+                    }
                     $response = $client->post($url_endpoint_qr, [
                         'form_params' => [
                             'rq_uuid' => $data->uuid,
@@ -178,7 +184,7 @@ class PaymentController extends Controller
                             'description' => "Tiket Reuni IKA UBAYA $data->uuid"
                         ],
                         'headers' => [
-                            'Authorization' => 'Basic U0dXSUtBQlVBWUE6KSpIVTkrN0pHNA=='
+                            'Authorization' => "Basic $credential"
                         ]
                     ]);
 
