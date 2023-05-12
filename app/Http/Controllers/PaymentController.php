@@ -185,7 +185,7 @@ class PaymentController extends Controller
                             'comm_code' => $comcode,
                             'amount' => $total_amount_tx,
                             'order_id' => $data->id,
-                            'product_code' => "QRIS",
+                            'product_code' => "LINKAJA",
                             'customer_id' => $data->no_hp,
                             'signature' => $signature,
                             'description' => "Tiket Reuni IKA UBAYA $data->uuid"
