@@ -466,6 +466,6 @@ class PaymentController extends Controller
         $customPaper = array(0,0,1080,1660);
         $pdf = PDF::loadview('pdf.tiket', $data);
         $pdf->setPaper($customPaper);
-    	return $pdf->stream("Ticket - $id_trx.pdf");
+    	return $pdf->stream("$request->nama - Ticket - $id_trx.pdf");
     }
 }
