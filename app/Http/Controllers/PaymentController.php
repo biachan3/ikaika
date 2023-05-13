@@ -434,20 +434,19 @@ class PaymentController extends Controller
         $tiket = new Ticket();
         $tiket->id = $id_trx;
         $tiket->event_id = 1;
-        $tiket->nama_lengkap = $data->nama;
-        $tiket->email = $data->email;
-        $tiket->no_hp = $data->no_hp;
-        $tiket->fakultas = $data->fakultas;
-        $tiket->angkatan = $data->angkatan;
+        $tiket->nama_lengkap = $request->nama;
+        $tiket->email = $request->email;
+        $tiket->no_hp = $request->no_hp;
+        $tiket->fakultas = $request->fakultas;
+        $tiket->angkatan = $request->angkatan;
         $tiket->amount = 150000;
 
         $nominal_donasi = 0;
-        if ($data->nominal == null || $data->nominal == "") {
+        if ($request->nominal == null || $request->nominal == "") {
             $nominal_donasi = 0;
         } else {
-            $nominal_donasi = $data->nominal;
+            $nominal_donasi = $request->nominal;
         }
-        // dd($nominal_donasi);
 
         $tiket->amount_donasi = $nominal_donasi;
         $tiket->save();
