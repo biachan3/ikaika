@@ -18,6 +18,9 @@
         <label for="">Nama : </label>
         <input type="text" name="nama" id="">
         <br>
+        <label for="">Nomer Telpon : </label>
+        <input type="text" name="no_hp" id="">
+        <br>
         <button type="submit">Submit</button>
     </form>
 </html>

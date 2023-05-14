@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Models\Ticket;
 use App\Models\Attendee;
+use App\Models\TicketOwner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -157,7 +158,7 @@ class TicketController extends Controller
         $last = Ticket::orderBy('created_at','desc')->first();
         $idcomplement = substr($last->id,-4) + 1;
         $id_trx = "TX-".$prefix.$prefix_fakultas."-".str_pad($idcomplement,4,"0",STR_PAD_LEFT);;
-        // dd($id_trx);
+
         $tiket = new Ticket();
         $tiket->id = $id_trx;
         $tiket->event_id = 1;
@@ -174,14 +175,17 @@ class TicketController extends Controller
         } else {
             $nominal_donasi = $data->nominal;
         }
-        // dd($nominal_donasi);
 
         $tiket->amount_donasi = $nominal_donasi;
         $tiket->save();
 
-        // dd($data);
+        $t = new TicketOwner();
+        $t->nama = $data->nama;
+        $t->id_tiket = $id_trx;
+        $t->save();
+
+
         return redirect()->route('detail.trx',$id_trx);
-        //here
     }
     public function detail_transaki($id)
     {

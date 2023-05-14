@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Ticket;
 use App\Models\TicketOwner;
 use App\Mail\InfoRegistrationMail;
+use App\Mail\InfoLinkRegisMail;
 use Illuminate\Support\Facades\Mail;
 use Exception;
 use Illuminate\Support\Str;
@@ -13,15 +14,17 @@ use PDF;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Uuid;
 use Carbon\Carbon;
+use File;
+use Http;
 
 class PaymentController extends Controller
 {
     public function genkey()
     {
         $signkey = env('SIGNKEY');
-        $datetime = "2023-04-05 13:48:30";
-        $orderid = "TX-TD-FTQR1";
-        $model = "SENDINVOICE";
+        $datetime = "2023-05-13 01:51:45";
+        $orderid = "TX-TO-FT-0027";
+        $model = "INQUIRY";
         $comcode = env('COMCODE');
         $amount = 10300;
         $ccy = "IDR";
@@ -29,12 +32,12 @@ class PaymentController extends Controller
         // $uuid = Uuid::generate();
 
         $uppercase = strtoupper("##$signkey##$uuid##$datetime##$orderid##$amount##$ccy##$comcode##$model##");
-        $checkstatus = strtoupper("##$signkey##$datetime##$orderid##CHECKSTATUS##");
+        $checkstatus = strtoupper("##$signkey##$datetime##$orderid##INQUIRY##");
 
         $qr = strtoupper("##$uuid##$comcode##LINKAJA##$orderid##$amount##PUSHTOPAY##5jvmfze7dgc9enof##");
 
-        $signature = hash('sha256', $qr);
-        echo $signature." + ".$qr.'<hr>';
+        $signature = hash('sha256', $checkstatus);
+        echo $signature." + ".$checkstatus.'<hr>';
     }
     public function inquiryProcess(Request $request)
     {
@@ -88,6 +91,7 @@ class PaymentController extends Controller
     }
     public function getVirtualAccount(Request $request)
     {
+
         $data = Ticket::find($request->id);
         $method = $request->method;
         $obj_response ="";
@@ -154,17 +158,30 @@ class PaymentController extends Controller
                     $data->fee = $obj_response->fee;
                     $fee = $obj_response->fee;
                     $total_amount_tx += $obj_response->fee;
-
+                    //kirim email
                     $data->save();
-                    // dd($data);
+
+                    $details = [
+                        'nama' => $data->nama_lengkap,
+                        'email' => $data->email,
+                        'id_transaksi' => $data->id
+                    ];
+                    \Mail::to($data->email)->send(new InfoLinkRegisMail($details));
                 }
 
             }
             else if($method == "qris"){
                 try {
-                    $qr = strtoupper("##$data->uuid##$comcode##LINKAJA##$data->id##$total_amount_tx##PUSHTOPAY##5jvmfze7dgc9enof##");
+                    $productcode = env('PRODUCT_CODE_QRIS');
+                    $qr = strtoupper("##$data->uuid##$comcode##$productcode##$data->id##$total_amount_tx##PUSHTOPAY##$signkey##");
                     $signature = hash('sha256', $qr);
-
+                    $credential = "";
+                    if($is_production)
+                    {
+                        $credential = 'U0dXSUtBVUJBWUE6SkRWRERKVE8=';
+                    } else {
+                        $credential = 'U0dXSUtBQlVBWUE6KSpIVTkrN0pHNA==';
+                    }
                     $response = $client->post($url_endpoint_qr, [
                         'form_params' => [
                             'rq_uuid' => $data->uuid,
@@ -172,18 +189,18 @@ class PaymentController extends Controller
                             'comm_code' => $comcode,
                             'amount' => $total_amount_tx,
                             'order_id' => $data->id,
-                            'product_code' => "LINKAJA",
+                            'product_code' => env('PRODUCT_CODE_QRIS'),
                             'customer_id' => $data->no_hp,
                             'signature' => $signature,
                             'description' => "Tiket Reuni IKA UBAYA $data->uuid"
                         ],
                         'headers' => [
-                            'Authorization' => 'Basic U0dXSUtBQlVBWUE6KSpIVTkrN0pHNA=='
+                            'Authorization' => "Basic $credential"
                         ]
                     ]);
 
                     $obj_response = json_decode($response->getBody());
-                    // dd($obj_response->error_code);
+
                     if($obj_response->error_code == "0000"){
                         $data->payment_method = "QRIS";
                         $data->transaction_status = "Menunggu Pembayaran";
@@ -192,7 +209,12 @@ class PaymentController extends Controller
                         $data->uuid = $obj_response->rq_uuid;
                         $data->payment_ref = $obj_response->trx_id;
                         $data->save();
-                        // dd($data);
+                        $details = [
+                            'nama' => $data->nama_lengkap,
+                            'email' => $data->email,
+                            'id_transaksi' => $data->id
+                        ];
+                        \Mail::to($data->email)->send(new InfoLinkRegisMail($details));
                     }
                 } catch(Exception $e) {
                     echo 'Message: ' .$e->getMessage();
@@ -267,6 +289,8 @@ class PaymentController extends Controller
             $pdf->setPaper($customPaper);
 
             $directory_path = public_path('public/pdf');
+            $secretKey = 'NJpWs4gWb9vi5Q6hMJPV';
+            $nohp = Str::replaceFirst('0', '62', $ticket->no_hp);
 
             if(!File::exists($directory_path)) {
 
@@ -274,11 +298,12 @@ class PaymentController extends Controller
             }
             $filename="Ticket-$id_trx.pdf";
             $pdf->save(''.$directory_path.'/'.$filename);
-             $fileurl = url("/public/public/pdf/$filename");
+            $fileurl = url("/public/public/pdf/$filename");
+
             $response = Http::withHeaders([
                 'secretkey' => $secretKey,
                 'Content-Type' => 'application/json'
-            ])->post($botUrl, [
+            ])->post("https://apiikaubaya.waviro.com/api/sendmedia", [
                 'nohp' => $nohp,
                 'pesan' => "",
                 'mediaurl' =>$fileurl
@@ -402,20 +427,34 @@ class PaymentController extends Controller
                 $prefix_fakultas = "";
         }
 
-        $numbers = '1234567890';
-        $randoms = array();
-        $numCount = strlen($numbers) - 1;
-        for ($i = 0; $i < 4; $i++) {
-            $n = rand(0, $numCount);
-            $randoms[] = $numbers[$n];
+        $last = Ticket::orderBy('created_at','desc')->first();
+        $idcomplement = substr($last->id,-4) + 1;
+        $id_trx = "TX-".$prefix.$prefix_fakultas."-".str_pad($idcomplement,4,"0",STR_PAD_LEFT);;
+
+        $tiket = new Ticket();
+        $tiket->id = $id_trx;
+        $tiket->event_id = 1;
+        $tiket->nama_lengkap = $request->nama;
+        $tiket->email = $request->email;
+        $tiket->no_hp = $request->no_hp;
+        $tiket->fakultas = $request->fakultas;
+        $tiket->angkatan = $request->angkatan;
+        $tiket->amount = 150000;
+
+        $nominal_donasi = 0;
+        if ($request->nominal == null || $request->nominal == "") {
+            $nominal_donasi = 0;
+        } else {
+            $nominal_donasi = $request->nominal;
         }
-        $idcomplement = implode($randoms);
-        $id_trx = $prefix.$prefix_fakultas."-".time().$idcomplement;
+
+        $tiket->amount_donasi = $nominal_donasi;
+        $tiket->save();
 
         $t = new TicketOwner();
         $t->nama = $request->nama;
         $t->id_tiket = $id_trx;
-        // $t->save();
+        $t->save();
 
         $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($id_trx));
         // $qrcode = QrCode::generate($id_trx);
@@ -427,6 +466,6 @@ class PaymentController extends Controller
         $customPaper = array(0,0,1080,1660);
         $pdf = PDF::loadview('pdf.tiket', $data);
         $pdf->setPaper($customPaper);
-    	return $pdf->stream("Ticket - $id_trx.pdf");
+    	return $pdf->stream("$request->nama - Ticket - $id_trx.pdf");
     }
 }
