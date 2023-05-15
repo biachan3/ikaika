@@ -40,7 +40,7 @@
                                 <th>Total Bayar</th>
                                 <th>Status</th>
                                 <th>Detail</th>
-                                <th>Resend WA</th>
+                                {{-- <th>Resend WA</th> --}}
 
                             </tr>
                         </thead>
@@ -55,7 +55,7 @@
                                 <th>Total Bayar</th>
                                 <th>Status</th>
                                 <th>Detail</th>
-                                <th>Resend WA</th>
+                                {{-- <th>Resend WA</th> --}}
                             </tr>
                         </tfoot>
                         <tbody>
@@ -79,8 +79,8 @@
                                     @endif
                                     <td> <a href="{{ route('admin.detail', [$result->id]) }}"
                                             class="btn block btn-xs btn-info">Detail</a></td>
-                                    <td><a href="{{ route('admin.resendWA', [$result->id, $result->no_hp]) }}"
-                                            class="btn block btn-xs btn-info">Resend WA</a></td>
+                                    {{-- <td><a href="{{ route('admin.resendWA', [$result->id, $result->no_hp]) }}"
+                                            class="btn block btn-xs btn-info">Resend WA</a></td> --}}
                                 </tr>
                                 @php
                                     $angka++;
