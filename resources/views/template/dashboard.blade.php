@@ -56,8 +56,8 @@
             <nav class="nav-menu menu">
 
                 <ul class="nav-list">
-                    <li><a href="/#news" style="color: black;">Galeri IKA</a></li>
-                    <li><a href="/faq" style="color: black;">FAQ</a></li>
+                    <li><a href="/#news" class="clor">Galeri IKA</a></li>
+                    <li><a href="/faq" class="clor">FAQ</a></li>
 
                     {{-- <li><a href="{{ route('user.order') }}" style="color: black;">Daftar</a></li> --}}
                     {{-- <li><a href="#conference-team.html" style="color: black;">Conference Team</a></li> --}}
@@ -96,6 +96,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=you_googlemap_key"></script>
     <script src="{{ asset('Ginger') }}/assets/js/parallax.min.js"></script>
     <script src="{{ asset('Ginger') }}/assets/js/scripts.js"></script>
+    
 </body>
 
 </html>

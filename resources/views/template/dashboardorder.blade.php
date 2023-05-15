@@ -56,6 +56,7 @@
             </div>
 
             <nav class="nav-menu menu">
+                
 
                 <ul class="nav-list">
                     {{-- <li><a href="/#news" style="color: black;">Galeri IKA</a></li>
@@ -80,6 +81,7 @@
     <!-- =============== HEADER END =============== -->
     @yield('content')
     <!-- =========== S-CONFERENCE-SLIDER =========== -->
+    
 
     <!--================== FOOTER END ==================-->
 

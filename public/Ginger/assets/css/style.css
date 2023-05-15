@@ -146,6 +146,7 @@ html {
 ol,
 ul {
   list-style: none;
+  color: black;
 }
 
 @media -sass-debug-info {
@@ -1899,7 +1900,7 @@ header {
   color: #ffd910;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 480px) {
   @media -sass-debug-info {
     filename {
       font-family: file\:\/\/F\:\/localhost\/giner-html\/template\/assets\/scss\/_header\.scss
@@ -1915,7 +1916,7 @@ header {
     display: block !important;
     width: auto !important;
     position: relative;
-    left: auto;
+    left: -150px;
     top: auto;
     background-color: transparent;
     z-index: 0;
@@ -2500,8 +2501,16 @@ header {
   }
 }
 
-.conference-header-fixed .nav-list>li>a {
+@media (max-width: 480px) {
+  .conference-header-fixed .nav-list>li>a {
   color: #fff;
+  }
+}
+
+@media (min-width: 480px) {
+  .conference-header-fixed .nav-list>li>a {
+  color: #000;
+  }
 }
 
 @media -sass-debug-info {
@@ -4045,6 +4054,8 @@ header {
     -webkit-transform: translateX(0);
     transform: translateX(0);
     opacity: 1;
+    margin-left: 10px;
+    color: white;
   }
 }
 
@@ -5814,7 +5825,7 @@ footer .social-list {
   .multi-nav {
     gap: 2px;
     margin-left: 35px;
-    display: none;
+    max-width: 92%;
   }
 
   .card-orderd {
@@ -5822,22 +5833,22 @@ footer .social-list {
     flex-wrap: wrap;
     margin-right: -130px;
     margin-left: -120px;
-}
+  }
 
-.galeris {
-  width: 100%;
-}
+  .galeris {
+    width: 100%;
+  }
 
-.judul {
-  text-align: initial;
-  font-size: 12px;
-}
+  .judul {
+    text-align: initial;
+    font-size: 12px;
+  }
 
-.captionphoto {
-  color: black; 
-  text-align: justify; 
-  font-size: 10px;
-}
+  .captionphoto {
+    color: black;
+    text-align: justify;
+    font-size: 10px;
+  }
 
 }
 
@@ -5863,12 +5874,15 @@ footer .social-list {
   .logo3 {
     margin-right: -150px;
   }
+
   .logo4 {
     margin-right: 100px;
   }
+
   .logo5 {
     margin-right: -150px;
   }
+
   .logo6 {
     margin-right: 100px;
   }
@@ -5892,19 +5906,20 @@ footer .social-list {
   } */
 
   .multi-nav {
-    gap: 2px;
-    margin-left: 35px;
+    gap: 1px;
+    margin-left: -90px;
+    max-width: 55%;
   }
 
   .margin-ftr {
     margin-left: 100px;
   }
-  
+
   .card-orderd {
-      display: flex;
-      flex-wrap: wrap;
-      margin-right: auto;
-      margin-left: auto;
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: auto;
+    margin-left: auto;
   }
 
   .galeris {
@@ -5913,15 +5928,15 @@ footer .social-list {
   }
 
   .judul {
-    text-align: center; 
+    text-align: center;
     font-size: 24px;
     margin-top: 10px;
     margin-bottom: 10px;
   }
-  
+
   .captionphoto {
-    color: black; 
-    text-align: justify; 
+    color: black;
+    text-align: justify;
     font-size: 18px;
   }
 }
@@ -7871,6 +7886,7 @@ footer .social-list {
     font-family: \00003675
   }
 }
+
 .event-schedule-item .schedule-item-info:before {
   content: '';
   -webkit-transition: .35s ease;
@@ -13020,11 +13036,6 @@ blockquote:before {
   }
 }
 
-.pricing-table-col.premium {
-  padding-top: 0;
-  padding-bottom: 0;
-}
-
 @media -sass-debug-info {
   filename {
     font-family: file\:\/\/F\:\/localhost\/giner-html\/template\/assets\/scss\/_site\.scss
@@ -13037,7 +13048,13 @@ blockquote:before {
 
 .pricing-table-col.premium .pricing-table-item:before {
   background: -webkit-gradient(linear, left top, left bottom, from(#0035C1), to(#2459E6));
-  background: linear-gradient(180deg, #0035C1 0%, #2459E6 100%);
+  background: linear-gradient(180deg, rgba(246,191,13,1) 0%, rgb(255, 102, 102) 120%);
+}
+
+.pricing-table-col.diamond .pricing-table-item:before {
+  background: -webkit-gradient(linear, left top, left bottom, from(#0035C1), to(#2459E6));
+  background: linear-gradient(180deg,  rgba(221,22,224,1) 11%,rgba(111,22,190,1) 95%);
+  /* background-image: linear-gradient( 108.7deg,  rgba(221,22,224,1) 11%, rgba(111,22,190,1) 88.2% ); */
 }
 
 @media -sass-debug-info {
@@ -13050,9 +13067,6 @@ blockquote:before {
   }
 }
 
-.pricing-table-col.premium .pricing-table-item>* {
-  color: #fff;
-}
 
 @media -sass-debug-info {
   filename {
@@ -13064,9 +13078,6 @@ blockquote:before {
   }
 }
 
-.pricing-table-col.premium .pricing-table-item .btn {
-  color: #000;
-}
 
 @media -sass-debug-info {
   filename {
@@ -13076,10 +13087,6 @@ blockquote:before {
   line {
     font-family: \000032417
   }
-}
-
-.pricing-table-col.premium .pricing-table-item h3:before {
-  background-color: rgba(234, 234, 234, 0.2);
 }
 
 @media -sass-debug-info {
@@ -13092,9 +13099,6 @@ blockquote:before {
   }
 }
 
-.pricing-table-col.premium .price-list {
-  color: #fff;
-}
 
 @media -sass-debug-info {
   filename {
@@ -13104,10 +13108,6 @@ blockquote:before {
   line {
     font-family: \000032424
   }
-}
-
-.pricing-table-col.premium .price-list i {
-  color: #fff;
 }
 
 @media -sass-debug-info {
@@ -13151,8 +13151,8 @@ blockquote:before {
 }
 
 .pricing-table-col:nth-of-type(3) .pricing-table-item img {
-  top: 47%;
-  left: 54%;
+  top: 59%;
+  left: 52%;
 }
 
 @media -sass-debug-info {
@@ -13228,9 +13228,9 @@ blockquote:before {
 }
 
 .pricing-table-item h3 {
-  line-height: 121px;
+  line-height: 100px;
   text-align: center;
-  color: #232756;
+  color: #000;
   -webkit-transition: .4s ease-out;
   transition: .4s ease-out;
   position: relative;
@@ -13299,7 +13299,7 @@ blockquote:before {
   -ms-flex-pack: center;
   justify-content: center;
   position: relative;
-  color: #0d5aa5;
+  color: #000;
   font-weight: 700;
   line-height: 1;
   padding: 48px 0 35px;
@@ -13352,7 +13352,7 @@ blockquote:before {
 .pricing-table-item .name {
   font-weight: 600;
   font-size: 22px;
-  color: #232756;
+  color: #000;
   text-transform: capitalize;
   margin-bottom: 4px;
 }
@@ -13388,7 +13388,8 @@ blockquote:before {
   max-width: 360px;
   margin: 0 auto;
   padding: 45px 20px 51px 20px;
-  color: #898686;
+  color: #000;
+  font-weight: 500;
   font-family: "Red Hat Display", sans-serif;
 }
 
@@ -13432,7 +13433,7 @@ blockquote:before {
 }
 
 .pricing-table-item .price-list li i {
-  color: #898686;
+  color: #000;
   font-size: 14px;
   margin-right: 19px;
 }
