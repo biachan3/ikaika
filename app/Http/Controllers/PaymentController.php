@@ -222,7 +222,7 @@ class PaymentController extends Controller
                         $data->payment_media = $obj_response->QRCode;
                         $data->gross_amount = $data->gross_amount;
                         $data->uuid = $obj_response->rq_uuid;
-                        $data->payment_ref = $obj_response->trx_id;
+                        // $data->payment_ref = $obj_response->trx_id;
                         $data->save();
                         $details = [
                             'nama' => $data->nama_lengkap,
