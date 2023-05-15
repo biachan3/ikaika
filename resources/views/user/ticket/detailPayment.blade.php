@@ -6,7 +6,7 @@
     </div>
 </div>
 @else
-    @if ($data->status != "settlement" || $data->status != "Sukses")
+    @if ($data->transaction_status != "Sukses")
     <div class="row">
         <div class="col-12">
             @if ($method == "qris")
