@@ -106,6 +106,7 @@ Route::get('/home', 'App\Http\Controllers\UserController@index')->name('user.ind
 
 Route::prefix('dev')->group(function () {
     Route::get('/order', [App\Http\Controllers\DevController::class, 'index_user'])->name('dev.order');
+    Route::get('/genpdf', [App\Http\Controllers\DevController::class, 'pdf_manual'])->name('dev.pdfmanual');
     Route::post('/regis', [App\Http\Controllers\DevController::class, 'regis'])->name('dev.regis');
 
 });
