@@ -331,7 +331,7 @@ class PaymentController extends Controller
                 'Content-Type' => 'application/json'
             ])->post('https://apiikaubaya.waviro.com/api/sendwa', [
                 'nohp' => $nohp,
-                'pesan' => "Selamat Siang Ubayatizen!\n\nTerimakasih kami ucapkan atas partisipasinya dalam\nREUNI AKBAR IKA UBAYA 2023\n\nUntuk itu, kami bermaksud mengirimkan E-PASS sebagai bukti partisipasi saudara dan dapat ditunjukkan saat registrasi acara.\n \n🤫 E-PASS di atas bersifat rahasia dan hanya berlaku untuk 1x registrasi saja, tunjukkan E-PASS di meja registrasi.\n \nJangan lupa untuk hadir dalam rangkaian acara pada 3 Juni 2023.\n \n#StrongerTogether"
+                'pesan' => "Halo Ubayatizen!\n\nTerimakasih kami ucapkan atas partisipasinya dalam\nREUNI AKBAR IKA UBAYA 2023\n\nUntuk itu, kami bermaksud mengirimkan E-PASS sebagai bukti partisipasi saudara dan dapat ditunjukkan saat registrasi acara.\n \n🤫 E-PASS di atas bersifat rahasia dan hanya berlaku untuk 1x registrasi saja, tunjukkan E-PASS di meja registrasi.\n \nJangan lupa untuk hadir dalam rangkaian acara pada 3 Juni 2023.\n \n#StrongerTogether"
             ]);
 
             // Log::info($response)
