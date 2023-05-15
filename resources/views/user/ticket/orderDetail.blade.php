@@ -56,16 +56,18 @@
                                             <b>{{$detail_tx->payment_media}}</b>
                                         </p>
                                         @else
-                                        <div class="row justify-content-center">
-                                            <div class="col-8" style="text-align: center">
-                                                <h5>Silahkan melakukan pembayaran pada QRIS berikut :</h5>
-                                                <p>
-                                                    <img src="https://pulsapaket.com/images/blog/iconQris.png" style="max-width:80%" alt="">
-                                                    <br>
-                                                    <img src="{{$detail_tx->payment_media}}" style="max-width:90%" alt="">
-                                                </p>
-                                            </div>
-                                        </div>
+                                            @if ($data->transaction_status != "Sukses")
+                                                <div class="row justify-content-center">
+                                                    <div class="col-8" style="text-align: center">
+                                                        <h5>Silahkan melakukan pembayaran pada QRIS berikut :</h5>
+                                                        <p>
+                                                            <img src="https://pulsapaket.com/images/blog/iconQris.png" style="max-width:80%" alt="">
+                                                            <br>
+                                                            <img src="{{$detail_tx->payment_media}}" style="max-width:90%" alt="">
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            @endif
 
                                         @endif
                                         <p>Status Pembayaran :
