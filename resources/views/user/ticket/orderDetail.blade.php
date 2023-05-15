@@ -56,7 +56,7 @@
                                             <b>{{$detail_tx->payment_media}}</b>
                                         </p>
                                         @else
-                                            @if ($data->transaction_status != "Sukses")
+                                            @if ($detail_tx->transaction_status != "Sukses")
                                                 <div class="row justify-content-center">
                                                     <div class="col-8" style="text-align: center">
                                                         <h5>Silahkan melakukan pembayaran pada QRIS berikut :</h5>
