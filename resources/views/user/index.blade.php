@@ -254,9 +254,9 @@
     <!--=============== S-HAVE-PREPARED END ===============-->
 
     <!--================= S-PRICING-TABLE =================-->
-    <section class="s-pricing-table">
+    {{-- <section class="s-pricing-table">
         <div class="container">
-            <h2 class="title-conference"><span>Pricing table</span></h2>
+            <h2 class="title-conference"><span>Sponsorship</span></h2>
             <div class="row pricing-table-cover">
                 <div class="col-md-4 pricing-table-col">
                     <div class="pricing-table-item">
@@ -278,16 +278,16 @@
                 </div>
                 <div class="col-md-4 pricing-table-col premium">
                     <div class="pricing-table-item">
-                        <h3>Premium</h3>
+                        <h3>Crown</h3>
                         <div class="price-cover">
-                            <span>$</span>
-                            <div class="price">150</div>
+                            <span>Rp.</span>
+                            <div class="price">30.000.000</div>
                             <img src="{{ asset('Ginger') }}/assets/img/tringle-price-blue.svg" alt="img">
                         </div>
-                        <div class="name">three day</div>
+                        <div class="name">Gratis 5 undangan peserta</div>
                         <div class="price-text">Active Event</div>
-                        <ul class="price-list">
-                            <li><i class="fas fa-check"></i>consectetur adipiscing</li>
+                        <ul class="price-list"> <span style="font-size: 24px; margin: auto; justify-content: center;">Online Campaign</span>
+                            <li><i class="fas fa-check"></i>Logo tercantum pada promo event social media</li>
                             <li><i class="fas fa-check"></i>elit, sed do eiusmod </li>
                             <li><i class="fas fa-check"></i>tempor incididunt</li>
                             <li><i class="fas fa-check"></i>ut labore et dolore</li>
@@ -315,7 +315,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <!--=============== S-PRICING-TABLE END ===============-->
 
 
@@ -697,7 +697,7 @@
                                 <path fill-rule="evenodd"
                                     d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z" />
                             </svg>
-                            <a href="https://wa.me/+6281554971600" style="font-weight: 500; padding-left: 1px;">+62 815 5497 1600
+                            <a href="https://wa.me/+6281554971600" style="font-weight: 500; padding-left: 1px;">+62 812-9157-0084
                             </a>
                         </li>
                         <li>

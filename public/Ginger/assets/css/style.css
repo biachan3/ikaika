@@ -13319,7 +13319,7 @@ blockquote:before {
   position: relative;
   z-index: 1;
   font-size: 24px;
-  padding-top: 10px;
+  padding-top: 0px;
 }
 
 @media -sass-debug-info {
@@ -13335,7 +13335,8 @@ blockquote:before {
 .pricing-table-item .price-cover .price {
   position: relative;
   z-index: 1;
-  font-size: 64px;
+  font-size: 32px;
+  margin-left: 4px;
 }
 
 @media -sass-debug-info {
@@ -13349,8 +13350,8 @@ blockquote:before {
 }
 
 .pricing-table-item .name {
-  font-weight: 700;
-  font-size: 26px;
+  font-weight: 600;
+  font-size: 22px;
   color: #232756;
   text-transform: capitalize;
   margin-bottom: 4px;
@@ -13384,7 +13385,7 @@ blockquote:before {
 
 .pricing-table-item .price-list {
   text-align: left;
-  max-width: 260px;
+  max-width: 360px;
   margin: 0 auto;
   padding: 45px 20px 51px 20px;
   color: #898686;
