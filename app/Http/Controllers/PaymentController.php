@@ -16,6 +16,7 @@ use Uuid;
 use Carbon\Carbon;
 use File;
 use Http;
+use Log;
 
 class PaymentController extends Controller
 {
@@ -130,8 +131,11 @@ class PaymentController extends Controller
 
                 $uppercase = strtoupper("##$signkey##$data->uuid##$now##$data->id##$total_amount_tx##IDR##$comcode##SENDINVOICE##");
                 $signature = hash('sha256', $uppercase);
+                Log::info("REQUEST SIGNATURE PLAIN : ".$uppercase);
+                Log::info("REQUEST SIGNATURE HASH : ".$signature);
+                // dd($signature);
 
-                $response = $client->post($url_endpoint, [
+                $requestData = [
                     'form_params' => [
                         'rq_uuid' => $data->uuid,
                         'rq_datetime' => $now,
@@ -144,11 +148,13 @@ class PaymentController extends Controller
                         'bank_code' => $method,
                         'signature' => $signature
                     ]
-                ]);
+                ];
+                Log::info("REQUEST DATA : ".json_encode($requestData));
+                $response = $client->post($url_endpoint, $requestData);
+                Log::info("RESPONSE DATA : ".($response->getBody()));
 
                 $obj_response = json_decode($response->getBody());
                 // dd($obj_response);
-
                 if($obj_response->error_code == "0000"){
                     $data->payment_method = $method;
                     $data->transaction_status = "Menunggu Pembayaran";
@@ -176,28 +182,37 @@ class PaymentController extends Controller
                     $qr = strtoupper("##$data->uuid##$comcode##$productcode##$data->id##$total_amount_tx##PUSHTOPAY##$signkey##");
                     $signature = hash('sha256', $qr);
                     $credential = "";
+                    Log::info("REQUEST SIGNATURE PLAIN : ".$qr);
+                    Log::info("REQUEST SIGNATURE HASH : ".$signature);
+
                     if($is_production)
                     {
                         $credential = 'U0dXSUtBVUJBWUE6SkRWRERKVE8=';
                     } else {
                         $credential = 'U0dXSUtBQlVBWUE6KSpIVTkrN0pHNA==';
                     }
+                    Log::info("CREDENTIAL QR : ".$credential);
+
+                    $requestData = [
+                        'rq_uuid' => $data->uuid,
+                        'rq_datetime' => $now,
+                        'comm_code' => $comcode,
+                        'amount' => $total_amount_tx,
+                        'order_id' => $data->id,
+                        'product_code' => env('PRODUCT_CODE_QRIS'),
+                        'customer_id' => $data->no_hp,
+                        'signature' => $signature,
+                        'description' => "Tiket Reuni IKA UBAYA $data->uuid ."
+                    ];
+                    Log::info("REQUEST DATA : ".json_encode($requestData));
+
                     $response = $client->post($url_endpoint_qr, [
-                        'form_params' => [
-                            'rq_uuid' => $data->uuid,
-                            'rq_datetime' => $now,
-                            'comm_code' => $comcode,
-                            'amount' => $total_amount_tx,
-                            'order_id' => $data->id,
-                            'product_code' => env('PRODUCT_CODE_QRIS'),
-                            'customer_id' => $data->no_hp,
-                            'signature' => $signature,
-                            'description' => "Tiket Reuni IKA UBAYA $data->uuid"
-                        ],
+                        'form_params' => $requestData,
                         'headers' => [
                             'Authorization' => "Basic $credential"
                         ]
                     ]);
+                    Log::info("RESPONSE DATA : ".($response->getBody()));
 
                     $obj_response = json_decode($response->getBody());
 

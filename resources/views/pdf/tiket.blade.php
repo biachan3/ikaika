@@ -73,7 +73,7 @@
 
             color: #695345;
             font-family: 'klik', sans-serif;
-            font-size: 2.8em;
+            font-size: 2.5em;
             position: fixed;
         }
         .undian{

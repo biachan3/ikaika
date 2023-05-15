@@ -15,6 +15,7 @@ use Http;
 use PDF;
 use Storage;
 use File;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class DevController extends Controller
 {
@@ -110,5 +111,19 @@ class DevController extends Controller
 
         return redirect()->route('detail.trx',$id_trx);
     }
+    public function pdf_manual()
+    {
+        $id_trx = "TX-TO-FH-0099";
+        $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($id_trx));
+        // $qrcode = QrCode::generate($id_trx);
+        $data["name"] = "Sandy Resa Ramadhan,S.H.,CTA.,CPLA.";
+        $data["nomer"] = $id_trx;
+        $data['qr'] = $qrcode;
 
+        $customPaper = array(0,0,1080,1660);
+        $pdf = PDF::loadview('pdf.tiket', $data);
+        $pdf->setPaper($customPaper);
+    	return $pdf->stream("Sandy Resa Ramadhan,S.H.,CTA.,CPLA - Ticket - $id_trx.pdf");
+
+    }
 }
