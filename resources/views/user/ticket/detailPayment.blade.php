@@ -6,12 +6,13 @@
     </div>
 </div>
 @else
-    @if ($data->status != "settlement" || $data->status != "Sukses")
+    @if ($data->transaction_status != "Sukses")
     <div class="row">
         <div class="col-12">
             @if ($method == "qris")
                 <p>Total Nominal : {{$total_amount_tx}}</p>
                 <small>Rp. {{$data->amount + $data->amount_donasi}} + Biaya Penanganan Rp. {{$fee}}</small>
+                @if ($data->transaction_status != "Sukses")
                 <div class="row justify-content-center">
                     <div class="col-8" style="text-align: center">
                         <h5>Silahkan melakukan pembayaran pada QRIS berikut :</h5>
@@ -23,6 +24,7 @@
                     </div>
                 </div>
                 <small>Harap segera melakukan pembayaran sebelum : <b>{{$data->payment_expiry_time}}</b></small>
+                @endif
             @else
                 <p>Total Nominal : {{$total_amount_tx}}</p>
                 <small>Rp. {{$data->amount + $data->amount_donasi}} + Biaya Penanganan Rp. {{$fee}}</small>

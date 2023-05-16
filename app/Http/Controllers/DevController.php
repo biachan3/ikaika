@@ -91,7 +91,7 @@ class DevController extends Controller
         $tiket->no_hp = $data->no_hp;
         $tiket->fakultas = $data->fakultas;
         $tiket->angkatan = $data->angkatan;
-        $tiket->amount = 10000;
+        $tiket->amount = 5000;
 
         $nominal_donasi = 0;
         if ($data->nominal == null || $data->nominal == "") {
