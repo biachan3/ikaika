@@ -13,6 +13,7 @@
     <!-- =================== STYLE =================== -->
     @yield('css')
     <link rel="stylesheet" type="text/css" href="{{ asset('Ginger') }}/assets/css/slick.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('Ginger') }}/assets/css/bootstrap-grid.css">
     <link href="https://use.fontawesome.com/releases/v5.10.1/css/all.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('Ginger') }}/assets/css/nice-select.css">
@@ -96,6 +97,7 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=you_googlemap_key"></script>
     <script src="{{ asset('Ginger') }}/assets/js/parallax.min.js"></script>
     <script src="{{ asset('Ginger') }}/assets/js/scripts.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     
 </body>
 

@@ -570,7 +570,7 @@ h5 {
 }
 
 h6 {
-  font-size: 16px;
+  font-size: 17px;
 }
 
 @media -sass-debug-info {
@@ -1121,7 +1121,7 @@ h2.title {
   }
 
   h6 {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   @media -sass-debug-info {
@@ -5849,7 +5849,6 @@ footer .social-list {
     text-align: justify;
     font-size: 10px;
   }
-
 }
 
 @media (min-width: 480px) {
@@ -14267,7 +14266,7 @@ blockquote:before {
 }
 
 .conference-post-content h4 {
-  font-size: 25px;
+  font-size: 22px;
   font-weight: 600;
   position: relative;
   padding-top: 19px;

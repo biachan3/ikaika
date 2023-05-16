@@ -1,5 +1,3 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 @extends('template.dashboard')
 
 @section('css')
@@ -334,7 +332,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h1 class="modal-title fs-1" id="exampleModalLabel" style="font-size: 2.5 rem;">Crown</h1>
+                    <h1 class="modal-title fs-4" id="exampleModalLabel" style="font-size: 2.5 rem;">Crown</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -375,7 +373,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h1 class="modal-title fs-1" id="exampleModalLabel" style="font-size: 2.5 rem;">Crown</h1>
+                    <h1 class="modal-title fs-4" id="exampleModalLabel" style="font-size: 2.5 rem;">Crown</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -416,7 +414,7 @@
         <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header text-center">
-                    <h1 class="modal-title fs-1" id="exampleModalLabel" style="font-size: 2.5 rem;">Crown</h1>
+                    <h1 class="modal-title fs-4" id="exampleModalLabel" style="font-size: 2.5 rem;">Crown</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -554,7 +552,7 @@
             <h2 class="title-conference title-conference-white"><span>Galeri IKA</span></h2>
             <div class="conference-news-slider">
                 {{-- {{ dd($results) }} --}}
-                @foreach ($results as $result)
+                {{-- @foreach ($results as $result)
                     <div class="conference-news-slide">
                         <div class="conference-news-item">
                             <div class="conference-post-thumbnail">
@@ -567,98 +565,525 @@
                             </div>
                         </div>
                     </div>
-                @endforeach
-                {{-- <div class="conference-news-slide">
+                @endforeach --}}
+                {{-- 2020 --}}
+                <div class="conference-news-slide" data-bs-toggle="modal" data-bs-target="#BaktiSosial">
                     <div class="conference-news-item">
                         <div class="conference-post-thumbnail">
-                            <a href="single-blog.html"><img src="{{ asset('Ginger') }}/assets/img/Donor Darah 2021.jpg"
-                                    alt="img"></a>
+                            <a href="single-blog.html" data-bs-toggle="modal" data-bs-target="#BaktiSosial"><img
+                                    src="{{ asset('Ginger') }}/assets/img/baksos ika.jpg" alt="img"></a>
                         </div>
-                        <div class="date"><span>2021</span></div>
+                        <div class="date"><span>2020</span></div>
                         <div class="conference-post-content">
-                            <h4><a href="single-blog.html">Donor Darah
-                                </a></h4>
+                            <h4>Bakti Sosial IKA Ubaya</h4>
                         </div>
                     </div>
                 </div>
-                <div class="conference-news-slide">
+
+                <div class="conference-news-slide" data-bs-toggle="modal" data-bs-target="#GrandLaunching">
                     <div class="conference-news-item">
                         <div class="conference-post-thumbnail">
-                            <a href="single-blog.html"><img src="{{ asset('Ginger') }}/assets/img/Baksos Covid 2020.jpg"
+                            <a href="single-blog.html" data-bs-toggle="modal" data-bs-target="#GrandLaunching"><img
+                                    src="{{ asset('Ginger') }}/assets/img/launching mars.jpg" alt="img"></a>
+                        </div>
+                        <div class="date"><span>2020</span></div>
+                        <div class="conference-post-content">
+                            <h4>Grand Launching Mars dan Hymne IKA Ubaya</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="conference-news-slide" data-bs-toggle="modal" data-bs-target="#NatalTahunBaru">
+                    <div class="conference-news-item">
+                        <div class="conference-post-thumbnail">
+                            <a href="single-blog.html" data-bs-toggle="modal" data-bs-target="#NatalTahunBaru"><img
+                                    src="{{ asset('Ginger') }}/assets/img/perayaan natal tahun baru.jpg"
                                     alt="img"></a>
                         </div>
                         <div class="date"><span>2020</span></div>
                         <div class="conference-post-content">
-                            <h4><a href="single-blog.html">Bakti Sosial Covid</a></h4>
+                            <h4>Perayaan Natal & Tahun Baru</h4>
                         </div>
                     </div>
                 </div>
-                <div class="conference-news-slide">
+
+                <div class="conference-news-slide" data-bs-toggle="modal" data-bs-target="#RapatKerja">
                     <div class="conference-news-item">
                         <div class="conference-post-thumbnail">
-                            <a href="single-blog.html"><img
-                                    src="{{ asset('Ginger') }}/assets/img/Studium Generale 2022.jpeg" alt="img"></a>
+                            <a href="single-blog.html" data-bs-toggle="modal" data-bs-target="#RapatKerja"><img
+                                    src="{{ asset('Ginger') }}/assets/img/rapat kerja utc.jpg" alt="img"></a>
                         </div>
-                        <div class="date"><span>2022</span></div>
+                        <div class="date"><span>2020</span></div>
                         <div class="conference-post-content">
-                            <h4><a href="single-blog.html">Studium Generale</a></h4>
+                            <h4>Rapat Kerja IKA Ubaya</h4>
                         </div>
                     </div>
                 </div>
-                <div class="conference-news-slide">
+
+                <div class="conference-news-slide" data-bs-toggle="modal" data-bs-target="#StudiEkskursi">
                     <div class="conference-news-item">
                         <div class="conference-post-thumbnail">
-                            <a href="single-blog.html"><img
+                            <a href="single-blog.html" data-bs-toggle="modal" data-bs-target="#StudiEkskursi"><img
                                     src="{{ asset('Ginger') }}/assets/img/Studi Ekskursi 2020.jpg" alt="img"></a>
                         </div>
                         <div class="date"><span>2020</span></div>
                         <div class="conference-post-content">
-                            <h4><a href="single-blog.html">Studi Ekskursi</a></h4>
+                            <h4>Studi Ekskursi Fakultas Hukum</h4>
                         </div>
                     </div>
                 </div>
-                <div class="conference-news-slide">
+
+                {{-- 2021 --}}
+                <div class="conference-news-slide" data-bs-toggle="modal" data-bs-target="#PeluncuranBuku">
                     <div class="conference-news-item">
                         <div class="conference-post-thumbnail">
-                            <a href="single-blog.html"><img
-                                    src="{{ asset('Ginger') }}/assets/img/Rapat Umum Ang Baru 2021.jpg"
-                                    alt="img"></a>
+                            <a href="single-blog.html" data-bs-toggle="modal" data-bs-target="#PeluncuranBuku">
+                                <img src="{{ asset('Ginger') }}/assets/img/peluncuran buku 2.jpg" alt="img"></a>
                         </div>
                         <div class="date"><span>2021</span></div>
                         <div class="conference-post-content">
-                            <h4><a href="single-blog.html">Rapat Umum Anggota Baru</a></h4>
+                            <h4>Peluncuran Buku “Aku dan Ubaya” </h4>
                         </div>
                     </div>
                 </div>
-                <div class="conference-news-slide">
+
+                <div class="conference-news-slide" data-bs-toggle="modal" data-bs-target="#DonorDarah">
                     <div class="conference-news-item">
                         <div class="conference-post-thumbnail">
-                            <a href="single-blog.html"><img src="{{ asset('Ginger') }}/assets/img/Raker IKA 2020.jpg"
-                                    alt="img"></a>
+                            <a href="single-blog.html" data-bs-toggle="modal" data-bs-target="#DonorDarah">
+                                <img src="{{ asset('Ginger') }}/assets/img/donor darah 2.jpg" alt="img"></a>
                         </div>
-                        <div class="date"><span>2020</span></div>
+                        <div class="date"><span>2021</span></div>
                         <div class="conference-post-content">
-                            <h4><a href="single-blog.html">Raker IKA</a></h4>
+                            <h4>Kegiatan Donor Darah bersama IKA Ubaya</h4>
                         </div>
                     </div>
                 </div>
-                <div class="conference-news-slide">
+
+                <div class="conference-news-slide" data-bs-toggle="modal" data-bs-target="#Baksos2">
                     <div class="conference-news-item">
                         <div class="conference-post-thumbnail">
-                            <a href="single-blog.html"><img
-                                    src="{{ asset('Ginger') }}/assets/img/Pelantikan Pengurus IKA 2022.jpeg"
+                            <a href="single-blog.html" data-bs-toggle="modal" data-bs-target="#Baksos2">
+                                <img src="{{ asset('Ginger') }}/assets/img/bakti sosial 2.jpg" alt="img"></a>
+                        </div>
+                        <div class="date"><span>2021</span></div>
+                        <div class="conference-post-content">
+                            <h4>Bakti Sosial kepada
+                                Petugas Command Center 112</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="conference-news-slide" data-bs-toggle="modal" data-bs-target="#BaksosRamadhan">
+                    <div class="conference-news-item">
+                        <div class="conference-post-thumbnail">
+                            <a href="single-blog.html" data-bs-toggle="modal" data-bs-target="#BaksosRamadhan">
+                                <img src="{{ asset('Ginger') }}/assets/img/bakti sosial ramadhan.jpg" alt="img"></a>
+                        </div>
+                        <div class="date"><span>2021</span></div>
+                        <div class="conference-post-content">
+                            <h4>Bakti Sosial IKA Ubaya di Bulan Ramadhan</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="conference-news-slide" data-bs-toggle="modal" data-bs-target="#mou">
+                    <div class="conference-news-item">
+                        <div class="conference-post-thumbnail">
+                            <a href="single-blog.html" data-bs-toggle="modal" data-bs-target="#mou">
+                                <img src="{{ asset('Ginger') }}/assets/img/mou.jpg" alt="img"></a>
+                        </div>
+                        <div class="date"><span>2021</span></div>
+                        <div class="conference-post-content">
+                            <h4>Pendatanganan MOU
+                                pembuatan website Koperasi Maju</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="conference-news-slide" data-bs-toggle="modal" data-bs-target="#penyerahan">
+                    <div class="conference-news-item">
+                        <div class="conference-post-thumbnail">
+                            <a href="single-blog.html" data-bs-toggle="modal" data-bs-target="#penyerahan">
+                                <img src="{{ asset('Ginger') }}/assets/img/penyerahan laporan.jpg" alt="img"></a>
+                        </div>
+                        <div class="date"><span>2021</span></div>
+                        <div class="conference-post-content">
+                            <h4>Penyerahan Laporan Pertanggungjawaban Pengurus IKA Ubaya</h4>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- 2022 --}}
+                <div class="conference-news-slide" data-bs-toggle="modal" data-bs-target="#pelantikan">
+                    <div class="conference-news-item">
+                        <div class="conference-post-thumbnail">
+                            <a href="single-blog.html" data-bs-toggle="modal" data-bs-target="#pelantikan">
+                                <img src="{{ asset('Ginger') }}/assets/img/Pelantikan Pengurus IKA 2022.jpeg"
                                     alt="img"></a>
                         </div>
                         <div class="date"><span>2022</span></div>
                         <div class="conference-post-content">
-                            <h4><a href="single-blog.html">Pelantikan Pengurus IKA</a></h4>
+                            <h4>Pelantikan Pengurus IKA Ubaya</h4>
                         </div>
                     </div>
-                </div> --}}
+                </div>
+
+                <div class="conference-news-slide" data-bs-toggle="modal" data-bs-target="#BukuPersembahan">
+                    <div class="conference-news-item">
+                        <div class="conference-post-thumbnail">
+                            <a href="single-blog.html" data-bs-toggle="modal" data-bs-target="#BukuPersembahan">
+                                <img src="{{ asset('Ginger') }}/assets/img/buku persembahan.jpg" alt="img"></a>
+                        </div>
+                        <div class="date"><span>2022</span></div>
+                        <div class="conference-post-content">
+                            <h4>Penyerahan Buku Persembahan 50th Ubaya dan Persembahan 30th Ubaya</h4>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
     <!--============== CONFERENCE NEWS END ==============-->
+    <!--============== MODAL GALERI ==============-->
+    {{-- 2020 --}}
+    <div class="modal fade" id="BaktiSosial" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h1 class="modal-title fs-4" id="exampleModalLabel" style="font-size: 2.5 rem;">Bakti Sosial IKA
+                        Ubaya</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="text-align: justify;">
+                    <img src="{{ asset('Ginger') }}/assets/img/baksos ika.jpg" alt="img"
+                        style="width: -webkit-fill-available;">
+                    <br>
+                    <h6 style="font-weight: 500; ">Selama masa Pandemi IKA Ubaya terus melakukan bakti
+                        sosial tanpa henti,
+                        dengan membagi-bagikan APD,
+                        masker, alcohol, handsanitizer, vitamin-vitamin dan kebutuhan makanan ke beberapa tempat garda depan
+                        seperti Rumah Sakit, Puskesmas, Kantor polisi, serta pula daerah-daerah perumahan yang banyak
+                        terdampak covid.</h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="GrandLaunching" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h1 class="modal-title fs-4" id="exampleModalLabel" style="font-size: 2.5 rem;">Grand Launching Mars
+                        dan Hymne IKA Ubaya</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="text-align: justify;">
+                    <img src="{{ asset('Ginger') }}/assets/img/launching mars.jpg" alt="img"
+                        style="width: -webkit-fill-available;">
+                    <br>
+                    <h6 style="font-weight: 500; ">Grand Launching Mars dan Hymne IKA Ubaya pada
+                        tanggal 24 Agustus 2020.
+                        Wakil Ketua I IKA Ubaya, Bp.
+                        Drs. Ec. Erwin Haritjahjo menyerahkan penghargaan kepada pencipta lagu Mars dan Hymne IKA Ubaya Sdr.
+                        Dr. Reina A. Hadikusumo, S.E, M.M., M.Kom. alumni Ubaya Fakultas Ekonomi angkatan 1993.
+                        <br><br>
+                        Lagu Mars dan Hymne IKA Ubaya ini juga diaransemen oleh Maestro Musik Indonesia Mas Addie MS. Saat
+                        Grand Launching Mars dan Hymne IKA Ubaya ini untuk pertama kalinya dipersembahkan ke seluruh alumni
+                        dan civitas academica Ubaya dengan iringan Twilite Orchestra dan Twilite Chorus yang megah dan gegap
+                        gempita.
+                    </h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="NatalTahunBaru" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h1 class="modal-title fs-4" id="exampleModalLabel" style="font-size: 2.5 rem;">Perayaan Natal &
+                        Tahun Baru</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="text-align: justify;">
+                    <img src="{{ asset('Ginger') }}/assets/img/perayaan natal tahun baru.jpg" alt="img"
+                        style="width: -webkit-fill-available;">
+                    <br>
+                    <h6 style="font-weight: 500; ">Perayaan Natal 2019 dan Tahun Baru 2020 IKA Ubaya
+                        bersama adik-adik Panti
+                        Asuhan di Integrity Room Lt. 4 Ubaya Ngagel Surabaya.
+                    </h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="RapatKerja" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h1 class="modal-title fs-4" id="exampleModalLabel" style="font-size: 2.5 rem;">Rapat Kerja IKA Ubaya
+                    </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="text-align: justify;">
+                    <img src="{{ asset('Ginger') }}/assets/img/rapat kerja utc.jpg" alt="img"
+                        style="width: -webkit-fill-available;">
+                    <br>
+                    <h6 style="font-weight: 500; ">Rapat Kerja IKA Ubaya tahun 2020 pada tanggal 1-2
+                        Februari 2020 di Ubaya
+                        Training Center Trawas Mojokerto.
+                    </h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="StudiEkskursi" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h1 class="modal-title fs-4" id="exampleModalLabel" style="font-size: 2.5 rem;">Studi Ekskursi
+                        Fakultas Hukum</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="text-align: justify;">
+                    <img src="{{ asset('Ginger') }}/assets/img/Studi Ekskursi 2020.jpg" alt="img"
+                        style="width: -webkit-fill-available;">
+                    <br>
+                    <h6 style="font-weight: 500; ">Studi Ekskursi Fakultas Hukum bersama Komisariat
+                        Fakultas Hukum di
+                        Jakarta dihadiri beberapa alumni FH di Jakarta.
+                    </h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- 2021 --}}
+    <div class="modal fade" id="PeluncuranBuku" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h1 class="modal-title fs-4" id="exampleModalLabel" style="font-size: 2.5 rem;">Peluncuran Buku "Aku
+                        dan Ubaya"</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="text-align: justify;">
+                    <img src="{{ asset('Ginger') }}/assets/img/peluncuran buku 2.jpg" alt="img"
+                        style="width: -webkit-fill-available;">
+                    <br>
+                    <h6 style="font-weight: 500; margin-bottom: 10px;">Peluncuran Buku “Aku dan Ubaya” pada tanggal 17
+                        Agustus 2021. Buku “Aku
+                        dan Ubaya”ini ditulis oleh Penulis wanita Ubaya, yang terdiri dari Alumni, Mahasiswa dan Citivitas
+                        Akademika Ubaya.
+                    </h6>
+                    <img src="{{ asset('Ginger') }}/assets/img/peluncuran buku.jpg" alt="img"
+                        style="width: -webkit-fill-available;">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="DonorDarah" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h1 class="modal-title fs-4" id="exampleModalLabel" style="font-size: 2.5 rem;">Kegiatan Donor Darah
+                        bersama IKA Ubaya </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="text-align: justify;">
+                    <img src="{{ asset('Ginger') }}/assets/img/donor darah.jpg" alt="img"
+                        style="width: -webkit-fill-available;">
+                    <br>
+                    <h6 style="font-weight: 500; margin-bottom: 10px;">Kegiatan Donor Darah bersama IKA Ubaya pada tanggal
+                        22 Agustus 2021 di
+                        PMI Jl. Embong Ploso Surabaya.
+                    </h6>
+                    <img src="{{ asset('Ginger') }}/assets/img/donor darah 2.jpg" alt="img"
+                        style="width: -webkit-fill-available;">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="Baksos2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h1 class="modal-title fs-4" id="exampleModalLabel" style="font-size: 2.5 rem;">Bakti Sosial kepada
+                        Petugas Command Center 112</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="text-align: justify;">
+                    <img src="{{ asset('Ginger') }}/assets/img/bakti sosial 2.jpg" alt="img"
+                        style="width: -webkit-fill-available;">
+                    <br>
+                    <h6 style="font-weight: 500; margin-bottom: 10px;">Bakti Sosial IKA Ubaya dengan membagikan makanan
+                        siap saji dan minuman bergizi kepada para
+                        Petugas Command Center 112, IGD RSUD Dr. Soetomo, dan juga Petugas Pemakaman pada tanggal
+                        20-21 Agustus 2021.
+                    </h6>
+                    <img src="{{ asset('Ginger') }}/assets/img/bakti sosial.jpg" alt="img"
+                        style="width: -webkit-fill-available;">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="BaksosRamadhan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h1 class="modal-title fs-4" id="exampleModalLabel" style="font-size: 2.5 rem;">Bakti Sosial IKA
+                        Ubaya di Bulan Ramadhan</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="text-align: justify;">
+                    <img src="{{ asset('Ginger') }}/assets/img/bakti sosial ramadhan.jpg" alt="img"
+                        style="width: -webkit-fill-available;">
+                    <br>
+                    <h6 style="font-weight: 500; ">Bakti Sosial IKA Ubaya di Bulan Ramadhan dengan
+                        membagikan menu takjil, buka puasa dan bingkisan kepada adik-adik di beberapa Pantia Asuhan di
+                        Surabaya pada tanggal Mei 2021.
+                    </h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="mou" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h1 class="modal-title fs-4" id="exampleModalLabel" style="font-size: 2.5 rem;">Pendatanganan MOU
+                        pembuatan website Koperasi Maju</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="text-align: justify;">
+                    <img src="{{ asset('Ginger') }}/assets/img/mou.jpg" alt="img"
+                        style="width: -webkit-fill-available;">
+                    <br>
+                    <h6 style="font-weight: 500; ">Pendatanganan MOU pembuatan website Koperasi Maju
+                        Bersama Alumni IKA Ubaya bersama Ubaya pada tanggal 28 Nopember 2020.
+                    </h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="penyerahan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h1 class="modal-title fs-4" id="exampleModalLabel" style="font-size: 2.5 rem;">Penyerahan Laporan
+                        Pertanggungjawaban Pengurus IKA Ubaya</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="text-align: justify;">
+                    <img src="{{ asset('Ginger') }}/assets/img/penyerahan laporan.jpg" alt="img"
+                        style="width: -webkit-fill-available;">
+                    <br>
+                    <h6 style="font-weight: 500; margin-bottom: 10px;">Penyerahan Laporan Pertanggungjawaban Pengurus IKA
+                        Ubaya Periode 2017-2021 oleh Ketua Umum Periode 2017-2021 Bp. Dr. Adi Toegarisman, S.H., M.H. kepada
+                        Pimpinan Sidang Rapat Umum Anggota, Bp. Umar Hanafi, S.H.
+                    </h6>
+                    <img src="{{ asset('Ginger') }}/assets/img/penyerahan berita.jpg" alt="img"
+                        style="width: -webkit-fill-available;">
+                    <br>
+                    <h6 style="font-weight: 500; ">Penyerahan Berita Acara Rapat Umum Anggota IKA Ubaya
+                        tahun 2021 dari Pimpinan Sidang kepada Ketua Umum Terpilih Periode 2021-2025 Bp. Ely Shahputra,
+                        S.H., M.H. disaksikan oleh Anggota Sidang dan peserta Sidang Rapat Umum Anggota IKA Ubaya tanggal 19
+                        Desember 2021 di Isyana Ballroom, Hotel Bumi Surabaya.
+                    </h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- 2022 --}}
+    <div class="modal fade" id="pelantikan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h1 class="modal-title fs-4" id="exampleModalLabel" style="font-size: 2.5 rem;">Pelantikan Pengurus
+                        IKA Ubaya</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="text-align: justify;">
+                    <img src="{{ asset('Ginger') }}/assets/img/Pelantikan Pengurus IKA 2022.jpeg" alt="img"
+                        style="width: -webkit-fill-available;">
+                    <br>
+                    <h6 style="font-weight: 500; margin-bottom: 10px;">Pelantikan Pengurus IKA Ubaya Periode 2021-2025 pada
+                        tanggal 30 Januari 2023 di Selasar FBE Ubaya Tenggilis
+                    </h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="BukuPersembahan" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header text-center">
+                    <h1 class="modal-title fs-4" id="exampleModalLabel" style="font-size: 2.5 rem;">Penyerahan Buku
+                        Persembahan 50th Ubaya dan Persembahan 30th Ubaya</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="text-align: justify;">
+                    <img src="{{ asset('Ginger') }}/assets/img/buku persembahan.jpg" alt="img"
+                        style="width: -webkit-fill-available;">
+                    <br>
+                    <h6 style="font-weight: 500; margin-bottom: 10px;">Penyerahan Buku Persembahan 50th Ubaya dan
+                        Persembahan 30th Ubaya dari Bapak Rektor Ubaya, Dr. Ir. Benny Lianto, MMBAT kepada Sekjen IKA Ubaya,
+                        Bp. Umar Hanafi, S.H.
+                    </h6>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--============== MODAL GALERI END ==============-->
 
     <!-- =============== CONFERENCE-MAP =============== -->
     {{-- <section id="location" class="conference-map">
