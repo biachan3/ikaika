@@ -8,6 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
 
     <title>Admin IKA - @yield('title')</title>
 
@@ -87,7 +89,7 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        
+
                         <a class="collapse-item" href="utilities-color.html">All Data</a>
                         <a class="collapse-item" href="utilities-border.html">Lunas/Manual</a>
                         <a class="collapse-item" href="utilities-animation.html">Input Manual</a>

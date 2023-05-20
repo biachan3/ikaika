@@ -82,7 +82,7 @@ Scanner
 
       if (cameras.length > 0) {
 
-        scanner.start(cameras[0]);//bila di mobile adalah kamera belakang
+        scanner.start(cameras[1]);//bila di mobile adalah kamera belakang
 
       } else {
 
