@@ -97,7 +97,7 @@ Scanner
                         alert('No Front camera found!');
                     }
                 }else if($(this).val()==2){
-                    if(cameras[1]!=""){
+                    if(cameras[2]!=""){
                         scanner.start(cameras[1]);
                     }else{
                         alert('No Back camera found!');
