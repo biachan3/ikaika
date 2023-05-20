@@ -28,6 +28,13 @@ class AdminController extends Controller
         return view('admin.tiket.index', compact('results', 'jum_tx', 'jum_sdh', 'uang_lunas', 'uang_blm', 'jum_blm'));
     }
 
+    public function lunas_manual()
+    {
+        // $results = Ticket::all();
+        $results = Ticket::all()->where('transaction_status', '=', 'Sukses');
+        // return dd($results);
+        return view('admin.sidebar.lunas_manual', compact('results'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -58,7 +65,7 @@ class AdminController extends Controller
     public function show($id)
     {
         $ticket = Ticket::findOrFail($id);
-// return dd($ticket);
+        // return dd($ticket);
         return view('admin.tiket.detail', compact('ticket'));
     }
 
@@ -84,14 +91,14 @@ class AdminController extends Controller
     {
         //
     }
-    public function resendWA($id,$no_hp)
+    public function resendWA($id, $no_hp)
     {
         // $no_hp="08125133338";
         $botUrl = 'https://apiikaubaya.waviro.com/api/sendwa';
         $secretKey = 'NJpWs4gWb9vi5Q6hMJPV';
         $nohp = Str::replaceFirst('0', '62', $no_hp);
-        $message = 'Berikut Link untuk Ticket Anda : https://reuni55ubaya.com/user/order/'.$id;
-       
+        $message = 'Berikut Link untuk Ticket Anda : https://reuni55ubaya.com/user/order/' . $id;
+
 
         $response = Http::withHeaders([
             'secretkey' => $secretKey,

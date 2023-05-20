@@ -13,7 +13,6 @@
         }
     </style>
 @endsection
-
 @section('sidebar')
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
@@ -68,8 +67,8 @@
                 data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
 
-                    <a class="collapse-item active" href="/admin">All Data</a>
-                    <a class="collapse-item" href="/admin/lunas_manual">Lunas/Manual</a>
+                    <a class="collapse-item" href="/admin">All Data</a>
+                    <a class="collapse-item active" href="/admin/lunas_manual">Lunas/Manual</a>
                     <a class="collapse-item" href="utilities-animation.html">Input Manual</a>
                 </div>
             </div>
@@ -145,18 +144,13 @@
 
     </ul>
 @endsection
-
 @section('content')
     <div class="col-xl-12 col-lg-12">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h5 class="m-0 font-weight-bold text-primary">Table Transaksi</h5>
                 <br>
-                <h6>Banyaknya Transaksi: {{ $jum_tx }}</h6>
-                <h6>Sudah Lunas: {{ $jum_sdh }} transaksi dengan total uang sebesar: Rp.
-                    {{ number_format($uang_lunas) }}</h6>
-                <h6>Belum Lunas: {{ $jum_blm }} transaksi dengan total uang sebesar: Rp. {{ number_format($uang_blm) }}
-                </h6>
+
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -164,14 +158,13 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Id Tiket</th>
                                 <th>Nama Lengkap</th>
                                 <th>Nomor Handphone</th>
-                                <th>Harga Tiket</th>
-                                <th>Nominal Donasi</th>
-                                <th>Total Bayar</th>
-                                <th>Status</th>
-                                <th>Detail</th>
+                                <th>Fakultas</th>
+                                <th>Angkatan</th>
+                                <th>Payment Ref</th>
+                                <th>Payment Time</th>
+                                <th>Metode Bayar</th>
                                 {{-- <th>Resend WA</th> --}}
 
                             </tr>
@@ -179,14 +172,13 @@
                         <tfoot>
                             <tr>
                                 <th>No</th>
-                                <th>Id Tiket</th>
                                 <th>Nama Lengkap</th>
                                 <th>Nomor Handphone</th>
-                                <th>Harga Tiket</th>
-                                <th>Nominal Donasi</th>
-                                <th>Total Bayar</th>
-                                <th>Status</th>
-                                <th>Detail</th>
+                                <th>Fakultas</th>
+                                <th>Angkatan</th>
+                                <th>Payment Ref</th>
+                                <th>Payment Time</th>
+                                <th>Metode Bayar</th>
                                 {{-- <th>Resend WA</th> --}}
                             </tr>
                         </tfoot>
@@ -196,24 +188,29 @@
                                 $angka = 1;
                             @endphp
                             @foreach ($results as $result)
-                                <tr>
-                                    <td>{{ $angka }}</td>
-                                    <td>{{ $result->id }}</td>
-                                    <td>{{ $result->nama_lengkap }}</td>
-                                    <td>{{ $result->no_hp }}</td>
-                                    <td>{{ $result->amount }}</td>
-                                    <td>{{ $result->amount_donasi }}</td>
-                                    <td>{{ $result->gross_amount }}</td>
-                                    @if ($result->transaction_status == null)
-                                        <td>Terbentuk</td>
-                                    @else
-                                        <td>{{ $result->transaction_status }}</td>
-                                    @endif
-                                    <td> <a href="{{ route('admin.detail', [$result->id]) }}"
-                                            class="btn block btn-xs btn-info">Detail</a></td>
-                                    {{-- <td><a href="{{ route('admin.resendWA', [$result->id, $result->no_hp]) }}"
-                                            class="btn block btn-xs btn-info">Resend WA</a></td> --}}
-                                </tr>
+                                @if ($result->email == null && $result->payment_ref == null)
+                                    <tr style="background-color:#fbff7f;color:#000000;">
+                                        <td>{{ $angka }}</td>
+                                        <td>{{ $result->nama_lengkap }}</td>
+                                        <td>{{ $result->no_hp }}</td>
+                                        <td>{{ $result->fakultas }}</td>
+                                        <td>{{ $result->angkatan }}</td>
+                                        <td>{{ $result->payment_ref }}</td>
+                                        <td>{{ $result->payment_datetime }}</td>
+                                        <td>{{ $result->payment_method }}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td>{{ $angka }}</td>
+                                        <td>{{ $result->nama_lengkap }}</td>
+                                        <td>{{ $result->no_hp }}</td>
+                                        <td>{{ $result->fakultas }}</td>
+                                        <td>{{ $result->angkatan }}</td>
+                                        <td>{{ $result->payment_ref }}</td>
+                                        <td>{{ $result->payment_datetime }}</td>
+                                        <td>{{ $result->payment_method }}</td>
+                                    </tr>
+                                @endif
                                 @php
                                     $angka++;
                                 @endphp

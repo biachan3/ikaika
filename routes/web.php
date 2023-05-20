@@ -32,7 +32,8 @@ Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 
 // Route::middleware('auth')->group(function () {
 
-    Route::prefix('ticket')->name('ticket.')->controller(TicketController::class)->name('ticket.')->group(function () {
+Route::prefix('ticket')->name('ticket.')->controller(TicketController::class)->name('ticket.')->group(
+    function () {
         Route::get('', 'index')->name('index');
         Route::get('register/{id}', 'order')->name("order");
         Route::get('order/', 'create')->name("create");
@@ -40,39 +41,41 @@ Route::get('/', [HomeController::class, 'index'])->name('dashboard');
         Route::post('buy', 'store')->name('store');
         Route::get('buy', 'store1')->name('store1');
     }
-    );
+);
 
-    Route::prefix('admin')->name('admin.')->controller(AdminController::class)->name('admin.')->group(
-        function () {
-            Route::get('', 'index')->name('index');
-            Route::get('/detail/{id}', 'show')->name('detail');
-            Route::get('/resendWA/{id}/{no_hp}', 'resendWA')->name('resendWA');
-        }
-    );
-    Route::prefix('payment')->controller(PaymentController::class)->group(
-        function () {
-            Route::post('/getVirtualAccount', 'getVirtualAccount')->name("getVirtualAccount");
-            // Route::post('/notification/handling', 'notifHandling')->name("notifHandling");
-            Route::post('/inquiry-process', 'inquiryProcess')->name("inquiryProcess");
-            Route::post('/payment-notif', 'notifHandling')->name("notifHandling");
-        }
-    );
-    Route::get('/event', 'App\Http\Controllers\EventController@index')->name('event.index');
+Route::prefix('admin')->name('admin.')->controller(AdminController::class)->name('admin.')->group(
+    function () {
+        Route::get('', 'index')->name('index');
+        Route::get('/lunas_manual', 'lunas_manual')->name('lunas_manual');
+        Route::get('/detail/{id}', 'show')->name('detail');
+        Route::get('/resendWA/{id}/{no_hp}', 'resendWA')->name('resendWA');
+    }
+);
+Route::prefix('payment')->controller(PaymentController::class)->group(
+    function () {
+        Route::post('/getVirtualAccount', 'getVirtualAccount')->name("getVirtualAccount");
+        // Route::post('/notification/handling', 'notifHandling')->name("notifHandling");
+        Route::post('/inquiry-process', 'inquiryProcess')->name("inquiryProcess");
+        Route::post('/payment-notif', 'notifHandling')->name("notifHandling");
+    }
+);
+Route::get('/event', 'App\Http\Controllers\EventController@index')->name('event.index');
 
-    Route::get('/payment', 'App\Http\Controllers\PaymentController@index')->name('payment.index');
-    Route::post('/payment/ping', 'App\Http\Controllers\PaymentController@ping')->name('payment.ping');
-    Route::get('/scanner', 'App\Http\Controllers\ScanController@index')->name('scanner.index');
-    Route::get('/qr/{id}', 'App\Http\Controllers\ScanController@generateQR')->name('qrgenerate');
-    Route::post('/payment/ping', 'App\Http\Controllers\PaymentController@ping')->name('payment.ping');
-    // });
+Route::get('/payment', 'App\Http\Controllers\PaymentController@index')->name('payment.index');
+Route::post('/payment/ping', 'App\Http\Controllers\PaymentController@ping')->name('payment.ping');
+Route::get('/scanner', 'App\Http\Controllers\ScanController@index')->name('scanner.index');
+Route::get('/qr/{id}', 'App\Http\Controllers\ScanController@generateQR')->name('qrgenerate');
+Route::post('/payment/ping', 'App\Http\Controllers\PaymentController@ping')->name('payment.ping');
+// });
 
 
-Route::prefix('ticket')->name('ticket.')->controller(TicketController::class)->name('ticket.')->group(function () {
-    Route::get('', 'index')->name('index');
-    Route::get('register/{id}', 'order')->name("order");
-    Route::get('order/', 'create')->name("create");
-    Route::post('store', 'store')->name('store');
-}
+Route::prefix('ticket')->name('ticket.')->controller(TicketController::class)->name('ticket.')->group(
+    function () {
+        Route::get('', 'index')->name('index');
+        Route::get('register/{id}', 'order')->name("order");
+        Route::get('order/', 'create')->name("create");
+        Route::post('store', 'store')->name('store');
+    }
 );
 Route::get('/sendemail/{order_id}', [App\Http\Controllers\TicketController::class, 'sendemail'])->name('sendemail.manual');
 
@@ -111,7 +114,6 @@ Route::prefix('dev')->group(function () {
     Route::get('/order', [App\Http\Controllers\DevController::class, 'index_user'])->name('dev.order');
     Route::get('/genpdf', [App\Http\Controllers\DevController::class, 'pdf_manual'])->name('dev.pdfmanual');
     Route::post('/regis', [App\Http\Controllers\DevController::class, 'regis'])->name('dev.regis');
-
 });
 
 
