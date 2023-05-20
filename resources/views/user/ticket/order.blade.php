@@ -198,6 +198,6 @@
 <script>
     $("#form-regis").on("submit", function(){
             $("#pageloader").fadeIn();
-        });//submit
+        });
 </script>
 @endsection

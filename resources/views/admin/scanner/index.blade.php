@@ -7,10 +7,33 @@ Scanner
 @section('style')
 <link rel="stylesheet" href="{{asset('css/custom-nvn.css')}}">
 
+<style>
+    #pageloader
+        {
+            background: rgba( 255, 255, 255, 0.8 );
+            display: none;
+            height: 100%;
+            position: fixed;
+            width: 100%;
+            z-index: 9999;
+        }
+
+        #pageloader img
+        {
+            left: 50%;
+            margin-left: -32px;
+            margin-top: -32px;
+            position: absolute;
+            top: 50%;
+        }
+</style>
 <script src="{{ asset('js/instascan.min.js') }}"></script>
 @endsection
 
 @section('content')
+<div id="pageloader">
+    <img src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif" alt="processing..." />
+ </div>
 
 <div class="container-fluid">
 
@@ -34,18 +57,7 @@ Scanner
             </div>
         </div>
         <div class="col-lg-6">
-            <div>
-                <div id="detaildata">
-                    <p>Nama Lengkap : Anu hehehe</p>
-                    <p>Email : Anu hehehe</p>
-                    <p>No HP : 081234567890</p>
-                    <p>Alumni Fakultas : Teknik</p>
-                    <p>Angkatan : 2018</p>
-                    <p>Status Bayar : Lunas</p>
-                </div>
-
-                <button class="btn btn-sm btn-primary shadow-sm"><i class="fas fa-check fa-sm text-white-50"></i> Check-In</button>
-            </div>
+            <div id="response_scan"></div>
         </div>
         <!-- Pie Chart -->
 
@@ -85,48 +97,54 @@ Scanner
     });
     function checkInClick()
     {
-        if (confirm('Apakah anda dengan data di atas? Bila data "NULL", maka otomatis data scan tidak akan masuk.')) {
-            $.ajax({
-                type:'POST',
-                url:'',
-                data: '_token=<?php echo csrf_token() ?>',
-                success:function(data) {
-                    $("#showinfo").html(data.msg);
-                }
-            });
-            alert('Thing was saved to the database. ');
-        } else {
-            alert('Thing was not saved to the database.');
+        $("#pageloader").fadeIn();
+        var idtx = $("#idtiket").val();
+        var attend = 0;
+        var merch = 0;
+        if ($('input#attend').is(':checked')) {
+            attend=1;
         }
+        if ($('input#merch').is(':checked')) {
+            merch=1;
+        }
+
+        $.ajax({
+            type:'POST',
+            url:"{{route('scanner.changeStatus')}}",
+            data: {
+                '_token':'<?php echo csrf_token() ?>',
+                id: idtx,
+                attend: attend,
+                merch: merch
+            },
+            success:function(data) {
+                // console.log(data);
+                $('#response_scan').html(data.msg)
+                $("#pageloader").fadeOut();
+
+            }
+        });
     }
     function showDetailMhs(idtx)
     {
       var str = "kosong;";
         $.ajax({
             type:'POST',
-            url:'',
+            url:"{{route('scanner.getDetailData')}}",
             data: {
                 '_token':'<?php echo csrf_token() ?>',
                 id: idtx
             },
-            success:function(data) {
-                console.log(data);
-                var str = data.pesan;
-                var res = str.split(";");
-                $("#detaildata").html(`
-                    <p>Nama Lengkap : Anu hehehe</p>
-                    <p>Email : Anu hehehe</p>
-                    <p>No HP : 081234567890</p>
-                    <p>Alumni Fakultas : Teknik</p>
-                    <p>Angkatan : 2018</p>
-                    <p>Status Bayar : Lunas</p>
-                `);
+            success: function(data){
+                $('#response_scan').html(data.msg)
             }
+
           });
-        return str;
     }
   </script>
 @endsection
 
 @section('script')
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 @endsection

@@ -3,10 +3,12 @@
 <link rel="stylesheet" href="{{asset('css/custom-nvn.css')}}">
 @endsection
 @section('content')
+@if ($detail_tx->payment_method == null)
 <script>
-    alert("Harap pastikan pilihan metode pembayaran anda! Anda tidak dapat mengubah metode pembayaran kecuali melakukan registrasi ulang!");
 
+    alert("Harap pastikan pilihan metode pembayaran anda! Anda tidak dapat mengubah metode pembayaran kecuali melakukan registrasi ulang!");
 </script>
+@endif
 
 <section id="register" class="s-buy-ticket" style="padding:148px 148px; ">
     <div class="">
