@@ -87,7 +87,7 @@ Scanner
 
     Instascan.Camera.getCameras().then(function (cameras){
         if(cameras.length>0){
-            alert(cameras);
+            // alert(cameras);
             scanner.start(cameras[0]);
             $('[name="options"]').on('change',function(){
                 if($(this).val()==1){

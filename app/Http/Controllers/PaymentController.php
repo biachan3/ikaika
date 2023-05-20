@@ -469,6 +469,7 @@ class PaymentController extends Controller
         }
 
         $tiket->amount_donasi = $nominal_donasi;
+        $tiket->transaction_status = "Sukses - Manual";
         $tiket->save();
 
         $t = new TicketOwner();

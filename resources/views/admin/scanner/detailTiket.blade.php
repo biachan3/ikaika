@@ -1,4 +1,4 @@
-@if ($data->transaction_status == "Sukses")
+@if ($data->transaction_status == "Sukses" || $data->transaction_status == "Sukses - Manual")
 <div>
     <div id="detaildata">
         <p>Nama Lengkap : {{$data->nama_lengkap}}</p>
