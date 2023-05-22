@@ -106,7 +106,7 @@ Route::post('/payment/ping', 'App\Http\Controllers\PaymentController@ping')->nam
 Route::get('/scanner', 'App\Http\Controllers\ScanController@index')->name('scanner.index');
 Route::post('/scanner', 'App\Http\Controllers\ScanController@getDetailData')->name('scanner.getDetailData');
 Route::post('/changeStatus', 'App\Http\Controllers\ScanController@changeStatus')->name('scanner.changeStatus');
-Route::post('/exportTicket', 'App\Http\Controllers\AdminController@exportTicket')->name('admin.exportTicket');
+Route::get('/exportTicket', 'App\Http\Controllers\AdminController@exportTicket')->name('admin.exportTicket');
 
 Route::get('/qr/{id}', 'App\Http\Controllers\ScanController@generateQR')->name('qrgenerate');
 Route::get('/faq', 'App\Http\Controllers\FaqController@index')->name('faq.index');

@@ -88,6 +88,7 @@
             <div class="card-header py-3">
                 <h5 class="m-0 font-weight-bold text-primary">Table Transaksi</h5>
                 <br>
+                <a href="{{route('admin.exportTicket')}}" class="btn btn-primary">Download Data</a>
 
             </div>
             <div class="card-body">

@@ -13,13 +13,13 @@ class TicketsExport implements FromView
     protected $data;
 
     function __construct($data) {
-        $this->tagihan = $tagihan;
+        $this->data = $data;
     }
     public function view(): View
     {
         $data = $this->data;
-
-        return view('admin.export.excel_donwload_sukses', compact('data'));
+        // dd($data);
+        return view('admin.export.excel_download_sukses', compact('data'));
     }
 
 }

@@ -7,6 +7,8 @@ use App\Models\Attendee;
 use App\Models\Ticket;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
+use Excel;
+use App\Exports\TicketsExport;
 
 class AdminController extends Controller
 {
@@ -129,7 +131,8 @@ class AdminController extends Controller
     }
     public function exportTicket()
     {
-        $data = Tiket::where('transaction_status', 'Sukses')->where('transaction_status', 'Sukses - Manual')->get();
+        $data = Ticket::where('transaction_status', 'Sukses')->orWhere('transaction_status', 'Sukses - Manual')->get();
+        // dd($data);
         $date_now = date('Y-m-d');
         $nama_file = 'Rekap Peserta - '.$date_now.'.xlsx';
 
