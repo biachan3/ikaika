@@ -46,20 +46,19 @@
                         <tbody>
                             {{-- {{ dd($ticket) }} --}}
                             {{-- @foreach ($ticket as $result) --}}
-                                <tr>
-                                    <td>{{ $ticket->id }}</td>
-                                    <td>{{ $ticket->event_id }}</td>
-                                    <td>{{ $ticket->bank_id }}</td>
-                                    <td>{{ $ticket->amount }}</td>
-                                    
-                                </tr>
-                                </tr>
+                            <tr>
+                                <td>{{ $ticket->id }}</td>
+                                <td>{{ $ticket->event_id }}</td>
+                                <td>{{ $ticket->bank_id }}</td>
+                                <td>{{ $ticket->amount }}</td>
+
+                            </tr>
+                            </tr>
                             {{-- @endforeach --}}
                         </tbody>
                     </table>
                 </div>
-                <a href="{{ route('admin.index') }}"
-                    class="btn block btn-xs btn-info">Back</a>
+                <a href="{{ route('admin.index') }}" class="btn block btn-xs btn-info">Back</a>
             </div>
         </div>
     </div>

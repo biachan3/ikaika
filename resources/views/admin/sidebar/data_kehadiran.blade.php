@@ -57,7 +57,7 @@
     </li> --}}
 
         <!-- Nav Item - Utilities Collapse Menu -->
-        <li class="nav-item active">
+        <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                 aria-expanded="true" aria-controls="collapseUtilities">
                 <i class="fas fa-fw fa-user"></i>
@@ -68,19 +68,17 @@
                 <div class="bg-white py-2 collapse-inner rounded">
 
                     <a class="collapse-item" href="/admin">All Data</a>
-                    <a class="collapse-item active" href="/admin/lunas_manual">Lunas/Manual</a>
+                    <a class="collapse-item" href="/admin/lunas_manual">Lunas/Manual</a>
                     <a class="collapse-item" href="utilities-animation.html">Input Manual</a>
                 </div>
             </div>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="/admin/data_kehadiran">
+        <li class="nav-item active">
+            <a class="nav-link" href="/data_kehadiran">
                 <i class="fas fa-fw fa-list"></i>
                 <span>Data Kehadiran</span>
             </a>
         </li>
-
-
 
     </ul>
 @endsection
@@ -98,28 +96,22 @@
                         <thead>
                             <tr>
                                 <th>No</th>
+                                <th>Tx_id</th>
                                 <th>Nama Lengkap</th>
-                                <th>Nomor Handphone</th>
-                                <th>Fakultas</th>
-                                <th>Angkatan</th>
-                                <th>Payment Ref</th>
-                                <th>Payment Time</th>
-                                <th>Metode Bayar</th>
-                                {{-- <th>Resend WA</th> --}}
+                                <th>Is_checkin</th>
+                                <th>Is_merch</th>
+
 
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>No</th>
+                                <th>Tx_id</th>
                                 <th>Nama Lengkap</th>
-                                <th>Nomor Handphone</th>
-                                <th>Fakultas</th>
-                                <th>Angkatan</th>
-                                <th>Payment Ref</th>
-                                <th>Payment Time</th>
-                                <th>Metode Bayar</th>
-                                {{-- <th>Resend WA</th> --}}
+                                <th>Is_checkin</th>
+                                <th>Is_merch</th>
+
                             </tr>
                         </tfoot>
                         <tbody>
@@ -128,29 +120,23 @@
                                 $angka = 1;
                             @endphp
                             @foreach ($results as $result)
-                                @if ($result->transaction_status == 'Sukses - Manual')
-                                    <tr style="background-color:#fbff7f;color:#000000;">
-                                        <td>{{ $angka }}</td>
-                                        <td>{{ $result->nama_lengkap }}</td>
-                                        <td>{{ $result->no_hp }}</td>
-                                        <td>{{ $result->fakultas }}</td>
-                                        <td>{{ $result->angkatan }}</td>
-                                        <td>{{ $result->payment_ref }}</td>
-                                        <td>{{ $result->payment_datetime }}</td>
-                                        <td>{{ $result->payment_method }}</td>
-                                    </tr>
-                                @else
-                                    <tr>
-                                        <td>{{ $angka }}</td>
-                                        <td>{{ $result->nama_lengkap }}</td>
-                                        <td>{{ $result->no_hp }}</td>
-                                        <td>{{ $result->fakultas }}</td>
-                                        <td>{{ $result->angkatan }}</td>
-                                        <td>{{ $result->payment_ref }}</td>
-                                        <td>{{ $result->payment_datetime }}</td>
-                                        <td>{{ $result->payment_method }}</td>
-                                    </tr>
-                                @endif
+                                <tr>
+                                    <td>{{ $angka }}</td>
+                                    <td>{{ $result->id }}</td>
+                                    <td>{{ $result->nama_lengkap }}</td>
+                                    @if ($result->is_check_in == 1)
+                                        <td>✅</td>
+                                    @else
+                                        <td>❌</td>
+                                    @endif
+                                    @if ($result->is_take_merch == 1)
+                                        <td>✅</td>
+                                    @else
+                                        <td>❌</td>
+                                    @endif
+
+                                </tr>
+
                                 @php
                                     $angka++;
                                 @endphp
