@@ -1,9 +1,9 @@
 @if ($data->transaction_status == "Sukses" || $data->transaction_status == "Sukses - Manual")
 <div>
     <div id="detaildata">
-        <p>Nama Lengkap : {{$data->nama_lengkap}}</p>
-        <p>Alumni Fakultas : {{$data->fakultas}}</p>
-        <p>Angkatan : {{$data->angkatan}}</p>
+        <p>Nama Lengkap : <b style="font-size: 50px;">{{$data->nama_lengkap}}</b></p>
+        <p>Alumni Fakultas : <b style="font-size: 50px;">{{$data->fakultas}}</b></p>
+        <p>Angkatan : <b style="font-size: 50px;">{{$data->angkatan}}</b></p>
         <hr>
         <p>Status Bayar : {{$data->transaction_status}}</p>
         <p>Tanggal Bayar : {{$data->payment_datetime}}</p>
