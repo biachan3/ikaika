@@ -2,7 +2,7 @@
 <div>
     <div id="detaildata">
         <p>Nama Lengkap : <b style="font-size: 50px;">{{$data->nama_lengkap}}</b></p>
-        <p>Alumni Fakultas : <b style="font-size: 50px;">{{$data->fakultas}}</b></p>
+        <p>Alumni Fakultas : <b style="font-size: 50px; text-transform: capitalize;">{{$data->fakultas}}</b></p>
         <p>Angkatan : <b style="font-size: 50px;">{{$data->angkatan}}</b></p>
         <hr>
         <p>Status Bayar : {{$data->transaction_status}}</p>
