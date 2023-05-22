@@ -47,6 +47,7 @@ Route::prefix('admin')->name('admin.')->controller(AdminController::class)->name
     function () {
         Route::get('', 'index')->name('index');
         Route::get('/lunas_manual', 'lunas_manual')->name('lunas_manual');
+        Route::get('/data_kehadiran', 'data_kehadiran')->name('data_kehadiran');
         Route::get('/detail/{id}', 'show')->name('detail');
         Route::get('/resendWA/{id}/{no_hp}', 'resendWA')->name('resendWA');
     }

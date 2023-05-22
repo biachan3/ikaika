@@ -31,9 +31,16 @@ class AdminController extends Controller
     public function lunas_manual()
     {
         // $results = Ticket::all();
-        $results = Ticket::all()->where('transaction_status', '=', 'Sukses');
+        $results = Ticket::where('transaction_status', '=', 'Sukses')->orWhere('transaction_status', '=', 'Sukses - Manual')->get();
         // return dd($results);
         return view('admin.sidebar.lunas_manual', compact('results'));
+    }
+    public function data_kehadiran()
+    {
+        // $results = Ticket::all();
+        $results = Ticket::where('transaction_status', '=', 'Sukses')->orWhere('transaction_status', '=', 'Sukses - Manual')->get();
+        // return dd($results);
+        return view('admin.sidebar.data_kehadiran', compact('results'));
     }
     /**
      * Show the form for creating a new resource.
