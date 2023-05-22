@@ -317,11 +317,11 @@
     <script src="{{ asset('startbootstrap-sb-admin-2-gh-pages') }}/js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="{{ asset('startbootstrap-sb-admin-2-gh-pages') }}/vendor/chart.js/Chart.min.js"></script>
+    {{-- <script src="{{ asset('startbootstrap-sb-admin-2-gh-pages') }}/vendor/chart.js/Chart.min.js"></script> --}}
 
     <!-- Page level custom scripts -->
-    <script src="{{ asset('startbootstrap-sb-admin-2-gh-pages') }}/js/demo/chart-area-demo.js"></script>
-    <script src="{{ asset('startbootstrap-sb-admin-2-gh-pages') }}/js/demo/chart-pie-demo.js"></script>
+    {{-- <script src="{{ asset('startbootstrap-sb-admin-2-gh-pages') }}/js/demo/chart-area-demo.js"></script>
+    <script src="{{ asset('startbootstrap-sb-admin-2-gh-pages') }}/js/demo/chart-pie-demo.js"></script> --}}
 
     <!-- Page level plugins -->
     <script src="{{ asset('startbootstrap-sb-admin-2-gh-pages') }}/vendor/datatables/jquery.dataTables.min.js"></script>
@@ -330,6 +330,19 @@
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('startbootstrap-sb-admin-2-gh-pages') }}/js/demo/datatables-demo.js"></script>
+
+    {{-- @if (session()->has('status'))
+        <script type="text/javascript">
+        alertKu('success', `{!! session()->get('status') !!}`);
+        </script>
+        {{session()->forget('status')}}
+    @endif
+    @if (session()->has('statusT'))
+        <script type="text/javascript">
+        alertKu('error', `{!! session()->get('statusT') !!}`);
+        </script>
+        {{session()->forget('statusT')}}
+    @endif --}}
 
     @yield('script')
 </body>

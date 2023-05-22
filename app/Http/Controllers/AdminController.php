@@ -120,4 +120,12 @@ class AdminController extends Controller
     {
         //
     }
+    public function exportTicket()
+    {
+        $data = Tiket::where('transaction_status', 'Sukses')->where('transaction_status', 'Sukses - Manual')->get();
+        $date_now = date('Y-m-d');
+        $nama_file = 'Rekap Peserta - '.$date_now.'.xlsx';
+
+        return Excel::download(new TicketsExport($data),$nama_file);
+    }
 }

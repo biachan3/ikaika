@@ -23,10 +23,17 @@ class ScanController extends Controller
     public function getDetailData(Request $request)
     {
         $data = Ticket::find($request->id);
-        return response()->json(array(
-            'status'=>'oke',
-            'msg'=>view('admin.scanner.detailTiket',compact('data'))->render()
-        ),200);
+        if($data == null)
+        {
+            return response()->json(array(
+                'status'=>'notfound'),200);
+        } else {
+            return response()->json(array(
+                'status'=>'oke',
+                'nama'=> $data->nama_lengkap,
+                'msg'=>view('admin.scanner.detailTiket',compact('data'))->render()
+            ),200);
+        }
     }
 
     public function changeStatus(Request $request)
