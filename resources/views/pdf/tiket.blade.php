@@ -10,7 +10,7 @@
 </style>
 
 </head>
-<body style="background-image: url(./image-template/ticket 4-02.png); background-size: cover; height:200px;">
+<body style="background-image: url(./image-template/ticket 5.png); background-size: cover; height:200px;">
 	<style type="text/css">
         @font-face {
             font-family: "klik";

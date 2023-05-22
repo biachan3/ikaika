@@ -302,7 +302,7 @@ class PaymentController extends Controller
             $data["nomer"] = $id_trx;
             $data['qr'] = $qrcode;
 
-            $customPaper = array(0,0,1080,1660);
+            $customPaper = array(0,0,1080,2043.48);
             $pdf = PDF::loadview('pdf.tiket', $data);
             $pdf->setPaper($customPaper);
 
@@ -484,7 +484,7 @@ class PaymentController extends Controller
         $data["nomer"] = $id_trx;
         $data['qr'] = $qrcode;
 
-        $customPaper = array(0,0,1080,1660);
+        $customPaper = array(0,0,1080,2043.48);
         $pdf = PDF::loadview('pdf.tiket', $data);
         $pdf->setPaper($customPaper);
     	return $pdf->stream("$request->nama - Ticket - $id_trx.pdf");
