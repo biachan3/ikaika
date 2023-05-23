@@ -2503,13 +2503,13 @@ header {
 
 @media (max-width: 480px) {
   .conference-header-fixed .nav-list>li>a {
-  color: #fff;
+    color: #fff;
   }
 }
 
 @media (min-width: 480px) {
   .conference-header-fixed .nav-list>li>a {
-  color: #000;
+    color: #000;
   }
 }
 
@@ -5849,6 +5849,42 @@ footer .social-list {
     text-align: justify;
     font-size: 10px;
   }
+
+  .diamond-ct {
+    width: 200px;
+    left: 31%;
+    /* top: 5px; */
+  }
+
+  .diamond-lg {
+    width: 140px;
+    height: 70px !important;
+  }
+
+  .platinum-lg {
+    width: 100%;
+    height: 50px !important;
+  }
+
+  .media-lg {
+    width: 100%;
+  }
+
+  .gold-ct {
+    width: 100%;
+    left: 19%;
+    top: 30px;
+    padding-bottom: 75px;
+  }
+
+  .gold-lg {
+    width: 100%;
+    height: 40px !important;
+  }
+
+  .margin-title {
+    margin-top: 40px;
+  }
 }
 
 @media (min-width: 480px) {
@@ -5937,6 +5973,59 @@ footer .social-list {
     color: black;
     text-align: justify;
     font-size: 18px;
+  }
+
+  .diamond-ct {
+    width: 500px;
+    left: 38%;
+    height: 100px;
+    /* top: -70px; */
+  }
+
+  .diamond-lg {
+    width: 300px;
+  }
+
+  .platinum-ct {
+    width: 1000px;
+    left: 21%;
+    /* top: -110px; */
+  }
+
+  .platinum-lg {
+    width: 150px;
+    max-width: 100%;
+  }
+
+  .media-lg {
+    width: 150px;
+    max-width: 100%;
+  }
+
+  .gold-ct {
+    width: 1000px;
+    left: 37.5%;
+    top: -20px;
+  }
+
+  .gold-lg {
+    width: 130px;
+    height: 40px;
+    max-width: 100%;
+  }
+
+  .mediap {
+    width: 1000px;
+    left: 28%;
+    
+  }
+
+  .confert {
+    margin-bottom: 30px;
+  }
+
+  .margin-title {
+    margin-top: 70px;
   }
 }
 
@@ -13047,12 +13136,12 @@ blockquote:before {
 
 .pricing-table-col.premium .pricing-table-item:before {
   background: -webkit-gradient(linear, left top, left bottom, from(#0035C1), to(#2459E6));
-  background: linear-gradient(180deg, rgba(246,191,13,1) 0%, rgb(255, 102, 102) 120%);
+  background: linear-gradient(180deg, rgba(246, 191, 13, 1) 0%, rgb(255, 102, 102) 120%);
 }
 
 .pricing-table-col.diamond .pricing-table-item:before {
   background: -webkit-gradient(linear, left top, left bottom, from(#0035C1), to(#2459E6));
-  background: linear-gradient(180deg,  rgba(221,22,224,1) 11%,rgba(111,22,190,1) 95%);
+  background: linear-gradient(180deg, rgba(221, 22, 224, 1) 11%, rgba(111, 22, 190, 1) 95%);
   /* background-image: linear-gradient( 108.7deg,  rgba(221,22,224,1) 11%, rgba(111,22,190,1) 88.2% ); */
 }
 
@@ -14325,6 +14414,7 @@ blockquote:before {
   font-size: 16px;
 }
 
+
 @media -sass-debug-info {
   filename {
     font-family: file\:\/\/F\:\/localhost\/giner-html\/template\/assets\/scss\/_site\.scss
@@ -14499,7 +14589,7 @@ blockquote:before {
 }
 
 .s-clients.s-partners {
-  padding: 0 0 160px;
+  padding: 0 0px;
 }
 
 /* --------------------- DANCE-SLIDER ---------------------- */
@@ -22432,7 +22522,7 @@ body.modal .popup-close {
   .s-clients.s-partners,
   .s-buy-ticket,
   .map-with-route {
-    padding-bottom: 100px;
+    padding-bottom: 30px;
   }
 
   @media -sass-debug-info {
@@ -23206,7 +23296,7 @@ body.modal .popup-close {
 
   .title-conference {
     padding: 7px 0;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
   }
 
   @media -sass-debug-info {

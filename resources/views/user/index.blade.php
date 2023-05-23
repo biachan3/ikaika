@@ -1115,38 +1115,103 @@
     <!-- ============= CONFERENCE-MAP END ============= -->
 
     <!--=================== S-CLIENTS ===================-->
-    {{-- <section class="s-clients s-partners">
+    <section class="s-clients s-partners">
         <div class="container">
-            <h2 class="title-conference"><span>Our partners</span></h2>
+            <h2 class="title-conference confert" style="margin-top: 30px;"><span>Sponsored By :</span></h2>
             <div class="clients-cover">
                 <div class="client-slide">
                     <div class="client-slide-cover">
-                        <img src="{{ asset('Ginger') }}/assets/img/client-1.svg" alt="img">
+                        <img src="{{ asset('Ginger') }}/assets/img/BJatim.png" alt="img">
                     </div>
                 </div>
                 <div class="client-slide">
                     <div class="client-slide-cover">
-                        <img src="{{ asset('Ginger') }}/assets/img/client-2.svg" alt="img">
+                        <img src="{{ asset('Ginger') }}/assets/img/JD3.png" alt="img">
                     </div>
                 </div>
                 <div class="client-slide">
                     <div class="client-slide-cover">
-                        <img src="{{ asset('Ginger') }}/assets/img/client-4.svg" alt="img">
+                        <img src="{{ asset('Ginger') }}/assets/img/DLU.png" alt="img">
                     </div>
                 </div>
                 <div class="client-slide">
                     <div class="client-slide-cover">
-                        <img src="{{ asset('Ginger') }}/assets/img/client-5.svg" alt="img">
+                        <img src="{{ asset('Ginger') }}/assets/img/KYO.png" alt="img">
                     </div>
                 </div>
                 <div class="client-slide">
                     <div class="client-slide-cover">
-                        <img src="{{ asset('Ginger') }}/assets/img/client-6.svg" alt="img">
+                        <img src="{{ asset('Ginger') }}/assets/img/tanrise.png" alt="img">
                     </div>
                 </div>
             </div>
+
+            <h4 class="title-conference confert margin-title"><span>Supported By :</span></h4>
+            <div class="clients-cover diamond-ct">
+                <div class="client-slide">
+                    <div class="client-slide-cover diamond-lg">
+                        <img src="{{ asset('Ginger') }}/assets/img/JawaPos.png" alt="img">
+                    </div>
+                </div>
+            </div>
+
+            <div class="clients-cover platinum-ct">
+                <div class="client-slide">
+                    <div class="client-slide-cover platinum-lg">
+                        <img src="{{ asset('Ginger') }}/assets/img/MSA.png" alt="img">
+                    </div>
+                </div>
+                <div class="client-slide">
+                    <div class="client-slide-cover platinum-lg">
+                        <img src="{{ asset('Ginger') }}/assets/img/BJB.png" alt="img">
+                    </div>
+                </div>
+                <div class="client-slide">
+                    <div class="client-slide-cover platinum-lg">
+                        <img src="{{ asset('Ginger') }}/assets/img/Kencana.png" alt="img" style="margin-top: 25%;">
+                    </div>
+                </div>
+                <div class="client-slide">
+                    <div class="client-slide-cover platinum-lg">
+                        <img src="{{ asset('Ginger') }}/assets/img/USM.jpg" alt="img" style="margin-top: 25%;">
+                    </div>
+                </div>
+            </div>
+
+            <div class="clients-cover gold-ct">
+                <div class="client-slide">
+                    <div class="client-slide-cover gold-lg">
+                        <img src="{{ asset('Ginger') }}/assets/img/HappyPup.png" alt="img">
+                    </div>
+                </div>
+                <div class="client-slide">
+                    <div class="client-slide-cover gold-lg">
+                        <img src="{{ asset('Ginger') }}/assets/img/indopicri.png" alt="img" style="margin-top: 20%;">
+                    </div>
+                </div>
+            </div>
+
+            <h4 class="title-conference confert"><span>Media Partner :</span></h4>
+            <div class="clients-cover mediap">
+                <div class="client-slide">
+                    <div class="client-slide-cover media-lg">
+                        <img src="{{ asset('Ginger') }}/assets/img/she.png" alt="img">
+                    </div>
+                </div>
+                <div class="client-slide">
+                    <div class="client-slide-cover media-lg">
+                        <img src="{{ asset('Ginger') }}/assets/img/SuaraSurabaya.png" alt="img">
+                    </div>
+                </div>
+                <div class="client-slide">
+                    <div class="client-slide-cover media-lg">
+                        <img src="{{ asset('Ginger') }}/assets/img/JawaPos.png" alt="img">
+                    </div>
+                </div>
+            </div>
+
         </div>
-    </section> --}}
+    </section>
     <!--================= S-CLIENTS END =================-->
 
     <!--================== S-INSTAGRAM ==================-->
