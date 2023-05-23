@@ -23,6 +23,9 @@
                 <td><b>NO</b></td>
                 <td><b>ID TRANSAKSI</b></td>
                 <td><b>NAMA LENGKAP</b></td>
+                <td><b>FAKULTAS</b></td>
+                <td><b>ANGKATAN</b></td>
+                <td><b>NO HP</b></td>
                 <td><b>HADIR</b></td>
                 <td><b>MERCH</b></td>
             </tr>
@@ -32,6 +35,9 @@
                 <td>{{$loop->iteration}}</td>
                 <td>{{$d->id}}</td>
                 <td>{{$d->nama_lengkap}}</td>
+                <td style="text-transform: capitalize;">{{$d->fakultas}}</td>
+                <td>{{$d->angkatan}}</td>
+                <td>{{$d->no_hp}}</td>
                 <td>{{$d->is_check_in}}</td>
                 <td>{{$d->is_take_merch}}</td>
             </tr>
