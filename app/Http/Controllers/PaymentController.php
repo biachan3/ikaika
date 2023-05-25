@@ -417,91 +417,87 @@ class PaymentController extends Controller
             Excel::import(new TicketImport, request()->file('file'));
             # code..
         } else {
-            dd("not ok");
-            # code...
-        }
+            $prefix = "TO-";
+            $prefix_fakultas = "";
+            $fakultas = $request->fakultas;
 
+            switch ($fakultas) {
+                case "farmasi":
+                    $prefix_fakultas = "FF";
+                    break;
+                case "hukum":
+                    $prefix_fakultas = "FH";
+                    break;
+                case "fbe":
+                    $prefix_fakultas = "FBE";
+                    break;
+                case "politeknik":
+                    $prefix_fakultas = "POL";
+                    break;
+                case "psikologi":
+                    $prefix_fakultas = "FP";
+                    break;
+                case "teknik":
+                    $prefix_fakultas = "FT";
+                    break;
+                case "industri":
+                    $prefix_fakultas = "FIK";
+                    break;
+                case "teknobiologi":
+                    $prefix_fakultas = "FTB";
+                    break;
+                case "kedokteran":
+                    $prefix_fakultas = "FK";
+                    break;
+                case "kia":
+                    $prefix_fakultas = "KIA";
+                    break;
 
-        $prefix = "TO-";
-        $prefix_fakultas = "";
-        $fakultas = $request->fakultas;
+                default:
+                    $prefix_fakultas = "";
+            }
 
-        switch ($fakultas) {
-            case "farmasi":
-                $prefix_fakultas = "FF";
-                break;
-            case "hukum":
-                $prefix_fakultas = "FH";
-                break;
-            case "fbe":
-                $prefix_fakultas = "FBE";
-                break;
-            case "politeknik":
-                $prefix_fakultas = "POL";
-                break;
-            case "psikologi":
-                $prefix_fakultas = "FP";
-                break;
-            case "teknik":
-                $prefix_fakultas = "FT";
-                break;
-            case "industri":
-                $prefix_fakultas = "FIK";
-                break;
-            case "teknobiologi":
-                $prefix_fakultas = "FTB";
-                break;
-            case "kedokteran":
-                $prefix_fakultas = "FK";
-                break;
-            case "kia":
-                $prefix_fakultas = "KIA";
-                break;
+            $last = Ticket::orderBy('created_at','desc')->first();
+            $idcomplement = substr($last->id,-4) + 1;
+            $id_trx = "TX-".$prefix.$prefix_fakultas."-".str_pad($idcomplement,4,"0",STR_PAD_LEFT);;
 
-            default:
-                $prefix_fakultas = "";
-        }
+            $tiket = new Ticket();
+            $tiket->id = $id_trx;
+            $tiket->event_id = 1;
+            $tiket->nama_lengkap = $request->nama;
+            $tiket->email = $request->email;
+            $tiket->no_hp = $request->no_hp;
+            $tiket->fakultas = $request->fakultas;
+            $tiket->angkatan = $request->angkatan;
+            $tiket->amount = 150000;
 
-        $last = Ticket::orderBy('created_at','desc')->first();
-        $idcomplement = substr($last->id,-4) + 1;
-        $id_trx = "TX-".$prefix.$prefix_fakultas."-".str_pad($idcomplement,4,"0",STR_PAD_LEFT);;
-
-        $tiket = new Ticket();
-        $tiket->id = $id_trx;
-        $tiket->event_id = 1;
-        $tiket->nama_lengkap = $request->nama;
-        $tiket->email = $request->email;
-        $tiket->no_hp = $request->no_hp;
-        $tiket->fakultas = $request->fakultas;
-        $tiket->angkatan = $request->angkatan;
-        $tiket->amount = 150000;
-
-        $nominal_donasi = 0;
-        if ($request->nominal == null || $request->nominal == "") {
             $nominal_donasi = 0;
-        } else {
-            $nominal_donasi = $request->nominal;
+            if ($request->nominal == null || $request->nominal == "") {
+                $nominal_donasi = 0;
+            } else {
+                $nominal_donasi = $request->nominal;
+            }
+
+            $tiket->amount_donasi = $nominal_donasi;
+            $tiket->transaction_status = "Sukses - Manual";
+            $tiket->save();
+
+            $t = new TicketOwner();
+            $t->nama = $request->nama;
+            $t->id_tiket = $id_trx;
+            $t->save();
+
+            $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($id_trx));
+            // $qrcode = QrCode::generate($id_trx);
+
+            $data["name"] = $request->nama;
+            $data["nomer"] = $id_trx;
+            $data['qr'] = $qrcode;
+
+            $customPaper = array(0,0,1080,2043.48);
+            $pdf = PDF::loadview('pdf.tiket', $data);
+            $pdf->setPaper($customPaper);
+            return $pdf->stream("$request->nama - Ticket - $id_trx.pdf");
         }
-
-        $tiket->amount_donasi = $nominal_donasi;
-        $tiket->transaction_status = "Sukses - Manual";
-        $tiket->save();
-
-        $t = new TicketOwner();
-        $t->nama = $request->nama;
-        $t->id_tiket = $id_trx;
-        $t->save();
-
-        $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($id_trx));
-        // $qrcode = QrCode::generate($id_trx);
-
-        $data["name"] = $request->nama;
-        $data["nomer"] = $id_trx;
-        $data['qr'] = $qrcode;
-
-        $customPaper = array(0,0,1080,2043.48);
-        $pdf = PDF::loadview('pdf.tiket', $data);
-        $pdf->setPaper($customPaper);
-    	return $pdf->stream("$request->nama - Ticket - $id_trx.pdf");
     }
 }
