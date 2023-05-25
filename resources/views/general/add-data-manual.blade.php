@@ -1,6 +1,6 @@
 <html>
     <h1>Input Data Manual</h1>
-    <form action="{{route('postadddatamanual')}}" method="post" target="_blank">
+    <form action="{{route('postadddatamanual')}}" method="post" enctype="multipart/form-data">
         @csrf
         <select class="" name="fakultas">
             <option selected="selected" disabled>&nbsp; &nbsp; &nbsp; Alumni Fakultas</option>
@@ -21,6 +21,10 @@
         <label for="">Nomer Telpon : </label>
         <input type="text" name="no_hp" id="">
         <br>
+        <label for="">angkatan : </label>
+        <input type="text" name="angakatan" id="">
+        <br>
+        <input type="file" name="file" id="">
         <button type="submit">Submit</button>
     </form>
 </html>
