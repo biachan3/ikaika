@@ -1,6 +1,6 @@
 <html>
     <h1>Input Data Manual</h1>
-    <form action="{{route('postadddatamanual')}}" method="post" enctype="multipart/form-data">
+    <form action="{{route('postadddatamanual')}}" method="post" target="_blank" enctype="multipart/form-data">
         @csrf
         <select class="" name="fakultas">
             <option selected="selected" disabled>&nbsp; &nbsp; &nbsp; Alumni Fakultas</option>
