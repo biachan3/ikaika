@@ -85,7 +85,7 @@
                                 <input id="no_hp" type="text" name="no_hp" placeholder="Nomor HP" required>
                             </div>
                             <div class="mb-3">
-                                <select class="form-select" name="fakultas">
+                                <select class="form-select" name="fakultas" required>
                                     <option selected="selected" disabled>&nbsp; &nbsp; &nbsp; Alumni Fakultas</option>
                                     <option value="kia">&nbsp; &nbsp; &nbsp; Keluarga Ikatan Aumni</option>
                                     <option value="farmasi">&nbsp; &nbsp; &nbsp; Farmasi</option>
