@@ -1,4 +1,4 @@
-comp<?php
+<?php
 
 use Maatwebsite\Excel\Excel;
 
