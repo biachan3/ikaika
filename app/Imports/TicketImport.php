@@ -85,10 +85,10 @@ class TicketImport implements ToCollection, WithHeadingRow
                 $tiket->transaction_status = "Sukses - Manual";
                 $tiket->save();
 
-                $t = new TicketOwner();
-                $t->nama = $row['nama'];
-                $t->id_tiket = $id_trx;
-                $t->save();
+                // $t = new TicketOwner();
+                // $t->nama = $row['nama'];
+                // $t->id_tiket = $id_trx;
+                // $t->save();
                 // $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($id_trx));
                 // $data["name"] = $row['nama'];
                 // $data["nomer"] = $id_trx;
