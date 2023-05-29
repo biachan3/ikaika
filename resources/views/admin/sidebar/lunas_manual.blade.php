@@ -166,6 +166,7 @@
                                         <td>{{ $result->payment_ref }}</td>
                                         <td>{{ $result->payment_datetime }}</td>
                                         <td>{{ $result->payment_method }}</td>
+                                        <td>-</td>
                                     </tr>
                                 @endif
                                 @php
