@@ -181,7 +181,7 @@ class AdminController extends Controller
             $status = false;
             // $response = $e->getResponse();
             // $errMsg = $response->getBody()->getContents();
-            ddd($e->getResponse()->getBody()->getContents());
+            dd($e->getResponse()->getBody()->getContents());
 
             $errMsg = $e->getMessage();
             Log::info("ERROR : ".$e->getMessage());
