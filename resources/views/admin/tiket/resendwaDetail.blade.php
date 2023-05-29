@@ -1,4 +1,4 @@
-<h2>
+<h3>
     Status Resend WA?
     @if ($status)
     ✅
@@ -6,4 +6,4 @@
     ❌
     {{$errMsg}}
     @endif
-</h2>
+</h3>
