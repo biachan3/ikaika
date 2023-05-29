@@ -184,7 +184,7 @@ class AdminController extends Controller
             ddd($e->getResponse()->getBody()->getContents());
 
             $errMsg = $e->getMessage();
-            Log::info("ERROR : ".$th->getMessage());
+            Log::info("ERROR : ".$e->getMessage());
             return response()->json(array(
                 'status'=>'failed',
                 'reason'=> $errMsg,
