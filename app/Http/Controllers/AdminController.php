@@ -187,6 +187,7 @@ class AdminController extends Controller
         } catch (\Exception $th) {
             $status = false;
             $errMsg = $th->getMessage();
+            Log::info("ERROR : " + $th->getMessage());
             return response()->json(array(
                 'status'=>'failed',
                 'reason'=> $errMsg,
