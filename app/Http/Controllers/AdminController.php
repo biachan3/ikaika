@@ -189,7 +189,7 @@ class AdminController extends Controller
 
             return response()->json(array(
                 'status'=>'failed',
-                'reason'=> $th->getMessage()
+                'reason'=> $th->getMessage(),
                 'msg'=>view('admin.resendwaDetail',compact('status'))->render()
             ),400);
         }
