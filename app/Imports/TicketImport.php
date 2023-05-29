@@ -23,6 +23,8 @@ class TicketImport implements ToCollection, WithHeadingRow
     */
     public function collection(Collection $rows)
     {
+        $idcomplement = 756 + 1;
+
         foreach ($rows as $row)
         {
             $nomer = $row["no"];
@@ -68,8 +70,8 @@ class TicketImport implements ToCollection, WithHeadingRow
             }
 
             $last = Ticket::orderBy('created_at','desc')->first();
-            $idcomplement = substr($last->id,-4) + 1;
             $id_trx = "TX-".$prefix.$prefix_fakultas."-".str_pad($idcomplement,4,"0",STR_PAD_LEFT);;
+            $idcomplement++;
 
             try {
                 $tiket = new Ticket();
