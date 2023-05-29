@@ -12,6 +12,8 @@
             text-align: center;
         }
     </style>
+    <link rel="stylesheet" href="{{asset('css/custom-nvn.css')}}">
+
 @endsection
 
 @section('sidebar')
@@ -178,7 +180,7 @@
                                 <th>Total Bayar</th>
                                 <th>Status</th>
                                 <th>Detail</th>
-                                {{-- <th>Resend WA</th> --}}
+                                <th>Resend WA</th>
 
                             </tr>
                         </thead>
@@ -193,7 +195,7 @@
                                 <th>Total Bayar</th>
                                 <th>Status</th>
                                 <th>Detail</th>
-                                {{-- <th>Resend WA</th> --}}
+                                <th>Resend WA</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -217,8 +219,10 @@
                                     @endif
                                     <td> <a href="{{ route('admin.detail', [$result->id]) }}"
                                             class="btn block btn-xs btn-info">Detail</a></td>
-                                    {{-- <td><a href="{{ route('admin.resendWA', [$result->id, $result->no_hp]) }}"
-                                            class="btn block btn-xs btn-info">Resend WA</a></td> --}}
+                                    <td><button type="button" onclick="resendwa('{{ $result->id }}')" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                        Resend WA
+                                      </button>
+                                      </td>
                                 </tr>
                                 @php
                                     $angka++;
@@ -230,4 +234,44 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Status</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" id="modalcontent">
+                <div class="loader"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+@endsection
+
+@section('script')
+<script>
+    function resendwa(id) {
+        $.ajax({
+        type:'POST',
+        url:'{{route("admin.resendwa")}}',
+        data:{
+            '_token':'<?php echo csrf_token() ?>',
+            id: id
+        },
+        success: function(data){
+            // $('#response_payment').clear();
+            $('#response_payment').html(data.msg)
+        }
+    });
+
+    }
+
+</script>
 @endsection
