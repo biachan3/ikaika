@@ -116,10 +116,16 @@ class AdminController extends Controller
         $ticket = Ticket::find($id_trx);
         try {
             $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($id_trx));
+            $length = strlen($ticket->nama_lengkap);
+            $sizeLarge = false;
+            if($length > 45) {
+                $sizeLarge = true;
+            }
 
             $data["name"] = $ticket->nama_lengkap;
             $data["nomer"] = $id_trx;
             $data['qr'] = $qrcode;
+            $data['size'] = $sizeLarge;
 
             $customPaper = array(0,0,1080,2043.48);
             $pdf = PDF::loadview('pdf.tiket', $data);
