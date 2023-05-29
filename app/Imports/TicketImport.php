@@ -12,6 +12,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use PDF;
 use File;
 use Log;
+use Exception;
 
 class TicketImport implements ToCollection, WithHeadingRow
 {
@@ -70,36 +71,42 @@ class TicketImport implements ToCollection, WithHeadingRow
             $idcomplement = substr($last->id,-4) + 1;
             $id_trx = "TX-".$prefix.$prefix_fakultas."-".str_pad($idcomplement,4,"0",STR_PAD_LEFT);;
 
+            try {
+                $tiket = new Ticket();
+                $tiket->id = $id_trx;
+                $tiket->event_id = 1;
+                $tiket->nama_lengkap = $row['nama'];
+                $tiket->fakultas = $row['fakultas'];
+                $tiket->angkatan = $row['angkatan'];
+                $tiket->no_hp = $row['nomor'];
+                $tiket->amount = 150000;
+                $tiket->transaction_status = "Sukses - Manual";
+                $tiket->save();
 
-            $tiket = new Ticket();
-            $tiket->id = $id_trx;
-            $tiket->event_id = 1;
-            $tiket->nama_lengkap = $row['nama'];
-            $tiket->fakultas = $row['fakultas'];
-            $tiket->angkatan = $row['angkatan'];
-            $tiket->no_hp = $row['nomor'];
-            $tiket->amount = 150000;
-            $tiket->transaction_status = "Sukses - Manual";
-            $tiket->save();
+                $t = new TicketOwner();
+                $t->nama = $row['nama'];
+                $t->id_tiket = $id_trx;
+                $t->save();
+                $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($id_trx));
+                $data["name"] = $row['nama'];
+                $data["nomer"] = $id_trx;
+                $data['qr'] = $qrcode;
 
-            $t = new TicketOwner();
-            $t->nama = $row['nama'];
-            $t->id_tiket = $id_trx;
-            $t->save();
-            $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($id_trx));
-            $data["name"] = $row['nama'];
-            $data["nomer"] = $id_trx;
-            $data['qr'] = $qrcode;
+                $customPaper = array(0,0,1080,2043.48);
+                $pdf = PDF::loadview('pdf.tiket', $data);
+                $pdf->setPaper($customPaper);
 
-            $customPaper = array(0,0,1080,2043.48);
-            $pdf = PDF::loadview('pdf.tiket', $data);
-            $pdf->setPaper($customPaper);
+                $directory_path = public_path("public/pdf/$fakultas");
+                $filename = $row['nama']." - Ticket - $id_trx.pdf";
+                Log::info("CETAK MANUAL ID : ".$id_trx."- SUKSES - ".$nomer);
+                $pdf->save(''.$directory_path.'/'.$filename);
+                echo "CETAK MANUAL ID : ".$id_trx."- SUKSES - ".$nomer."<br>";
+            } catch (\Exception $th) {
+                Log::error("CETAK MANUAL ID : ".$id_trx."- gagal - ".$th->getMessage());
 
-            $directory_path = public_path('public/pdf');
-            $filename="Ticket-$id_trx.pdf";
-            Log::info("CETAK MANUAL ID : ".$id_trx."- SUKSES - ".$nomer);
-            $pdf->save(''.$directory_path.'/'.$filename);
-            echo "CETAK MANUAL ID : ".$id_trx."- SUKSES - ".$nomer;
+                echo 'Message: ' .$e->getMessage();
+            }
+
             // $fileurl = url("/public/public/pdf/$filename");
 
         }
