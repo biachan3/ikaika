@@ -470,7 +470,11 @@ class PaymentController extends Controller
             $tiket->fakultas = $request->fakultas;
             $tiket->angkatan = $request->angkatan;
             $tiket->amount = 150000;
-
+            $length = strlen($request->nama);
+            $sizeLarge = false;
+            if($length > 45) {
+                $sizeLarge = true;
+            }
             $nominal_donasi = 0;
             if ($request->nominal == null || $request->nominal == "") {
                 $nominal_donasi = 0;
@@ -493,7 +497,8 @@ class PaymentController extends Controller
             $data["name"] = $request->nama;
             $data["nomer"] = $id_trx;
             $data['qr'] = $qrcode;
-
+            $data['size'] = $sizeLarge;
+            // dd($data['size']."-". $length);
             $customPaper = array(0,0,1080,2043.48);
             $pdf = PDF::loadview('pdf.tiket', $data);
             $pdf->setPaper($customPaper);

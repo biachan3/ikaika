@@ -87,19 +87,19 @@ class TicketImport implements ToCollection, WithHeadingRow
                 $t->nama = $row['nama'];
                 $t->id_tiket = $id_trx;
                 $t->save();
-                $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($id_trx));
-                $data["name"] = $row['nama'];
-                $data["nomer"] = $id_trx;
-                $data['qr'] = $qrcode;
+                // $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($id_trx));
+                // $data["name"] = $row['nama'];
+                // $data["nomer"] = $id_trx;
+                // $data['qr'] = $qrcode;
 
-                $customPaper = array(0,0,1080,2043.48);
-                $pdf = PDF::loadview('pdf.tiket', $data);
-                $pdf->setPaper($customPaper);
+                // $customPaper = array(0,0,1080,2043.48);
+                // $pdf = PDF::loadview('pdf.tiket', $data);
+                // $pdf->setPaper($customPaper);
 
-                $directory_path = public_path("public/pdf/$fakultas");
-                $filename = $row['nama']." - Ticket - $id_trx.pdf";
+                // $directory_path = public_path("public/pdf/$fakultas");
+                // $filename = $row['nama']." - Ticket - $id_trx.pdf";
                 Log::info("CETAK MANUAL ID : ".$id_trx."- SUKSES - ".$nomer);
-                $pdf->save(''.$directory_path.'/'.$filename);
+                // $pdf->save(''.$directory_path.'/'.$filename);
                 echo "CETAK MANUAL ID : ".$id_trx."- SUKSES - ".$nomer."<br>";
             } catch (\Exception $th) {
                 Log::error("CETAK MANUAL ID : ".$id_trx."- gagal - ".$th->getMessage());
