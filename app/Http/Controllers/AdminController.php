@@ -15,6 +15,7 @@ use Uuid;
 use Carbon\Carbon;
 use File;
 use Log;
+use Exception;
 
 class AdminController extends Controller
 {
@@ -113,83 +114,86 @@ class AdminController extends Controller
         $url_media = 'https://apiikaubaya.waviro.com/api/sendmedia';
         $id_trx = $request->id;
         $ticket = Ticket::find($id_trx);
+        try {
+            $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($id_trx));
 
-        $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($id_trx));
+            $data["name"] = $ticket->nama_lengkap;
+            $data["nomer"] = $id_trx;
+            $data['qr'] = $qrcode;
 
-        $data["name"] = $ticket->nama_lengkap;
-        $data["nomer"] = $id_trx;
-        $data['qr'] = $qrcode;
+            $customPaper = array(0,0,1080,2043.48);
+            $pdf = PDF::loadview('pdf.tiket', $data);
+            $pdf->setPaper($customPaper);
 
-        $customPaper = array(0,0,1080,2043.48);
-        $pdf = PDF::loadview('pdf.tiket', $data);
-        $pdf->setPaper($customPaper);
+            $directory_path = public_path('public/pdf');
+            $secretKey = 'NJpWs4gWb9vi5Q6hMJPV';
+            $nohp = Str::replaceFirst('0', '62', $ticket->no_hp);
 
-        $directory_path = public_path('public/pdf');
-        $secretKey = 'NJpWs4gWb9vi5Q6hMJPV';
-        $nohp = Str::replaceFirst('0', '62', $ticket->no_hp);
+            if(!File::exists($directory_path)) {
 
-        if(!File::exists($directory_path)) {
+                File::makeDirectory($directory_path, $mode = 0755, true, true);
+            }
+            $filename="Ticket-$id_trx.pdf";
+            $pdf->save(''.$directory_path.'/'.$filename);
+            $fileurl = url("/public/public/pdf/$filename");
 
-            File::makeDirectory($directory_path, $mode = 0755, true, true);
+            // $requestChat = [
+            //     'nohp' => $nohp,
+            //     'pesan' => "Halo Sahabat IKA Ubaya 🙌🏻!\n\nTerimakasih kami ucapkan atas partisipasinya dalam\n*REUNI AKBAR IKA UBAYA 2023*\n\nUntuk itu, kami bermaksud mengirimkan E-PASS sebagai bukti partisipasi saudara dan dapat ditunjukkan saat registrasi acara.\n \n🤫 E-PASS di atas bersifat rahasia dan hanya berlaku untuk 1x registrasi saja, tunjukkan E-PASS di meja registrasi.\n \nOpen Registrasi  : 17:00 WIB \n\nJangan lupa untuk hadir dalam rangkaian acara pada 3 Juni 2023.\n \n#reuniakbarubaya2023\n#StrongerTogether"
+            // ];
+            $requestChat = "{
+                'nohp:'. $nohp,
+                'pesan': 'Halo Sahabat IKA Ubaya 🙌🏻!\n\nTerimakasih kami ucapkan atas partisipasinya dalam\n*REUNI AKBAR IKA UBAYA 2023*\n\nUntuk itu, kami bermaksud mengirimkan E-PASS sebagai bukti partisipasi saudara dan dapat ditunjukkan saat registrasi acara.\n \n🤫 E-PASS di atas bersifat rahasia dan hanya berlaku untuk 1x registrasi saja, tunjukkan E-PASS di meja registrasi.\n \nOpen Registrasi  : 17:00 WIB \n\nJangan lupa untuk hadir dalam rangkaian acara pada 3 Juni 2023.\n \n#reuniakbarubaya2023\n#StrongerTogether'
+            }";
+            Log::info("GM - Request Chat : ".$requestChat);
+            $requestMedia = "{
+                'nohp:'$nohp,
+                'pesan: '',
+                'mediaurl': $fileurl
+            }";
+            Log::info("GM - Request Media : ".json_encode($requestMedia));
+
+            $responseChat = $client->post($url_chat, [
+                'body' => $requestChat,
+                'headers' => [
+                    'accept' => 'application/json',
+                    'content-type' => 'application/json',
+                    'secretkey' => $secretKey
+                ]
+            ]);
+            Log::info("GM - Response Chat : ".($responseChat->getBody()));
+
+            $responseMedia = $client->post($url_media, [
+                'body' => $requestMedia,
+                'headers' => [
+                    'accept' => 'application/json',
+                    'content-type' => 'application/json',
+                    'secretkey' => $secretKey
+                ]
+            ]);
+            Log::info("GM - Response Media : ".($responseMedia->getBody()));
+
+            $obj_response_chat = json_decode($responseChat->getBody());
+            $obj_response_media = json_decode($responseMedia->getBody());
+            $status = false;
+            if ($obj_response_chat->success == true && $obj_response_media->success == true) {
+                $status = true;
+            }
+            return response()->json(array(
+                'status'=>'oke',
+                'msg'=>view('admin.resendwaDetail',compact('status'))->render()
+            ),200);
+
+        } catch (\Exception $th) {
+            $status = false;
+
+            return response()->json(array(
+                'status'=>'failed',
+                'reason'=> $th->getMessage()
+                'msg'=>view('admin.resendwaDetail',compact('status'))->render()
+            ),400);
         }
-        $filename="Ticket-$id_trx.pdf";
-        $pdf->save(''.$directory_path.'/'.$filename);
-        $fileurl = url("/public/public/pdf/$filename");
 
-        // $requestChat = [
-        //     'nohp' => $nohp,
-        //     'pesan' => "Halo Sahabat IKA Ubaya 🙌🏻!\n\nTerimakasih kami ucapkan atas partisipasinya dalam\n*REUNI AKBAR IKA UBAYA 2023*\n\nUntuk itu, kami bermaksud mengirimkan E-PASS sebagai bukti partisipasi saudara dan dapat ditunjukkan saat registrasi acara.\n \n🤫 E-PASS di atas bersifat rahasia dan hanya berlaku untuk 1x registrasi saja, tunjukkan E-PASS di meja registrasi.\n \nOpen Registrasi  : 17:00 WIB \n\nJangan lupa untuk hadir dalam rangkaian acara pada 3 Juni 2023.\n \n#reuniakbarubaya2023\n#StrongerTogether"
-        // ];
-        $requestChat = "{
-            'nohp:'. $nohp,
-            'pesan': 'Halo Sahabat IKA Ubaya 🙌🏻!\n\nTerimakasih kami ucapkan atas partisipasinya dalam\n*REUNI AKBAR IKA UBAYA 2023*\n\nUntuk itu, kami bermaksud mengirimkan E-PASS sebagai bukti partisipasi saudara dan dapat ditunjukkan saat registrasi acara.\n \n🤫 E-PASS di atas bersifat rahasia dan hanya berlaku untuk 1x registrasi saja, tunjukkan E-PASS di meja registrasi.\n \nOpen Registrasi  : 17:00 WIB \n\nJangan lupa untuk hadir dalam rangkaian acara pada 3 Juni 2023.\n \n#reuniakbarubaya2023\n#StrongerTogether'
-        }";
-        Log::info("GM - Request Chat : ".$requestChat);
-        $requestMedia = "{
-            'nohp:'$nohp,
-            'pesan: '',
-            'mediaurl': $fileurl
-        }";
-        Log::info("GM - Request Media : ".json_encode($requestMedia));
-
-        $responseChat = $client->post($url_chat, [
-            'body' => $requestChat,
-            'headers' => [
-                'accept' => 'application/json',
-                'content-type' => 'application/json',
-                'secretkey' => $secretKey
-            ]
-        ]);
-        Log::info("GM - Response Chat : ".($responseChat->getBody()));
-
-        $responseMedia = $client->post($url_media, [
-            'body' => $requestMedia,
-            'headers' => [
-                'accept' => 'application/json',
-                'content-type' => 'application/json',
-                'secretkey' => $secretKey
-            ]
-        ]);
-        Log::info("GM - Response Media : ".($responseMedia->getBody()));
-
-        $obj_response_chat = json_decode($responseChat->getBody());
-        $obj_response_media = json_decode($responseMedia->getBody());
-        $status = false;
-        if ($obj_response_chat->success == true && $obj_response_media->success == true) {
-            $status = true;
-        }
-        // $response = Http::withHeaders([
-        //     'secretkey' => $secretKey,
-        //     'Content-Type' => 'application/json'
-        // ])->post($botUrl, [
-        //     'nohp' => $nohp,
-        //     'pesan' => $message
-        // ]);
-
-        return response()->json(array(
-            'status'=>'oke',
-            'msg'=>view('admin.resendwaDetail',compact('status'))->render()
-        ),200);
     }
     /**
      * Remove the specified resource from storage.
