@@ -191,7 +191,7 @@ class AdminController extends Controller
                 'status'=>'failed',
                 'reason'=> $errMsg,
                 'msg'=>view('admin.tiket.resendwaDetail',compact('status','errMsg'))->render()
-            ),400);
+            ),200);
         }
 
     }

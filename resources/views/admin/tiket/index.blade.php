@@ -266,7 +266,7 @@
             id: id
         },
         success: function(data){
-            // $('#response_payment').clear();
+            console.log(data);
             $('#modalcontent').html(data.msg)
         }
     });
