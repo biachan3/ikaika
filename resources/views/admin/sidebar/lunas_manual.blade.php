@@ -202,6 +202,8 @@
 @section('script')
 <script>
     function resendwa(id) {
+        $('#modalcontent').clear();
+
         $.ajax({
         type:'POST',
         url:'{{route("admin.resendwa")}}',

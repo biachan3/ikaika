@@ -178,6 +178,7 @@ class AdminController extends Controller
             if ($obj_response_chat->success == true && $obj_response_media->success == true) {
                 $status = true;
                 $ticket->wa_sent = 1;
+                $ticket->save();
             }
             return response()->json(array(
                 'status'=>'oke',
