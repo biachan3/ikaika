@@ -108,7 +108,7 @@ class AdminController extends Controller
     }
     public function resendwa(Request $request)
     {
-        // $no_hp="08125133338";
+        $client = new \GuzzleHttp\Client();
         $url_chat = 'https://apiikaubaya.waviro.com/api/sendwa';
         $url_media = 'https://apiikaubaya.waviro.com/api/sendmedia';
         $id_trx = $request->id;
