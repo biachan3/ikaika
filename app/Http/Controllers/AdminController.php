@@ -112,6 +112,8 @@ class AdminController extends Controller
         $url_chat = 'https://apiikaubaya.waviro.com/api/sendwa';
         $url_media = 'https://apiikaubaya.waviro.com/api/sendmedia';
         $id_trx = $request->id;
+        $ticket = Ticket::find($id_trx);
+
         $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($id_trx));
 
         $data["name"] = $ticket->nama_lengkap;
