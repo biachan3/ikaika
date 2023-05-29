@@ -177,12 +177,13 @@ class AdminController extends Controller
                 'msg'=>view('admin.tiket.resendwaDetail',compact('status'))->render()
             ),200);
 
-        } catch (Exception $th) {
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
             $status = false;
             // $response = $e->getResponse();
             // $errMsg = $response->getBody()->getContents();
+            ddd($e->getResponse()->getBody()->getContents());
 
-            $errMsg = $th->getMessage();
+            $errMsg = $e->getMessage();
             Log::info("ERROR : ".$th->getMessage());
             return response()->json(array(
                 'status'=>'failed',
