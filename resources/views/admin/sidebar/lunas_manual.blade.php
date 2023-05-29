@@ -202,7 +202,7 @@
 @section('script')
 <script>
     function resendwa(id) {
-        $('#modalcontent').clear();
+        $('#modalcontent').html(`<div class="loader"></div>`);
 
         $.ajax({
         type:'POST',
