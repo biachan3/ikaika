@@ -101,7 +101,7 @@ class TicketImport implements ToCollection, WithHeadingRow
                 Log::info("CETAK MANUAL ID : ".$id_trx."- SUKSES - ".$nomer);
                 // $pdf->save(''.$directory_path.'/'.$filename);
                 echo "CETAK MANUAL ID : ".$id_trx."- SUKSES - ".$nomer."<br>";
-            } catch (\Exception $th) {
+            } catch (\Exception $e) {
                 Log::error("CETAK MANUAL ID : ".$id_trx."- gagal - ".$th->getMessage());
 
                 echo 'Message: ' .$e->getMessage();
