@@ -151,6 +151,8 @@ class AdminController extends Controller
         $responseChat = $client->post($url_chat, [
             'body' => $requestChat,
             'headers' => [
+                'accept' => 'application/json',
+                'content-type' => 'application/json',
                 'secretkey' => $secretKey
             ]
         ]);
@@ -159,6 +161,8 @@ class AdminController extends Controller
         $responseMedia = $client->post($url_media, [
             'body' => $requestMedia,
             'headers' => [
+                'accept' => 'application/json',
+                'content-type' => 'application/json',
                 'secretkey' => $secretKey
             ]
         ]);
