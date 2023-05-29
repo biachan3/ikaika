@@ -181,7 +181,7 @@ class AdminController extends Controller
             }
             return response()->json(array(
                 'status'=>'oke',
-                'msg'=>view('admin.resendwaDetail',compact('status'))->render()
+                'msg'=>view('admin.tiket.resendwaDetail',compact('status'))->render()
             ),200);
 
         } catch (\Exception $th) {
@@ -190,7 +190,7 @@ class AdminController extends Controller
             return response()->json(array(
                 'status'=>'failed',
                 'reason'=> $th->getMessage(),
-                'msg'=>view('admin.resendwaDetail',compact('status'))->render()
+                'msg'=>view('admin.tiket.resendwaDetail',compact('status'))->render()
             ),400);
         }
 
