@@ -12,6 +12,8 @@
             text-align: center;
         }
     </style>
+        <link rel="stylesheet" href="{{asset('css/custom-nvn.css')}}">
+
 @endsection
 @section('sidebar')
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
@@ -105,7 +107,7 @@
                                 <th>Payment Ref</th>
                                 <th>Payment Time</th>
                                 <th>Metode Bayar</th>
-                                {{-- <th>Resend WA</th> --}}
+                                <th>Resend WA</th>
 
                             </tr>
                         </thead>
@@ -119,7 +121,7 @@
                                 <th>Payment Ref</th>
                                 <th>Payment Time</th>
                                 <th>Metode Bayar</th>
-                                {{-- <th>Resend WA</th> --}}
+                                <th>Resend WA</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -138,6 +140,21 @@
                                         <td>{{ $result->payment_ref }}</td>
                                         <td>{{ $result->payment_datetime }}</td>
                                         <td>{{ $result->payment_method }}</td>
+                                        @if ($result->wa_sent == 1)
+                                        <td>
+                                            <button type="button" onclick="resendwa('{{ $result->id }}')" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal">
+                                                Resend WA
+                                            </button>
+                                        </td>
+
+                                        @else
+                                        <td>
+                                            <button type="button" onclick="resendwa('{{ $result->id }}')" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                                Resend WA
+                                            </button>
+                                        </td>
+
+                                        @endif
                                     </tr>
                                 @else
                                     <tr>
@@ -161,4 +178,43 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Status</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" id="modalcontent">
+                <div class="loader"></div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+@endsection
+@section('script')
+<script>
+    function resendwa(id) {
+        $.ajax({
+        type:'POST',
+        url:'{{route("admin.resendwa")}}',
+        data:{
+            '_token':'<?php echo csrf_token() ?>',
+            id: id
+        },
+        success: function(data){
+            console.log(data);
+            $('#modalcontent').html(data.msg)
+        }
+    });
+
+    }
+
+</script>
 @endsection
