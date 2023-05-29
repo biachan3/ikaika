@@ -153,7 +153,7 @@ class AdminController extends Controller
                     'content-type' => 'application/json',
                     'secretkey' => $secretKey
                 ]
-            ]);
+            ], ['http_errors' => false]);
             Log::info("GM - Response Chat : ".($responseChat->getBody()));
 
             $responseMedia = $client->post($url_media, [
@@ -163,7 +163,7 @@ class AdminController extends Controller
                     'content-type' => 'application/json',
                     'secretkey' => $secretKey
                 ]
-            ]);
+            ], ['http_errors' => false]);
             Log::info("GM - Response Media : ".($responseMedia->getBody()));
 
             $obj_response_chat = json_decode($responseChat->getBody());
