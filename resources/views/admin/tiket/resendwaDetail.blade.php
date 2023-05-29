@@ -4,5 +4,6 @@
     ✅
     @else
     ❌
+    {{$errMsg}}
     @endif
 </h2>

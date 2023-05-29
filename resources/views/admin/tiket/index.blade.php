@@ -267,7 +267,7 @@
         },
         success: function(data){
             // $('#response_payment').clear();
-            $('#response_payment').html(data.msg)
+            $('#modalcontent').html(data.msg)
         }
     });
 

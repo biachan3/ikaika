@@ -186,11 +186,11 @@ class AdminController extends Controller
 
         } catch (\Exception $th) {
             $status = false;
-
+            $errMsg = $th->getMessage();
             return response()->json(array(
                 'status'=>'failed',
-                'reason'=> $th->getMessage(),
-                'msg'=>view('admin.tiket.resendwaDetail',compact('status'))->render()
+                'reason'=> $errMsg,
+                'msg'=>view('admin.tiket.resendwaDetail',compact('status','errMsg'))->render()
             ),400);
         }
 
