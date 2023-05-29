@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Excel;
 use App\Exports\TicketsExport;
+use PDF;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Uuid;
+use Carbon\Carbon;
+use File;
+use Log;
 
 class AdminController extends Controller
 {
