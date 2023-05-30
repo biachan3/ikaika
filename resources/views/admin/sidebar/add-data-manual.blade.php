@@ -74,7 +74,7 @@
             </div>
         </li>
         <li class="nav-item active">
-            <a class="nav-link" href="/data_kehadiran">
+            <a class="nav-link" href="/admin/data_kehadiran">
                 <i class="fas fa-fw fa-list"></i>
                 <span>Data Kehadiran</span>
             </a>
