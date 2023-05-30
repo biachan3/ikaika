@@ -54,14 +54,14 @@ class AuthenticatedSessionController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        if($user->role_id == "1"){
-            return redirect('home');
-        }
+        // if($user->role_id == "1"){
+        //     return redirect('home');
+        // }
 
-        if($user->role_id == "2"){
-            return redirect('guru/beranda');
-        }
+        // if($user->role_id == "2"){
+        //     return redirect('guru/beranda');
+        // }
 
-        
+
     }
 }
