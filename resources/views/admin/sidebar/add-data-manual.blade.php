@@ -69,11 +69,11 @@
 
                     <a class="collapse-item" href="/admin">All Data</a>
                     <a class="collapse-item" href="/admin/lunas_manual">Lunas/Manual</a>
-                    <a class="collapse-item" href="/admin/add-data-manual">Input Manual</a>
+                    <a class="collapse-item active" href="/admin/add-data-manual">Input Manual</a>
                 </div>
             </div>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
             <a class="nav-link" href="/admin/data_kehadiran">
                 <i class="fas fa-fw fa-list"></i>
                 <span>Data Kehadiran</span>
