@@ -46,6 +46,7 @@ Route::prefix('ticket')->name('ticket.')->controller(TicketController::class)->n
 Route::prefix('admin')->name('admin.')->controller(AdminController::class)->name('admin.')->group(
     function () {
         Route::get('', 'index')->name('index');
+        Route::get('/add-data-manual', 'App\Http\Controllers\PaymentController@addManualData')->name('addManualData');
         Route::get('/lunas_manual', 'lunas_manual')->name('lunas_manual');
         Route::get('/data_kehadiran', 'data_kehadiran')->name('data_kehadiran');
         Route::get('/detail/{id}', 'show')->name('detail');
@@ -95,7 +96,6 @@ Route::prefix('admin')->name('admin.')->controller(AdminController::class)->name
     }
 );
 Route::get('/genkey', 'App\Http\Controllers\PaymentController@genkey')->name('genkey');
-Route::get('/add-data-manual', 'App\Http\Controllers\PaymentController@addManualData')->name('addManualData');
 Route::post('/postadddatamanual', 'App\Http\Controllers\PaymentController@postadddatamanual')->name('postadddatamanual');
 
 Route::get('/event', 'App\Http\Controllers\EventController@index')->name('event.index');
