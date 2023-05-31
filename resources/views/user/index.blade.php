@@ -25,9 +25,9 @@
                         <form method="GET" action="{{ route('user.order') }}">
                             <div class="btn-form-cover">
                                 <a href="{{ route('user.order') }}">
-                                    <button id="#submit" type="submit" class="btn">
+                                    {{-- <button id="#submit" type="submit" class="btn">
                                         <span>Daftar Sekarang!</span>
-                                    </button>
+                                    </button> --}}
                                 </a>
                             </div>
                         </form>
