@@ -10,7 +10,7 @@
 </style>
 
 </head>
-<body style="background-image: url(./image-template/ticket 5.png); background-size: cover; height:200px;">
+<body style="background-image: url(./image-template/tiketfinal.png); background-size: cover; height:200px;">
 	<style type="text/css">
         @font-face {
             font-family: "klik";
@@ -67,8 +67,17 @@
         display: table;
         clear: both;
         }
-        .nama{
+        .nama1{
             top:880px;
+            left: 500px;
+
+            color: #695345;
+            font-family: 'klik', sans-serif;
+            font-size: 2em;
+            position: fixed;
+        }
+        .nama2{
+            top:890px;
             left: 500px;
 
             color: #695345;
@@ -109,7 +118,13 @@
 	</style>
     <section>
         <div class="nomer" style="margin-bottom:20px">{{$nomer}}</div>
-        <div class="nama">{{$name}}</div>
+        @if ($size==true)
+        <div class="nama1">{{$name}}</div>
+
+        @else
+        <div class="nama2">{{$name}}</div>
+
+        @endif
         <img src="data:image/png;base64, {!! $qr !!}" class="qr">
         {{-- <div class="row">
             <div class="column2">

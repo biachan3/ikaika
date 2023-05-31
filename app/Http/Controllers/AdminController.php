@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Excel;
 use App\Exports\TicketsExport;
+use PDF;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Uuid;
+use Carbon\Carbon;
+use File;
+use Log;
+use Exception;
 
 class AdminController extends Controller
 {
@@ -100,24 +107,99 @@ class AdminController extends Controller
     {
         //
     }
-    public function resendWA($id, $no_hp)
+    public function resendwa(Request $request)
     {
-        // $no_hp="08125133338";
-        $botUrl = 'https://apiikaubaya.waviro.com/api/sendwa';
-        $secretKey = 'NJpWs4gWb9vi5Q6hMJPV';
-        $nohp = Str::replaceFirst('0', '62', $no_hp);
-        $message = 'Berikut Link untuk Ticket Anda : https://reuni55ubaya.com/user/order/' . $id;
+        $client = new \GuzzleHttp\Client();
+        $url_chat = 'https://apiikaubaya.waviro.com/api/sendwa';
+        $url_media = 'https://apiikaubaya.waviro.com/api/sendmedia';
+        $id_trx = $request->id;
+        try {
+            $ticket = Ticket::find($id_trx);
+            $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($id_trx));
+            $length = strlen($ticket->nama_lengkap);
+            $sizeLarge = false;
+            if($length > 45) {
+                $sizeLarge = true;
+            }
 
+            $data["name"] = $ticket->nama_lengkap;
+            $data["nomer"] = $id_trx;
+            $data['qr'] = $qrcode;
+            $data['size'] = $sizeLarge;
 
-        $response = Http::withHeaders([
-            'secretkey' => $secretKey,
-            'Content-Type' => 'application/json'
-        ])->post($botUrl, [
-            'nohp' => $nohp,
-            'pesan' => $message
-        ]);
+            $customPaper = array(0,0,1080,2043.48);
+            $pdf = PDF::loadview('pdf.tiket', $data);
+            $pdf->setPaper($customPaper);
 
-        return response()->json($response->body());
+            $directory_path = public_path('public/pdf');
+            $secretKey = 'NJpWs4gWb9vi5Q6hMJPV';
+            $nohp = Str::replaceFirst('0', '62', $ticket->no_hp);
+
+            if(!File::exists($directory_path)) {
+
+                File::makeDirectory($directory_path, $mode = 0755, true, true);
+            }
+            $filename="Ticket-$id_trx.pdf";
+            $pdf->save(''.$directory_path.'/'.$filename);
+            $fileurl = url("/public/public/pdf/$filename");
+
+            // $requestChat = [
+            //     'nohp' => $nohp,
+            //     'pesan' => "Halo Sahabat IKA Ubaya 🙌🏻!\n\nTerimakasih kami ucapkan atas partisipasinya dalam\n*REUNI AKBAR IKA UBAYA 2023*\n\nUntuk itu, kami bermaksud mengirimkan E-PASS sebagai bukti partisipasi saudara dan dapat ditunjukkan saat registrasi acara.\n \n🤫 E-PASS di atas bersifat rahasia dan hanya berlaku untuk 1x registrasi saja, tunjukkan E-PASS di meja registrasi.\n \nOpen Registrasi  : 17:00 WIB \n\nJangan lupa untuk hadir dalam rangkaian acara pada 3 Juni 2023.\n \n#reuniakbarubaya2023\n#StrongerTogether"
+            // ];
+            $requestChat = '{"nohp":"'.$nohp.'","pesan":"Halo Sahabat IKA Ubaya 🙌🏻!\n\nTerimakasih kami ucapkan atas partisipasinya dalam\n*REUNI AKBAR IKA UBAYA 2023*\n\nUntuk itu, kami bermaksud mengirimkan E-PASS sebagai bukti partisipasi saudara dan dapat ditunjukkan saat registrasi acara.\n \n🤫 E-PASS di atas bersifat rahasia dan hanya berlaku untuk 1x registrasi saja, tunjukkan E-PASS di meja registrasi.\n \nOpen Registrasi  : 17:00 WIB \n\nJangan lupa untuk hadir dalam rangkaian acara pada 3 Juni 2023.\n \n#reuniakbarubaya2023\n#StrongerTogether"}';
+            Log::info("GM - Request Chat : ".$requestChat);
+            $requestMedia = '{"nohp":"'.$nohp.'","pesan": "","mediaurl": "'.$fileurl.'"}';
+            Log::info("GM - Request Media : ".$requestMedia);
+
+            $responseChat = $client->post($url_chat, [
+                'body' => $requestChat,
+                'headers' => [
+                    'accept' => 'application/json',
+                    'content-type' => 'application/json',
+                    'secretkey' => $secretKey
+                ]
+            ], ['http_errors' => false]);
+            Log::info("GM - Response Chat : ".($responseChat->getBody()));
+
+            $responseMedia = $client->post($url_media, [
+                'body' => $requestMedia,
+                'headers' => [
+                    'accept' => 'application/json',
+                    'content-type' => 'application/json',
+                    'secretkey' => $secretKey
+                ]
+            ], ['http_errors' => false]);
+            Log::info("GM - Response Media : ".($responseMedia->getBody()));
+
+            $obj_response_chat = json_decode($responseChat->getBody());
+            $obj_response_media = json_decode($responseMedia->getBody());
+            $status = false;
+            if ($obj_response_chat->success == true && $obj_response_media->success == true) {
+                $status = true;
+                $ticket->wa_sent = 1;
+                $ticket->save();
+            }
+            return response()->json(array(
+                'status'=>'oke',
+                'msg'=>view('admin.tiket.resendwaDetail',compact('status'))->render()
+            ),200);
+
+        } catch (\Exception $e) {
+            $status = false;
+            // $response = $e->getResponse();
+            // $errMsg = $response->getBody()->getContents();
+            // dd($e->getResponse()->getBody()->getContents());
+
+            $errMsg = $e->getMessage();
+            Log::info("ERROR : ".$e->getMessage());
+            return response()->json(array(
+                'status'=>'failed',
+                'reason'=> $errMsg,
+                'msg'=>view('admin.tiket.resendwaDetail',compact('status','errMsg'))->render()
+            ),200);
+        }
+
     }
     /**
      * Remove the specified resource from storage.

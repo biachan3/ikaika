@@ -47,13 +47,13 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        return dd($this);
-        if ($this->role_id == 1) {
-            return true;
-        } else if ($this == null) {
-            return false;
-        } else {
-            return false;
-        }
+        // return dd($this);
+        // if ($this->role_id == 1) {
+        //     return true;
+        // } else if ($this == null) {
+        //     return false;
+        // } else {
+        //     return false;
+        // }
     }
 }

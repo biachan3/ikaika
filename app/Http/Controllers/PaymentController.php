@@ -31,7 +31,7 @@ class PaymentController extends Controller
         $comcode = env('COMCODE');
         $amount = 10300;
         $ccy = "IDR";
-        $uuid="e7276d90-d451-11ed-9e6b-65a9879c03c9-1231231";
+        $uuid = "e7276d90-d451-11ed-9e6b-65a9879c03c9-1231231";
         // $uuid = Uuid::generate();
 
         $uppercase = strtoupper("##$signkey##$uuid##$datetime##$orderid##$amount##$ccy##$comcode##$model##");
@@ -40,7 +40,7 @@ class PaymentController extends Controller
         $qr = strtoupper("##$uuid##$comcode##LINKAJA##$orderid##$amount##PUSHTOPAY##5jvmfze7dgc9enof##");
 
         $signature = hash('sha256', $checkstatus);
-        echo $signature." + ".$checkstatus.'<hr>';
+        echo $signature . " + " . $checkstatus . '<hr>';
     }
     public function inquiryProcess(Request $request)
     {
@@ -57,36 +57,39 @@ class PaymentController extends Controller
         $model = "INQUIRY-RS";
 
         // if($rq_password == ")*HU9+7JG4"){
-        if($rq_password == env('PASSWORD_PG')){
+        if ($rq_password == env('PASSWORD_PG')) {
             $upper = strtoupper("##$signkey##$rq_uuid##$now##$rq_orderid##0000##$model##");
             $signature_res = hash('sha256', $upper);
             $t = Ticket::find($rq_orderid);
             $t->gross_amount = $t->amount + $t->amount_donasi;
             $t->save();
-            return response()->json([
-                'rq_uuid' => $rq_uuid,
-                'rs_datetime' => $now,
-                'error_code' => '0000',
-                'error_message' => 'success',
-                'order_id' => $rq_orderid,
-                // 'amount' => 10300,
-                'amount' => $t->gross_amount,
-                'ccy' => 'IDR',
-                'description' => 'Tiket Reuni',
-                'trx_date' => $now,
-                'signature' => $signature_res
-                ]
-            ,200);
+            return response()->json(
+                [
+                    'rq_uuid' => $rq_uuid,
+                    'rs_datetime' => $now,
+                    'error_code' => '0000',
+                    'error_message' => 'success',
+                    'order_id' => $rq_orderid,
+                    // 'amount' => 10300,
+                    'amount' => $t->gross_amount,
+                    'ccy' => 'IDR',
+                    'description' => 'Tiket Reuni',
+                    'trx_date' => $now,
+                    'signature' => $signature_res
+                ],
+                200
+            );
         } else {
-            return response()->json([
-                'rq_uuid' => $rq_uuid,
-                'rs_datetime' => $now,
-                'error_code' => '1001',
-                'error_message' => "Invalid Password",
-                ]
-            ,200);
+            return response()->json(
+                [
+                    'rq_uuid' => $rq_uuid,
+                    'rs_datetime' => $now,
+                    'error_code' => '1001',
+                    'error_message' => "Invalid Password",
+                ],
+                200
+            );
         }
-
     }
     public function index()
     {
@@ -97,26 +100,24 @@ class PaymentController extends Controller
 
         $data = Ticket::find($request->id);
         $method = $request->method;
-        $obj_response ="";
+        $obj_response = "";
         $is_production = env('IS_PRODUCTION');
 
-        $url_endpoint ="";
-        if($is_production)
-        {
+        $url_endpoint = "";
+        if ($is_production) {
             // $url_endpoint = 'https://sandbox-api.espay.id/rest/merchantpg/sendinvoices';
             $url_endpoint = 'https://api.espay.id/rest/merchantpg/sendinvoice';
         } else {
             $url_endpoint = 'https://sandbox-api.espay.id/rest/merchantpg/sendinvoice';
         }
 
-        $url_endpoint_qr ="";
-        if($is_production)
-        {
+        $url_endpoint_qr = "";
+        if ($is_production) {
             $url_endpoint_qr = 'https://api.espay.id/rest/digitalpay/pushtopay';
         } else {
             $url_endpoint_qr = 'https://sandbox-api.espay.id/rest/digitalpay/pushtopay';
         }
-// dd($url_endpoint_qr);
+        // dd($url_endpoint_qr);
         //Prepare api
         $client = new \GuzzleHttp\Client();
         $total_amount_tx = $data->amount + $data->amount_donasi;
@@ -133,8 +134,8 @@ class PaymentController extends Controller
 
                 $uppercase = strtoupper("##$signkey##$data->uuid##$now##$data->id##$total_amount_tx##IDR##$comcode##SENDINVOICE##");
                 $signature = hash('sha256', $uppercase);
-                Log::info("REQUEST SIGNATURE PLAIN : ".$uppercase);
-                Log::info("REQUEST SIGNATURE HASH : ".$signature);
+                Log::info("REQUEST SIGNATURE PLAIN : " . $uppercase);
+                Log::info("REQUEST SIGNATURE HASH : " . $signature);
                 // dd($signature);
 
                 $requestData = [
@@ -151,13 +152,13 @@ class PaymentController extends Controller
                         'signature' => $signature
                     ]
                 ];
-                Log::info("REQUEST DATA : ".json_encode($requestData));
+                Log::info("REQUEST DATA : " . json_encode($requestData));
                 $response = $client->post($url_endpoint, $requestData);
-                Log::info("RESPONSE DATA : ".($response->getBody()));
+                Log::info("RESPONSE DATA : " . ($response->getBody()));
 
                 $obj_response = json_decode($response->getBody());
                 // dd($obj_response);
-                if($obj_response->error_code == "0000"){
+                if ($obj_response->error_code == "0000") {
                     $data->payment_method = $method;
                     $data->transaction_status = "Menunggu Pembayaran";
                     $data->payment_expiry_time = $obj_response->expired;
@@ -176,24 +177,21 @@ class PaymentController extends Controller
                     ];
                     \Mail::to($data->email)->send(new InfoLinkRegisMail($details));
                 }
-
-            }
-            else if($method == "qris"){
+            } else if ($method == "qris") {
                 try {
                     $productcode = env('PRODUCT_CODE_QRIS');
                     $qr = strtoupper("##$data->uuid##$comcode##$productcode##$data->id##$total_amount_tx##PUSHTOPAY##$signkey##");
                     $signature = hash('sha256', $qr);
                     $credential = "";
-                    Log::info("REQUEST SIGNATURE PLAIN : ".$qr);
-                    Log::info("REQUEST SIGNATURE HASH : ".$signature);
+                    Log::info("REQUEST SIGNATURE PLAIN : " . $qr);
+                    Log::info("REQUEST SIGNATURE HASH : " . $signature);
 
-                    if($is_production)
-                    {
+                    if ($is_production) {
                         $credential = 'U0dXSUtBVUJBWUE6SkRWRERKVE8=';
                     } else {
                         $credential = 'U0dXSUtBQlVBWUE6KSpIVTkrN0pHNA==';
                     }
-                    Log::info("CREDENTIAL QR : ".$credential);
+                    Log::info("CREDENTIAL QR : " . $credential);
 
                     $requestData = [
                         'rq_uuid' => $data->uuid,
@@ -206,7 +204,7 @@ class PaymentController extends Controller
                         'signature' => $signature,
                         'description' => "Tiket Reuni IKA UBAYA $data->uuid ."
                     ];
-                    Log::info("REQUEST DATA : ".json_encode($requestData));
+                    Log::info("REQUEST DATA : " . json_encode($requestData));
 
                     $response = $client->post($url_endpoint_qr, [
                         'form_params' => $requestData,
@@ -214,11 +212,11 @@ class PaymentController extends Controller
                             'Authorization' => "Basic $credential"
                         ]
                     ]);
-                    Log::info("RESPONSE DATA : ".($response->getBody()));
+                    Log::info("RESPONSE DATA : " . ($response->getBody()));
 
                     $obj_response = json_decode($response->getBody());
 
-                    if($obj_response->error_code == "0000"){
+                    if ($obj_response->error_code == "0000") {
                         $data->payment_method = "QRIS";
                         $data->transaction_status = "Menunggu Pembayaran";
                         $data->payment_media = $obj_response->QRCode;
@@ -233,8 +231,8 @@ class PaymentController extends Controller
                         ];
                         \Mail::to($data->email)->send(new InfoLinkRegisMail($details));
                     }
-                } catch(Exception $e) {
-                    echo 'Message: ' .$e->getMessage();
+                } catch (Exception $e) {
+                    echo 'Message: ' . $e->getMessage();
                 }
             }
         }
@@ -243,9 +241,9 @@ class PaymentController extends Controller
 
 
         return response()->json(array(
-            'status'=>'oke',
-            'msg'=>view('user.ticket.detailPayment',compact('data','fee','method','obj_response','total_amount_tx'))->render()
-        ),200);
+            'status' => 'oke',
+            'msg' => view('user.ticket.detailPayment', compact('data', 'fee', 'method', 'obj_response', 'total_amount_tx'))->render()
+        ), 200);
     }
 
     public function notifHandling(Request $request)
@@ -254,30 +252,33 @@ class PaymentController extends Controller
         $rq_uuid = $request->rq_uuid;
         $rq_datetime = $request->rq_datetime;
         $rq_password = $request->password;
-        Log::info("HANDLE NOTIF : ".$request->rq_uuid);
+        Log::info("HANDLE NOTIF : " . $request->rq_uuid);
 
-        if($rq_password != env('PASSWORD_PG'))
-        {
-            return response()->json([
-                'rq_uuid' => $rq_uuid,
-                'rs_datetime' => $now,
-                'error_code' => '1001',
-                'error_message' => "Invalid Password",
-                ]
-            ,200);
+        if ($rq_password != env('PASSWORD_PG')) {
+            return response()->json(
+                [
+                    'rq_uuid' => $rq_uuid,
+                    'rs_datetime' => $now,
+                    'error_code' => '1001',
+                    'error_message' => "Invalid Password",
+                ],
+                200
+            );
         }
         $order_id = $request->order_id;
         $payment_datetime = $request->payment_datetime;
         $payment_ref = $request->payment_ref;
-        $cekTiket = Ticket::where('payment_ref',$payment_ref)->first();
+        $cekTiket = Ticket::where('payment_ref', $payment_ref)->first();
         if ($cekTiket != null) {
-            return response()->json([
-                'rq_uuid' => $rq_uuid,
-                'rs_datetime' => $now,
-                'error_code' => '1002',
-                'error_message' => "Invalid, double payment",
-                ]
-            ,200);
+            return response()->json(
+                [
+                    'rq_uuid' => $rq_uuid,
+                    'rs_datetime' => $now,
+                    'error_code' => '1002',
+                    'error_message' => "Invalid, double payment",
+                ],
+                200
+            );
         }
 
         try {
@@ -287,17 +288,18 @@ class PaymentController extends Controller
             $ticket->payment_datetime = $payment_datetime;
             $ticket->payment_ref = $payment_ref;
             $ticket->save();
-            $details = ['nama' => $ticket->nama_lengkap,
-                        'email' => $ticket->email,
-                        'id_transaksi' => $ticket->id
-                        ];
+            $details = [
+                'nama' => $ticket->nama_lengkap,
+                'email' => $ticket->email,
+                'id_transaksi' => $ticket->id
+            ];
             \Mail::to($ticket->email)->send(new InfoRegistrationMail($details));
             $signkey = env('SIGNKEY');
 
             $upper = strtoupper("##$signkey##$rq_uuid##$now##0000##PAYMENTREPORT-RS##");
             $signature_res = hash('sha256', $upper);
-            Log::info("PAYMENT NOTIF - SIGNATUR PLAIN : ". $upper);
-            Log::info("PAYMENT NOTIF - SIGNATUR RESPONSE : ".$signature_res);
+            Log::info("PAYMENT NOTIF - SIGNATUR PLAIN : " . $upper);
+            Log::info("PAYMENT NOTIF - SIGNATUR RESPONSE : " . $signature_res);
             //Start WA
             $id_trx = $ticket->id;
             $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($id_trx));
@@ -306,7 +308,7 @@ class PaymentController extends Controller
             $data["nomer"] = $id_trx;
             $data['qr'] = $qrcode;
 
-            $customPaper = array(0,0,1080,2043.48);
+            $customPaper = array(0, 0, 1080, 2043.48);
             $pdf = PDF::loadview('pdf.tiket', $data);
             $pdf->setPaper($customPaper);
 
@@ -314,12 +316,12 @@ class PaymentController extends Controller
             $secretKey = 'NJpWs4gWb9vi5Q6hMJPV';
             $nohp = Str::replaceFirst('0', '62', $ticket->no_hp);
 
-            if(!File::exists($directory_path)) {
+            if (!File::exists($directory_path)) {
 
                 File::makeDirectory($directory_path, $mode = 0755, true, true);
             }
-            $filename="Ticket-$id_trx.pdf";
-            $pdf->save(''.$directory_path.'/'.$filename);
+            $filename = "Ticket-$id_trx.pdf";
+            $pdf->save('' . $directory_path . '/' . $filename);
             $fileurl = url("/public/public/pdf/$filename");
 
             $response = Http::withHeaders([
@@ -328,7 +330,7 @@ class PaymentController extends Controller
             ])->post("https://apiikaubaya.waviro.com/api/sendmedia", [
                 'nohp' => $nohp,
                 'pesan' => "",
-                'mediaurl' =>$fileurl
+                'mediaurl' => $fileurl
             ]);
             $responseChat = Http::withHeaders([
                 'secretkey' => $secretKey,
@@ -340,25 +342,29 @@ class PaymentController extends Controller
 
             // Log::info("HANDLE NOTIF : ".$response);
             //END WA
-            return response()->json([
-                'rq_uuid' => $rq_uuid,
-                'rs_datetime' => $now,
-                'error_code' => '0000',
-                'error_message' => 'success',
-                'order_id' => $order_id,
-                'reconcile_id' => strtotime("now"),
-                'reconcile_datetime' => $now,
-                'signature' => $signature_res
-                ]
-            ,200);
+            return response()->json(
+                [
+                    'rq_uuid' => $rq_uuid,
+                    'rs_datetime' => $now,
+                    'error_code' => '0000',
+                    'error_message' => 'success',
+                    'order_id' => $order_id,
+                    'reconcile_id' => strtotime("now"),
+                    'reconcile_datetime' => $now,
+                    'signature' => $signature_res
+                ],
+                200
+            );
         } catch (\Exception $e) {
-            return response()->json([
-                'rq_uuid' => $rq_uuid,
-                'rs_datetime' => $now,
-                'error_code' => '1001',
-                'error_message' => $e->getMessage(),
-                ]
-            ,200);
+            return response()->json(
+                [
+                    'rq_uuid' => $rq_uuid,
+                    'rs_datetime' => $now,
+                    'error_code' => '1001',
+                    'error_message' => $e->getMessage(),
+                ],
+                200
+            );
         }
 
         // $obj_notify = json_decode($request);
@@ -370,9 +376,9 @@ class PaymentController extends Controller
         $base64username = base64_encode(env('MIDTRANS_SERVER_KEY'));
         $time = time();
         $response = $client->request('POST', 'https://app.sandbox.midtrans.com/snap/v1/transactions', [
-        'body' => '{
+            'body' => '{
             "transaction_details":{
-                "order_id":'.$time.',
+                "order_id":' . $time . ',
                 "gross_amount":190000
             },
             "credit_card":{
@@ -393,11 +399,11 @@ class PaymentController extends Controller
                 }
               ]
         }',
-        'headers' => [
-            'accept' => 'application/json',
-            'authorization' => 'Basic '.$base64username,
-            'content-type' => 'application/json',
-        ],
+            'headers' => [
+                'accept' => 'application/json',
+                'authorization' => 'Basic ' . $base64username,
+                'content-type' => 'application/json',
+            ],
         ]);
 
         echo $response->getBody();
@@ -406,7 +412,7 @@ class PaymentController extends Controller
 
     public function addManualData()
     {
-        return view('general.add-data-manual');
+        return view('admin.sidebar.add-data-manual');
     }
 
     public function postadddatamanual(Request $request)
@@ -457,9 +463,9 @@ class PaymentController extends Controller
                     $prefix_fakultas = "";
             }
 
-            $last = Ticket::orderBy('created_at','desc')->first();
-            $idcomplement = substr($last->id,-4) + 1;
-            $id_trx = "TX-".$prefix.$prefix_fakultas."-".str_pad($idcomplement,4,"0",STR_PAD_LEFT);;
+            $last = Ticket::orderBy('created_at', 'desc')->first();
+            $idcomplement = substr($last->id, -4) + 1;
+            $id_trx = "TX-" . $prefix . $prefix_fakultas . "-" . str_pad($idcomplement, 4, "0", STR_PAD_LEFT);;
 
             $tiket = new Ticket();
             $tiket->id = $id_trx;
@@ -470,7 +476,11 @@ class PaymentController extends Controller
             $tiket->fakultas = $request->fakultas;
             $tiket->angkatan = $request->angkatan;
             $tiket->amount = 150000;
-
+            $length = strlen($request->nama);
+            $sizeLarge = false;
+            if ($length > 45) {
+                $sizeLarge = true;
+            }
             $nominal_donasi = 0;
             if ($request->nominal == null || $request->nominal == "") {
                 $nominal_donasi = 0;
@@ -493,8 +503,9 @@ class PaymentController extends Controller
             $data["name"] = $request->nama;
             $data["nomer"] = $id_trx;
             $data['qr'] = $qrcode;
-
-            $customPaper = array(0,0,1080,2043.48);
+            $data['size'] = $sizeLarge;
+            // dd($data['size']."-". $length);
+            $customPaper = array(0, 0, 1080, 2043.48);
             $pdf = PDF::loadview('pdf.tiket', $data);
             $pdf->setPaper($customPaper);
             return $pdf->stream("$request->nama - Ticket - $id_trx.pdf");

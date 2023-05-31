@@ -26,37 +26,6 @@
 
         <!-- Divider -->
         <hr class="sidebar-divider my-0">
-
-        <!-- Nav Item - Dashboard -->
-        {{-- <li class="nav-item active">
-        <a class="nav-link" href="/admin">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span></a>
-    </li>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Interface
-    </div> --}}
-
-        <!-- Nav Item - Pages Collapse Menu -->
-        {{-- <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>All Data</span>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="#">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Data Kehadiran</span>
-        </a>
-    </li> --}}
-
-        <!-- Nav Item - Utilities Collapse Menu -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                 aria-expanded="true" aria-controls="collapseUtilities">
@@ -69,12 +38,12 @@
 
                     <a class="collapse-item" href="/admin">All Data</a>
                     <a class="collapse-item" href="/admin/lunas_manual">Lunas/Manual</a>
-                    <a class="collapse-item" href="utilities-animation.html">Input Manual</a>
+                    <a class="collapse-item" href="/admin/add-data-manual">Input Manual</a>
                 </div>
             </div>
         </li>
         <li class="nav-item active">
-            <a class="nav-link" href="/data_kehadiran">
+            <a class="nav-link" href="/admin/data_kehadiran">
                 <i class="fas fa-fw fa-list"></i>
                 <span>Data Kehadiran</span>
             </a>
@@ -88,7 +57,7 @@
             <div class="card-header py-3">
                 <h5 class="m-0 font-weight-bold text-primary">Table Transaksi</h5>
                 <br>
-                <a href="{{route('admin.exportTicket')}}" class="btn btn-primary">Download Data</a>
+                <a href="{{ route('admin.exportTicket') }}" class="btn btn-primary">Download Data</a>
 
             </div>
             <div class="card-body">

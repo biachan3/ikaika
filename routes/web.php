@@ -7,7 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CustomerTicketController;
-
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,10 +25,10 @@ Route::get('/dashboard', function () {
     return view('welcome');
 });
 
-// Route::get('/', function () {
-//     return view('user.index');
-// })->name('dashboard');
-Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+Route::get('/', function () {
+    return view('user.index');
+})->name('dashboard');
+// Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 
 // Route::middleware('auth')->group(function () {
 
@@ -46,10 +46,11 @@ Route::prefix('ticket')->name('ticket.')->controller(TicketController::class)->n
 Route::prefix('admin')->name('admin.')->controller(AdminController::class)->name('admin.')->group(
     function () {
         Route::get('', 'index')->name('index');
+        Route::get('/add-data-manual', 'App\Http\Controllers\PaymentController@addManualData')->name('addManualData');
         Route::get('/lunas_manual', 'lunas_manual')->name('lunas_manual');
         Route::get('/data_kehadiran', 'data_kehadiran')->name('data_kehadiran');
         Route::get('/detail/{id}', 'show')->name('detail');
-        Route::get('/resendWA/{id}/{no_hp}', 'resendWA')->name('resendWA');
+        Route::post('/resendWA', 'resendwa')->name('resendwa');
     }
 );
 Route::prefix('payment')->controller(PaymentController::class)->group(
@@ -95,7 +96,6 @@ Route::prefix('admin')->name('admin.')->controller(AdminController::class)->name
     }
 );
 Route::get('/genkey', 'App\Http\Controllers\PaymentController@genkey')->name('genkey');
-Route::get('/add-data-manual', 'App\Http\Controllers\PaymentController@addManualData')->name('addManualData');
 Route::post('/postadddatamanual', 'App\Http\Controllers\PaymentController@postadddatamanual')->name('postadddatamanual');
 
 Route::get('/event', 'App\Http\Controllers\EventController@index')->name('event.index');
@@ -125,3 +125,7 @@ Route::prefix('dev')->group(function () {
 // })->name('admindash');
 
 require __DIR__ . '/auth.php';
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
