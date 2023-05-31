@@ -25,10 +25,10 @@ Route::get('/dashboard', function () {
     return view('welcome');
 });
 
-// Route::get('/', function () {
-//     return view('user.index');
-// })->name('dashboard');
-Route::get('/', [HomeController::class, 'index'])->name('dashboard');
+Route::get('/', function () {
+    return view('user.index');
+})->name('dashboard');
+// Route::get('/', [HomeController::class, 'index'])->name('dashboard');
 
 // Route::middleware('auth')->group(function () {
 
