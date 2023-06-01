@@ -502,6 +502,9 @@ class PaymentController extends Controller
             $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($id_trx));
             // $qrcode = QrCode::generate($id_trx);
 $client = new \GuzzleHttp\Client();
+            $url_chat = 'https://apiikaubaya.waviro.com/api/sendwa';
+
+        $url_media = 'https://apiikaubaya.waviro.com/api/sendmedia';
             $data["name"] = $request->nama;
             $data["nomer"] = $id_trx;
             $data['qr'] = $qrcode;
