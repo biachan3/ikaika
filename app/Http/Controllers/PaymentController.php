@@ -419,9 +419,7 @@ class PaymentController extends Controller
     {
         ini_set('max_execution_time', '0');
         if (request()->file('file')) {
-            // dd("oke");
             Excel::import(new TicketImport, request()->file('file'));
-            # code..
         } else {
             $prefix = "TO-";
             $prefix_fakultas = "";
@@ -501,10 +499,10 @@ class PaymentController extends Controller
 
             $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($id_trx));
             // $qrcode = QrCode::generate($id_trx);
-$client = new \GuzzleHttp\Client();
+            $client = new \GuzzleHttp\Client();
             $url_chat = 'https://apiikaubaya.waviro.com/api/sendwa';
+            $url_media = 'https://apiikaubaya.waviro.com/api/sendmedia';
 
-        $url_media = 'https://apiikaubaya.waviro.com/api/sendmedia';
             $data["name"] = $request->nama;
             $data["nomer"] = $id_trx;
             $data['qr'] = $qrcode;
@@ -557,6 +555,7 @@ $client = new \GuzzleHttp\Client();
                 $tiket->wa_sent = 1;
                 $tiket->save();
             }
+            return redirect()->back()->compact('status');
         }
     }
 }
