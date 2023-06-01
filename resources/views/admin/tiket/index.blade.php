@@ -180,6 +180,20 @@
                 </h6>
             </div>
             <div class="card-body">
+                <div class="chart-pie pt-4 pb-2">
+                    <canvas id="myPieChart"></canvas>
+                </div>
+                <div class="mt-4 text-center small">
+                    <span class="mr-2">
+                        <i class="fas fa-circle text-primary"></i> Direct
+                    </span>
+                    <span class="mr-2">
+                        <i class="fas fa-circle text-success"></i> Social
+                    </span>
+                    <span class="mr-2">
+                        <i class="fas fa-circle text-info"></i> Referral
+                    </span>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
@@ -270,7 +284,43 @@
 @endsection
 
 @section('script')
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+
     <script>
+        // Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+        // Chart.defaults.global.defaultFontColor = '#858796';
+
+        var ctx = document.getElementById("myPieChart");
+        var myPieChart = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: ["Sukses", "Belum"],
+            datasets: [{
+            data: [{{$manual_sukses_wa}}, {{$manual_not_wa}}],
+            backgroundColor: ['#4e73df', '#1cc88a'],
+            hoverBackgroundColor: ['#2e59d9', '#17a673'],
+            hoverBorderColor: "rgba(234, 236, 244, 1)",
+            }],
+        },
+        options: {
+            maintainAspectRatio: false,
+            tooltips: {
+            backgroundColor: "rgb(255,255,255)",
+            bodyFontColor: "#858796",
+            borderColor: '#dddfeb',
+            borderWidth: 1,
+            xPadding: 15,
+            yPadding: 15,
+            displayColors: false,
+            caretPadding: 10,
+            },
+            legend: {
+            display: false
+            },
+            cutoutPercentage: 80,
+        },
+        });
         function resendwa(id) {
             $.ajax({
                 type: 'POST',

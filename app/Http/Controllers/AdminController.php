@@ -36,10 +36,13 @@ class AdminController extends Controller
         $blm_lunas = Ticket::all()->where('transaction_status', '!=', 'Sukses');
         $uang_lunas = Ticket::where('transaction_status', '=', 'Sukses')->sum('gross_amount');
         $uang_blm = Ticket::where('transaction_status', '!=', 'Sukses')->sum('gross_amount');
+
+        $manual_sukses_wa = Ticket::where('transaction_status', 'Sukses - Manual')->where('wa_sent',1)->count();
+        $manual_not_wa = Ticket::where('transaction_status', 'Sukses - Manual')->where('wa_sent',0)->count();
         $jum_sdh = $sdh_lunas->count();
         $jum_blm = $blm_lunas->count();
         $jum_tx = $results->count();
-        return view('admin.tiket.index', compact('results', 'jum_tx', 'jum_sdh', 'uang_lunas', 'uang_blm', 'jum_blm'));
+        return view('admin.tiket.index', compact('results', 'jum_tx', 'jum_sdh', 'uang_lunas', 'uang_blm', 'jum_blm', 'manual_sukses_wa', 'manual_not_wa'));
     }
 
     public function lunas_manual()
