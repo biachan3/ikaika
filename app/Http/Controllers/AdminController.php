@@ -19,6 +19,11 @@ use Exception;
 
 class AdminController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -118,7 +123,7 @@ class AdminController extends Controller
             $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate($id_trx));
             $length = strlen($ticket->nama_lengkap);
             $sizeLarge = false;
-            if($length > 45) {
+            if ($length > 45) {
                 $sizeLarge = true;
             }
 
@@ -127,7 +132,7 @@ class AdminController extends Controller
             $data['qr'] = $qrcode;
             $data['size'] = $sizeLarge;
 
-            $customPaper = array(0,0,1080,2043.48);
+            $customPaper = array(0, 0, 1080, 2043.48);
             $pdf = PDF::loadview('pdf.tiket', $data);
             $pdf->setPaper($customPaper);
 
@@ -135,22 +140,22 @@ class AdminController extends Controller
             $secretKey = 'NJpWs4gWb9vi5Q6hMJPV';
             $nohp = Str::replaceFirst('0', '62', $ticket->no_hp);
 
-            if(!File::exists($directory_path)) {
+            if (!File::exists($directory_path)) {
 
                 File::makeDirectory($directory_path, $mode = 0755, true, true);
             }
-            $filename="Ticket-$id_trx.pdf";
-            $pdf->save(''.$directory_path.'/'.$filename);
+            $filename = "Ticket-$id_trx.pdf";
+            $pdf->save('' . $directory_path . '/' . $filename);
             $fileurl = url("/public/public/pdf/$filename");
 
             // $requestChat = [
             //     'nohp' => $nohp,
             //     'pesan' => "Halo Sahabat IKA Ubaya 🙌🏻!\n\nTerimakasih kami ucapkan atas partisipasinya dalam\n*REUNI AKBAR IKA UBAYA 2023*\n\nUntuk itu, kami bermaksud mengirimkan E-PASS sebagai bukti partisipasi saudara dan dapat ditunjukkan saat registrasi acara.\n \n🤫 E-PASS di atas bersifat rahasia dan hanya berlaku untuk 1x registrasi saja, tunjukkan E-PASS di meja registrasi.\n \nOpen Registrasi  : 17:00 WIB \n\nJangan lupa untuk hadir dalam rangkaian acara pada 3 Juni 2023.\n \n#reuniakbarubaya2023\n#StrongerTogether"
             // ];
-            $requestChat = '{"nohp":"'.$nohp.'","pesan":"Halo Sahabat IKA Ubaya 🙌🏻!\n\nTerimakasih kami ucapkan atas partisipasinya dalam\n*REUNI AKBAR IKA UBAYA 2023*\n\nUntuk itu, kami bermaksud mengirimkan E-PASS sebagai bukti partisipasi saudara dan dapat ditunjukkan saat registrasi acara.\n \n🤫 E-PASS di atas bersifat rahasia dan hanya berlaku untuk 1x registrasi saja, tunjukkan E-PASS di meja registrasi.\n \nOpen Registrasi  : 17:00 WIB \n\nJangan lupa untuk hadir dalam rangkaian acara pada 3 Juni 2023.\n \n#reuniakbarubaya2023\n#StrongerTogether"}';
-            Log::info("GM - Request Chat : ".$requestChat);
-            $requestMedia = '{"nohp":"'.$nohp.'","pesan": "","mediaurl": "'.$fileurl.'"}';
-            Log::info("GM - Request Media : ".$requestMedia);
+            $requestChat = '{"nohp":"' . $nohp . '","pesan":"Halo Sahabat IKA Ubaya 🙌🏻!\n\nTerimakasih kami ucapkan atas partisipasinya dalam\n*REUNI AKBAR IKA UBAYA 2023*\n\nUntuk itu, kami bermaksud mengirimkan E-PASS sebagai bukti partisipasi saudara dan dapat ditunjukkan saat registrasi acara.\n \n🤫 E-PASS di atas bersifat rahasia dan hanya berlaku untuk 1x registrasi saja, tunjukkan E-PASS di meja registrasi.\n \nOpen Registrasi  : 17:00 WIB \n\nJangan lupa untuk hadir dalam rangkaian acara pada 3 Juni 2023.\n \n#reuniakbarubaya2023\n#StrongerTogether"}';
+            Log::info("GM - Request Chat : " . $requestChat);
+            $requestMedia = '{"nohp":"' . $nohp . '","pesan": "","mediaurl": "' . $fileurl . '"}';
+            Log::info("GM - Request Media : " . $requestMedia);
 
             $responseChat = $client->post($url_chat, [
                 'body' => $requestChat,
@@ -160,7 +165,7 @@ class AdminController extends Controller
                     'secretkey' => $secretKey
                 ]
             ], ['http_errors' => false]);
-            Log::info("GM - Response Chat : ".($responseChat->getBody()));
+            Log::info("GM - Response Chat : " . ($responseChat->getBody()));
 
             $responseMedia = $client->post($url_media, [
                 'body' => $requestMedia,
@@ -170,7 +175,7 @@ class AdminController extends Controller
                     'secretkey' => $secretKey
                 ]
             ], ['http_errors' => false]);
-            Log::info("GM - Response Media : ".($responseMedia->getBody()));
+            Log::info("GM - Response Media : " . ($responseMedia->getBody()));
 
             $obj_response_chat = json_decode($responseChat->getBody());
             $obj_response_media = json_decode($responseMedia->getBody());
@@ -181,10 +186,9 @@ class AdminController extends Controller
                 $ticket->save();
             }
             return response()->json(array(
-                'status'=>'oke',
-                'msg'=>view('admin.tiket.resendwaDetail',compact('status'))->render()
-            ),200);
-
+                'status' => 'oke',
+                'msg' => view('admin.tiket.resendwaDetail', compact('status'))->render()
+            ), 200);
         } catch (\Exception $e) {
             $status = false;
             // $response = $e->getResponse();
@@ -192,14 +196,13 @@ class AdminController extends Controller
             // dd($e->getResponse()->getBody()->getContents());
 
             $errMsg = $e->getMessage();
-            Log::info("ERROR : ".$e->getMessage());
+            Log::info("ERROR : " . $e->getMessage());
             return response()->json(array(
-                'status'=>'failed',
-                'reason'=> $errMsg,
-                'msg'=>view('admin.tiket.resendwaDetail',compact('status','errMsg'))->render()
-            ),200);
+                'status' => 'failed',
+                'reason' => $errMsg,
+                'msg' => view('admin.tiket.resendwaDetail', compact('status', 'errMsg'))->render()
+            ), 200);
         }
-
     }
     /**
      * Remove the specified resource from storage.
@@ -216,8 +219,8 @@ class AdminController extends Controller
         $data = Ticket::where('transaction_status', 'Sukses')->orWhere('transaction_status', 'Sukses - Manual')->get();
         // dd($data);
         $date_now = date('Y-m-d');
-        $nama_file = 'Rekap Peserta - '.$date_now.'.xlsx';
+        $nama_file = 'Rekap Peserta - ' . $date_now . '.xlsx';
 
-        return Excel::download(new TicketsExport($data),$nama_file);
+        return Excel::download(new TicketsExport($data), $nama_file);
     }
 }
