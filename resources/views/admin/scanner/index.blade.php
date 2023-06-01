@@ -117,6 +117,10 @@
     <div id="pageloader">
         <img src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif" alt="processing..." />
     </div>
+    <audio id="myAudio">
+        <source src="{{asset('sound/horse.mp3')}}" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio>
 
     <div class="container-fluid">
 
@@ -161,6 +165,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script type="text/javascript">
+        var x = document.getElementById("myAudio");
+
         let scanner = new Instascan.Scanner({
             video: document.getElementById('preview'),
             mirror: false
@@ -259,6 +265,7 @@
                             text: 'Data tidak ditemukan di database!'
                         });
                     } else {
+                        x.play();
                         Swal.fire({
                             icon: 'success',
                             title: 'Hai!',

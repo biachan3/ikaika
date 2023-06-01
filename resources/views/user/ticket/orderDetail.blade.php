@@ -17,7 +17,7 @@
             <div class="col-md-6" style="  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); padding: 15px 15px 20px 15px; border-radius:20px; margin-bottom:20px;">
                 <div class="buy-ticket-form">
                     <i>Kode Transaksi : {{$detail_tx->id}}</i>
-                    @if ($detail_tx->payment_method == null)
+                    @if ($detail_tx->payment_method == null && $detail_tx->transaction_status != "Sukses - Manual")
                     <form id='contactform' action="{{route('regis')}}" method="POST">
                         @csrf
                         <h5>Data Pembayaran</h5>
@@ -80,7 +80,7 @@
                                             @endif
                                         </p>
                                         <hr>
-                                        @if($detail_tx->transaction_status == "settlement" || $detail_tx->transaction_status == "Sukses")
+                                        @if($detail_tx->transaction_status == "Sukses - Manual" || $detail_tx->transaction_status == "Sukses")
                                         <p>
                                             <b>
                                                 Terima kasih Anda telah terdaftar sebagai peserta Reuni Akbar IKA Ubaya 2023. Undangan Elektronik akan kami kirimkan ke email atau nomor wa Anda yang terdaftar dalam waktu 2x24jam 🙏🏻

@@ -476,6 +476,8 @@ class PaymentController extends Controller
             $tiket->fakultas = $request->fakultas;
             $tiket->angkatan = $request->angkatan;
             $tiket->amount = 150000;
+            $tiket->is_take_merch = 1;
+            $tiket->is_check_in = 1;
             $length = strlen($request->nama);
             $sizeLarge = false;
             if ($length > 45) {
@@ -524,6 +526,34 @@ class PaymentController extends Controller
             $requestMedia = '{"nohp":"' . $nohp . '","pesan": "","mediaurl": "' . $fileurl . '"}';
             Log::info("GM - Request add data manual Media : " . $requestMedia);
 
+            $responseChat = $client->post($url_chat, [
+                'body' => $requestChat,
+                'headers' => [
+                    'accept' => 'application/json',
+                    'content-type' => 'application/json',
+                    'secretkey' => $secretKey
+                ]
+            ], ['http_errors' => false]);
+            Log::info("GM - Response Chat : " . ($responseChat->getBody()));
+
+            $responseMedia = $client->post($url_media, [
+                'body' => $requestMedia,
+                'headers' => [
+                    'accept' => 'application/json',
+                    'content-type' => 'application/json',
+                    'secretkey' => $secretKey
+                ]
+            ], ['http_errors' => false]);
+            Log::info("GM - Response Media : " . ($responseMedia->getBody()));
+
+            $obj_response_chat = json_decode($responseChat->getBody());
+            $obj_response_media = json_decode($responseMedia->getBody());
+            $status = false;
+            if ($obj_response_chat->success == true && $obj_response_media->success == true) {
+                $status = true;
+                $tiket->wa_sent = 1;
+                $tiket->save();
+            }
         }
     }
 }

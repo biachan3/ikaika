@@ -193,7 +193,7 @@ class TicketController extends Controller
         // dd($detail_tx);
         $qrcode="";
         if ($detail_tx != null) {
-            if($detail_tx->transaction_status =="Sukses" || $detail_tx->transaction_status =="settlement")
+            if($detail_tx->transaction_status =="Sukses" || $detail_tx->transaction_status =="Sukses - Manual")
             {
                 $qrcode = base64_encode(QrCode::format('svg')->size(150)->errorCorrection('H')->generate(url($detail_tx->id)));
                 $qrcode = QrCode::generate($detail_tx->id);
