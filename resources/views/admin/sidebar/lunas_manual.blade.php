@@ -81,6 +81,12 @@
             </a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="/scanner">
+                <i class="fas fa-fw fa-list"></i>
+                <span>Scanner</span>
+            </a>
+        </li>
+        <li class="nav-item">
             <div class="text-center">
                 <form action="{{ route('logout') }}" method="POST" class="">
                     @csrf
