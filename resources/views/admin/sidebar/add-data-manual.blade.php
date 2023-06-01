@@ -83,14 +83,9 @@
 
 
             <div class="">
-                <a class="" href="{{ route('logout') }}"
-                    onclick="event.preventDefault();
-                                 document.getElementById('logout-form').submit();">
-                    {{ __('Logout') }}
-                </a>
-
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                <form action="{{ route('logout') }}" method="POST" class="">
                     @csrf
+                    <input type="submit" value="submit" class="btn btn-danger">
                 </form>
             </div>
         </li>
