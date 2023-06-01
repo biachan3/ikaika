@@ -43,18 +43,17 @@ Route::prefix('ticket')->name('ticket.')->controller(TicketController::class)->n
     }
 );
 
-Route::middleware('auth')->group(function () {
-    Route::prefix('admin')->name('admin.')->controller(AdminController::class)->name('admin.')->group(
-        function () {
-            Route::get('', 'index')->name('index');
-            Route::get('/add-data-manual', 'App\Http\Controllers\PaymentController@addManualData')->name('addManualData');
-            Route::get('/lunas_manual', 'lunas_manual')->name('lunas_manual');
-            Route::get('/data_kehadiran', 'data_kehadiran')->name('data_kehadiran');
-            Route::get('/detail/{id}', 'show')->name('detail');
-            Route::post('/resendWA', 'resendwa')->name('resendwa');
-        }
-    );
-});
+Route::prefix('admin')->name('admin.')->controller(AdminController::class)->name('admin.')->group(
+    function () {
+        Route::get('', 'index')->name('index');
+        Route::get('/add-data-manual', 'App\Http\Controllers\PaymentController@addManualData')->name('addManualData');
+        Route::get('/lunas_manual', 'lunas_manual')->name('lunas_manual');
+        Route::get('/data_kehadiran', 'data_kehadiran')->name('data_kehadiran');
+        Route::get('/detail/{id}', 'show')->name('detail');
+        Route::post('/resendWA', 'resendwa')->name('resendwa');
+    }
+);
+
 Route::prefix('payment')->controller(PaymentController::class)->group(
     function () {
         Route::post('/getVirtualAccount', 'getVirtualAccount')->name("getVirtualAccount");
