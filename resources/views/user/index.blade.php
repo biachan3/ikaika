@@ -67,19 +67,19 @@
                         <h4>Waktu Penutupan Registrasi Tersisa</h4>
                         <div id="clockdiv" class="clock-timer clock-timer-conference">
                             <div class="clock-item days-item">
-                                <span class="days"></span>
+                                <span class="days">00</span>
                                 <div class="smalltext">Days</div>
                             </div>
                             <div class="clock-item hours-item">
-                                <span class="hours"></span>
+                                <span class="hours">00</span>
                                 <div class="smalltext">Hours</div>
                             </div>
                             <div class="clock-item minutes-item">
-                                <span class="minutes"></span>
+                                <span class="minutes">00</span>
                                 <div class="smalltext">Minutes</div>
                             </div>
                             <div class="clock-item seconds-item">
-                                <span class="seconds"></span>
+                                <span class="seconds">00</span>
                                 <div class="smalltext">Seconds</div>
                             </div>
                         </div>
@@ -1186,7 +1186,8 @@
                 </div>
                 <div class="client-slide">
                     <div class="client-slide-cover gold-lg">
-                        <img src="{{ asset('Ginger') }}/assets/img/indopicri.png" alt="img" style="margin-top: 20%;">
+                        <img src="{{ asset('Ginger') }}/assets/img/indopicri.png" alt="img"
+                            style="margin-top: 20%;">
                     </div>
                 </div>
             </div>
