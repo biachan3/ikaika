@@ -48,7 +48,7 @@ class AdminController extends Controller
     public function lunas_manual()
     {
         // $results = Ticket::all();
-        $results = Ticket::where('transaction_status', '=', 'Sukses')->orWhere('transaction_status', '=', 'Sukses - Manual')->orderBy('wa_sent','desc')->get();
+        $results = Ticket::where('transaction_status', '=', 'Sukses')->orWhere('transaction_status', '=', 'Sukses - Manual')->orderBy('wa_sent','asc')->get();
         // return dd($results);
         return view('admin.sidebar.lunas_manual', compact('results'));
     }
