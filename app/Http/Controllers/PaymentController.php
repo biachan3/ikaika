@@ -508,7 +508,22 @@ class PaymentController extends Controller
             $customPaper = array(0, 0, 1080, 2043.48);
             $pdf = PDF::loadview('pdf.tiket', $data);
             $pdf->setPaper($customPaper);
-            return $pdf->stream("$request->nama - Ticket - $id_trx.pdf");
+            $directory_path = public_path('public/pdf');
+            $secretKey = 'NJpWs4gWb9vi5Q6hMJPV';
+            $nohp = Str::replaceFirst('0', '62', $request->no_hp);
+
+            if (!File::exists($directory_path)) {
+
+                File::makeDirectory($directory_path, $mode = 0755, true, true);
+            }
+            $filename = "Ticket-$id_trx.pdf";
+            $pdf->save('' . $directory_path . '/' . $filename);
+            $fileurl = url("/public/public/pdf/$filename");
+            $requestChat = '{"nohp":"' . $nohp . '","pesan":"Halo Sahabat IKA Ubaya 🙌🏻!\n\nTerimakasih kami ucapkan atas partisipasinya dalam\n*REUNI AKBAR IKA UBAYA 2023*\n\nUntuk itu, kami bermaksud mengirimkan E-PASS sebagai bukti partisipasi saudara dan dapat ditunjukkan saat registrasi acara.\n \n🤫 E-PASS di atas bersifat rahasia dan hanya berlaku untuk 1x registrasi saja, tunjukkan E-PASS di meja registrasi.\n \nOpen Registrasi  : 17:00 WIB \n\nJangan lupa untuk hadir dalam rangkaian acara pada 3 Juni 2023.\n \n#reuniakbarubaya2023\n#StrongerTogether"}';
+            Log::info("GM - Request add data manual Chat : " . $requestChat);
+            $requestMedia = '{"nohp":"' . $nohp . '","pesan": "","mediaurl": "' . $fileurl . '"}';
+            Log::info("GM - Request add data manual Media : " . $requestMedia);
+
         }
     }
 }

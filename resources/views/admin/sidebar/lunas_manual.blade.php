@@ -163,7 +163,7 @@
                                         @else
                                             <td>
                                                 <button type="button" onclick="resendwa('{{ $result->id }}')"
-                                                    class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                                    class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" id="buttonresend-{{$result->id}}">
                                                     Resend WA
                                                 </button>
                                             </td>
@@ -226,6 +226,9 @@
                 },
                 success: function(data) {
                     console.log(data);
+                    if(data.status == "oke") {
+                        $('#buttonresend-'+id).addClass('btn-secondary').removeClass('btn-primary');
+                    }
                     $('#modalcontent').html(data.msg)
                 }
             });
