@@ -85,7 +85,7 @@
             <div class="text-center">
                 <form action="{{ route('logout') }}" method="POST" class="">
                     @csrf
-                    <input type="submit" value="submit" class="btn btn-danger">
+                    <input type="submit" value="submit" class="btn btn-danger" style="width: 70%;">
                 </form>
             </div>
         </li>
