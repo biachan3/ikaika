@@ -8,6 +8,11 @@ use App\Models\Ticket;
 
 class ScanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
         return view('admin.scanner.index');
@@ -23,16 +28,16 @@ class ScanController extends Controller
     public function getDetailData(Request $request)
     {
         $data = Ticket::find($request->id);
-        if($data == null)
-        {
+        if ($data == null) {
             return response()->json(array(
-                'status'=>'notfound'),200);
+                'status' => 'notfound'
+            ), 200);
         } else {
             return response()->json(array(
-                'status'=>'oke',
-                'nama'=> $data->nama_lengkap,
-                'msg'=>view('admin.scanner.detailTiket',compact('data'))->render()
-            ),200);
+                'status' => 'oke',
+                'nama' => $data->nama_lengkap,
+                'msg' => view('admin.scanner.detailTiket', compact('data'))->render()
+            ), 200);
         }
     }
 
@@ -46,9 +51,8 @@ class ScanController extends Controller
         // dd($request);
 
         return response()->json(array(
-            'status'=>'oke',
-            'msg'=>view('admin.scanner.detailTiket',compact('data'))->render()
-        ),200);
-
+            'status' => 'oke',
+            'msg' => view('admin.scanner.detailTiket', compact('data'))->render()
+        ), 200);
     }
 }
