@@ -82,7 +82,7 @@
         <li class="nav-item">
 
 
-            <div class="">
+            <div class="center">
                 <form action="{{ route('logout') }}" method="POST" class="">
                     @csrf
                     <input type="submit" value="submit" class="btn btn-danger">
