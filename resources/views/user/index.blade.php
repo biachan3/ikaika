@@ -65,7 +65,7 @@
                         alt="img">
                     <div class="conference-counter-cover">
                         <h4>Waktu Penutupan Registrasi Tersisa</h4>
-                        <div id="clockdiv" class="clock-timer clock-timer-conference">
+                        <div id="" class="clock-timer clock-timer-conference">
                             <div class="clock-item days-item">
                                 <span class="days">00</span>
                                 <div class="smalltext">Days</div>
