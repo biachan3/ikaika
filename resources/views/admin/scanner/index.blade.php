@@ -118,7 +118,7 @@
         <img src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif" alt="processing..." />
     </div>
     <audio id="myAudio">
-        <source src="{{asset('sound/horse.mp3')}}" type="audio/mpeg">
+        <source src="{{asset('sound/Correct Answer Sound Effect.mp3')}}" type="audio/mpeg">
         Your browser does not support the audio element.
       </audio>
 
