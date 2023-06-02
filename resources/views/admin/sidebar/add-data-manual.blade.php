@@ -99,6 +99,19 @@
 @section('content')
     <div class="col-xl-12 col-lg-12">
         <div class="card shadow mb-4">
+        <div class="col-md-12">
+
+                    @if (session('status'))
+
+                    <div role="alert" class="alert alert-success">{{session('status')}}</div>
+
+                    @elseif (session('error'))
+
+                    <div role="alert" class="alert alert-danger">{{session('error')}}</div>
+
+                    @endif
+
+                </div>
             <div class="card-header py-3">
                 <h5 class="m-0 font-weight-bold text-primary">Input Data Manual</h5>
                 <br>
