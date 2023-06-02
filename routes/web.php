@@ -51,6 +51,8 @@ Route::prefix('admin')->name('admin.')->controller(AdminController::class)->name
         Route::get('/data_kehadiran', 'data_kehadiran')->name('data_kehadiran');
         Route::get('/detail/{id}', 'show')->name('detail');
         Route::post('/resendWA', 'resendwa')->name('resendwa');
+        Route::post('/editdata', 'editdata')->name('editdata');
+        Route::post('/posteditdata', 'store')->name('posteditdata');
     }
 );
 

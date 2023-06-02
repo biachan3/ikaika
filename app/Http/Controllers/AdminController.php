@@ -64,9 +64,16 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function editdata(Request $request)
     {
-        //
+        $ticket = Ticket::findOrFail($request->id);
+        // return dd($ticket);
+        // return view('admin.tiket.modaledit', compact('ticket'));
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => view('admin.tiket.modaledit', compact('ticket'))->render()
+        ), 200);
+
     }
 
     /**
@@ -77,7 +84,14 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request);
+
+        $t = Ticket::find($request->id);
+        $t->nama_lengkap = $request->nama_lengkap;
+        $t->no_hp = $request->no_hp;
+        $t->email= $request->email;
+        $t->save();
+        return redirect()->back()->with('status','Data berhasil diubah');
     }
 
     /**

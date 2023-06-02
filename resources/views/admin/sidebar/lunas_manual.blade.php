@@ -100,12 +100,21 @@
 @endsection
 @section('content')
     <div class="col-xl-12 col-lg-12">
+
         <div class="card shadow mb-4">
             <div class="card-header py-3">
+                <div class="col-md-12">
+                    @if (session('status'))
+                    <div role="alert" class="alert alert-success">{{session('status')}}</div>
+                    @elseif (session('error'))
+                    <div role="alert" class="alert alert-danger">{{session('error')}}</div>
+                    @endif
+                </div>
                 <h5 class="m-0 font-weight-bold text-primary">Table Transaksi</h5>
                 <br>
 
             </div>
+
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -119,6 +128,8 @@
                                 <th>Payment Ref</th>
                                 <th>Payment Time</th>
                                 <th>Metode Bayar</th>
+                                <th>Download</th>
+                                <th>Edit</th>
                                 <th>Resend WA</th>
 
                             </tr>
@@ -133,6 +144,8 @@
                                 <th>Payment Ref</th>
                                 <th>Payment Time</th>
                                 <th>Metode Bayar</th>
+                                <th>Download</th>
+                                <th>Edit</th>
                                 <th>Resend WA</th>
                             </tr>
                         </tfoot>
@@ -152,6 +165,15 @@
                                         <td>{{ $result->payment_ref }}</td>
                                         <td>{{ $result->payment_datetime }}</td>
                                         <td>{{ $result->payment_method }}</td>
+                                        <td>
+                                            <a href="{{url("/public/public/pdf/"."Ticket-$result->id.pdf")}}" class="btn btn-info">Download</a>
+                                        </td>
+                                        <td>
+                                            <button type="button" onclick="editdata('{{ $result->id }}')"
+                                                class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
+                                                Edit
+                                            </button>
+                                        </td>
                                         @if ($result->wa_sent == 1)
                                             <td>
                                                 <button type="button" onclick="resendwa('{{ $result->id }}')"
@@ -168,6 +190,7 @@
                                                 </button>
                                             </td>
                                         @endif
+
                                     </tr>
                                 @else
                                     <tr>
@@ -179,6 +202,15 @@
                                         <td>{{ $result->payment_ref }}</td>
                                         <td>{{ $result->payment_datetime }}</td>
                                         <td>{{ $result->payment_method }}</td>
+                                        <td>
+                                            <a href="{{url("/public/public/pdf/"."Ticket-$result->id.pdf")}}" class="btn btn-info">Download</a>
+                                        </td>
+                                        <td>
+                                            <button type="button" onclick="editdata('{{ $result->id }}')"
+                                                class="btn btn-warning" data-toggle="modal" data-target="#exampleModal">
+                                                Edit
+                                            </button>
+                                        </td>
                                         <td>-</td>
                                     </tr>
                                 @endif
@@ -233,6 +265,24 @@
                 }
             });
 
+        }
+
+        function editdata(id) {
+            $('#modalcontent').html(`<div class="loader"></div>`);
+            $.ajax({
+                type: 'POST',
+                url: "{{ route('admin.editdata') }}",
+                data: {
+                    '_token': '<?php echo csrf_token(); ?>',
+                    id: id
+                },
+                success: function(data) {
+                    // if(data.status == "oke") {
+                    //     $('#buttonresend-'+id).addClass('btn-secondary').removeClass('btn-primary');
+                    // }
+                    $('#modalcontent').html(data.msg)
+                }
+            });
         }
     </script>
 @endsection
