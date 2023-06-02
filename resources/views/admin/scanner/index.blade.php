@@ -208,6 +208,7 @@
 
         function checkInClick() {
             $("#pageloader").fadeIn();
+            x.play();
             var idtx = $("#idtiket").val();
             var attend = 0;
             var merch = 0;
