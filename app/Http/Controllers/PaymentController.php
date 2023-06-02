@@ -554,8 +554,9 @@ class PaymentController extends Controller
                 $status = true;
                 $tiket->wa_sent = 1;
                 $tiket->save();
+                return redirect()->back()->with('status', 'Berhasil simpan dan kirim wa');
             }
-            return redirect()->back()->compact('status');
+            return redirect()->back()->with('error', 'kirim wa gagal, namun Berhasil simpan data');
         }
     }
 }
