@@ -166,7 +166,7 @@
                                         <td>{{ $result->payment_datetime }}</td>
                                         <td>{{ $result->payment_method }}</td>
                                         <td>
-                                            <a href="{{url("/public/public/pdf/"."Ticket-$result->id.pdf")}}" class="btn btn-info">Download</a>
+                                            <a target='_blank' href="{{url("/public/public/pdf/"."Ticket-$result->id.pdf")}}" class="btn btn-info">Download</a>
                                         </td>
                                         <td>
                                             <button type="button" onclick="editdata('{{ $result->id }}')"
@@ -203,7 +203,7 @@
                                         <td>{{ $result->payment_datetime }}</td>
                                         <td>{{ $result->payment_method }}</td>
                                         <td>
-                                            <a href="{{url("/public/public/pdf/"."Ticket-$result->id.pdf")}}" class="btn btn-info">Download</a>
+                                            <a target='_blank' href="{{url("/public/public/pdf/"."Ticket-$result->id.pdf")}}" class="btn btn-info">Download</a>
                                         </td>
                                         <td>
                                             <button type="button" onclick="editdata('{{ $result->id }}')"
