@@ -16,6 +16,8 @@ use Carbon\Carbon;
 use File;
 use Log;
 use Exception;
+use DB;
+use Input;
 
 class AdminController extends Controller
 {
@@ -200,6 +202,8 @@ class AdminController extends Controller
             if ($obj_response_chat->success == true && $obj_response_media->success == true) {
                 $status = true;
                 $ticket->wa_sent = 1;
+                $ticket->check_in_time = date("Y-m-d H:i:s");
+
                 $ticket->save();
             }
             return response()->json(array(
@@ -208,10 +212,6 @@ class AdminController extends Controller
             ), 200);
         } catch (\Exception $e) {
             $status = false;
-            // $response = $e->getResponse();
-            // $errMsg = $response->getBody()->getContents();
-            // dd($e->getResponse()->getBody()->getContents());
-
             $errMsg = $e->getMessage();
             Log::info("ERROR : " . $e->getMessage());
             return response()->json(array(
@@ -239,5 +239,26 @@ class AdminController extends Controller
         $nama_file = 'Rekap Peserta - ' . $date_now . '.xlsx';
 
         return Excel::download(new TicketsExport($data), $nama_file);
+    }
+
+    public function downloaddatatime(Request $request)
+    {
+        // $start = str_replace("T", " ",$request->start);
+        // $end = str_replace("T", " ",$request->end);
+        $start_ts = strtotime($request->get('pstart'));
+        $start = date("Y-m-d H:i:s", $start_ts);
+        // dd($start);
+        $end_ts = strtotime($request->get('pend'));
+        $end = date("Y-m-d H:i:s", $end_ts);
+        // dd($start);
+        // $data = Ticket::where('transaction_status', 'Sukses')->orWhere('transaction_status', 'Sukses - Manual')->whereBetween('check_in_time', [$start, $end])->get();
+        $data = DB::select("SELECT * FROM `tickets` where check_in_time BETWEEN '$start' and '$end'");
+
+        // dd($data);
+        $date_now = date('Y-m-d');
+        $nama_file = 'Rekap Peserta - ' . $date_now . '.xlsx';
+
+        return Excel::download(new TicketsExport($data), $nama_file);
+
     }
 }

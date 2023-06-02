@@ -71,6 +71,14 @@
             <div class="card-header py-3">
                 <h5 class="m-0 font-weight-bold text-primary">Table Transaksi</h5>
                 <br>
+                <h5>Download Data Waktu Tertentu</h5>
+                <label for="start_date">Start</label>
+                <input type="datetime-local" class="form-control" name="start-time" id="start_date">
+                <label for="end_date">End</label>
+                <input type="datetime-local" class="form-control" name="end-time" id="end_date">
+                <button type="button" class="btn btn-primary" id="time-download" onclick="downloaddatawaktu()">Download berdasar Waktu</button>
+                <hr>
+                <h5>Download Seluruh Data</h5>
                 <a href="{{ route('admin.exportTicket') }}" class="btn btn-primary">Download Data</a>
 
             </div>
@@ -84,6 +92,7 @@
                                 <th>Nama Lengkap</th>
                                 <th>Is_checkin</th>
                                 <th>Is_merch</th>
+                                <th>Check in Time</th>
 
 
                             </tr>
@@ -95,6 +104,7 @@
                                 <th>Nama Lengkap</th>
                                 <th>Is_checkin</th>
                                 <th>Is_merch</th>
+                                <th>Check in Time</th>
 
                             </tr>
                         </tfoot>
@@ -118,7 +128,7 @@
                                     @else
                                         <td>❌</td>
                                     @endif
-
+                                    <td>{{ $result->check_in_time }}</td>
                                 </tr>
 
                                 @php
@@ -131,4 +141,31 @@
             </div>
         </div>
     </div>
+@endsection
+@section('script')
+<script>
+    function downloaddatawaktu(){
+        let start = $("#start_date").val();
+        let end = $("#end_date").val();
+        var query = {
+            pstart: $('#start_date').val(),
+            pend: $('#end_date').val(),
+            // booth: $('#booth').val()
+        }
+
+        var url = "{{URL::to('admin/downloaddatatime')}}?" + $.param(query)
+
+        window.location = url;
+        // $.ajax({
+        //         type: 'GET',
+        //         success: function(data) {
+        //             console.log(data);
+        //             if(data.status == "oke") {
+        //                 $('#buttonresend-'+id).addClass('btn-secondary').removeClass('btn-primary');
+        //             }
+        //             $('#modalcontent').html(data.msg)
+        //         }
+        //     });
+    }
+</script>
 @endsection

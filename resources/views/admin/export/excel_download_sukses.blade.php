@@ -28,6 +28,7 @@
                 <td><b>NO HP</b></td>
                 <td><b>HADIR</b></td>
                 <td><b>MERCH</b></td>
+                <td><b>WAKTU CHECK IN</b></td>
             </tr>
 
             @foreach ($data as $d)
@@ -40,6 +41,7 @@
                 <td>{{$d->no_hp}}</td>
                 <td>{{$d->is_check_in}}</td>
                 <td>{{$d->is_take_merch}}</td>
+                <td>{{$d->check_in_time}}</td>
             </tr>
             @endforeach
         </tbody>

@@ -53,6 +53,7 @@ Route::prefix('admin')->name('admin.')->controller(AdminController::class)->name
         Route::post('/resendWA', 'resendwa')->name('resendwa');
         Route::post('/editdata', 'editdata')->name('editdata');
         Route::post('/posteditdata', 'store')->name('posteditdata');
+        Route::get('/downloaddatatime', 'downloaddatatime')->name('downloaddatatime');
     }
 );
 
