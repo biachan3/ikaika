@@ -462,7 +462,7 @@ class PaymentController extends Controller
             }
 
             $last = Ticket::orderBy('created_at', 'desc')->first();
-            dd($last);
+            // dd($last);
             $idcomplement = substr($last->id, -4) + 1;
             $id_trx = "TX-" . $prefix . $prefix_fakultas . "-" . str_pad($idcomplement, 4, "0", STR_PAD_LEFT);;
 
