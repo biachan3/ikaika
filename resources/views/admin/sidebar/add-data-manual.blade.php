@@ -144,7 +144,7 @@
                     <label for="">angkatan : </label>
                     <input type="text" name="angakatan" id="">
                     <br>
-                    <input type="file" name="file" id="">
+                    {{-- <input type="file" name="file" id=""> --}}
                     <button type="submit">Submit</button>
                 </form>
             </div>
